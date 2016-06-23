@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Campus App</string>
+    <string name="CIIT">CIIT</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="log_in">Log in</string>
+    <string name="content_comsats_logo">Comsats Logo</string>
+    <string-array name="login_options">
+        <item>Select login option</item>
+        <item>Blood Bank</item>
+        <item>Food and others</item>
+    </string-array>
+    <string-array name="signup_options">
+        <item>Select sign up option</item>
+        <item>Teacher</item>
+        <item>Student</item>
+    </string-array>
+    <string-array name="bloodGroup_options">
+        <item>Select blood group</item>
+        <item>O +ve</item>
+        <item>O -ve</item>
+        <item>A +ve</item>
+        <item>A -ve</item>
+        <item>B +ve</item>
+        <item>B -ve</item>
+        <item>AB +ve</item>
+        <item>AB -ve</item>
+    </string-array>
+</resources>

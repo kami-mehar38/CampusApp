@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "398454349636",
+    "project_id": "campusapp-3f811"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:398454349636:android:22e65e661d1cad94",
+        "android_client_info": {
+          "package_name": "abbottabad.comsats.campusapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2VfhlGR5befzh4ncTjRlX5dtT_2yQDxM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
