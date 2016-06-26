@@ -100,6 +100,11 @@ public class LoginModal extends AsyncTask<String, Void, String>{
     private void startHomePageActivity(String status) {
         if (status != null && status.equals("OK")) {
 
+            SharedPreferences applicationStatus = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = applicationStatus.edit();
+            editor.putString("APPLICATION_STATUS", "BLOOD_BANK");
+            editor.apply();
+
             SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
             final int TOKEN_GOT = sharedPreferences.getInt("TOKEN_GOT", 0);
 
@@ -107,11 +112,6 @@ public class LoginModal extends AsyncTask<String, Void, String>{
                     context.startService(new Intent(context, RegistrationIntentService.class));
                 }
 
-
-            SharedPreferences applicationStatus = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = applicationStatus.edit();
-            editor.putString("APPLICATION_STATUS", "BLOOD_BANK");
-            editor.apply();
             context.startActivity(new Intent(context, HomePageView.class));
         }
         else {

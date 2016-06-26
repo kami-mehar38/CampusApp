@@ -28,22 +28,20 @@ public class MyGcmListenerService extends GcmListenerService {
         String stdContact = data.getString("stdContact");
         String bloodType = data.getString("bloodType");
         Log.i("TAG", "From: " + from);
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
-        int APPLICATION_MODE = sharedPreferences.getInt("SIGNUP_OPTION", 0);
 
-        if (from.startsWith("/topics/blood")) {
-            if (APPLICATION_MODE == 2){
-                BloodBankController bloodBankController = new BloodBankController(this);
-                bloodBankController.setStdName(stdName);
-                bloodBankController.setStdReg(stdReg);
-                bloodBankController.setStdContact(stdContact);
-                bloodBankController.setBloodType(bloodType);
-                createNotification(BLOOD_REQUEST_NOTIFICATION_MESSAGE + stdName);
+        SharedPreferences sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+        final String APPLICATION_STATUS = sharedPreferences.getString("APPLICATION_STATUS", "NULL");
 
-                BloodBankModal bloodBankModal = new BloodBankModal(this);
-                bloodBankModal.addBloodRequest(bloodBankController);
-            }
+        if (APPLICATION_STATUS.equals("BLOOD_BANK")){
+            BloodBankController bloodBankController = new BloodBankController(this);
+            bloodBankController.setStdName(stdName);
+            bloodBankController.setStdReg(stdReg);
+            bloodBankController.setStdContact(stdContact);
+            bloodBankController.setBloodType(bloodType);
+            createNotification(BLOOD_REQUEST_NOTIFICATION_MESSAGE + stdName);
 
+            BloodBankModal bloodBankModal = new BloodBankModal(this);
+            bloodBankModal.addBloodRequest(bloodBankController);
         } else {
             // normal downstream message.
            // createNotification(BLOOD_REQUEST_NOTIFICATION_MESSAGE + stdName);

@@ -23,15 +23,16 @@ public class BloodBankView extends AppCompatActivity {
         setActionBarLogo();
 
         SharedPreferences sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
-        final int SIGNUP_OPTION = sharedPreferences.getInt("SIGNUP_OPTION", 0);
-        if (SIGNUP_OPTION == 1){
+        final String APPLICATION_STATUS = sharedPreferences.getString("APPLICATION_STATUS", "NULL");
+
+        if (APPLICATION_STATUS.equals("STUDENT")){
             ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
             new BloodBankController(this).setupViewPagerRequester(viewPager, getSupportFragmentManager());
             TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
             if (tabLayout != null) {
                 tabLayout.setupWithViewPager(viewPager);
             }
-        }else if (SIGNUP_OPTION == 2){
+        }else if (APPLICATION_STATUS.equals("BLOOD_BANK")){
 
             ViewPager viewPagerAdmin = (ViewPager) findViewById(R.id.viewPager);
             new BloodBankController(this).setupViewPagerAdmin(viewPagerAdmin, getSupportFragmentManager());

@@ -31,7 +31,8 @@ public class RegistrationIntentService extends IntentService {
 
     private static final String TAG = "RegServicePush";
     private static final String GCM_SENDER_ID = "398454349636";
-    private static String[] topics = {"blood"};
+    public static String token;
+
 
     public RegistrationIntentService() {
         super(TAG);
@@ -41,12 +42,8 @@ public class RegistrationIntentService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         InstanceID instanceID = InstanceID.getInstance(this);
         try {
-            String token = instanceID.getToken(GCM_SENDER_ID,
+            token = instanceID.getToken(GCM_SENDER_ID,
                     GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
-            GcmPubSub gcmPubSub = GcmPubSub.getInstance(this);
-            for (String topic : topics){
-                gcmPubSub.subscribe(token, "/topics/" + topic, null);
-            }
 
             saveTokenPreferences();
             SharedPreferences sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
@@ -71,6 +68,10 @@ public class RegistrationIntentService extends IntentService {
 
     private void sendRegTokenToServer(String stringUrl, String designation, String token, String username, String password) {
         new SendTokenInBackground().execute(stringUrl, designation, token, username, password);
+    }
+
+    private void sendRegTokenToServer(){
+
     }
     public class SendTokenInBackground extends AsyncTask<String, Void, String> {
 

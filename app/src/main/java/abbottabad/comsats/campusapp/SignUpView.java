@@ -88,12 +88,8 @@ public class SignUpView extends AppCompatActivity implements AdapterView.OnItemS
                 if (spinnerOption != 0){
                     switch (spinnerOption){
                         case 1:{
-                            SharedPreferences sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putInt("SIGNUP_OPTION", 1);
-                            editor.apply();
 
-                            startActivity(new Intent(SignUpView.this, HomePageView.class));
+                            new SignUpModal(SignUpView.this).execute();
                             break;
                         }
                     }
