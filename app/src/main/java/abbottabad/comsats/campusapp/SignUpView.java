@@ -24,6 +24,9 @@ public class SignUpView extends AppCompatActivity implements AdapterView.OnItemS
     private static int spinnerOption;
     private AlertDialog alertDialog = null;
     private static final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
+    private EditText ETname;
+    private EditText ETregistration;
+    private EditText ETsection;
 
 
     @Override
@@ -44,9 +47,9 @@ public class SignUpView extends AppCompatActivity implements AdapterView.OnItemS
             TILsection.setHint("Section");
         }
 
-        EditText ETname = (EditText) findViewById(R.id.ETname);
-        EditText ETregistration = (EditText) findViewById(R.id.ETregistration);
-        EditText ETsection = (EditText) findViewById(R.id.ETsection);
+        ETname = (EditText) findViewById(R.id.ETname);
+        ETregistration = (EditText) findViewById(R.id.ETregistration);
+        ETsection = (EditText) findViewById(R.id.ETsection);
 
         setActionBarLogo();
         Spinner SPsignupOptions = (Spinner) findViewById(R.id.SPsignupOptions);
@@ -89,7 +92,17 @@ public class SignUpView extends AppCompatActivity implements AdapterView.OnItemS
                     switch (spinnerOption){
                         case 1:{
 
-                            new SignUpModal(SignUpView.this).execute();
+                            SharedPreferences sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+                            final int TOKEN_GOT = sharedPreferences.getInt("TOKEN_GOT", 0);
+
+                            if (TOKEN_GOT != 1) {
+                                this.startService(new Intent(this, RegistrationIntentService.class));
+                            }
+
+                            String name = ETname.getText().toString().trim();
+                            String reg = ETregistration.getText().toString().trim();
+                            String sec = ETsection.getText().toString().trim();
+                            new SignUpModal(SignUpView.this).execute(name, reg, sec);
                             break;
                         }
                     }
@@ -97,7 +110,7 @@ public class SignUpView extends AppCompatActivity implements AdapterView.OnItemS
                 else{
                     AlertDialog.Builder builder = new AlertDialog.Builder(this);
                     builder.setTitle("Error");
-                    builder.setMessage("Please select login option");
+                    builder.setMessage("Please select sign up option");
                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int which) {
@@ -116,5 +129,6 @@ public class SignUpView extends AppCompatActivity implements AdapterView.OnItemS
     public void setLoginError() {
         TILname.setError("Invalid username");
         TILreg.setError("Invalid password");
+        TILsection.setError("Invalid registration id");
     }
 }

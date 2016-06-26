@@ -31,7 +31,7 @@ public class RegistrationIntentService extends IntentService {
 
     private static final String TAG = "RegServicePush";
     private static final String GCM_SENDER_ID = "398454349636";
-    public static String token;
+    public static String token = null;
 
 
     public RegistrationIntentService() {
