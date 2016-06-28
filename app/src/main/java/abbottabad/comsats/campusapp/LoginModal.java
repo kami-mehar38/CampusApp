@@ -16,8 +16,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
 
@@ -81,11 +83,7 @@ public class LoginModal extends AsyncTask<String, Void, String>{
             inputStream.close();
             httpURLConnection.disconnect();
             return STATUS_OK.trim();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
+        } catch (JSONException | IOException e) {
             e.printStackTrace();
         }
         return null;
@@ -108,9 +106,9 @@ public class LoginModal extends AsyncTask<String, Void, String>{
             SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
             final int TOKEN_GOT = sharedPreferences.getInt("TOKEN_GOT", 0);
 
-                if (TOKEN_GOT != 1){
-                    context.startService(new Intent(context, RegistrationIntentService.class));
-                }
+            if (TOKEN_GOT != 1){
+                context.startService(new Intent(context, RegistrationIntentService.class));
+            }
 
             context.startActivity(new Intent(context, HomePageView.class));
         }

@@ -30,6 +30,15 @@ public class InitialPage extends Activity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+        final String APPLICATION_STATUS = sharedPreferences.getString("APPLICATION_STATUS", "NULL");
+        if (APPLICATION_STATUS.equals("STUDENT")){
+            startActivity(new Intent(this, HomePageView.class));
+        }
+
+        if (APPLICATION_STATUS.equals("BLOOD_BANK")){
+            startActivity(new Intent(this, LoginView.class));
+        }
         setContentView(R.layout.initial_page);
 
         isPlayServicesAvailable();

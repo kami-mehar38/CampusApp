@@ -3,6 +3,7 @@ package abbottabad.comsats.campusapp;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -134,7 +135,7 @@ public class BloodBankModal extends SQLiteOpenHelper {
 
         @Override
         protected String doInBackground(String... params) {
-            String stringUrl = "http://amgbuilders.co.nf/sendPushNotification.php";
+            String stringUrl = "http://10.0.2.2/CampusApp/sendPushNotification.php";
             String name, registration, contact, bloodType;
             try {
                 URL url = new URL(stringUrl);
@@ -150,7 +151,8 @@ public class BloodBankModal extends SQLiteOpenHelper {
                 String data = URLEncoder.encode("name", "UTF-8") +"="+ URLEncoder.encode(name, "UTF-8") +"&"+
                               URLEncoder.encode("registration", "UTF-8") +"="+ URLEncoder.encode(registration, "UTF-8") +"&"+
                               URLEncoder.encode("contact", "UTF-8") +"="+ URLEncoder.encode(contact, "UTF-8") +"&"+
-                              URLEncoder.encode("bloodType", "UTF-8") +"="+ URLEncoder.encode(bloodType, "UTF-8");
+                              URLEncoder.encode("bloodType", "UTF-8") +"="+ URLEncoder.encode(bloodType, "UTF-8") +"&"+
+                              URLEncoder.encode("designation", "UTF-8") +"="+ URLEncoder.encode("BLOOD_BANK", "UTF-8");
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
                 bufferedWriter.close();

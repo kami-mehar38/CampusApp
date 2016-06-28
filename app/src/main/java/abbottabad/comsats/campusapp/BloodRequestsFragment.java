@@ -58,10 +58,10 @@ public class BloodRequestsFragment extends Fragment{
         LV_requests.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Toast.makeText(context, LV_requests.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
+
                 String selection = LV_requests.getItemAtPosition(position).toString().trim();
                 String[] stdSelected = selection.split("  ");
-                //Log.i("TAG", "onItemClick: " +stdSelected[1]);
+
                 bloodBankModal.viewSelectedRequest(stdSelected[1].trim());
             }
         });

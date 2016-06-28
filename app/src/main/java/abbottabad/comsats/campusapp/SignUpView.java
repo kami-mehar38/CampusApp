@@ -91,14 +91,8 @@ public class SignUpView extends AppCompatActivity implements AdapterView.OnItemS
                 if (spinnerOption != 0){
                     switch (spinnerOption){
                         case 1:{
-
-                            SharedPreferences sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
-                            final int TOKEN_GOT = sharedPreferences.getInt("TOKEN_GOT", 0);
-
-                            if (TOKEN_GOT != 1) {
-                                this.startService(new Intent(this, RegistrationIntentService.class));
-                            }
-
+                        }
+                        case 2:{
                             String name = ETname.getText().toString().trim();
                             String reg = ETregistration.getText().toString().trim();
                             String sec = ETsection.getText().toString().trim();

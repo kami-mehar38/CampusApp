@@ -37,7 +37,7 @@ public class SignUpModal extends AsyncTask<String, Void, String> {
 
 
         String stringUrl = "http://10.0.2.2/CampusApp/addStudent.php";
-        String std_name, std_id, std_section, gcm_token;
+        String std_name, std_id, std_section;
         try {
             URL url = new URL(stringUrl);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -48,11 +48,11 @@ public class SignUpModal extends AsyncTask<String, Void, String> {
             std_name = params[0];
             std_id = params[1];
             std_section = params[2];
-            gcm_token = RegistrationIntentService.token;
+
             String data = URLEncoder.encode("std_name", "UTF-8") + "=" + URLEncoder.encode(std_name, "UTF-8") +"&"+
                     URLEncoder.encode("std_id", "UTF-8") + "=" + URLEncoder.encode(std_id, "UTF-8") +"&"+
-                    URLEncoder.encode("std_section", "UTF-8") + "=" + URLEncoder.encode(std_section, "UTF-8") +"&"+
-                    URLEncoder.encode("gcm_token", "UTF-8") + "=" + URLEncoder.encode(gcm_token, "UTF-8");
+                    URLEncoder.encode("std_section", "UTF-8") + "=" + URLEncoder.encode(std_section, "UTF-8");
+
             bufferedWriter.write(data);
             bufferedWriter.flush();
             bufferedWriter.close();
@@ -73,5 +73,12 @@ public class SignUpModal extends AsyncTask<String, Void, String> {
         SharedPreferences.Editor editor = applicationStatus.edit();
         editor.putString("APPLICATION_STATUS", "STUDENT");
         editor.apply();
+            SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+            final int TOKEN_GOT = sharedPreferences.getInt("TOKEN_GOT", 0);
+
+            if (TOKEN_GOT != 1){
+                context.startService(new Intent(context, RegistrationIntentService.class));
+            }
+            context.startActivity(new Intent(context, HomePageView.class));
     }
 }
