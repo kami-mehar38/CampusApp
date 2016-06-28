@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 /**
  * Created by Kamran Ramzan on 6/4/16.
@@ -13,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 public class BloodBankView extends AppCompatActivity {
 
     private static final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
+    private ViewPager viewPagerAdmin;
 
 
     @Override
@@ -34,13 +36,13 @@ public class BloodBankView extends AppCompatActivity {
             }
         }else if (APPLICATION_STATUS.equals("BLOOD_BANK")){
 
-            ViewPager viewPagerAdmin = (ViewPager) findViewById(R.id.viewPager);
+            viewPagerAdmin = (ViewPager) findViewById(R.id.viewPager);
             new BloodBankController(this).setupViewPagerAdmin(viewPagerAdmin, getSupportFragmentManager());
-
             TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
             if (tabLayout != null) {
                 tabLayout.setupWithViewPager(viewPagerAdmin);
             }
+
             new BloodBankModal(this);
         }
     }

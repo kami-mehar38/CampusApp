@@ -55,7 +55,6 @@ public class BloodBankModal extends SQLiteOpenHelper {
                 +COL_BLOOD_TYPE+ " TEXT"
                 + " )";
         db.execSQL(createTableQuery);
-        //db.close();
     }
 
     @Override
@@ -121,6 +120,10 @@ public class BloodBankModal extends SQLiteOpenHelper {
         new sendRequestInBackground().execute(name, registration, contact, bloodType);
     }
 
+    public void retrieveDonors() {
+        new RetrieveDonors().execute();
+    }
+
     private class sendRequestInBackground extends AsyncTask<String, Void, String>{
 
         private ProgressDialog progressDialog;
@@ -168,8 +171,6 @@ public class BloodBankModal extends SQLiteOpenHelper {
                 inputStream.close();
                 httpURLConnection.disconnect();
                 return stringBuilder.toString().trim();
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -182,4 +183,48 @@ public class BloodBankModal extends SQLiteOpenHelper {
             progressDialog.cancel();
         }
     }
+    public class RetrieveDonors extends AsyncTask<String, Void, String> {
+
+        private ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog = new ProgressDialog(context);
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressDialog.setMessage("Retrieving donors information...");
+            progressDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            String stringUrl = "http://10.0.2.2/CampusApp/retrieveDonors.php";
+
+            try {
+                URL url = new URL(stringUrl);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+                StringBuilder stringBuilder = new StringBuilder();
+                String line = "";
+                while ((line = bufferedReader.readLine()) != null){
+                    stringBuilder.append(line);
+                }
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return stringBuilder.toString().trim();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            progressDialog.cancel();
+            Toast.makeText(context, s, Toast.LENGTH_LONG).show();
+        }
+    }
+
 }

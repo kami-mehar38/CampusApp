@@ -31,13 +31,13 @@ public class DonorsViewAdapter extends RecyclerView.Adapter <DonorsViewAdapter.V
     public void onBindViewHolder(ViewHolder holder, int position) {
         DonorsInfo donorsInfo = donorsInfoList.get(position);
         holder.TV_donorName.append(donorsInfo.getName());
-        holder.TV_donorBloodtype.append(donorsInfo.getContact());
+        holder.TV_donorBloodtype.append(donorsInfo.getBloodType());
         holder.TV_donorContact.append(donorsInfo.getContact());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return donorsInfoList.size();
     }
 
     protected class ViewHolder extends RecyclerView.ViewHolder{

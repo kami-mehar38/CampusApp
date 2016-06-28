@@ -22,7 +22,8 @@ public class BloodRequestsFragment extends Fragment{
     private ListView LV_requests;
     private BloodBankModal bloodBankModal;
 
-
+    public BloodRequestsFragment() {
+    }
 
     public BloodRequestsFragment(Context context) {
         this.context = context;

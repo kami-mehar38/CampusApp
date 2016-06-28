@@ -69,11 +69,11 @@ public class BloodBankController {
         SPbloodTypeOptions.setAdapter(spinnerAdapter);
     }
 
-    public void setupViewPagerAdmin(ViewPager viewPager, FragmentManager supportFragmentManager) {
+    public void setupViewPagerAdmin(ViewPager viewPagerAdmin, FragmentManager supportFragmentManager) {
         ViewPagerAdapterAdmin viewPagerAdapterAdmin = new ViewPagerAdapterAdmin(supportFragmentManager);
         viewPagerAdapterAdmin.addFragment(new BloodRequestsFragment(context), "Requests");
-        viewPagerAdapterAdmin.addFragment(new BloodDonorsFragment(), "Donors");
-        viewPager.setAdapter(viewPagerAdapterAdmin);
+        viewPagerAdapterAdmin.addFragment(new BloodDonorsFragment(context), "Donors");
+       viewPagerAdmin.setAdapter(viewPagerAdapterAdmin);
     }
     private class ViewPagerAdapterAdmin extends FragmentPagerAdapter {
 
