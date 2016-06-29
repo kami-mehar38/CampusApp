@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import java.util.ArrayList;
@@ -50,28 +51,13 @@ public class BloodDonorsFragment extends Fragment{
         RecyclerView.ItemDecoration itemDecoration =
                 new DividerItemDecoration(view.getContext(), LinearLayoutManager.VERTICAL);
         recyclerView.addItemDecoration(itemDecoration);
-
-        List<DonorsInfo> donorsInfoList = new ArrayList<>();
-        DonorsInfo donorsInfo1, donorsInfo2;
-        donorsInfo1 = new DonorsInfo();
-        donorsInfo1.setName("Kamran Ramzan");
-        donorsInfo1.setBloodType("B+");
-        donorsInfo1.setContact("03450578052");
-
-        donorsInfo2 = new DonorsInfo();
-        donorsInfo2.setName("M.Zeeshan");
-        donorsInfo2.setBloodType("O+");
-        donorsInfo2.setContact("03450578052");
-
-        donorsInfoList.add(donorsInfo1);
-        donorsInfoList.add(donorsInfo2);
-        recyclerView.setAdapter(new DonorsViewAdapter(donorsInfoList));
     }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         if (isVisibleToUser){
-            new BloodBankModal(context).retrieveDonors();
+            new BloodBankModal(context).retrieveDonors(recyclerView);
+
         }
     }
 }

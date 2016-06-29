@@ -72,9 +72,7 @@ public class LoginModal extends AsyncTask<String, Void, String>{
                 stringBuilder.append(line);
             }
 
-
             String finalJson = stringBuilder.toString();
-            Log.i("TAG", "doInBackground: " + finalJson);
             JSONObject parentObject = new JSONObject(finalJson);
             JSONArray parentArray = parentObject.getJSONArray("STATUS");
             JSONObject finalObject = parentArray.getJSONObject(0);
@@ -101,6 +99,7 @@ public class LoginModal extends AsyncTask<String, Void, String>{
             SharedPreferences applicationStatus = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = applicationStatus.edit();
             editor.putString("APPLICATION_STATUS", "BLOOD_BANK");
+            editor.putBoolean("LOGGED_IN", true);
             editor.apply();
 
             SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);

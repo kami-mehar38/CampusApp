@@ -3,14 +3,17 @@ package abbottabad.comsats.campusapp;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
+import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -20,10 +23,10 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Kamran Ramzan on 6/4/16.
@@ -120,8 +123,8 @@ public class BloodBankModal extends SQLiteOpenHelper {
         new sendRequestInBackground().execute(name, registration, contact, bloodType);
     }
 
-    public void retrieveDonors() {
-        new RetrieveDonors().execute();
+    public void retrieveDonors(RecyclerView recyclerView) {
+        new RetrieveDonors(recyclerView).execute();
     }
 
     private class sendRequestInBackground extends AsyncTask<String, Void, String>{
@@ -183,9 +186,13 @@ public class BloodBankModal extends SQLiteOpenHelper {
             progressDialog.cancel();
         }
     }
-    public class RetrieveDonors extends AsyncTask<String, Void, String> {
+    public class RetrieveDonors extends AsyncTask<String, Void, List<DonorsInfo>> {
 
         private ProgressDialog progressDialog;
+        private RecyclerView recyclerView;
+        public RetrieveDonors(RecyclerView recyclerView) {
+            this.recyclerView = recyclerView;
+        }
 
         @Override
         protected void onPreExecute() {
@@ -196,9 +203,10 @@ public class BloodBankModal extends SQLiteOpenHelper {
         }
 
         @Override
-        protected String doInBackground(String... params) {
+        protected List<DonorsInfo> doInBackground(String... params) {
             String stringUrl = "http://10.0.2.2/CampusApp/retrieveDonors.php";
-
+            DonorsInfo[] donorsInfo;
+            List<DonorsInfo> donorsInfoList = new ArrayList<>();
             try {
                 URL url = new URL(stringUrl);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -211,20 +219,31 @@ public class BloodBankModal extends SQLiteOpenHelper {
                 while ((line = bufferedReader.readLine()) != null){
                     stringBuilder.append(line);
                 }
+                JSONArray parentJson = new JSONArray(stringBuilder.toString());
+                donorsInfo = new DonorsInfo[parentJson.length()];
+                for (int index = 0; index < parentJson.length(); index++) {
+                    JSONObject finalObject = parentJson.getJSONObject(index);
+                    donorsInfo[index] = new DonorsInfo();
+                    donorsInfo[index].setName(finalObject.getString("name"));
+                    donorsInfo[index].setBloodType(finalObject.getString("blood_type"));
+                    donorsInfo[index].setContact(finalObject.getString("contact"));
+                    donorsInfoList.add(donorsInfo[index]);
+                }
                 inputStream.close();
                 httpURLConnection.disconnect();
-                return stringBuilder.toString().trim();
+                return donorsInfoList;
             } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
             return null;
         }
 
         @Override
-        protected void onPostExecute(String s) {
+        protected void onPostExecute(List<DonorsInfo> s) {
             progressDialog.cancel();
-            Toast.makeText(context, s, Toast.LENGTH_LONG).show();
+            recyclerView.setAdapter(new DonorsViewAdapter(s));
         }
     }
-
 }

@@ -37,8 +37,14 @@ public class InitialPage extends Activity implements View.OnClickListener {
         }
 
         if (APPLICATION_STATUS.equals("BLOOD_BANK")){
-            startActivity(new Intent(this, LoginView.class));
+            Boolean LOGGED_IN = sharedPreferences.getBoolean("LOGGED_IN", false);
+            if (LOGGED_IN){
+                startActivity(new Intent(this, HomePageView.class));
+            } else {
+                startActivity(new Intent(this, LoginView.class));
+            }
         }
+
         setContentView(R.layout.initial_page);
 
         isPlayServicesAvailable();
