@@ -1,4 +1,4 @@
-package abbottabad.comsats.campusapp;
+package abbottabad.comsats.campusapp.Modals;
 
 import android.app.ProgressDialog;
 import android.content.ContentValues;
@@ -27,6 +27,10 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
+
+import abbottabad.comsats.campusapp.BloodBankController;
+import abbottabad.comsats.campusapp.DonorsInfo;
+import abbottabad.comsats.campusapp.DonorsViewAdapter;
 
 /**
  * Created by Kamran Ramzan on 6/4/16.
@@ -232,9 +236,7 @@ public class BloodBankModal extends SQLiteOpenHelper {
                 inputStream.close();
                 httpURLConnection.disconnect();
                 return donorsInfoList;
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
+            } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
             return null;

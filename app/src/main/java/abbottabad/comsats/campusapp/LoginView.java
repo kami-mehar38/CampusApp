@@ -47,6 +47,7 @@ public class LoginView extends AppCompatActivity implements AdapterView.OnItemSe
         ETpassword = (EditText) findViewById(R.id.ETpassword);
 
         setActionBarLogo();
+
         SPloginOptions = (Spinner) findViewById(R.id.SPloginOptions);
         new LoginController(this).populateSpinner(SPloginOptions);
         if (SPloginOptions != null) {

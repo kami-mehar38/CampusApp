@@ -1,6 +1,7 @@
 package abbottabad.comsats.campusapp;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -10,8 +11,14 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import abbottabad.comsats.campusapp.Modals.BloodBankModal;
 
 /**
  * Created by Kamran Ramzan on 6/4/16.
@@ -28,6 +35,7 @@ public class BloodDonorsFragment extends Fragment{
         this.context = context;
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +46,7 @@ public class BloodDonorsFragment extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_blood_donors, container, false);
+
     }
 
     @Override
@@ -57,7 +66,7 @@ public class BloodDonorsFragment extends Fragment{
     public void setUserVisibleHint(boolean isVisibleToUser) {
         if (isVisibleToUser){
             new BloodBankModal(context).retrieveDonors(recyclerView);
-
+            Toast.makeText(context, "OK", Toast.LENGTH_LONG).show();
         }
     }
 }

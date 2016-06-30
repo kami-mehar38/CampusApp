@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import abbottabad.comsats.campusapp.Modals.BloodBankModal;
+
 /**
  * Created by Kamran Ramzan on 6/8/16.
  */

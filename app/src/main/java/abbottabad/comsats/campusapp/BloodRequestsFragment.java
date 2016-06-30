@@ -11,7 +11,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
+
+import abbottabad.comsats.campusapp.Modals.BloodBankModal;
 
 /**
  * Created by Kamran Ramzan on 6/4/16.

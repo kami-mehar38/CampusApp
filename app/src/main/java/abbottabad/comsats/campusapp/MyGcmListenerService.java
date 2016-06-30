@@ -13,6 +13,8 @@ import android.util.Log;
 
 import com.google.android.gms.gcm.GcmListenerService;
 
+import abbottabad.comsats.campusapp.Modals.BloodBankModal;
+
 /**
  * Created by Kamran Ramzan on 6/3/16.
  */

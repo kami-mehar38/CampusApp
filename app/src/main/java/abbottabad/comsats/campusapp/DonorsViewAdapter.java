@@ -1,7 +1,8 @@
 package abbottabad.comsats.campusapp;
 
+import android.content.Intent;
 import android.graphics.Color;
-import android.support.annotation.ColorRes;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,8 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -34,9 +34,9 @@ public class DonorsViewAdapter extends RecyclerView.Adapter <DonorsViewAdapter.V
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         DonorsInfo donorsInfo = donorsInfoList.get(position);
-        holder.TV_donorName.append(donorsInfo.getName());
-        holder.TV_donorBloodtype.append(donorsInfo.getBloodType());
-        holder.TV_donorContact.append(donorsInfo.getContact());
+        holder.TV_donorName.setText(donorsInfo.getName());
+        holder.TV_donorBloodtype.setText(donorsInfo.getBloodType());
+        holder.TV_donorContact.setText(donorsInfo.getContact());
     }
 
     @Override
@@ -50,18 +50,19 @@ public class DonorsViewAdapter extends RecyclerView.Adapter <DonorsViewAdapter.V
         private TextView TV_donorContact;
         private Button btnCall;
         private Button btnMessage;
-        public ViewHolder(View itemView) {
+        public ViewHolder(final View itemView) {
             super(itemView);
             TV_donorName = (TextView) itemView.findViewById(R.id.TV_donorName);
-            TV_donorBloodtype = (TextView) itemView.findViewById(R.id.TV_donorBloodtype);
+            TV_donorBloodtype = (TextView) itemView.findViewById(R.id.TV_donorBloodType);
             TV_donorContact = (TextView) itemView.findViewById(R.id.TV_donorContact);
             btnCall = (Button) itemView.findViewById(R.id.btnCall);
             btnMessage = (Button) itemView.findViewById(R.id.btnMessage);
-            final RelativeLayout relativeLayout = (RelativeLayout) itemView.findViewById(R.id.RL_cardView);
             btnCall.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    relativeLayout.setBackgroundColor(Color.WHITE);
+                    Intent intent = new Intent(Intent.ACTION_DIAL,
+                            Uri.parse("tel:" + TV_donorContact.getText().toString().trim()));
+                    itemView.getContext().startActivity(intent);
                 }
             });
         }

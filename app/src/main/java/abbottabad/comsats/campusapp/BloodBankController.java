@@ -77,8 +77,8 @@ public class BloodBankController {
     }
     private class ViewPagerAdapterAdmin extends FragmentPagerAdapter {
 
-        private final List<Fragment> fragmentsList = new ArrayList();
-        private final List<String> titlesList = new ArrayList();
+        private final List<Fragment> fragmentsList = new ArrayList<Fragment>();
+        private final List<String> titlesList = new ArrayList<String>();
 
         public ViewPagerAdapterAdmin(FragmentManager fm) {
             super(fm);

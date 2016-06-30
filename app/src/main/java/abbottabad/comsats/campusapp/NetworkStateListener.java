@@ -19,7 +19,6 @@ public class NetworkStateListener extends BroadcastReceiver {
         Boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
         if (!isConnected){
             Toast.makeText(context, "No internet connection.", Toast.LENGTH_LONG).show();
-            ((Activity)(context)).finish();
         }
     }
 }
