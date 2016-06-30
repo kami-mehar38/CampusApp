@@ -127,8 +127,8 @@ public class BloodBankModal extends SQLiteOpenHelper {
         new sendRequestInBackground().execute(name, registration, contact, bloodType);
     }
 
-    public void retrieveDonors(RecyclerView recyclerView) {
-        new RetrieveDonors(recyclerView).execute();
+    public void retrieveDonors(RecyclerView recyclerView, String bloodType) {
+        new RetrieveDonors(recyclerView).execute(bloodType);
     }
 
     private class sendRequestInBackground extends AsyncTask<String, Void, String>{
@@ -211,11 +211,20 @@ public class BloodBankModal extends SQLiteOpenHelper {
             String stringUrl = "http://10.0.2.2/CampusApp/retrieveDonors.php";
             DonorsInfo[] donorsInfo;
             List<DonorsInfo> donorsInfoList = new ArrayList<>();
+            String bloodType = params[0];
             try {
                 URL url = new URL(stringUrl);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoOutput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+
+                String data = URLEncoder.encode("bloodType", "UTF-8") +"="+ URLEncoder.encode(bloodType, "UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
                 InputStream inputStream = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
                 StringBuilder stringBuilder = new StringBuilder();
