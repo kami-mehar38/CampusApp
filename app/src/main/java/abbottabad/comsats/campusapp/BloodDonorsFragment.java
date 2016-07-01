@@ -48,6 +48,7 @@ public class BloodDonorsFragment extends Fragment implements  android.support.v7
 
         // Spinner title navigation data
         ArrayList<SpinnerNavItem> navSpinner = new ArrayList<SpinnerNavItem>();
+        navSpinner.add(new SpinnerNavItem("Select Group"));
         navSpinner.add(new SpinnerNavItem("All"));
         navSpinner.add(new SpinnerNavItem("O +ve"));
         navSpinner.add(new SpinnerNavItem("O -ve"));
@@ -96,39 +97,39 @@ public class BloodDonorsFragment extends Fragment implements  android.support.v7
     @Override
     public boolean onNavigationItemSelected(int itemPosition, long itemId) {
         switch (itemPosition){
-            case 0: {
+            case 1: {
                 new BloodBankModal(context).retrieveDonors(recyclerView, "All");
                 break;
             }
-            case 1: {
+            case 2: {
                 new BloodBankModal(context).retrieveDonors(recyclerView, "O+");
                 break;
             }
-            case 2: {
+            case 3: {
                 new BloodBankModal(context).retrieveDonors(recyclerView, "O-");
                 break;
             }
-            case 3: {
+            case 4: {
                 new BloodBankModal(context).retrieveDonors(recyclerView, "A+");
                 break;
             }
-            case 4: {
+            case 5: {
                 new BloodBankModal(context).retrieveDonors(recyclerView, "A-");
                 break;
             }
-            case 5: {
+            case 6: {
                 new BloodBankModal(context).retrieveDonors(recyclerView, "B+");
                 break;
             }
-            case 6: {
+            case 7: {
                 new BloodBankModal(context).retrieveDonors(recyclerView, "B-");
                 break;
             }
-            case 7: {
+            case 8: {
                 new BloodBankModal(context).retrieveDonors(recyclerView, "AB+");
                 break;
             }
-            case 8: {
+            case 9: {
                 new BloodBankModal(context).retrieveDonors(recyclerView, "AB-");
                 break;
             }

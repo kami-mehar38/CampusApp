@@ -131,6 +131,10 @@ public class BloodBankModal extends SQLiteOpenHelper {
         new RetrieveDonors(recyclerView).execute(bloodType);
     }
 
+    public void addDonor(String name, String regID, String bloodType, String contact, String bleededDate){
+        new AddDonor().execute(name, regID, bloodType, contact, bleededDate);
+    }
+
     private class sendRequestInBackground extends AsyncTask<String, Void, String>{
 
         private ProgressDialog progressDialog;
@@ -255,6 +259,60 @@ public class BloodBankModal extends SQLiteOpenHelper {
         protected void onPostExecute(List<DonorsInfo> s) {
             progressDialog.cancel();
             recyclerView.setAdapter(new DonorsViewAdapter(s));
+        }
+    }
+    public class AddDonor extends AsyncTask<String, Void, String>{
+
+        private ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = new ProgressDialog(context);
+            progressDialog.setMessage("Adding donor... Please wait");
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            String stringUrl = "http://10.0.2.2/CampusApp/insertDonor.php";
+            String name, regID, bloodType, contact, bleeded;
+            try {
+                URL url = new URL(stringUrl);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                name = params[0];
+                regID = params[1];
+                bloodType = params[2];
+                contact = params[3];
+                bleeded = params[4];
+                String data = URLEncoder.encode("name", "UTF-8") +"="+ URLEncoder.encode(name, "UTF-8") +"&"+
+                        URLEncoder.encode("regID", "UTF-8") +"="+ URLEncoder.encode(regID, "UTF-8") +"&"+
+                        URLEncoder.encode("bloodType", "UTF-8") +"="+ URLEncoder.encode(bloodType, "UTF-8") +"&"+
+                        URLEncoder.encode("contact", "UTF-8") +"="+ URLEncoder.encode(contact, "UTF-8") +"&"+
+                        URLEncoder.encode("bleeded", "UTF-8") +"="+ URLEncoder.encode(bleeded, "UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return null;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            progressDialog.cancel();
         }
     }
 }
