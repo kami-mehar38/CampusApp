@@ -123,8 +123,6 @@ public class DonorsAddFragment extends Fragment {
             @Override
             public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 try {
-                    Toast.makeText(context, String.valueOf(year)+ String.valueOf(monthOfYear)+String.valueOf(dayOfMonth), Toast.LENGTH_LONG).show();
-
                     selectedDate = dateFormat.parse(String.valueOf(year) + "/" + String.valueOf(monthOfYear) +"/"+ String.valueOf(dayOfMonth));
                     bleededDate = String.valueOf(year) + "/" + String.valueOf(monthOfYear+1) +"/"+ String.valueOf(dayOfMonth);
                 } catch (ParseException e) {
