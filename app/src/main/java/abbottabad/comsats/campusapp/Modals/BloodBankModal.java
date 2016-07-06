@@ -31,6 +31,8 @@ import java.util.List;
 import abbottabad.comsats.campusapp.BloodBankController;
 import abbottabad.comsats.campusapp.DonorsInfo;
 import abbottabad.comsats.campusapp.DonorsViewAdapter;
+import abbottabad.comsats.campusapp.RequestsInfo;
+import abbottabad.comsats.campusapp.RequestsViewAdapter;
 
 /**
  * Created by Kamran Ramzan on 6/4/16.
@@ -80,49 +82,26 @@ public class BloodBankModal extends SQLiteOpenHelper {
         db.insert(TABLE_NAME, null, contentValues);
         db.close();
     }
-    public ArrayList<String> viewBloodRequests(){
+    public void viewBloodRequests(RecyclerView RV_bloodRequests){
         SQLiteDatabase db = this.getReadableDatabase();
         String selectQuery= "SELECT * FROM " +TABLE_NAME+ " ORDER BY " +SERIAL+ " DESC";
         Cursor cursor = db.rawQuery(selectQuery, null);
         cursor.moveToFirst();
-        String reqList = "";
-        ArrayList<String> arrayList = new ArrayList<String>();
+        List<RequestsInfo> requestsInfoList = new ArrayList<>();
+        RequestsInfo[] requestsInfos = new RequestsInfo[cursor.getCount()];
         while (!cursor.isAfterLast()){
-            reqList = reqList + "   " + cursor.getString(1);
-            reqList = reqList + "   " + cursor.getString(2);
-            arrayList.add(reqList);
-            reqList = "";
+            requestsInfos[cursor.getPosition()] = new RequestsInfo();
+            requestsInfos[cursor.getPosition()].setName(cursor.getString(1));
+            requestsInfos[cursor.getPosition()].setRegistration(cursor.getString(2));
+            requestsInfos[cursor.getPosition()].setBloodType(cursor.getString(4));
+            requestsInfos[cursor.getPosition()].setContact(cursor.getString(3));
+            requestsInfoList.add(requestsInfos[cursor.getPosition()]);
             cursor.moveToNext();
         }
         cursor.close();
-        return arrayList;
+        RV_bloodRequests.setAdapter(new RequestsViewAdapter(requestsInfoList));
     }
-    public void viewSelectedRequest(String searchREG){
-        SQLiteDatabase db = this.getReadableDatabase();
-        String[] columns = {COL_NAME, COL_REG, COL_CONTACT, COL_BLOOD_TYPE};
-        String where = COL_REG + "=?";
-        Cursor cursor = db.query(TABLE_NAME, columns, where, new String[]{searchREG}, null, null, null);
-        cursor.moveToFirst();
-        ArrayList<String> arrayList = new ArrayList<>();
 
-        while (!cursor.isAfterLast()){
-            arrayList.add(cursor.getString(0));
-            arrayList.add(cursor.getString(1));
-            arrayList.add(cursor.getString(2));
-            arrayList.add(cursor.getString(3));
-            cursor.moveToNext();
-        }
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Student details");
-        builder.setMessage("Name:   " +arrayList.get(0)+ "\n" +
-                           "Reg ID:   " +arrayList.get(1)+ "\n" +
-                           "Contact#:   " +arrayList.get(2)+ "\n" +
-                           "Blood required:   " +arrayList.get(3)+ "\n");
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
-        cursor.close();
-    }
     public void sendRequest(String name, String registration, String contact, String bloodType){
         new sendRequestInBackground().execute(name, registration, contact, bloodType);
     }

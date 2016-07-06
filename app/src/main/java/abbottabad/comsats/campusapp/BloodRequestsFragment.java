@@ -5,12 +5,15 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import abbottabad.comsats.campusapp.Modals.BloodBankModal;
 
@@ -20,8 +23,10 @@ import abbottabad.comsats.campusapp.Modals.BloodBankModal;
 public class BloodRequestsFragment extends Fragment{
 
     private Context context;
-    private ListView LV_requests;
+
     private BloodBankModal bloodBankModal;
+
+    private RecyclerView RV_bloodRequests;
 
     public BloodRequestsFragment() {
     }
@@ -49,29 +54,23 @@ public class BloodRequestsFragment extends Fragment{
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         // Setup any handles to view objects here
-
         super.onViewCreated(view, savedInstanceState);
-        LV_requests = (ListView) view.findViewById(R.id.LV_requests);
-        //String[] data = {"1", "2", "3"};
-
-        viewRequests();
-
-        LV_requests.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                String selection = LV_requests.getItemAtPosition(position).toString().trim();
-                String[] stdSelected = selection.split("  ");
-
-                bloodBankModal.viewSelectedRequest(stdSelected[1].trim());
-            }
-        });
+        RV_bloodRequests = (RecyclerView) view.findViewById(R.id.RV_bloodRequests);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        RV_bloodRequests.setLayoutManager(layoutManager);
+        RecyclerView.ItemDecoration itemDecoration =
+                new DividerItemDecoration(view.getContext(), LinearLayoutManager.VERTICAL);
+        RV_bloodRequests.addItemDecoration(itemDecoration);
+        bloodBankModal.viewBloodRequests(RV_bloodRequests);
+        Toast.makeText(context, "Ok it got it", Toast.LENGTH_LONG).show();
     }
 
-    public void viewRequests(){
-        ArrayAdapter arrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1,
-                bloodBankModal.viewBloodRequests());
-        LV_requests.setAdapter(arrayAdapter);
-    }
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser){
 
+        }
+    }
 }

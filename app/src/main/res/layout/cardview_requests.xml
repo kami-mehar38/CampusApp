@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/RL_cardView"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/TV_name"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:paddingBottom="10dp"
+                android:text="Name:                 " />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/TV_reg"
+                android:layout_below="@+id/TV_name"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:paddingBottom="10dp"
+                android:text="Reg ID:                " />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/TV_Bloodtype"
+                android:layout_below="@+id/TV_reg"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:paddingBottom="10dp"
+                android:text="Blood required: "/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/TV_Contact"
+                android:layout_below="@+id/TV_Bloodtype"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:text="Contact #:          "/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/TV_requesterName"
+                android:layout_toEndOf="@+id/TV_name"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:text="Name"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/TV_requesterReg"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:text="Reg"
+                android:layout_below="@+id/TV_name"
+                android:layout_toEndOf="@+id/TV_reg" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/TV_requesterBloodType"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:text="O+"
+                android:layout_below="@+id/TV_reg"
+                android:layout_toEndOf="@+id/TV_Bloodtype" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/TV_requesterContact"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:text="123456"
+                android:paddingBottom="10dp"
+                android:layout_below="@+id/TV_Bloodtype"
+                android:layout_toEndOf="@+id/TV_Contact" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnCall"
+                android:textColor="#000"
+                android:textSize="12sp"
+                android:layout_alignParentRight="true"
+                android:text="Call"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnMessage"
+                android:textColor="#000"
+                android:textSize="12sp"
+                android:layout_below="@+id/btnCall"
+                android:layout_alignParentEnd="true"
+                android:paddingBottom="10dp"
+                android:text="Message"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>
