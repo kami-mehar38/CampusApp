@@ -1,4 +1,4 @@
-package abbottabad.comsats.campusapp;
+package abbottabad.comsats.campusapp.Views;
 
 import android.content.Context;
 
@@ -18,7 +18,11 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 
+import abbottabad.comsats.campusapp.Helper_Classes.DividerItemDecoration;
 import abbottabad.comsats.campusapp.Modals.BloodBankModal;
+import abbottabad.comsats.campusapp.R;
+import abbottabad.comsats.campusapp.Helper_Classes.SpinnerNavItem;
+import abbottabad.comsats.campusapp.Controllers.TitleNavigationAdapter;
 
 /**
  * Created by Kamran Ramzan on 6/4/16.

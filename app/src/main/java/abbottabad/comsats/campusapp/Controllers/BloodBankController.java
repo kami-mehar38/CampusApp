@@ -1,4 +1,4 @@
-package abbottabad.comsats.campusapp;
+package abbottabad.comsats.campusapp.Controllers;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
@@ -10,6 +10,13 @@ import android.widget.Spinner;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import abbottabad.comsats.campusapp.Views.BloodDonorsFragment;
+import abbottabad.comsats.campusapp.Views.BloodRequestsFragment;
+import abbottabad.comsats.campusapp.Views.BloodRequestsSendFragment;
+import abbottabad.comsats.campusapp.Views.BloodRequestsSentFragment;
+import abbottabad.comsats.campusapp.Views.DonorsAddFragment;
+import abbottabad.comsats.campusapp.R;
 
 /**
  * Created by Kamran Ramzan on 6/4/16.

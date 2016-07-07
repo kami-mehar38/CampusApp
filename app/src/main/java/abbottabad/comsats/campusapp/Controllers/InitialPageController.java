@@ -1,4 +1,4 @@
-package abbottabad.comsats.campusapp;
+package abbottabad.comsats.campusapp.Controllers;
 
 import android.app.Activity;
 import android.app.ProgressDialog;

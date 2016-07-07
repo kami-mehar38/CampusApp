@@ -3,12 +3,14 @@ package abbottabad.comsats.campusapp.Modals;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -28,11 +30,11 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-import abbottabad.comsats.campusapp.BloodBankController;
-import abbottabad.comsats.campusapp.DonorsInfo;
-import abbottabad.comsats.campusapp.DonorsViewAdapter;
-import abbottabad.comsats.campusapp.RequestsInfo;
-import abbottabad.comsats.campusapp.RequestsViewAdapter;
+import abbottabad.comsats.campusapp.Controllers.BloodBankController;
+import abbottabad.comsats.campusapp.Helper_Classes.DonorsInfo;
+import abbottabad.comsats.campusapp.Controllers.DonorsViewAdapter;
+import abbottabad.comsats.campusapp.Helper_Classes.RequestsInfo;
+import abbottabad.comsats.campusapp.Controllers.RequestsViewAdapter;
 
 /**
  * Created by Kamran Ramzan on 6/4/16.
@@ -48,6 +50,7 @@ public class BloodBankModal extends SQLiteOpenHelper {
     private static String COL_CONTACT = "CONTACT";
     private static String COL_BLOOD_TYPE = "BLLOD_TYPE";
     private Context context;
+    private AlertDialog alertDialog;
 
     public BloodBankModal(Context context) {
         super(context, DATABASE_NAME, null, VERSION);
@@ -279,19 +282,54 @@ public class BloodBankModal extends SQLiteOpenHelper {
                 bufferedWriter.close();
                 outputStream.close();
                 InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+                StringBuilder stringBuilder = new StringBuilder();
+                String line = "";
+                while ((line = bufferedReader.readLine()) != null){
+                    stringBuilder.append(line);
+                }
+                JSONArray parentJSON = new JSONArray(stringBuilder.toString());
+                JSONObject finalObject = parentJSON.getJSONObject(0);
+                String RESPONSE = finalObject.getString("RESPONSE");
+                Log.i("TAG", "doInBackground: " + RESPONSE);
+                bufferedReader.close();
                 inputStream.close();
                 httpURLConnection.disconnect();
-                return null;
-            } catch (IOException e) {
+                return RESPONSE;
+            } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
             return null;
         }
 
         @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
             progressDialog.cancel();
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    alertDialog.cancel();
+                }
+            });
+            switch (result) {
+                case "INSERTED":
+                    Toast.makeText(context, "Donor is successfully inserted!", Toast.LENGTH_LONG).show();
+                    break;
+                case "EXISTED": {
+                    builder.setMessage("Couldn't add donor because donor already exists!");
+                    alertDialog = builder.create();
+                    alertDialog.show();
+                    break;
+                }
+                case "ERROR": {
+                    builder.setMessage("Some error occurred! Please try again.");
+                    alertDialog = builder.create();
+                    alertDialog.show();
+                    break;
+                }
+            }
         }
     }
 }

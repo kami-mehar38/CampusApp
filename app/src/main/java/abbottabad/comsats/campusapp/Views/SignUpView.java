@@ -1,9 +1,6 @@
-package abbottabad.comsats.campusapp;
+package abbottabad.comsats.campusapp.Views;
 
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
@@ -14,6 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import abbottabad.comsats.campusapp.Modals.SignUpModal;
+import abbottabad.comsats.campusapp.R;
+import abbottabad.comsats.campusapp.Controllers.SignUpController;
 
 /**
  * Created by Kamran Ramzan on 5/25/16.

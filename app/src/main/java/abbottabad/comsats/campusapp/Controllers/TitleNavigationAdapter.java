@@ -1,4 +1,4 @@
-package abbottabad.comsats.campusapp;
+package abbottabad.comsats.campusapp.Controllers;
 
 import android.app.Activity;
 import android.content.Context;
@@ -6,10 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import abbottabad.comsats.campusapp.Helper_Classes.SpinnerNavItem;
+import abbottabad.comsats.campusapp.R;
 
 /**
  * Created by Kamran Ramzan on 6/30/16.

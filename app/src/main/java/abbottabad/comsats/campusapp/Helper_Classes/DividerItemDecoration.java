@@ -1,4 +1,4 @@
-package abbottabad.comsats.campusapp;
+package abbottabad.comsats.campusapp.Helper_Classes;
 
 import android.content.Context;
 import android.content.res.TypedArray;

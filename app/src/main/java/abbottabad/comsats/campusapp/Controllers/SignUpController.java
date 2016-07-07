@@ -1,9 +1,11 @@
-package abbottabad.comsats.campusapp;
+package abbottabad.comsats.campusapp.Controllers;
 
 import android.content.Context;
-import android.content.Intent;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+
+import abbottabad.comsats.campusapp.Modals.LoginModal;
+import abbottabad.comsats.campusapp.R;
 
 /**
  * Created by Kamran Ramzan on 6/1/16.

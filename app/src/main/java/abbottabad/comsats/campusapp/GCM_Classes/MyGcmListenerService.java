@@ -1,4 +1,4 @@
-package abbottabad.comsats.campusapp;
+package abbottabad.comsats.campusapp.GCM_Classes;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -13,7 +13,10 @@ import android.util.Log;
 
 import com.google.android.gms.gcm.GcmListenerService;
 
+import abbottabad.comsats.campusapp.Controllers.BloodBankController;
 import abbottabad.comsats.campusapp.Modals.BloodBankModal;
+import abbottabad.comsats.campusapp.R;
+import abbottabad.comsats.campusapp.Views.BloodBankView;
 
 /**
  * Created by Kamran Ramzan on 6/3/16.

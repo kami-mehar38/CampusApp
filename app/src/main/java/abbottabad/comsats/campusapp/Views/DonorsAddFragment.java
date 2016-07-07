@@ -1,7 +1,6 @@
-package abbottabad.comsats.campusapp;
+package abbottabad.comsats.campusapp.Views;
 
 import android.content.DialogInterface;
-import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.content.Context;
@@ -9,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -26,7 +26,10 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import abbottabad.comsats.campusapp.Controllers.BloodBankController;
+import abbottabad.comsats.campusapp.Helper_Classes.Validation;
 import abbottabad.comsats.campusapp.Modals.BloodBankModal;
+import abbottabad.comsats.campusapp.R;
 
 /**
  * Created by Kamran Ramzan on 6/30/16.
@@ -47,6 +50,7 @@ public class DonorsAddFragment extends Fragment {
     private AlertDialog alertDialogDate;
     private int spinnerOption;
     private AlertDialog alertDialogBlood;
+    private Validation validation;
 
     public DonorsAddFragment() {
     }
@@ -59,6 +63,7 @@ public class DonorsAddFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         bloodBankController = new BloodBankController(context);
+        validation = new Validation();
         dateFormat = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
         Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
         curr_year = calendar.get(Calendar.YEAR);
@@ -147,11 +152,11 @@ public class DonorsAddFragment extends Fragment {
                 }
             }
         });
-        TextInputLayout TILname = (TextInputLayout) view.findViewById(R.id.TILDname);
+        final TextInputLayout TILname = (TextInputLayout) view.findViewById(R.id.TILDname);
         TILname.setHint("Name");
         TextInputLayout TILregId = (TextInputLayout) view.findViewById(R.id.TILDregID);
         TILregId.setHint("Registration ID");
-        TextInputLayout TILcontact = (TextInputLayout) view.findViewById(R.id.TILDcontact);
+        final TextInputLayout TILcontact = (TextInputLayout) view.findViewById(R.id.TILDcontact);
         TILcontact.setHint("Contact #");
 
         final EditText ETname = (EditText) view.findViewById(R.id.ETDname);
@@ -166,18 +171,25 @@ public class DonorsAddFragment extends Fragment {
                     Date currentDate = dateFormat.parse(String.valueOf(curr_year)
                             + "/" + String.valueOf(curr_month)
                             +"/"+ String.valueOf(curr_date));
-                    if (selectedDate.before(currentDate) || selectedDate.equals(currentDate)) {
-                        if (spinnerOption != 0) {
-                            String name = ETname.getText().toString().trim();
-                            String regID = ETregId.getText().toString().trim();
-                            String contact = ETcontact.getText().toString().trim();
-                            new BloodBankModal(context).addDonor(name, regID, bloodType, contact, bleededDate);
-                            //Toast.makeText(context, name+regID+contact, Toast.LENGTH_LONG).show();
+                    String name = ETname.getText().toString().trim();
+                    String regID = ETregId.getText().toString().trim();
+                    String contact = ETcontact.getText().toString().trim();
+                    if (validation.validateName(name)) {
+                        if (validation.validatePhoneNumber(contact)) {
+                            if (selectedDate.before(currentDate) || selectedDate.equals(currentDate)) {
+                                if (spinnerOption != 0) {
+                                    new BloodBankModal(context).addDonor(name, regID, bloodType, contact, bleededDate);
+                                } else {
+                                    alertDialogBlood.show();
+                                }
+                            } else {
+                                alertDialogDate.show();
+                            }
                         } else {
-                            alertDialogBlood.show();
+                            TILcontact.setError("Invalid contact#");
                         }
                     } else {
-                        alertDialogDate.show();
+                        TILname.setError("Invalid name");
                     }
                 } catch (ParseException e) {
                     e.printStackTrace();

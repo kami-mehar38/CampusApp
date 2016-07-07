@@ -1,27 +1,21 @@
-package abbottabad.comsats.campusapp;
+package abbottabad.comsats.campusapp.Views;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
+import abbottabad.comsats.campusapp.Controllers.BloodBankController;
+import abbottabad.comsats.campusapp.R;
 
 /**
  * Created by Kamran Ramzan on 6/4/16.
  */
 public class BloodBankView extends AppCompatActivity {
+
     private static final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
-    private ViewPager viewPagerAdmin;
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +36,7 @@ public class BloodBankView extends AppCompatActivity {
             }
         }else if (APPLICATION_STATUS.equals("BLOOD_BANK")){
 
-            viewPagerAdmin = (ViewPager) findViewById(R.id.viewPager);
+            ViewPager viewPagerAdmin = (ViewPager) findViewById(R.id.viewPager);
             new BloodBankController(this).setupViewPagerAdmin(viewPagerAdmin, getSupportFragmentManager());
             TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
             if (tabLayout != null) {
