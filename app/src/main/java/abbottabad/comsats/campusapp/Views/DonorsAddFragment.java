@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -72,7 +71,7 @@ public class DonorsAddFragment extends Fragment {
 
         AlertDialog.Builder builderDate = new AlertDialog.Builder(context);
         builderDate.setTitle("Invalid date");
-        builderDate.setMessage("Please select the valid date i.e. Date should be of past or today but not of future.");
+        builderDate.setMessage("Please select the valid date i.e. Date should be from past or today but not from future.");
         builderDate.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -93,7 +92,6 @@ public class DonorsAddFragment extends Fragment {
         alertDialogBlood = builderBlood.create();
     }
 
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_add_donor, container, false);
@@ -136,7 +134,7 @@ public class DonorsAddFragment extends Fragment {
             }
         });
         datePicker.setVisibility(View.GONE);
-        CB_bleeded = (CheckBox) view.findViewById(R.id.CB_bleeded);
+        CB_bleeded = (CheckBox) view.findViewById(R.id.CB_bleeding);
         CB_bleeded.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -65,7 +65,7 @@
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/CB_bleeded"
+            android:id="@+id/CB_bleeding"
             android:textColor="@color/colorPrimary"
             android:textSize="17sp"
             android:layout_gravity="center_horizontal"

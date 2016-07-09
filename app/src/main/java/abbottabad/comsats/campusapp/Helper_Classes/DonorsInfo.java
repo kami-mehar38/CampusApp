@@ -5,11 +5,20 @@ package abbottabad.comsats.campusapp.Helper_Classes;
  */
 public class DonorsInfo {
     private String name;
+    private String registration;
     private String bloodType;
     private String contact;
 
     public String getName() {
         return name;
+    }
+
+    public String getRegistration() {
+        return registration;
+    }
+
+    public void setRegistration(String registration) {
+        this.registration = registration;
     }
 
     public void setName(String name) {

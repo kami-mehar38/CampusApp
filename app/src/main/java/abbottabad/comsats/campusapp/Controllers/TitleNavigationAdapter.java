@@ -53,7 +53,6 @@ public class TitleNavigationAdapter extends BaseAdapter{
 
 
         TVbloodTypes = (TextView) convertView.findViewById(R.id.txtTitle);
-
         TVbloodTypes.setText(spinnerNavItem.get(position).getTitle());
         return convertView;
     }

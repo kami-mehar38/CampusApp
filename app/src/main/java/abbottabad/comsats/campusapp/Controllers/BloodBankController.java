@@ -14,7 +14,6 @@ import java.util.List;
 import abbottabad.comsats.campusapp.Views.BloodDonorsFragment;
 import abbottabad.comsats.campusapp.Views.BloodRequestsFragment;
 import abbottabad.comsats.campusapp.Views.BloodRequestsSendFragment;
-import abbottabad.comsats.campusapp.Views.BloodRequestsSentFragment;
 import abbottabad.comsats.campusapp.Views.DonorsAddFragment;
 import abbottabad.comsats.campusapp.R;
 
@@ -114,14 +113,14 @@ public class BloodBankController {
 
     public void setupViewPagerRequester(ViewPager viewPager, FragmentManager supportFragmentManager) {
         ViewPagerAdapterRequester viewPagerAdapterRequester = new ViewPagerAdapterRequester(supportFragmentManager);
-        viewPagerAdapterRequester.addFragment(new BloodRequestsSendFragment(), "Send");
-        viewPagerAdapterRequester.addFragment(new BloodRequestsSentFragment(), "Requests");
+        viewPagerAdapterRequester.addFragment(new BloodRequestsSendFragment(), "Blood Request");
+        viewPagerAdapterRequester.addFragment(new DonorsAddFragment(context),"Become a Donor");
         viewPager.setAdapter(viewPagerAdapterRequester);
     }
     private class ViewPagerAdapterRequester extends FragmentPagerAdapter {
 
-        private final List<Fragment> fragmentsList = new ArrayList();
-        private final List<String> titlesList = new ArrayList();
+        private final List<Fragment> fragmentsList = new ArrayList<Fragment>();
+        private final List<String> titlesList = new ArrayList<String>();
 
         public ViewPagerAdapterRequester(FragmentManager fm) {
             super(fm);

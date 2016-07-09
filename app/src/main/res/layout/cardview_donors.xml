@@ -19,13 +19,23 @@
                 android:textColor="#000"
                 android:textSize="15sp"
                 android:paddingBottom="10dp"
-                android:text="Name:                " />
+                android:text="Name:               " />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/TV_registration"
+                android:layout_below="@id/TV_name"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:paddingBottom="10dp"
+                android:text="Reg ID:              " />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/TV_Bloodtype"
-                android:layout_below="@+id/TV_name"
+                android:layout_below="@+id/TV_registration"
                 android:textColor="#000"
                 android:textSize="15sp"
                 android:paddingBottom="10dp"
@@ -38,7 +48,8 @@
                 android:layout_below="@+id/TV_Bloodtype"
                 android:textColor="#000"
                 android:textSize="15sp"
-                android:text="Contact #:                "/>
+                android:text="Contact #:                "
+                android:paddingBottom="10dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -52,11 +63,21 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/TV_donorRegistration"
+                android:layout_toEndOf="@+id/TV_registration"
+                android:layout_below="@+id/TV_name"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:text=""/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:id="@+id/TV_donorBloodType"
                 android:textColor="#000"
                 android:textSize="15sp"
                 android:text=""
-                android:layout_below="@+id/TV_name"
+                android:layout_below="@+id/TV_registration"
                 android:layout_toEndOf="@+id/TV_name" />
 
             <TextView
@@ -67,17 +88,16 @@
                 android:textSize="15sp"
                 android:text=""
                 android:layout_below="@+id/TV_Bloodtype"
-                android:layout_alignStart="@+id/TV_donorName"
-                android:paddingBottom="10dp"/>
+                android:layout_alignStart="@+id/TV_donorName" />
 
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/CB_bleeded"
+                android:id="@+id/CB_bleed"
                 android:textSize="15sp"
                 android:text="Please check if donor is agree to donate blood"
                 android:textColor="@color/colorPrimary"
-                android:layout_below="@+id/btnMessage"
+                android:layout_below="@id/TV_Contact"
                 android:layout_alignParentStart="true" />
 
             <Button

@@ -77,6 +77,21 @@ public class InitialPage extends Activity implements View.OnClickListener {
     protected void onPostResume() {
         super.onPostResume();
         isPlayServicesAvailable();
+
+        SharedPreferences sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+        final String APPLICATION_STATUS = sharedPreferences.getString("APPLICATION_STATUS", "NULL");
+        if (APPLICATION_STATUS.equals("STUDENT")){
+            finish();
+        }
+
+        if (APPLICATION_STATUS.equals("BLOOD_BANK")){
+            Boolean LOGGED_IN = sharedPreferences.getBoolean("LOGGED_IN", false);
+            if (LOGGED_IN){
+                finish();
+            } else {
+                finish();
+            }
+        }
     }
 
     private void setAnimations(ImageView iv_comsats_logo, TextView tv_ciit,

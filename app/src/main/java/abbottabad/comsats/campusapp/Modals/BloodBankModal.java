@@ -32,9 +32,11 @@ import java.util.List;
 
 import abbottabad.comsats.campusapp.Controllers.BloodBankController;
 import abbottabad.comsats.campusapp.Helper_Classes.DonorsInfo;
-import abbottabad.comsats.campusapp.Controllers.DonorsViewAdapter;
 import abbottabad.comsats.campusapp.Helper_Classes.RequestsInfo;
 import abbottabad.comsats.campusapp.Controllers.RequestsViewAdapter;
+import abbottabad.comsats.campusapp.Views.BloodDonorsFragment;
+
+import static abbottabad.comsats.campusapp.Views.BloodDonorsFragment.*;
 
 /**
  * Created by Kamran Ramzan on 6/4/16.
@@ -115,6 +117,10 @@ public class BloodBankModal extends SQLiteOpenHelper {
 
     public void addDonor(String name, String regID, String bloodType, String contact, String bleededDate){
         new AddDonor().execute(name, regID, bloodType, contact, bleededDate);
+    }
+
+    public void updateBleedingDate(String registration, String bleededDate){
+        new UpdateBleedingDate().execute(registration, bleededDate);
     }
 
     private class sendRequestInBackground extends AsyncTask<String, Void, String>{
@@ -224,6 +230,7 @@ public class BloodBankModal extends SQLiteOpenHelper {
                     JSONObject finalObject = parentJson.getJSONObject(index);
                     donorsInfo[index] = new DonorsInfo();
                     donorsInfo[index].setName(finalObject.getString("name"));
+                    donorsInfo[index].setRegistration(finalObject.getString("reg_id"));
                     donorsInfo[index].setBloodType(finalObject.getString("blood_type"));
                     donorsInfo[index].setContact(finalObject.getString("contact"));
                     donorsInfoList.add(donorsInfo[index]);
@@ -314,13 +321,90 @@ public class BloodBankModal extends SQLiteOpenHelper {
                 }
             });
             switch (result) {
-                case "INSERTED":
-                    Toast.makeText(context, "Donor is successfully inserted!", Toast.LENGTH_LONG).show();
+                case "INSERTED": {
+                    Toast.makeText(context, "Donor is successfully added!", Toast.LENGTH_LONG).show();
                     break;
+                }
                 case "EXISTED": {
                     builder.setMessage("Couldn't add donor because donor already exists!");
                     alertDialog = builder.create();
                     alertDialog.show();
+                    break;
+                }
+                case "ERROR": {
+                    builder.setMessage("Some error occurred! Please try again.");
+                    alertDialog = builder.create();
+                    alertDialog.show();
+                    break;
+                }
+            }
+        }
+    }
+
+    private class UpdateBleedingDate extends AsyncTask<String, Void, String> {
+        private ProgressDialog progressDialog;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = new ProgressDialog(context);
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressDialog.setMessage("Updating donor's information... Please wait!");
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            String stringUrl = "http://10.0.2.2/CampusApp/updateBleedingDate.php";
+            String regID, bleedingDate;
+            try {
+                URL url = new URL(stringUrl);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                regID = params[0];
+                bleedingDate = params[1];
+                String data = URLEncoder.encode("regID", "UTF-8") +"="+ URLEncoder.encode(regID, "UTF-8") +"&"+
+                        URLEncoder.encode("bleedingDate", "UTF-8") +"="+ URLEncoder.encode(bleedingDate, "UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+                StringBuilder stringBuilder = new StringBuilder();
+                String line = "";
+                while ((line = bufferedReader.readLine()) != null){
+                    stringBuilder.append(line);
+                }
+                JSONArray parentJSON = new JSONArray(stringBuilder.toString());
+                JSONObject finalObject = parentJSON.getJSONObject(0);
+                String RESPONSE = finalObject.getString("RESPONSE");
+                Log.i("TAG", "doInBackground: " + RESPONSE);
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return RESPONSE;
+            } catch (IOException | JSONException e) {
+                e.printStackTrace();
+            }
+            return "ERROR";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            progressDialog.cancel();
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    alertDialog.cancel();
+                }
+            });
+            switch (result) {
+                case "UPDATED": {
+                    Toast.makeText(context, "Bleeding date updated successfully!", Toast.LENGTH_LONG).show();
                     break;
                 }
                 case "ERROR": {
