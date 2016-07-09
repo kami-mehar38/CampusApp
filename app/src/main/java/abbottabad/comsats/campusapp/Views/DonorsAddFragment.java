@@ -194,6 +194,5 @@ public class DonorsAddFragment extends Fragment {
                 }
             }
         });
-
     }
 }
