@@ -1,5 +1,6 @@
 package abbottabad.comsats.campusapp.Controllers;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
@@ -32,12 +33,13 @@ public class RequestsViewAdapter extends RecyclerView.Adapter <RequestsViewAdapt
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         RequestsInfo requestsInfo = requestsInfoList.get(position);
         holder.TV_requesterName.setText(requestsInfo.getName());
         holder.TV_requesterReg.setText(requestsInfo.getRegistration());
         holder.TV_requesterBloodType.setText(requestsInfo.getBloodType());
         holder.TV_requesterContact.setText(requestsInfo.getContact());
+
     }
 
 
@@ -63,6 +65,7 @@ public class RequestsViewAdapter extends RecyclerView.Adapter <RequestsViewAdapt
             TV_requesterContact = (TextView) itemView.findViewById(R.id.TV_requesterContact);
             btnCall = (Button) itemView.findViewById(R.id.btnCall);
             btnMessage = (Button) itemView.findViewById(R.id.btnMessage);
+
             btnCall.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

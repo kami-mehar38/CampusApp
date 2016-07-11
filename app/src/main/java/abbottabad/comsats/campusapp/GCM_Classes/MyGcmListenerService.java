@@ -14,10 +14,9 @@ import android.util.Log;
 import com.google.android.gms.gcm.GcmListenerService;
 
 import abbottabad.comsats.campusapp.Controllers.BloodBankController;
-import abbottabad.comsats.campusapp.Modals.BloodBankLocalModal;
-import abbottabad.comsats.campusapp.Modals.BloodBankModal;
 import abbottabad.comsats.campusapp.R;
 import abbottabad.comsats.campusapp.Views.BloodBankView;
+import abbottabad.comsats.campusapp.Views.BloodRequestsFragment;
 
 /**
  * Created by Kamran Ramzan on 6/3/16.
@@ -46,8 +45,9 @@ public class MyGcmListenerService extends GcmListenerService {
             BloodBankController.setBloodType(bloodType);
             createNotification(BLOOD_REQUEST_NOTIFICATION_MESSAGE + stdName);
 
-            BloodBankLocalModal bloodBankLocalModal = new BloodBankLocalModal(this);
-            bloodBankLocalModal.addBloodRequest();
+            new BloodRequestsFragment.BloodBankLocalModal(this).addBloodRequest();
+            new BloodRequestsFragment.BloodBankLocalModal(this).viewBloodRequests();
+
         } else {
             // normal downstream message.
            // createNotification(BLOOD_REQUEST_NOTIFICATION_MESSAGE + stdName);

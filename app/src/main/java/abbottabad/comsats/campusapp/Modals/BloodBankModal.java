@@ -81,7 +81,7 @@ public class BloodBankModal {
 
         @Override
         protected String doInBackground(String... params) {
-            String stringUrl = "http://amgbuilders.co.nf/sendPushNotification.php";
+            String stringUrl = "http://10.0.2.2/CampusApp/sendPushNotification.php";
             String name, registration, contact, bloodType;
             try {
                 URL url = new URL(stringUrl);
