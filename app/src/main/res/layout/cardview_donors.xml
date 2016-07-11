@@ -95,8 +95,9 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/CB_bleed"
                 android:textSize="15sp"
+                android:textStyle="bold"
                 android:text="Please check if donor is agree to donate blood"
-                android:textColor="@color/colorPrimary"
+                android:textColor="#006699"
                 android:layout_below="@id/TV_Contact"
                 android:layout_alignParentStart="true" />
 

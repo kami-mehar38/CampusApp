@@ -1,7 +1,6 @@
-package abbottabad.comsats.campusapp.Controllers;
+package abbottabad.comsats.campusapp.controllers;
 
 import android.content.Context;
-import android.content.Intent;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 

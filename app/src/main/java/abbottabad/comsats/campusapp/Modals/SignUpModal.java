@@ -1,4 +1,4 @@
-package abbottabad.comsats.campusapp.Modals;
+package abbottabad.comsats.campusapp.modals;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -8,7 +8,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,8 +24,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-import abbottabad.comsats.campusapp.Views.HomePageView;
-import abbottabad.comsats.campusapp.GCM_Classes.RegistrationIntentService;
+import abbottabad.comsats.campusapp.views.HomePageView;
+import abbottabad.comsats.campusapp.gcm_classes.RegistrationIntentService;
 
 /**
  * Created by Kamran Ramzan on 6/26/16.

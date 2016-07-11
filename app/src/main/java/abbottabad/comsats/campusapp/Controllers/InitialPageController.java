@@ -1,4 +1,4 @@
-package abbottabad.comsats.campusapp.Controllers;
+package abbottabad.comsats.campusapp.controllers;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -8,8 +8,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
-
-import java.security.PrivateKey;
 
 /**
  * Created by Kamran Ramzan on 6/11/16.

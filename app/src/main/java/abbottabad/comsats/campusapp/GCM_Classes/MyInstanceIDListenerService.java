@@ -1,4 +1,4 @@
-package abbottabad.comsats.campusapp.GCM_Classes;
+package abbottabad.comsats.campusapp.gcm_classes;
 
 import android.content.Intent;
 

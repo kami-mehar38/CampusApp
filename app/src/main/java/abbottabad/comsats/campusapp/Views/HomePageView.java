@@ -1,4 +1,4 @@
-package abbottabad.comsats.campusapp.Views;
+package abbottabad.comsats.campusapp.views;
 
 import android.content.Context;
 import android.content.Intent;

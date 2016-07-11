@@ -1,4 +1,4 @@
-package abbottabad.comsats.campusapp.GCM_Classes;
+package abbottabad.comsats.campusapp.gcm_classes;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -13,10 +13,10 @@ import android.util.Log;
 
 import com.google.android.gms.gcm.GcmListenerService;
 
-import abbottabad.comsats.campusapp.Controllers.BloodBankController;
+import abbottabad.comsats.campusapp.controllers.BloodBankController;
 import abbottabad.comsats.campusapp.R;
-import abbottabad.comsats.campusapp.Views.BloodBankView;
-import abbottabad.comsats.campusapp.Views.BloodRequestsFragment;
+import abbottabad.comsats.campusapp.views.BloodBankView;
+import abbottabad.comsats.campusapp.views.BloodRequestsFragment;
 
 /**
  * Created by Kamran Ramzan on 6/3/16.
@@ -59,13 +59,13 @@ public class MyGcmListenerService extends GcmListenerService {
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        long[] pattern = {500};
+        long[] pattern = {1000,1000,1000,1000,1000};
 
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
                 new Intent(this, BloodBankView.class), 0);
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
-                this).setSmallIcon(R.drawable.comsats_logo)
-                .setContentTitle("Push Notification Test").setVibrate(pattern)
+                this).setSmallIcon(R.drawable.blood)
+                .setContentTitle("Blood Request").setVibrate(pattern)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
                 .setContentText(message)
                 .setAutoCancel(true).setSound(sound);

@@ -1,10 +1,7 @@
-package abbottabad.comsats.campusapp.Views;
-
-import android.content.Context;
+package abbottabad.comsats.campusapp.views;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -20,7 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
@@ -30,31 +26,12 @@ import java.util.List;
 import java.util.TimeZone;
 
 
-import abbottabad.comsats.campusapp.Helper_Classes.DividerItemDecoration;
-import abbottabad.comsats.campusapp.Helper_Classes.DonorsInfo;
-import abbottabad.comsats.campusapp.Modals.BloodBankModal;
+import abbottabad.comsats.campusapp.helper_classes.DividerItemDecoration;
+import abbottabad.comsats.campusapp.helper_classes.DonorsInfo;
+import abbottabad.comsats.campusapp.modals.BloodBankModal;
 import abbottabad.comsats.campusapp.R;
-import abbottabad.comsats.campusapp.Helper_Classes.SpinnerNavItem;
-import abbottabad.comsats.campusapp.Controllers.TitleNavigationAdapter;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.TextView;
-
-import java.util.Calendar;
-import java.util.List;
-import java.util.TimeZone;
-
-import abbottabad.comsats.campusapp.Helper_Classes.DonorsInfo;
-import abbottabad.comsats.campusapp.Modals.BloodBankModal;
-import abbottabad.comsats.campusapp.R;
+import abbottabad.comsats.campusapp.helper_classes.SpinnerNavItem;
+import abbottabad.comsats.campusapp.controllers.TitleNavigationAdapter;
 
 /**
  * Created by Kamran Ramzan on 6/4/16.

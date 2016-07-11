@@ -1,4 +1,4 @@
-package abbottabad.comsats.campusapp.Views;
+package abbottabad.comsats.campusapp.views;
 
 import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
@@ -14,8 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import abbottabad.comsats.campusapp.Controllers.BloodBankController;
-import abbottabad.comsats.campusapp.Modals.BloodBankModal;
+import abbottabad.comsats.campusapp.controllers.BloodBankController;
+import abbottabad.comsats.campusapp.modals.BloodBankModal;
 import abbottabad.comsats.campusapp.R;
 
 /**

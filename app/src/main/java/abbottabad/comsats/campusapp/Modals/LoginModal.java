@@ -1,4 +1,4 @@
-package abbottabad.comsats.campusapp.Modals;
+package abbottabad.comsats.campusapp.modals;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -19,9 +19,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-import abbottabad.comsats.campusapp.Views.HomePageView;
-import abbottabad.comsats.campusapp.Views.LoginView;
-import abbottabad.comsats.campusapp.GCM_Classes.RegistrationIntentService;
+import abbottabad.comsats.campusapp.views.HomePageView;
+import abbottabad.comsats.campusapp.views.LoginView;
+import abbottabad.comsats.campusapp.gcm_classes.RegistrationIntentService;
 
 /**
  * Created by Kamran Ramzan on 5/29/16.

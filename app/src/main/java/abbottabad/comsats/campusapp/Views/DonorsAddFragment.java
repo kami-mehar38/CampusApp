@@ -1,11 +1,9 @@
-package abbottabad.comsats.campusapp.Views;
+package abbottabad.comsats.campusapp.views;
 
 import android.content.DialogInterface;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +14,6 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -25,9 +22,9 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import abbottabad.comsats.campusapp.Controllers.BloodBankController;
-import abbottabad.comsats.campusapp.Helper_Classes.Validation;
-import abbottabad.comsats.campusapp.Modals.BloodBankModal;
+import abbottabad.comsats.campusapp.controllers.BloodBankController;
+import abbottabad.comsats.campusapp.helper_classes.Validation;
+import abbottabad.comsats.campusapp.modals.BloodBankModal;
 import abbottabad.comsats.campusapp.R;
 
 /**

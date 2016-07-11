@@ -1,10 +1,12 @@
-package abbottabad.comsats.campusapp.Views;
+package abbottabad.comsats.campusapp.views;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -14,15 +16,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import abbottabad.comsats.campusapp.Controllers.BloodBankController;
-import abbottabad.comsats.campusapp.Controllers.RequestsViewAdapter;
-import abbottabad.comsats.campusapp.Helper_Classes.DividerItemDecoration;
-import abbottabad.comsats.campusapp.Helper_Classes.RequestsInfo;
+import abbottabad.comsats.campusapp.controllers.BloodBankController;
+import abbottabad.comsats.campusapp.controllers.RequestsViewAdapter;
+import abbottabad.comsats.campusapp.helper_classes.DividerItemDecoration;
+import abbottabad.comsats.campusapp.helper_classes.RequestsInfo;
 import abbottabad.comsats.campusapp.R;
 
 /**
@@ -126,7 +127,7 @@ public class BloodRequestsFragment extends Fragment{
             String selectQuery= "SELECT * FROM " +TABLE_NAME+ " ORDER BY " +SERIAL+ " DESC";
             Cursor cursor = db.rawQuery(selectQuery, null);
             cursor.moveToFirst();
-            List<RequestsInfo> requestsInfoList = new ArrayList<>();
+            final List<RequestsInfo> requestsInfoList = new ArrayList<>();
             RequestsInfo[] requestsInfos = new RequestsInfo[cursor.getCount()];
             while (!cursor.isAfterLast()){
                 requestsInfos[cursor.getPosition()] = new RequestsInfo();
@@ -138,7 +139,16 @@ public class BloodRequestsFragment extends Fragment{
                 cursor.moveToNext();
             }
             cursor.close();
-            RV_bloodRequests.setAdapter(new RequestsViewAdapter(requestsInfoList));
+            Handler handler = new Handler(Looper.getMainLooper());
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    if (RV_bloodRequests != null) {
+                        RV_bloodRequests.setAdapter(new RequestsViewAdapter(requestsInfoList));
+                    }
+                }
+            });
+
         }
 
     }

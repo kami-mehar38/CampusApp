@@ -1,6 +1,5 @@
-package abbottabad.comsats.campusapp.Controllers;
+package abbottabad.comsats.campusapp.controllers;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
@@ -13,7 +12,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import abbottabad.comsats.campusapp.R;
-import abbottabad.comsats.campusapp.Helper_Classes.RequestsInfo;
+import abbottabad.comsats.campusapp.helper_classes.RequestsInfo;
 
 /**
  * Created by Kamran Ramzan on 7/6/16.

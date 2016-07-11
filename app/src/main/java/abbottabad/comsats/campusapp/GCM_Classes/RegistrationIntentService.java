@@ -1,4 +1,4 @@
-package abbottabad.comsats.campusapp.GCM_Classes;
+package abbottabad.comsats.campusapp.gcm_classes;
 
 import android.app.IntentService;
 import android.content.Context;
@@ -10,15 +10,9 @@ import android.util.Log;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.android.gms.iid.InstanceID;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;

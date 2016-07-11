@@ -1,12 +1,8 @@
-package abbottabad.comsats.campusapp.Modals;
+package abbottabad.comsats.campusapp.modals;
 
 import android.app.ProgressDialog;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
@@ -30,13 +26,9 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-import abbottabad.comsats.campusapp.Controllers.BloodBankController;
-import abbottabad.comsats.campusapp.Helper_Classes.DonorsInfo;
-import abbottabad.comsats.campusapp.Helper_Classes.RequestsInfo;
-import abbottabad.comsats.campusapp.Controllers.RequestsViewAdapter;
-import abbottabad.comsats.campusapp.Views.BloodDonorsFragment;
+import abbottabad.comsats.campusapp.helper_classes.DonorsInfo;
 
-import static abbottabad.comsats.campusapp.Views.BloodDonorsFragment.*;
+import static abbottabad.comsats.campusapp.views.BloodDonorsFragment.*;
 
 /**
  * Created by Kamran Ramzan on 6/4/16.

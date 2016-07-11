@@ -1,4 +1,4 @@
-package abbottabad.comsats.campusapp.Views;
+package abbottabad.comsats.campusapp.views;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -12,8 +12,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import abbottabad.comsats.campusapp.Controllers.LoginController;
-import abbottabad.comsats.campusapp.Modals.LoginModal;
+import abbottabad.comsats.campusapp.controllers.LoginController;
+import abbottabad.comsats.campusapp.modals.LoginModal;
 import abbottabad.comsats.campusapp.R;
 
 /**

@@ -1,4 +1,4 @@
-package abbottabad.comsats.campusapp.Controllers;
+package abbottabad.comsats.campusapp.controllers;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import abbottabad.comsats.campusapp.Helper_Classes.SpinnerNavItem;
+import abbottabad.comsats.campusapp.helper_classes.SpinnerNavItem;
 import abbottabad.comsats.campusapp.R;
 
 /**

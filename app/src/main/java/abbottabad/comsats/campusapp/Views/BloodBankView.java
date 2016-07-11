@@ -1,4 +1,4 @@
-package abbottabad.comsats.campusapp.Views;
+package abbottabad.comsats.campusapp.views;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -7,7 +7,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
-import abbottabad.comsats.campusapp.Controllers.BloodBankController;
+import abbottabad.comsats.campusapp.controllers.BloodBankController;
 import abbottabad.comsats.campusapp.R;
 
 /**

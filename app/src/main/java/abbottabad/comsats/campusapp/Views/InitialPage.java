@@ -1,4 +1,4 @@
-package abbottabad.comsats.campusapp.Views;
+package abbottabad.comsats.campusapp.views;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,7 +17,7 @@ import android.widget.TextView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
-import abbottabad.comsats.campusapp.Controllers.InitialPageController;
+import abbottabad.comsats.campusapp.controllers.InitialPageController;
 import abbottabad.comsats.campusapp.R;
 
 /**

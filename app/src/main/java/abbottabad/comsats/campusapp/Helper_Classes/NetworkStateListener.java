@@ -1,6 +1,5 @@
-package abbottabad.comsats.campusapp.Helper_Classes;
+package abbottabad.comsats.campusapp.helper_classes;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;

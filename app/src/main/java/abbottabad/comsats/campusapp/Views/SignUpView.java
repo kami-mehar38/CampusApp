@@ -1,4 +1,4 @@
-package abbottabad.comsats.campusapp.Views;
+package abbottabad.comsats.campusapp.views;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -12,9 +12,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import abbottabad.comsats.campusapp.Modals.SignUpModal;
+import abbottabad.comsats.campusapp.modals.SignUpModal;
 import abbottabad.comsats.campusapp.R;
-import abbottabad.comsats.campusapp.Controllers.SignUpController;
+import abbottabad.comsats.campusapp.controllers.SignUpController;
 
 /**
  * Created by Kamran Ramzan on 5/25/16.

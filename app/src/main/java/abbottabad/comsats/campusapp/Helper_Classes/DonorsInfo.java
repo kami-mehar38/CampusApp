@@ -1,4 +1,4 @@
-package abbottabad.comsats.campusapp.Helper_Classes;
+package abbottabad.comsats.campusapp.helper_classes;
 
 /**
  * Created by Kamran Ramzan on 6/28/16.
