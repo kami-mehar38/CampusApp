@@ -41,70 +41,14 @@ import static abbottabad.comsats.campusapp.Views.BloodDonorsFragment.*;
 /**
  * Created by Kamran Ramzan on 6/4/16.
  */
-public class BloodBankModal extends SQLiteOpenHelper {
+public class BloodBankModal {
 
-    private static int VERSION = 1;
-    private static String DATABASE_NAME = "BLOODBANK.db";
-    private static String SERIAL = "SERIAL_NO";
-    private static String TABLE_NAME = "BLOOD_REQUESTS";
-    private static String COL_NAME = "NAME";
-    private static String COL_REG = "REG_NO";
-    private static String COL_CONTACT = "CONTACT";
-    private static String COL_BLOOD_TYPE = "BLLOD_TYPE";
+
     private Context context;
     private AlertDialog alertDialog;
 
     public BloodBankModal(Context context) {
-        super(context, DATABASE_NAME, null, VERSION);
         this.context = context;
-    }
-
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        String createTableQuery = "CREATE TABLE IF NOT EXISTS " +TABLE_NAME+ " ( "
-                +SERIAL+ " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                +COL_NAME+ " TEXT,"
-                +COL_REG+ " TEXT,"
-                +COL_CONTACT+ " TEXT,"
-                +COL_BLOOD_TYPE+ " TEXT"
-                + " )";
-        db.execSQL(createTableQuery);
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        String dropTableQuery = "DROP TABLE IF EXISTS " +TABLE_NAME;
-        db.execSQL(dropTableQuery);
-        onCreate(db);
-    }
-    public void addBloodRequest(BloodBankController bloodBankController){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_NAME, bloodBankController.getStdName());
-        contentValues.put(COL_REG, bloodBankController.getStdReg());
-        contentValues.put(COL_CONTACT, bloodBankController.getStdContact());
-        contentValues.put(COL_BLOOD_TYPE, bloodBankController.getBloodType());
-        db.insert(TABLE_NAME, null, contentValues);
-        db.close();
-    }
-    public void viewBloodRequests(RecyclerView RV_bloodRequests){
-        SQLiteDatabase db = this.getReadableDatabase();
-        String selectQuery= "SELECT * FROM " +TABLE_NAME+ " ORDER BY " +SERIAL+ " DESC";
-        Cursor cursor = db.rawQuery(selectQuery, null);
-        cursor.moveToFirst();
-        List<RequestsInfo> requestsInfoList = new ArrayList<>();
-        RequestsInfo[] requestsInfos = new RequestsInfo[cursor.getCount()];
-        while (!cursor.isAfterLast()){
-            requestsInfos[cursor.getPosition()] = new RequestsInfo();
-            requestsInfos[cursor.getPosition()].setName(cursor.getString(1));
-            requestsInfos[cursor.getPosition()].setRegistration(cursor.getString(2));
-            requestsInfos[cursor.getPosition()].setBloodType(cursor.getString(4));
-            requestsInfos[cursor.getPosition()].setContact(cursor.getString(3));
-            requestsInfoList.add(requestsInfos[cursor.getPosition()]);
-            cursor.moveToNext();
-        }
-        cursor.close();
-        RV_bloodRequests.setAdapter(new RequestsViewAdapter(requestsInfoList));
     }
 
     public void sendRequest(String name, String registration, String contact, String bloodType){
@@ -137,7 +81,7 @@ public class BloodBankModal extends SQLiteOpenHelper {
 
         @Override
         protected String doInBackground(String... params) {
-            String stringUrl = "http://10.0.2.2/CampusApp/sendPushNotification.php";
+            String stringUrl = "http://amgbuilders.co.nf/sendPushNotification.php";
             String name, registration, contact, bloodType;
             try {
                 URL url = new URL(stringUrl);
@@ -200,7 +144,7 @@ public class BloodBankModal extends SQLiteOpenHelper {
 
         @Override
         protected List<DonorsInfo> doInBackground(String... params) {
-            String stringUrl = "http://10.0.2.2/CampusApp/retrieveDonors.php";
+            String stringUrl = "http://amgbuilders.co.nf/retrieveDonors.php";
             DonorsInfo[] donorsInfo;
             List<DonorsInfo> donorsInfoList = new ArrayList<>();
             String bloodType = params[0];
@@ -265,7 +209,7 @@ public class BloodBankModal extends SQLiteOpenHelper {
 
         @Override
         protected String doInBackground(String... params) {
-            String stringUrl = "http://10.0.2.2/CampusApp/insertDonor.php";
+            String stringUrl = "http://amgbuilders.co.nf/insertDonor.php";
             String name, regID, bloodType, contact, bleeded;
             try {
                 URL url = new URL(stringUrl);
@@ -353,7 +297,7 @@ public class BloodBankModal extends SQLiteOpenHelper {
 
         @Override
         protected String doInBackground(String... params) {
-            String stringUrl = "http://10.0.2.2/CampusApp/updateBleedingDate.php";
+            String stringUrl = "http://amgbuilders.co.nf/updateBleedingDate.php";
             String regID, bleedingDate;
             try {
                 URL url = new URL(stringUrl);

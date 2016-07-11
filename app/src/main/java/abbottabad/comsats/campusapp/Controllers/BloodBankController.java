@@ -77,9 +77,9 @@ public class BloodBankController {
 
     public void setupViewPagerAdmin(ViewPager viewPagerAdmin, FragmentManager supportFragmentManager) {
         ViewPagerAdapterAdmin viewPagerAdapterAdmin = new ViewPagerAdapterAdmin(supportFragmentManager);
-        viewPagerAdapterAdmin.addFragment(new BloodRequestsFragment(context), "Requests");
-        viewPagerAdapterAdmin.addFragment(new BloodDonorsFragment(context), "Donors");
-        viewPagerAdapterAdmin.addFragment(new DonorsAddFragment(context),"Add Donor");
+        viewPagerAdapterAdmin.addFragment(new BloodRequestsFragment(), "Requests");
+        viewPagerAdapterAdmin.addFragment(new BloodDonorsFragment(), "Donors");
+        viewPagerAdapterAdmin.addFragment(new DonorsAddFragment(),"Add Donor");
        viewPagerAdmin.setAdapter(viewPagerAdapterAdmin);
     }
     private class ViewPagerAdapterAdmin extends FragmentPagerAdapter {
@@ -114,7 +114,7 @@ public class BloodBankController {
     public void setupViewPagerRequester(ViewPager viewPager, FragmentManager supportFragmentManager) {
         ViewPagerAdapterRequester viewPagerAdapterRequester = new ViewPagerAdapterRequester(supportFragmentManager);
         viewPagerAdapterRequester.addFragment(new BloodRequestsSendFragment(), "Blood Request");
-        viewPagerAdapterRequester.addFragment(new DonorsAddFragment(context),"Become a Donor");
+        viewPagerAdapterRequester.addFragment(new DonorsAddFragment(),"Become a Donor");
         viewPager.setAdapter(viewPagerAdapterRequester);
     }
     private class ViewPagerAdapterRequester extends FragmentPagerAdapter {

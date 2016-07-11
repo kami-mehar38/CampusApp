@@ -36,7 +36,6 @@ import abbottabad.comsats.campusapp.R;
 public class DonorsAddFragment extends Fragment {
     private Spinner SPbloodTypes;
     private BloodBankController bloodBankController;
-    private Context context;
     private String bloodType;
     private CheckBox CB_bleeded;
     private DatePicker datePicker;
@@ -54,14 +53,10 @@ public class DonorsAddFragment extends Fragment {
     public DonorsAddFragment() {
     }
 
-    public DonorsAddFragment(Context context) {
-        this.context = context;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        bloodBankController = new BloodBankController(context);
+        bloodBankController = new BloodBankController(getContext());
         validation = new Validation();
         dateFormat = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
         Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
@@ -69,7 +64,7 @@ public class DonorsAddFragment extends Fragment {
         curr_month = calendar.get(Calendar.MONTH);
         curr_date = calendar.get(Calendar.DATE);
 
-        AlertDialog.Builder builderDate = new AlertDialog.Builder(context);
+        AlertDialog.Builder builderDate = new AlertDialog.Builder(getContext());
         builderDate.setTitle("Invalid date");
         builderDate.setMessage("Please select the valid date i.e. Date should be from past or today but not from future.");
         builderDate.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -80,7 +75,7 @@ public class DonorsAddFragment extends Fragment {
         });
         alertDialogDate = builderDate.create();
 
-        AlertDialog.Builder builderBlood = new AlertDialog.Builder(context);
+        AlertDialog.Builder builderBlood = new AlertDialog.Builder(getContext());
         builderBlood.setTitle("Error");
         builderBlood.setMessage("Please select the blood group of the donor.");
         builderBlood.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -176,7 +171,7 @@ public class DonorsAddFragment extends Fragment {
                         if (validation.validatePhoneNumber(contact)) {
                             if (selectedDate.before(currentDate) || selectedDate.equals(currentDate)) {
                                 if (spinnerOption != 0) {
-                                    new BloodBankModal(context).addDonor(name, regID, bloodType, contact, bleededDate);
+                                    new BloodBankModal(getContext()).addDonor(name, regID, bloodType, contact, bleededDate);
                                 } else {
                                     alertDialogBlood.show();
                                 }

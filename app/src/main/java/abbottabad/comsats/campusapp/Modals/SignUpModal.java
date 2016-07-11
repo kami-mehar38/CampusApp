@@ -55,7 +55,7 @@ public class SignUpModal extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
 
 
-        String stringUrl = "http://10.0.2.2/CampusApp/addStudent.php";
+        String stringUrl = "http://amgbuilders.co.nf/addStudent.php";
         String std_name, std_id, std_section;
         try {
             URL url = new URL(stringUrl);
@@ -110,7 +110,6 @@ public class SignUpModal extends AsyncTask<String, Void, String> {
                 });
             switch (result) {
                 case "ADDED":
-                    Toast.makeText(context, "Donor is successfully added!", Toast.LENGTH_LONG).show();
                     SharedPreferences applicationStatus = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = applicationStatus.edit();
                     editor.putString("APPLICATION_STATUS", "STUDENT");

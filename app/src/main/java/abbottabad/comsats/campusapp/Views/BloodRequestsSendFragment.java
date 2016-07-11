@@ -55,7 +55,7 @@ public class BloodRequestsSendFragment extends Fragment implements AdapterView.O
         }
 
         SPbloodTypeOptions = (Spinner) view.findViewById(R.id.SPbloodType);
-        new BloodBankController(view.getContext()).populateSpinner(SPbloodTypeOptions);
+        new BloodBankController(getContext()).populateSpinner(SPbloodTypeOptions);
         SPbloodTypeOptions.setOnItemSelectedListener(this);
 
         ETname = (EditText) view.findViewById(R.id.ETname);

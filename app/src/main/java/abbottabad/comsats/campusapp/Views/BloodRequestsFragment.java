@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import abbottabad.comsats.campusapp.Helper_Classes.DividerItemDecoration;
+import abbottabad.comsats.campusapp.Modals.BloodBankLocalModal;
 import abbottabad.comsats.campusapp.Modals.BloodBankModal;
 import abbottabad.comsats.campusapp.R;
 
@@ -21,23 +22,17 @@ import abbottabad.comsats.campusapp.R;
  */
 public class BloodRequestsFragment extends Fragment{
 
-    private Context context;
 
-    private BloodBankModal bloodBankModal;
-
-    private RecyclerView RV_bloodRequests;
+    private BloodBankLocalModal bloodBankLocalModal;
 
     public BloodRequestsFragment() {
     }
 
-    public BloodRequestsFragment(Context context) {
-        this.context = context;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        bloodBankModal = new BloodBankModal(context);
+        bloodBankLocalModal = new BloodBankLocalModal(getContext());
 
     }
 
@@ -54,15 +49,15 @@ public class BloodRequestsFragment extends Fragment{
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         // Setup any handles to view objects here
         super.onViewCreated(view, savedInstanceState);
-        RV_bloodRequests = (RecyclerView) view.findViewById(R.id.RV_bloodRequests);
+        RecyclerView RV_bloodRequests = (RecyclerView) view.findViewById(R.id.RV_bloodRequests);
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         RV_bloodRequests.setLayoutManager(layoutManager);
         RecyclerView.ItemDecoration itemDecoration =
-                new DividerItemDecoration(view.getContext(), LinearLayoutManager.VERTICAL);
+                new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL);
         RV_bloodRequests.addItemDecoration(itemDecoration);
-        bloodBankModal.viewBloodRequests(RV_bloodRequests);
-        Toast.makeText(context, "Ok it got it", Toast.LENGTH_LONG).show();
+        bloodBankLocalModal.viewBloodRequests(RV_bloodRequests);
+        Toast.makeText(getContext(), "Ok it got it", Toast.LENGTH_LONG).show();
     }
 
     @Override

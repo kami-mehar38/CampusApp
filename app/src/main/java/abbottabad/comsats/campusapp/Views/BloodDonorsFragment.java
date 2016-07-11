@@ -60,16 +60,11 @@ import abbottabad.comsats.campusapp.R;
 public class BloodDonorsFragment extends Fragment implements  android.support.v7.app.ActionBar.OnNavigationListener {
 
 
-    private static Context context;
     private static RecyclerView recyclerView;
 
     public BloodDonorsFragment() {
         // Required empty public constructor
     }
-    public BloodDonorsFragment(Context context){
-        this.context = context;
-    }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -94,7 +89,7 @@ public class BloodDonorsFragment extends Fragment implements  android.support.v7
         navSpinner.add(new SpinnerNavItem("AB -ve"));
 
         supportActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-        TitleNavigationAdapter adapter = new TitleNavigationAdapter(context, navSpinner);
+        TitleNavigationAdapter adapter = new TitleNavigationAdapter(getContext(), navSpinner);
         supportActionBar.setListNavigationCallbacks(adapter, this);
     }
 
@@ -123,7 +118,7 @@ public class BloodDonorsFragment extends Fragment implements  android.support.v7
     public void setUserVisibleHint(boolean isVisibleToUser) {
 
         if (isVisibleToUser) {
-            new BloodBankModal(context).retrieveDonors(recyclerView, "All");
+            new BloodBankModal(getContext()).retrieveDonors(recyclerView, "All");
         }
 
     }
@@ -132,39 +127,39 @@ public class BloodDonorsFragment extends Fragment implements  android.support.v7
     public boolean onNavigationItemSelected(int itemPosition, long itemId) {
         switch (itemPosition){
             case 1: {
-                new BloodBankModal(context).retrieveDonors(recyclerView, "All");
+                new BloodBankModal(getContext()).retrieveDonors(recyclerView, "All");
                 break;
             }
             case 2: {
-                new BloodBankModal(context).retrieveDonors(recyclerView, "O+");
+                new BloodBankModal(getContext()).retrieveDonors(recyclerView, "O+");
                 break;
             }
             case 3: {
-                new BloodBankModal(context).retrieveDonors(recyclerView, "O-");
+                new BloodBankModal(getContext()).retrieveDonors(recyclerView, "O-");
                 break;
             }
             case 4: {
-                new BloodBankModal(context).retrieveDonors(recyclerView, "A+");
+                new BloodBankModal(getContext()).retrieveDonors(recyclerView, "A+");
                 break;
             }
             case 5: {
-                new BloodBankModal(context).retrieveDonors(recyclerView, "A-");
+                new BloodBankModal(getContext()).retrieveDonors(recyclerView, "A-");
                 break;
             }
             case 6: {
-                new BloodBankModal(context).retrieveDonors(recyclerView, "B+");
+                new BloodBankModal(getContext()).retrieveDonors(recyclerView, "B+");
                 break;
             }
             case 7: {
-                new BloodBankModal(context).retrieveDonors(recyclerView, "B-");
+                new BloodBankModal(getContext()).retrieveDonors(recyclerView, "B-");
                 break;
             }
             case 8: {
-                new BloodBankModal(context).retrieveDonors(recyclerView, "AB+");
+                new BloodBankModal(getContext()).retrieveDonors(recyclerView, "AB+");
                 break;
             }
             case 9: {
-                new BloodBankModal(context).retrieveDonors(recyclerView, "AB-");
+                new BloodBankModal(getContext()).retrieveDonors(recyclerView, "AB-");
                 break;
             }
         }
@@ -258,7 +253,7 @@ public class BloodDonorsFragment extends Fragment implements  android.support.v7
                                 public void onClick(DialogInterface dialog, int which) {
                                     new BloodBankModal(itemView.getContext())
                                             .updateBleedingDate(registration, bleededDate);
-                                    new BloodBankModal(context).retrieveDonors(recyclerView, "All");
+                                    new BloodBankModal(itemView.getContext()).retrieveDonors(recyclerView, "All");
                                 }
                             });
 

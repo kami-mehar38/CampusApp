@@ -66,7 +66,7 @@ public class RegistrationIntentService extends IntentService {
     private void sendRegTokenToServer() {
         SharedPreferences sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         final String APPLICATION_STATUS = sharedPreferences.getString("APPLICATION_STATUS", "NULL");
-        String stringUrl = "http://10.0.2.2/CampusApp/insertToken.php";
+        String stringUrl = "http://amgbuilders.co.nf/insertToken.php";
         new SaveTokenInBackground().execute(stringUrl, APPLICATION_STATUS, token);
     }
 
