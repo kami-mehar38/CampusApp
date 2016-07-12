@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:fullBackupContent="false"
         android:theme="@style/AppTheme">
-        <activity android:name=".views.InitialPage">
+        <activity android:name=".InitialPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
         
-        <receiver android:name=".helper_classes.NetworkStateListener">
+        <receiver android:name=".NetworkStateListener">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
@@ -45,7 +45,7 @@
         </receiver>
 
         <service
-            android:name=".gcm_classes.MyGcmListenerService"
+            android:name=".MyGcmListenerService"
             android:exported="false" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
@@ -53,7 +53,7 @@
         </service>
 
         <service
-            android:name=".gcm_classes.MyInstanceIDListenerService"
+            android:name=".MyInstanceIDListenerService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.gms.iid.InstanceID"/>
@@ -61,20 +61,20 @@
         </service>
 
         <service
-            android:name=".gcm_classes.RegistrationIntentService"
+            android:name=".RegistrationIntentService"
             android:exported="false">
         </service>
 
 
 
 
-        <activity android:name=".views.LoginView" />
+        <activity android:name=".LoginView" />
 
-        <activity android:name=".views.SignUpView" />
+        <activity android:name=".SignUpView" />
 
-        <activity android:name=".views.HomePageView" />
+        <activity android:name=".HomePageView" />
 
-        <activity android:name=".views.BloodBankView" />
+        <activity android:name=".BloodBankView" />
 
     </application>
 
