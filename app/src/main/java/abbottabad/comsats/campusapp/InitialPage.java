@@ -30,6 +30,11 @@ public class InitialPage extends Activity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.initial_page);
+
+        new InitialPageController(this).execute();
+        isPlayServicesAvailable();
+
         SharedPreferences sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         final String APPLICATION_STATUS = sharedPreferences.getString("APPLICATION_STATUS", "NULL");
         if (APPLICATION_STATUS.equals("STUDENT")){
@@ -44,12 +49,6 @@ public class InitialPage extends Activity implements View.OnClickListener {
                 startActivity(new Intent(this, LoginView.class));
             }
         }
-
-        setContentView(R.layout.initial_page);
-
-        isPlayServicesAvailable();
-
-        new InitialPageController(this).execute();
 
         ImageView iv_comsats_logo = (ImageView) findViewById(R.id.IV_comsats_logo);
         TextView tv_ciit = (TextView) findViewById(R.id.TV_ciit);
@@ -71,10 +70,9 @@ public class InitialPage extends Activity implements View.OnClickListener {
     }
 
     @Override
-    protected void onPostResume() {
-        super.onPostResume();
+    protected void onResume() {
+        super.onResume();
         isPlayServicesAvailable();
-
         SharedPreferences sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         final String APPLICATION_STATUS = sharedPreferences.getString("APPLICATION_STATUS", "NULL");
         if (APPLICATION_STATUS.equals("STUDENT")){
