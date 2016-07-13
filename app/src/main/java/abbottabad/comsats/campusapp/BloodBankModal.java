@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.NumberPicker;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -129,6 +130,13 @@ public class BloodBankModal {
             progressDialog = new ProgressDialog(context);
             progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             progressDialog.setMessage("Retrieving donors information...");
+            progressDialog.setCancelable(false);
+            progressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    cancel(true);
+                }
+            });
             progressDialog.show();
         }
 
@@ -138,42 +146,47 @@ public class BloodBankModal {
             DonorsInfo[] donorsInfo;
             List<DonorsInfo> donorsInfoList = new ArrayList<>();
             String bloodType = params[0];
-            try {
-                URL url = new URL(stringUrl);
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                httpURLConnection.setRequestMethod("POST");
-                httpURLConnection.setDoOutput(true);
-                OutputStream outputStream = httpURLConnection.getOutputStream();
-                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+            if (isCancelled()){
+                Log.i("TAG", "doInBackground: Cancelled");
+                return null;
+            } else {
+                try {
+                    URL url = new URL(stringUrl);
+                    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                    httpURLConnection.setRequestMethod("POST");
+                    httpURLConnection.setDoOutput(true);
+                    OutputStream outputStream = httpURLConnection.getOutputStream();
+                    BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
 
-                String data = URLEncoder.encode("bloodType", "UTF-8") +"="+ URLEncoder.encode(bloodType, "UTF-8");
-                bufferedWriter.write(data);
-                bufferedWriter.flush();
-                bufferedWriter.close();
-                outputStream.close();
-                InputStream inputStream = httpURLConnection.getInputStream();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
-                StringBuilder stringBuilder = new StringBuilder();
-                String line = "";
-                while ((line = bufferedReader.readLine()) != null){
-                    stringBuilder.append(line);
+                    String data = URLEncoder.encode("bloodType", "UTF-8") + "=" + URLEncoder.encode(bloodType, "UTF-8");
+                    bufferedWriter.write(data);
+                    bufferedWriter.flush();
+                    bufferedWriter.close();
+                    outputStream.close();
+                    InputStream inputStream = httpURLConnection.getInputStream();
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+                    StringBuilder stringBuilder = new StringBuilder();
+                    String line = "";
+                    while ((line = bufferedReader.readLine()) != null) {
+                        stringBuilder.append(line);
+                    }
+                    JSONArray parentJson = new JSONArray(stringBuilder.toString());
+                    donorsInfo = new DonorsInfo[parentJson.length()];
+                    for (int index = 0; index < parentJson.length(); index++) {
+                        JSONObject finalObject = parentJson.getJSONObject(index);
+                        donorsInfo[index] = new DonorsInfo();
+                        donorsInfo[index].setName(finalObject.getString("name"));
+                        donorsInfo[index].setRegistration(finalObject.getString("reg_id"));
+                        donorsInfo[index].setBloodType(finalObject.getString("blood_type"));
+                        donorsInfo[index].setContact(finalObject.getString("contact"));
+                        donorsInfoList.add(donorsInfo[index]);
+                    }
+                    inputStream.close();
+                    httpURLConnection.disconnect();
+                    return donorsInfoList;
+                } catch (IOException | JSONException e) {
+                    e.printStackTrace();
                 }
-                JSONArray parentJson = new JSONArray(stringBuilder.toString());
-                donorsInfo = new DonorsInfo[parentJson.length()];
-                for (int index = 0; index < parentJson.length(); index++) {
-                    JSONObject finalObject = parentJson.getJSONObject(index);
-                    donorsInfo[index] = new DonorsInfo();
-                    donorsInfo[index].setName(finalObject.getString("name"));
-                    donorsInfo[index].setRegistration(finalObject.getString("reg_id"));
-                    donorsInfo[index].setBloodType(finalObject.getString("blood_type"));
-                    donorsInfo[index].setContact(finalObject.getString("contact"));
-                    donorsInfoList.add(donorsInfo[index]);
-                }
-                inputStream.close();
-                httpURLConnection.disconnect();
-                return donorsInfoList;
-            } catch (IOException | JSONException e) {
-                e.printStackTrace();
             }
             return null;
         }
@@ -181,7 +194,11 @@ public class BloodBankModal {
         @Override
         protected void onPostExecute(List<DonorsInfo> s) {
             progressDialog.cancel();
-            recyclerView.setAdapter(new DonorsViewAdapter(s));
+            if (s != null) {
+                recyclerView.setAdapter(new DonorsViewAdapter(s));
+            } else {
+                Toast.makeText(context, "Couldn't retrieve donors.", Toast.LENGTH_LONG).show();
+            }
         }
     }
     public class AddDonor extends AsyncTask<String, Void, String>{
