@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 
@@ -59,6 +61,7 @@ public class BloodRequestsFragment extends Fragment{
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         // Setup any handles to view objects here
         super.onViewCreated(view, savedInstanceState);
+
         RV_bloodRequests = (RecyclerView) view.findViewById(R.id.RV_bloodRequests);
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -67,7 +70,6 @@ public class BloodRequestsFragment extends Fragment{
                 new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL);
         RV_bloodRequests.addItemDecoration(itemDecoration);
         bloodBankLocalModal.viewBloodRequests();
-
     }
 
     @Override
@@ -144,7 +146,8 @@ public class BloodRequestsFragment extends Fragment{
                 @Override
                 public void run() {
                     if (RV_bloodRequests != null) {
-                        RV_bloodRequests.setAdapter(new RequestsViewAdapter(requestsInfoList));
+                        RequestsViewAdapter requestsViewAdapter = new RequestsViewAdapter(requestsInfoList);
+                        RV_bloodRequests.setAdapter(requestsViewAdapter);
                     }
                 }
             });

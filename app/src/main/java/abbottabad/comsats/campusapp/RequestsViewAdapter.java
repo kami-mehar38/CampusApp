@@ -18,6 +18,9 @@ public class RequestsViewAdapter extends RecyclerView.Adapter <RequestsViewAdapt
 
     private List<RequestsInfo> requestsInfoList;
 
+    public RequestsViewAdapter(){
+
+    }
     public RequestsViewAdapter(List<RequestsInfo> requestsInfoList) {
         this.requestsInfoList = requestsInfoList;
     }
