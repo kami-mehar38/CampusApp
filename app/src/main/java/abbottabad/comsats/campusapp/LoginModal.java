@@ -1,4 +1,5 @@
 package abbottabad.comsats.campusapp;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -106,6 +107,7 @@ public class LoginModal extends AsyncTask<String, Void, String>{
             }
 
             context.startActivity(new Intent(context, HomePageView.class));
+            ((Activity) context).finish();
         }
         else {
             new LoginView().setLoginError();
