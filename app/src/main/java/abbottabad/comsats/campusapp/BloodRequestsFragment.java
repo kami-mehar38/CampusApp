@@ -2,36 +2,33 @@ package abbottabad.comsats.campusapp;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import abbottabad.comsats.campusapp.BloodBankController;
-import abbottabad.comsats.campusapp.RequestsViewAdapter;
-import abbottabad.comsats.campusapp.DividerItemDecoration;
-import abbottabad.comsats.campusapp.RequestsInfo;
-import abbottabad.comsats.campusapp.R;
 
 /**
  * Created by Kamran Ramzan on 6/4/16.
  */
-public class BloodRequestsFragment extends Fragment{
+public class BloodRequestsFragment extends Fragment {
 
 
     private BloodBankLocalModal bloodBankLocalModal;
@@ -72,14 +69,6 @@ public class BloodRequestsFragment extends Fragment{
         bloodBankLocalModal.viewBloodRequests();
     }
 
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser){
-
-        }
-    }
-
     public static class BloodBankLocalModal extends SQLiteOpenHelper {
 
         private static int VERSION = 1;
@@ -93,7 +82,6 @@ public class BloodRequestsFragment extends Fragment{
 
         public BloodBankLocalModal(Context context) {
             super(context, DATABASE_NAME, null, VERSION);
-
         }
 
         @Override
@@ -146,13 +134,97 @@ public class BloodRequestsFragment extends Fragment{
                 @Override
                 public void run() {
                     if (RV_bloodRequests != null) {
-                        RequestsViewAdapter requestsViewAdapter = new RequestsViewAdapter(requestsInfoList);
-                        RV_bloodRequests.setAdapter(requestsViewAdapter);
+                        RV_bloodRequests.setAdapter(new RequestsViewAdapter(requestsInfoList));
                     }
                 }
             });
-
+            db.close();
         }
 
+        public void deleteRequest(String reg){
+            SQLiteDatabase db = this.getWritableDatabase();
+            db.delete(TABLE_NAME, COL_REG + " = ?", new String[]{reg});
+            viewBloodRequests();
+        }
+
+    }
+    /**
+     * Created by Kamran Ramzan on 7/6/16.
+     */
+    public static class RequestsViewAdapter extends RecyclerView.Adapter <RequestsViewAdapter.ViewHolder> {
+
+        private List<RequestsInfo> requestsInfoList;
+
+        public RequestsViewAdapter(List<RequestsInfo> requestsInfoList){
+            this.requestsInfoList = requestsInfoList;
+        }
+
+        @Override
+        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_requests, null);
+            return new ViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(final ViewHolder holder, int position) {
+            RequestsInfo requestsInfo = requestsInfoList.get(position);
+            holder.TV_requesterName.setText(requestsInfo.getName());
+            holder.TV_requesterReg.setText(requestsInfo.getRegistration());
+            holder.TV_requesterBloodType.setText(requestsInfo.getBloodType());
+            holder.TV_requesterContact.setText(requestsInfo.getContact());
+        }
+
+
+        @Override
+        public int getItemCount() {
+            return requestsInfoList.size();
+        }
+
+        protected class ViewHolder extends RecyclerView.ViewHolder{
+
+            private TextView TV_requesterName;
+            private TextView TV_requesterReg;
+            private TextView TV_requesterBloodType;
+            private TextView TV_requesterContact;
+            private Button btnCall;
+            private Button btnMessage;
+            private Button btnDelete;
+
+            public ViewHolder(final View itemView) {
+                super(itemView);
+                TV_requesterName = (TextView) itemView.findViewById(R.id.TV_requesterName);
+                TV_requesterReg = (TextView) itemView.findViewById(R.id.TV_requesterReg);
+                TV_requesterBloodType = (TextView) itemView.findViewById(R.id.TV_requesterBloodType);
+                TV_requesterContact = (TextView) itemView.findViewById(R.id.TV_requesterContact);
+                btnDelete = (Button) itemView.findViewById(R.id.btnDelete);
+                btnCall = (Button) itemView.findViewById(R.id.btnCall);
+                btnMessage = (Button) itemView.findViewById(R.id.btnMessage);
+
+                btnCall.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(Intent.ACTION_DIAL,
+                                Uri.parse("tel:" + TV_requesterContact.getText().toString().trim()));
+                        itemView.getContext().startActivity(intent);
+                    }
+                });
+
+                btnMessage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(Intent.ACTION_VIEW,
+                                Uri.parse("sms:" + TV_requesterContact.getText().toString().trim()));
+                        itemView.getContext().startActivity(intent);
+                    }
+                });
+
+                btnDelete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        new BloodBankLocalModal(itemView.getContext()).deleteRequest(TV_requesterReg.getText().toString());
+                    }
+                });
+            }
+        }
     }
 }

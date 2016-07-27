@@ -40,6 +40,7 @@ public class MyGcmListenerService extends GcmListenerService {
             BloodBankController.setBloodType(bloodType);
             createNotification(BLOOD_REQUEST_NOTIFICATION_MESSAGE + stdName);
 
+
             new BloodRequestsFragment.BloodBankLocalModal(this).addBloodRequest();
             new BloodRequestsFragment.BloodBankLocalModal(this).viewBloodRequests();
 
