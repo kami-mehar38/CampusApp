@@ -44,7 +44,7 @@ public class LoginModal extends AsyncTask<String, Void, String>{
 
     @Override
     protected String doInBackground(String... params) {
-        String stringUrl = "http://amgbuilders.co.nf/getData.php";
+        String stringUrl = "http://hostellocator.com/getData.php";
         String username, password;
         try {
             URL url = new URL(stringUrl);

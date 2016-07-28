@@ -72,7 +72,7 @@ public class BloodBankModal {
 
         @Override
         protected String doInBackground(String... params) {
-            String stringUrl = "http://10.0.2.2/CampusApp/sendPushNotification.php";
+            String stringUrl = "http://hostellocator.com/sendPushNotification.php";
             String name, registration, contact, bloodType;
             try {
                 URL url = new URL(stringUrl);
@@ -143,7 +143,7 @@ public class BloodBankModal {
 
         @Override
         protected List<DonorsInfo> doInBackground(String... params) {
-            String stringUrl = "http://amgbuilders.co.nf/retrieveDonors.php";
+            String stringUrl = "http://hostellocator.com/retrieveDonors.php";
             DonorsInfo[] donorsInfo;
             List<DonorsInfo> donorsInfoList = new ArrayList<>();
             String bloodType = params[0];
@@ -217,7 +217,7 @@ public class BloodBankModal {
 
         @Override
         protected String doInBackground(String... params) {
-            String stringUrl = "http://amgbuilders.co.nf/insertDonor.php";
+            String stringUrl = "http://hostellocator.com/insertDonor.php";
             String name, regID, bloodType, contact, bleeded;
             try {
                 URL url = new URL(stringUrl);
@@ -305,7 +305,7 @@ public class BloodBankModal {
 
         @Override
         protected String doInBackground(String... params) {
-            String stringUrl = "http://amgbuilders.co.nf/updateBleedingDate.php";
+            String stringUrl = "http://hostellocator.com/updateBleedingDate.php";
             String regID, bleedingDate;
             try {
                 URL url = new URL(stringUrl);

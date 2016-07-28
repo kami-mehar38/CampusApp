@@ -51,7 +51,7 @@ public class SignUpModal extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
 
 
-        String stringUrl = "http://amgbuilders.co.nf/addStudent.php";
+        String stringUrl = "http://hostellocator.com/addStudent.php";
         String std_name, std_id, std_section;
         try {
             URL url = new URL(stringUrl);
