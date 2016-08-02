@@ -47,7 +47,12 @@ public class HomePageView extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
+
+        SharedPreferences sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+        final String APPLICATION_STATUS = sharedPreferences.getString("APPLICATION_STATUS", "NULL");
+        if (APPLICATION_STATUS.equals("BLOOD_BANK")) {
+            getMenuInflater().inflate(R.menu.menu, menu);
+        }
         return super.onCreateOptionsMenu(menu);
     }
 

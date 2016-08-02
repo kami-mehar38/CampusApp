@@ -27,7 +27,7 @@ public class LoginModal extends AsyncTask<String, Void, String>{
 
     private ProgressDialog progressDialog;
     private Context context;
-    private String loginStatus = "";
+
     private static final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
 
     public LoginModal(Context context) {

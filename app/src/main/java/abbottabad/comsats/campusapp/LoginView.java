@@ -24,8 +24,6 @@ public class LoginView extends AppCompatActivity implements AdapterView.OnItemSe
     private AlertDialog alertDialog = null;
     private Spinner SPloginOptions;
     public static String designation;
-    public static String username;
-    public static String password;
 
 
     @Override
@@ -87,8 +85,8 @@ public class LoginView extends AppCompatActivity implements AdapterView.OnItemSe
                 if (spinnerOption != 0){
                     switch (spinnerOption){
                         case 1:{
-                            username = ETuname.getText().toString().trim();
-                            password = ETpassword.getText().toString().trim();
+                            String username = ETuname.getText().toString().trim();
+                            String password = ETpassword.getText().toString().trim();
                             new LoginModal(LoginView.this).execute(username, password);
 
                             break;
