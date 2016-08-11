@@ -67,6 +67,14 @@ public class BloodBankModal {
             progressDialog = new ProgressDialog(context);
             progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             progressDialog.setMessage("Sending Request...");
+            progressDialog.setCancelable(false);
+            progressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            cancel(true);
+                        }
+                    });
             progressDialog.show();
         }
 
@@ -147,10 +155,6 @@ public class BloodBankModal {
             DonorsInfo[] donorsInfo;
             List<DonorsInfo> donorsInfoList = new ArrayList<>();
             String bloodType = params[0];
-            if (isCancelled()){
-                Log.i("TAG", "doInBackground: Cancelled");
-                return null;
-            } else {
                 try {
                     URL url = new URL(stringUrl);
                     HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -188,7 +192,6 @@ public class BloodBankModal {
                 } catch (IOException | JSONException e) {
                     e.printStackTrace();
                 }
-            }
             return null;
         }
 
@@ -212,6 +215,14 @@ public class BloodBankModal {
             progressDialog = new ProgressDialog(context);
             progressDialog.setMessage("Adding donor... Please wait");
             progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressDialog.setCancelable(false);
+            progressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            cancel(true);
+                        }
+                    });
             progressDialog.show();
         }
 

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -110,7 +111,7 @@ public class LoginModal extends AsyncTask<String, Void, String>{
             ((Activity) context).finish();
         }
         else {
-            new LoginView().setLoginError();
+            Toast.makeText(context, "Invalid login credentials.", Toast.LENGTH_LONG).show();
         }
     }
 }

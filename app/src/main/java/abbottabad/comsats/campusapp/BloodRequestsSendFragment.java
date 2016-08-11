@@ -89,11 +89,6 @@ public class BloodRequestsSendFragment extends Fragment implements AdapterView.O
             }
         });
     }
-    public void setLoginError() {
-        TILname.setError("Invalid name");
-        TILreg.setError("Invalid registration id");
-        TILcontact.setError("Invalid contact no");
-    }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

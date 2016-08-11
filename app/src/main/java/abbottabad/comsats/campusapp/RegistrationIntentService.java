@@ -40,7 +40,6 @@ public class RegistrationIntentService extends IntentService {
             token = instanceID.getToken(GCM_SENDER_ID,
                     GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
 
-            saveTokenPreferences();
             sendRegTokenToServer();
 
         } catch (IOException e) {
@@ -50,10 +49,7 @@ public class RegistrationIntentService extends IntentService {
 
     private void saveTokenPreferences() {
         if (token != null) {
-            SharedPreferences sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putInt("TOKEN_GOT", 1);
-            editor.apply();
+
         }
     }
 
@@ -64,10 +60,10 @@ public class RegistrationIntentService extends IntentService {
         new SaveTokenInBackground().execute(stringUrl, APPLICATION_STATUS, token);
     }
 
-    private class SaveTokenInBackground extends AsyncTask<String, Void, Void> {
+    private class SaveTokenInBackground extends AsyncTask<String, Void, String> {
 
         @Override
-        protected Void doInBackground(String... params) {
+        protected String doInBackground(String... params) {
             String stringUrl = params[0];
             String designation = params[1];
             String token = params[2];
@@ -91,6 +87,19 @@ public class RegistrationIntentService extends IntentService {
                 e.printStackTrace();
             }
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            if (result != null && token != null){
+                SharedPreferences sharedPreferences = RegistrationIntentService.
+                        this.getSharedPreferences(
+                        PREFERENCE_FILE_KEY,
+                        Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putInt("TOKEN_GOT", 1);
+                editor.apply();
+            }
         }
     }
 }
