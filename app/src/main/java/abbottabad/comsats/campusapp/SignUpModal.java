@@ -27,83 +27,92 @@ import java.net.URLEncoder;
 /**
  * Created by Kamran Ramzan on 6/26/16.
  */
-public class SignUpModal extends AsyncTask<String, Void, String> {
-    private Context context;
-    private static final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
-    private AlertDialog alertDialog;
 
-
+public class SignUpModal {
+    protected Context context;
     public SignUpModal(Context context) {
         this.context = context;
     }
 
-    private ProgressDialog progressDialog;
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-        progressDialog = new ProgressDialog(context);
-        progressDialog.setMessage("Singing you up... Please wait");
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.show();
+    public void addStudent(String name, String reg, String sec){
+        new AddStudent().execute(name, reg, sec);
     }
 
-    @Override
-    protected String doInBackground(String... params) {
+    public void addTeacher(String name, String reg){
+        new AddTeacher().execute(name, reg);
+    }
 
+    public class AddStudent extends AsyncTask<String, Void, String> {
 
-        String stringUrl = "http://hostellocator.com/addStudent.php";
-        String std_name, std_id, std_section;
-        try {
-            URL url = new URL(stringUrl);
-            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-            httpURLConnection.setRequestMethod("POST");
-            httpURLConnection.setDoOutput(true);
-            OutputStream outputStream = httpURLConnection.getOutputStream();
-            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-            std_name = params[0];
-            std_id = params[1];
-            std_section = params[2];
-
-            String data = URLEncoder.encode("std_name", "UTF-8") + "=" + URLEncoder.encode(std_name, "UTF-8") +"&"+
-                    URLEncoder.encode("std_id", "UTF-8") + "=" + URLEncoder.encode(std_id, "UTF-8") +"&"+
-                    URLEncoder.encode("std_section", "UTF-8") + "=" + URLEncoder.encode(std_section, "UTF-8");
-
-            bufferedWriter.write(data);
-            bufferedWriter.flush();
-            bufferedWriter.close();
-            outputStream.close();
-            InputStream inputStream = httpURLConnection.getInputStream();
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
-            StringBuilder stringBuilder = new StringBuilder();
-            String line = "";
-            while ((line = bufferedReader.readLine()) != null){
-                stringBuilder.append(line);
-            }
-            JSONArray parentJSON = new JSONArray(stringBuilder.toString());
-            JSONObject finalObject = parentJSON.getJSONObject(0);
-            String RESPONSE = finalObject.getString("RESPONSE");
-            Log.i("TAG", "doInBackground: " + RESPONSE);
-            bufferedReader.close();
-            inputStream.close();
-            httpURLConnection.disconnect();
-            return RESPONSE;
-        } catch (IOException | JSONException e) {
-            e.printStackTrace();
+        private static final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
+        private AlertDialog alertDialog;
+        private ProgressDialog progressDialog;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = new ProgressDialog(context);
+            progressDialog.setMessage("Singing you up... Please wait");
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressDialog.show();
         }
-        return "ERROR";
-    }
 
         @Override
-    protected void onPostExecute(String result) {
-        super.onPostExecute(result);
+        protected String doInBackground(String... params) {
+
+
+            String stringUrl = "http://hostellocator.com/addStudent.php";
+            String std_name, std_id, std_section;
+            try {
+                URL url = new URL(stringUrl);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                std_name = params[0];
+                std_id = params[1];
+                std_section = params[2];
+
+                String data = URLEncoder.encode("std_name", "UTF-8") + "=" + URLEncoder.encode(std_name, "UTF-8") +"&"+
+                        URLEncoder.encode("std_id", "UTF-8") + "=" + URLEncoder.encode(std_id, "UTF-8") +"&"+
+                        URLEncoder.encode("std_section", "UTF-8") + "=" + URLEncoder.encode(std_section, "UTF-8");
+
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+                StringBuilder stringBuilder = new StringBuilder();
+                String line = "";
+                while ((line = bufferedReader.readLine()) != null){
+                    stringBuilder.append(line);
+                }
+                JSONArray parentJSON = new JSONArray(stringBuilder.toString());
+                JSONObject finalObject = parentJSON.getJSONObject(0);
+                String RESPONSE = finalObject.getString("RESPONSE");
+                Log.i("TAG", "doInBackground: " + RESPONSE);
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return RESPONSE;
+            } catch (IOException | JSONException e) {
+                e.printStackTrace();
+            }
+            return "ERROR";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
             progressDialog.cancel();
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        alertDialog.cancel();
-                    }
-                });
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    alertDialog.cancel();
+                }
+            });
             switch (result) {
                 case "ADDED":
                     SharedPreferences applicationStatus = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
@@ -114,7 +123,7 @@ public class SignUpModal extends AsyncTask<String, Void, String> {
                     final int TOKEN_GOT = sharedPreferences.getInt("TOKEN_GOT", 0);
 
                     if (TOKEN_GOT != 1){
-                        context.startService(new Intent(context, RegistrationIntentService.class));
+                        //context.startService(new Intent(context, RegistrationIntentService.class));
                     }
                     context.startActivity(new Intent(context, HomePageView.class));
                     break;
@@ -131,5 +140,108 @@ public class SignUpModal extends AsyncTask<String, Void, String> {
                     break;
                 }
             }
+        }
+    }
+
+    public class AddTeacher extends AsyncTask<String, Void, String> {
+
+        private static final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
+        private AlertDialog alertDialog;
+        private ProgressDialog progressDialog;
+        private String reg_id;
+        private String name;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = new ProgressDialog(context);
+            progressDialog.setMessage("Singing you up... Please wait");
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+
+            String stringUrl = "http://hostellocator.com/addTeacher.php";
+            try {
+                URL url = new URL(stringUrl);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                name = params[0];
+                reg_id = params[1];
+                String data = URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8") +"&"+
+                        URLEncoder.encode("reg_id", "UTF-8") + "=" + URLEncoder.encode(reg_id, "UTF-8");
+
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+                StringBuilder stringBuilder = new StringBuilder();
+                String line = "";
+                while ((line = bufferedReader.readLine()) != null){
+                    stringBuilder.append(line);
+                }
+                JSONArray parentJSON = new JSONArray(stringBuilder.toString());
+                JSONObject finalObject = parentJSON.getJSONObject(0);
+                String RESPONSE = finalObject.getString("RESPONSE");
+                Log.i("TAG", "doInBackground: " + RESPONSE);
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return RESPONSE;
+            } catch (IOException | JSONException e) {
+                e.printStackTrace();
+            }
+            return "ERROR";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            progressDialog.cancel();
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    alertDialog.cancel();
+                }
+            });
+            switch (result) {
+                case "ADDED":
+                    SharedPreferences applicationStatus = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = applicationStatus.edit();
+                    editor.putString("APPLICATION_STATUS", "TEACHER");
+                    editor.putString("TEACHER_ID", reg_id);
+                    editor.apply();
+                    SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+                    final int TOKEN_GOT = sharedPreferences.getInt("TOKEN_GOT", 0);
+
+                    if (TOKEN_GOT != 1){
+                        context.startService(new Intent(context, RegistrationIntentService.class));
+                    }
+                    context.startActivity(new Intent(context, HomePageView.class));
+                    break;
+                case "EXISTED": {
+                    builder.setMessage("Couldn't sign up, teacher already exists!");
+                    alertDialog = builder.create();
+                    alertDialog.show();
+                    break;
+                }
+                case "ERROR": {
+                    builder.setMessage("Some error occurred! Please try again.");
+                    alertDialog = builder.create();
+                    alertDialog.show();
+                    break;
+                }
+            }
+        }
     }
 }
+

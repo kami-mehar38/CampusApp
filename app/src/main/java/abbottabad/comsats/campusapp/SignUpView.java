@@ -88,12 +88,16 @@ public class SignUpView extends AppCompatActivity implements AdapterView.OnItemS
                 if (spinnerOption != 0){
                     switch (spinnerOption){
                         case 1:{
+                            String name = ETname.getText().toString().trim();
+                            String reg = ETregistration.getText().toString().trim();
+                            new SignUpModal(SignUpView.this).addTeacher(name, reg);
+                            break;
                         }
                         case 2:{
                             String name = ETname.getText().toString().trim();
                             String reg = ETregistration.getText().toString().trim();
                             String sec = ETsection.getText().toString().trim();
-                            new SignUpModal(SignUpView.this).execute(name, reg, sec);
+                            new SignUpModal(SignUpView.this).addStudent(name, reg, sec);
                             break;
                         }
                     }

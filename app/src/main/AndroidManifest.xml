@@ -75,6 +75,8 @@
 
         <activity android:name=".BloodBankView" />
 
+        <activity android:name=".TrackFacultyView" />
+
     </application>
 
 </manifest>

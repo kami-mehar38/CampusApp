@@ -43,6 +43,17 @@ public class HomePageView extends AppCompatActivity {
                     }
                 });
             }
+
+        CardView cv_tracking = (CardView) findViewById(R.id.CV_tracking);
+
+        if (cv_tracking != null) {
+            cv_tracking.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(HomePageView.this, TrackFacultyView.class));
+                }
+            });
+        }
     }
 
     @Override

@@ -23,23 +23,23 @@ public class MyGcmListenerService extends GcmListenerService {
 
     @Override
     public void onMessageReceived(String from, Bundle data) {
-        String stdName = data.getString("stdName");
-        String stdReg = data.getString("stdReg");
-        String stdContact = data.getString("stdContact");
-        String bloodType = data.getString("bloodType");
-        Log.i("TAG", "From: " + from);
+
 
         SharedPreferences sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         final String APPLICATION_STATUS = sharedPreferences.getString("APPLICATION_STATUS", "NULL");
 
         if (APPLICATION_STATUS.equals("BLOOD_BANK")){
+            String stdName = data.getString("stdName");
+            String stdReg = data.getString("stdReg");
+            String stdContact = data.getString("stdContact");
+            String bloodType = data.getString("bloodType");
+            Log.i("TAG", "From: " + from);
 
             BloodBankController.setStdName(stdName);
             BloodBankController.setStdReg(stdReg);
             BloodBankController.setStdContact(stdContact);
             BloodBankController.setBloodType(bloodType);
             createNotification(BLOOD_REQUEST_NOTIFICATION_MESSAGE + stdName);
-
 
             new BloodRequestsFragment.BloodBankLocalModal(this).addBloodRequest();
             new BloodRequestsFragment.BloodBankLocalModal(this).viewBloodRequests();
