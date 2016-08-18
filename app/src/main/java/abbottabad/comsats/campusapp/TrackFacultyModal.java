@@ -74,6 +74,7 @@ public class TrackFacultyModal {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             cancel(true);
+                            swipeRefreshLayout.setRefreshing(false);
                         }
                     });
             progressDialog.show();
@@ -148,6 +149,7 @@ public class TrackFacultyModal {
                     s.remove(0);
                     textView.setText(statusInfo.getStatus());
                 }
+                TrackFacultyView.statusInfoList = s;
                 recyclerView.setAdapter(new StatusViewAdapter(s));
                 swipeRefreshLayout.setRefreshing(false);
 
@@ -163,6 +165,7 @@ public class TrackFacultyModal {
         private AlertDialog alertDialog;
         private TextView textView;
         private String status;
+        private String teacher_id;
 
         public UpdateStatus(TextView TV_myStatus) {
             this.textView = TV_myStatus;
@@ -189,7 +192,7 @@ public class TrackFacultyModal {
         protected String doInBackground(String... params) {
             String stringUrl = "http://hostellocator.com/updateStatus.php";
             status = params[0];
-            String teacher_id = params[1];
+            teacher_id = params[1];
             try {
                 URL url = new URL(stringUrl);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -238,6 +241,7 @@ public class TrackFacultyModal {
                 case "UPDATED": {
                     Toast.makeText(context, "Status is successfully updated!", Toast.LENGTH_LONG).show();
                     textView.setText(status);
+                    new sendStatusNotification().execute(teacher_id, status);
                     break;
                 }
                 case "ERROR": {
@@ -253,6 +257,53 @@ public class TrackFacultyModal {
                     break;
                 }
             }
+        }
+    }
+
+    public class sendStatusNotification extends AsyncTask<String, Void, String> {
+
+        private AlertDialog alertDialog;
+
+        @Override
+        protected String doInBackground(String... params) {
+            String stringUrl = "http://hostellocator.com/sendStatusNotification.php";
+            String teacher_id = params[0];
+             String status = params[1];
+            try {
+                URL url = new URL(stringUrl);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String data = URLEncoder.encode("reg_id", "UTF-8") +"="+ URLEncoder.encode(teacher_id, "UTF-8") +"&"+
+                              URLEncoder.encode("status", "UTF-8") +"="+ URLEncoder.encode(status, "UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+                StringBuilder stringBuilder = new StringBuilder();
+                String line = "";
+                while ((line = bufferedReader.readLine()) != null){
+                    stringBuilder.append(line);
+                }
+
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return stringBuilder.toString().trim();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            Toast.makeText(context, s, Toast.LENGTH_LONG).show();
         }
     }
 }

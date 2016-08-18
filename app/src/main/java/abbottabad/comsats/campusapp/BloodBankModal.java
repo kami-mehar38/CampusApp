@@ -110,6 +110,7 @@ public class BloodBankModal {
                     stringBuilder.append(line);
                 }
 
+                bufferedReader.close();
                 inputStream.close();
                 httpURLConnection.disconnect();
                 return stringBuilder.toString().trim();

@@ -47,6 +47,8 @@ public class SignUpModal {
         private static final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
         private AlertDialog alertDialog;
         private ProgressDialog progressDialog;
+        private String std_id;
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -61,7 +63,8 @@ public class SignUpModal {
 
 
             String stringUrl = "http://hostellocator.com/addStudent.php";
-            String std_name, std_id, std_section;
+            String std_name;
+            String std_section;
             try {
                 URL url = new URL(stringUrl);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -118,6 +121,7 @@ public class SignUpModal {
                     SharedPreferences applicationStatus = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = applicationStatus.edit();
                     editor.putString("APPLICATION_STATUS", "STUDENT");
+                    editor.putString("REG_ID", std_id);
                     editor.apply();
                     SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
                     final int TOKEN_GOT = sharedPreferences.getInt("TOKEN_GOT", 0);
@@ -148,7 +152,7 @@ public class SignUpModal {
         private static final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
         private AlertDialog alertDialog;
         private ProgressDialog progressDialog;
-        private String reg_id;
+        private String teacher_id;
         private String name;
 
         @Override
@@ -173,9 +177,9 @@ public class SignUpModal {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
                 name = params[0];
-                reg_id = params[1];
+                teacher_id = params[1];
                 String data = URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8") +"&"+
-                        URLEncoder.encode("reg_id", "UTF-8") + "=" + URLEncoder.encode(reg_id, "UTF-8");
+                        URLEncoder.encode("teacher_id", "UTF-8") + "=" + URLEncoder.encode(teacher_id, "UTF-8");
 
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
@@ -218,7 +222,7 @@ public class SignUpModal {
                     SharedPreferences applicationStatus = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = applicationStatus.edit();
                     editor.putString("APPLICATION_STATUS", "TEACHER");
-                    editor.putString("TEACHER_ID", reg_id);
+                    editor.putString("REG_ID", teacher_id);
                     editor.apply();
                     SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
                     final int TOKEN_GOT = sharedPreferences.getInt("TOKEN_GOT", 0);

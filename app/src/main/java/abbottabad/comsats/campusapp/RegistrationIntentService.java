@@ -39,25 +39,19 @@ public class RegistrationIntentService extends IntentService {
         try {
             token = instanceID.getToken(GCM_SENDER_ID,
                     GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
-
+            Log.i(TAG, "onHandleIntent: "+ token);
             sendRegTokenToServer();
-
         } catch (IOException e) {
             Log.i(TAG, "onHandleIntent: Couldn't get Token");
-        }
-    }
-
-    private void saveTokenPreferences() {
-        if (token != null) {
-
         }
     }
 
     private void sendRegTokenToServer() {
         SharedPreferences sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         final String APPLICATION_STATUS = sharedPreferences.getString("APPLICATION_STATUS", "NULL");
+        final String REG_ID = sharedPreferences.getString("REG_ID", "NULL");
         String stringUrl = "http://hostellocator.com/insertToken.php";
-        new SaveTokenInBackground().execute(stringUrl, APPLICATION_STATUS, token);
+        new SaveTokenInBackground().execute(stringUrl, APPLICATION_STATUS, token, REG_ID);
     }
 
     private class SaveTokenInBackground extends AsyncTask<String, Void, String> {
@@ -67,6 +61,7 @@ public class RegistrationIntentService extends IntentService {
             String stringUrl = params[0];
             String designation = params[1];
             String token = params[2];
+            String reg_id = params[3];
             try {
                 URL url = new URL(stringUrl);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -75,7 +70,8 @@ public class RegistrationIntentService extends IntentService {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
                 String data = URLEncoder.encode("designation", "UTF-8") +"="+ URLEncoder.encode(designation, "UTF-8") +"&"+
-                        URLEncoder.encode("token", "UTF-8") +"="+ URLEncoder.encode(token, "UTF-8");
+                        URLEncoder.encode("token", "UTF-8") +"="+ URLEncoder.encode(token, "UTF-8") +"&"+
+                        URLEncoder.encode("reg_id", "UTF-8") +"="+ URLEncoder.encode(reg_id, "UTF-8");
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
                 bufferedWriter.close();

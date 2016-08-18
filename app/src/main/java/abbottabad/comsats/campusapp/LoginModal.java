@@ -98,6 +98,7 @@ public class LoginModal extends AsyncTask<String, Void, String>{
             SharedPreferences.Editor editor = applicationStatus.edit();
             editor.putString("APPLICATION_STATUS", "BLOOD_BANK");
             editor.putBoolean("LOGGED_IN", true);
+            editor.putString("REG_ID", "12345");
             editor.apply();
 
             SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);

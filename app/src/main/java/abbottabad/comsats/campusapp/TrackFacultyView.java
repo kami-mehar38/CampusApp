@@ -13,9 +13,14 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.SearchView;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This project CampusApp is created by Kamran Ramzan on 8/15/16.
@@ -31,6 +36,8 @@ public class TrackFacultyView extends Activity {
     private SharedPreferences sharedPreferences;
     private AlertDialog alertDialog;
     private String status;
+    public static List<StatusInfo> statusInfoList;
+    private LinearLayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +46,9 @@ public class TrackFacultyView extends Activity {
         setUpCollapsingToolbar();
         final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.RV_facultyStatus);
         recyclerView.setHasFixedSize(true);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-        RecyclerView.ItemDecoration itemDecoration =
-                new DividerItemDecoration(this, LinearLayoutManager.VERTICAL);
-        recyclerView.addItemDecoration(itemDecoration);
 
         TV_myStatus = (TextView) findViewById(R.id.TV_myStatus);
         sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
@@ -63,7 +67,7 @@ public class TrackFacultyView extends Activity {
                 editor = sharedPreferences.edit();
                 editor.putInt("SELECTED_STATUS", which);
                 editor.apply();
-                TEACHER_ID = sharedPreferences.getString("TEACHER_ID", null);
+                TEACHER_ID = sharedPreferences.getString("REG_ID", null);
                 status = alertDialog.getListView().getItemAtPosition(which).toString();
 
             }
@@ -96,7 +100,7 @@ public class TrackFacultyView extends Activity {
         SRL_facultyStatus = (SwipeRefreshLayout) findViewById(R.id.SRL_facultyStatus);
 
         if (APPLICATION_STATUS.equals("TEACHER")) {
-            TEACHER_ID = sharedPreferences.getString("TEACHER_ID", null);
+            TEACHER_ID = sharedPreferences.getString("REG_ID", null);
             Toast.makeText(this, TEACHER_ID, Toast.LENGTH_LONG).show();
             new TrackFacultyModal(this).retrieveStatus(recyclerView, SRL_facultyStatus, TV_myStatus, TEACHER_ID);
         }else if (APPLICATION_STATUS.equals("BLOOD_BANK") || APPLICATION_STATUS.equals("STUDENT")) {
@@ -113,6 +117,49 @@ public class TrackFacultyView extends Activity {
                 }else if (APPLICATION_STATUS.equals("BLOOD_BANK") || APPLICATION_STATUS.equals("STUDENT")){
                     new TrackFacultyModal(TrackFacultyView.this).retrieveStatus(recyclerView, SRL_facultyStatus, TV_myStatus, "ALL");
                 }
+            }
+        });
+
+        final SearchView SV_facultyStatus = (SearchView) findViewById(R.id.SV_facultyStatus);
+        SV_facultyStatus.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                    return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                newText = newText.toLowerCase().trim();
+                final List<StatusInfo> filteredList = new ArrayList<StatusInfo>();
+                if (newText.isEmpty()){
+                    StatusViewAdapter statusViewAdapter = new StatusViewAdapter(statusInfoList);
+                    recyclerView.setLayoutManager(layoutManager);
+                    recyclerView.setAdapter(statusViewAdapter);
+                    statusViewAdapter.notifyDataSetChanged();
+                } else {
+                    for (int i = 0; i < statusInfoList.size(); i++) {
+                        StatusInfo statusInfo = statusInfoList.get(i);
+                        String teacherName = statusInfo.getTeacherName().toLowerCase();
+                        if (teacherName.contains(newText)) {
+                            filteredList.add(statusInfoList.get(i));
+                        }
+                    }
+                    StatusViewAdapter statusViewAdapter = new StatusViewAdapter(filteredList);
+                    recyclerView.setLayoutManager(layoutManager);
+                    recyclerView.setAdapter(statusViewAdapter);
+                    statusViewAdapter.notifyDataSetChanged();
+                }
+                return true;
+            }
+        });
+        SV_facultyStatus.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                if(getCurrentFocus()!=null) {
+                    InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                    inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                }
+                return true;
             }
         });
     }
