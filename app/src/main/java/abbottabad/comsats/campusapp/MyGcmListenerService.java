@@ -19,6 +19,7 @@ import com.google.android.gms.gcm.GcmListenerService;
 public class MyGcmListenerService extends GcmListenerService {
     private static final int GCM_NOTIFICATION_ID = 13548;
     private static final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
+    private Boolean IS_LOGGED_IN;
 
     @Override
     public void onMessageReceived(String from, Bundle data) {
@@ -26,6 +27,7 @@ public class MyGcmListenerService extends GcmListenerService {
         Log.i("TAG", "From: " + from);
         SharedPreferences sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         final String APPLICATION_STATUS = sharedPreferences.getString("APPLICATION_STATUS", "NULL");
+        IS_LOGGED_IN = sharedPreferences.getBoolean("LOGGED_IN", false);
         String PURPOSE = data.getString("PURPOSE");
         if (APPLICATION_STATUS.equals("BLOOD_BANK")){
             if (PURPOSE != null && PURPOSE.equals("BLOOD_REQUEST")) {
@@ -72,10 +74,13 @@ public class MyGcmListenerService extends GcmListenerService {
         BloodBankController.setStdReg(stdReg);
         BloodBankController.setStdContact(stdContact);
         BloodBankController.setBloodType(bloodType);
-        createBloodNotification("New Blood request from " + stdName);
 
         new BloodRequestsFragment.BloodBankLocalModal(this).addBloodRequest();
         new BloodRequestsFragment.BloodBankLocalModal(this).viewBloodRequests();
+
+        if (IS_LOGGED_IN) {
+            createBloodNotification("New Blood request from " + stdName);
+        }
     }
 
     private void createBloodNotification(String message) {

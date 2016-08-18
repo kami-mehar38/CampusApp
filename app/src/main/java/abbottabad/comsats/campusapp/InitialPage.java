@@ -109,11 +109,13 @@ public class InitialPage extends Activity implements View.OnClickListener {
             case R.id.btn_signup:{
                 Intent intent = new Intent(InitialPage.this, SignUpView.class);
                 startActivity(intent);
+                finish();
                 break;
             }
             case R.id.btn_login:{
                 Intent intent = new Intent(InitialPage.this, LoginView.class);
                 startActivity(intent);
+                finish();
                 break;
             }
         }

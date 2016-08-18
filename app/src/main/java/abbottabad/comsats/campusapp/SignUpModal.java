@@ -1,5 +1,6 @@
 package abbottabad.comsats.campusapp;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -127,9 +128,10 @@ public class SignUpModal {
                     final int TOKEN_GOT = sharedPreferences.getInt("TOKEN_GOT", 0);
 
                     if (TOKEN_GOT != 1){
-                        //context.startService(new Intent(context, RegistrationIntentService.class));
+                        context.startService(new Intent(context, RegistrationIntentService.class));
                     }
                     context.startActivity(new Intent(context, HomePageView.class));
+                    ((Activity) context).finish();
                     break;
                 case "EXISTED": {
                     builder.setMessage("Couldn't sign up, student already exists!");
@@ -231,6 +233,7 @@ public class SignUpModal {
                         context.startService(new Intent(context, RegistrationIntentService.class));
                     }
                     context.startActivity(new Intent(context, HomePageView.class));
+                    ((Activity) context).finish();
                     break;
                 case "EXISTED": {
                     builder.setMessage("Couldn't sign up, teacher already exists!");

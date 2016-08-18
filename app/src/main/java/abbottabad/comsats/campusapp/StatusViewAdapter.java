@@ -33,7 +33,7 @@ public class StatusViewAdapter extends RecyclerView.Adapter<StatusViewAdapter.Vi
         StatusInfo statusInfo = statusInfoList.get(position);
         holder.TV_teacherName.setText(statusInfo.getTeacherName());
         holder.TV_teacherStatus.setText(statusInfo.getStatus());
-        setFadeAnimation(holder.CV_facultyStatus);
+        //setFadeAnimation(holder.CV_facultyStatus);
         //setScaleAnimation(holder.CV_facultyStatus);
     }
 
