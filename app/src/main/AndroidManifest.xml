@@ -77,6 +77,8 @@
 
         <activity android:name=".TrackFacultyView" />
 
+        <activity android:name=".NotificationsView" />
+
     </application>
 
 </manifest>

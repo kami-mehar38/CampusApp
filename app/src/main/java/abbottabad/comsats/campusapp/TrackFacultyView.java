@@ -22,6 +22,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
+import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
+
 /**
  * This project CampusApp is created by Kamran Ramzan on 8/15/16.
  */

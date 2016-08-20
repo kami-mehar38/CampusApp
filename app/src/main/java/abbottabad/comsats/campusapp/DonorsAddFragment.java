@@ -144,7 +144,7 @@ public class DonorsAddFragment extends Fragment {
         });
         final TextInputLayout TILname = (TextInputLayout) view.findViewById(R.id.TILDname);
         TILname.setHint("Name");
-        TextInputLayout TILregId = (TextInputLayout) view.findViewById(R.id.TILDregID);
+        final TextInputLayout TILregId = (TextInputLayout) view.findViewById(R.id.TILDregID);
         TILregId.setHint("Registration ID");
         final TextInputLayout TILcontact = (TextInputLayout) view.findViewById(R.id.TILDcontact);
         TILcontact.setHint("Contact #");
@@ -165,19 +165,21 @@ public class DonorsAddFragment extends Fragment {
                     String regID = ETregId.getText().toString().trim();
                     String contact = ETcontact.getText().toString().trim();
                     if (validation.validateName(name)) {
-                        if (validation.validatePhoneNumber(contact)) {
-                            if (selectedDate.before(currentDate) || selectedDate.equals(currentDate)) {
-                                if (spinnerOption != 0) {
-                                    new BloodBankModal(getContext()).addDonor(name, regID, bloodType, contact, bleededDate);
+                        if (validation.validateReg(regID)) {
+                            if (validation.validatePhoneNumber(contact)) {
+                                if (selectedDate.before(currentDate) || selectedDate.equals(currentDate)) {
+                                    if (spinnerOption != 0) {
+                                        new BloodBankModal(getContext()).addDonor(name, regID, bloodType, contact, bleededDate);
+                                    } else {
+                                        alertDialogBlood.show();
+                                    }
                                 } else {
-                                    alertDialogBlood.show();
+                                    alertDialogDate.show();
                                 }
                             } else {
-                                alertDialogDate.show();
+                                TILcontact.setError("Invalid contact#");
                             }
-                        } else {
-                            TILcontact.setError("Invalid contact#");
-                        }
+                        } else TILregId.setError("Invalid registration");
                     } else {
                         TILname.setError("Invalid name");
                     }

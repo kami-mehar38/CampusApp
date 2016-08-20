@@ -33,8 +33,6 @@ public class StatusViewAdapter extends RecyclerView.Adapter<StatusViewAdapter.Vi
         StatusInfo statusInfo = statusInfoList.get(position);
         holder.TV_teacherName.setText(statusInfo.getTeacherName());
         holder.TV_teacherStatus.setText(statusInfo.getStatus());
-        //setFadeAnimation(holder.CV_facultyStatus);
-        //setScaleAnimation(holder.CV_facultyStatus);
     }
 
     @Override
@@ -42,17 +40,6 @@ public class StatusViewAdapter extends RecyclerView.Adapter<StatusViewAdapter.Vi
         return statusInfoList.size();
     }
 
-    private void setFadeAnimation(View view) {
-        AlphaAnimation anim = new AlphaAnimation(0.0f, 1.0f);
-        anim.setDuration(500);
-        view.startAnimation(anim);
-    }
-
-    private void setScaleAnimation(View view) {
-        ScaleAnimation anim = new ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        anim.setDuration(1000);
-        view.startAnimation(anim);
-    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView TV_teacherName;

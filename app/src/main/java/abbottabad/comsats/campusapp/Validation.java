@@ -3,7 +3,7 @@ package abbottabad.comsats.campusapp;
 import java.util.regex.Pattern;
 
 /**
- * Created by Kamran Ramzan on 7/7/16.
+ * This project CampusApp is created by Kamran Ramzan on 7/7/16.
  */
 public class Validation {
     public boolean validateName(String name){
@@ -21,5 +21,17 @@ public class Validation {
     public boolean validatePhoneNumber(String phoneNumber){
         String PHONE_NUMBER = phoneNumber.trim();
         return Pattern.matches("[+]?[0-9]{10,13}", PHONE_NUMBER);
+    }
+
+    public boolean validateReg(String reg){
+        String REG = reg.trim();
+        if (REG.equals("")){
+            return false;
+        } else if (REG.length() > 30){
+            return false;
+        } else if (!REG.matches(".*\\d.*")){
+            return false;
+        }
+        return true;
     }
 }

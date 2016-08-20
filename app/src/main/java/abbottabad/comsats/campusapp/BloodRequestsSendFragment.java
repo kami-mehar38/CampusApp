@@ -41,6 +41,7 @@ public class BloodRequestsSendFragment extends Fragment implements AdapterView.O
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        final Validation validation = new Validation();
         TILname = (TextInputLayout) view.findViewById(R.id.TILname);
         if (TILname != null) {
             TILname.setHint("Name");
@@ -70,7 +71,13 @@ public class BloodRequestsSendFragment extends Fragment implements AdapterView.O
                     String name = ETname.getText().toString().trim();
                     String registration = ETregistration.getText().toString().trim();
                     String contact = ETcontact.getText().toString().trim();
-                    new BloodBankModal(view.getContext()).sendRequest(name, registration, contact, bloodType);
+                    if (validation.validateName(name)){
+                        if (validation.validateReg(registration)){
+                            if (validation.validatePhoneNumber(contact)){
+                                new BloodBankModal(view.getContext()).sendRequest(name, registration, contact, bloodType);
+                            } else TILcontact.setError("Invalid contact#");
+                        } else TILreg.setError("Invalid registration");
+                    } else TILname.setError("Invalid name");
                 }else{
                     AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
                     builder.setTitle("Warning");

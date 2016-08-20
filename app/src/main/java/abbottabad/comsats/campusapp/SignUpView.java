@@ -17,13 +17,13 @@ import android.widget.Toast;
  */
 public class SignUpView extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
-    private static TextInputLayout TILname, TILreg, TILsection;
+    private static TextInputLayout TILname, TILreg;
     private static int spinnerOption;
     private AlertDialog alertDialog = null;
     private static final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
     private EditText ETname;
     private EditText ETregistration;
-    private EditText ETsection;
+    private Validation validation;
 
 
     @Override
@@ -31,6 +31,7 @@ public class SignUpView extends AppCompatActivity implements AdapterView.OnItemS
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup_page);
 
+        validation = new Validation();
         TILname = (TextInputLayout) findViewById(R.id.TILname);
         if (TILname != null) {
             TILname.setHint("Name");
@@ -39,14 +40,9 @@ public class SignUpView extends AppCompatActivity implements AdapterView.OnItemS
         if (TILreg != null) {
             TILreg.setHint("Registration ID");
         }
-        TILsection = (TextInputLayout) findViewById(R.id.TILsection);
-        if (TILsection != null) {
-            TILsection.setHint("Section");
-        }
 
         ETname = (EditText) findViewById(R.id.ETname);
         ETregistration = (EditText) findViewById(R.id.ETregistration);
-        ETsection = (EditText) findViewById(R.id.ETsection);
 
         setActionBarLogo();
         Spinner SPsignupOptions = (Spinner) findViewById(R.id.SPsignupOptions);
@@ -90,14 +86,21 @@ public class SignUpView extends AppCompatActivity implements AdapterView.OnItemS
                         case 1:{
                             String name = ETname.getText().toString().trim();
                             String reg = ETregistration.getText().toString().trim();
-                            new SignUpModal(SignUpView.this).addTeacher(name, reg);
+                            if (validation.validateName(name)) {
+                                if (validation.validateReg(reg)) {
+                                    new SignUpModal(SignUpView.this).addTeacher(name, reg);
+                                }else TILreg.setError("Invalid registration");
+                            }else TILname.setError("Invalid name");
                             break;
                         }
                         case 2:{
                             String name = ETname.getText().toString().trim();
                             String reg = ETregistration.getText().toString().trim();
-                            String sec = ETsection.getText().toString().trim();
-                            new SignUpModal(SignUpView.this).addStudent(name, reg, sec);
+                            if (validation.validateName(name)) {
+                                if (validation.validateReg(reg)) {
+                                    new SignUpModal(SignUpView.this).addStudent(name, reg);
+                                }else TILreg.setError("Invalid registration");
+                            }else TILname.setError("Invalid name");
                             break;
                         }
                     }
@@ -121,9 +124,4 @@ public class SignUpView extends AppCompatActivity implements AdapterView.OnItemS
         }
     }
 
-    public void setLoginError() {
-        TILname.setError("Invalid username");
-        TILreg.setError("Invalid password");
-        TILsection.setError("Invalid registration id");
-    }
 }

@@ -110,11 +110,17 @@ public class BloodBankModal {
                     stringBuilder.append(line);
                 }
 
+                JSONArray parentJSON = new JSONArray(stringBuilder.toString());
+                JSONObject finalObject = parentJSON.getJSONObject(0);
+                String RESPONSE = finalObject.getString("RESPONSE");
+
                 bufferedReader.close();
                 inputStream.close();
                 httpURLConnection.disconnect();
-                return stringBuilder.toString().trim();
+                return RESPONSE;
             } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
             return null;
@@ -122,8 +128,13 @@ public class BloodBankModal {
 
         @Override
         protected void onPostExecute(String s) {
-            Toast.makeText(context, s, Toast.LENGTH_LONG).show();
             progressDialog.cancel();
+            if (s != null && s.equals("OK")) {
+                Toast.makeText(context, "Request sent.", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(context, "Some error occurred, please try again.", Toast.LENGTH_LONG).show();
+            }
+
         }
     }
     public class RetrieveDonors extends AsyncTask<String, Void, List<DonorsInfo>> {

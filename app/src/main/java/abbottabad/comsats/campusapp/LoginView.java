@@ -110,9 +110,4 @@ public class LoginView extends AppCompatActivity implements AdapterView.OnItemSe
             }
         }
     }
-
-    public void setLoginError() {
-        TIname.setError("Invalid username");
-        TIpass.setError("Invalid password");
-    }
 }

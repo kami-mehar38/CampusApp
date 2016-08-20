@@ -35,8 +35,8 @@ public class SignUpModal {
         this.context = context;
     }
 
-    public void addStudent(String name, String reg, String sec){
-        new AddStudent().execute(name, reg, sec);
+    public void addStudent(String name, String reg){
+        new AddStudent().execute(name, reg);
     }
 
     public void addTeacher(String name, String reg){
@@ -65,7 +65,6 @@ public class SignUpModal {
 
             String stringUrl = "http://hostellocator.com/addStudent.php";
             String std_name;
-            String std_section;
             try {
                 URL url = new URL(stringUrl);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -75,11 +74,9 @@ public class SignUpModal {
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
                 std_name = params[0];
                 std_id = params[1];
-                std_section = params[2];
 
                 String data = URLEncoder.encode("std_name", "UTF-8") + "=" + URLEncoder.encode(std_name, "UTF-8") +"&"+
-                        URLEncoder.encode("std_id", "UTF-8") + "=" + URLEncoder.encode(std_id, "UTF-8") +"&"+
-                        URLEncoder.encode("std_section", "UTF-8") + "=" + URLEncoder.encode(std_section, "UTF-8");
+                        URLEncoder.encode("std_id", "UTF-8") + "=" + URLEncoder.encode(std_id, "UTF-8");
 
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
