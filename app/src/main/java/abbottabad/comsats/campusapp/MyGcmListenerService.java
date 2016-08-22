@@ -8,6 +8,8 @@ import android.content.SharedPreferences;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -60,7 +62,24 @@ public class MyGcmListenerService extends GcmListenerService {
         NotificationsController.setDateTime(currentDateTimeString);
         NotificationsController.setMine(0);
         new EventNotificationsLocalModal(this).addEventNotification();
-        new EventNotificationsLocalModal(this).retrieveNotifications();
+
+        final EventNotificationInfo eventNotificationInfo = new EventNotificationInfo();
+        eventNotificationInfo.setNotification(message);
+        eventNotificationInfo.setDateTime(currentDateTimeString);
+        eventNotificationInfo.setMine(0);
+
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                if (NotificationsView.eventNotificationsAdapter != null && NotificationsView.listView != null){
+                    NotificationsView.eventNotificationsAdapter.add(eventNotificationInfo);
+                    NotificationsView.eventNotificationsAdapter.notifyDataSetChanged();
+                    NotificationsView.listView.setSelection(NotificationsView.eventNotificationsAdapter.getCount());
+                }
+            }
+        });
+
         createEventNotification(message);
     }
 

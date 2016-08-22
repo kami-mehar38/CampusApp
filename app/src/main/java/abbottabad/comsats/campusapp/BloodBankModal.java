@@ -292,23 +292,25 @@ public class BloodBankModal {
                     alertDialog.cancel();
                 }
             });
-            switch (result) {
-                case "INSERTED": {
-                    Toast.makeText(context, "Donor is successfully added!", Toast.LENGTH_LONG).show();
-                    break;
+            if (result != null) {
+                switch (result) {
+                    case "INSERTED": {
+                        Toast.makeText(context, "Donor is successfully added!", Toast.LENGTH_LONG).show();
+                        break;
+                    }
+                    case "EXISTED": {
+                        builder.setMessage("Couldn't add donor because donor already exists!");
+                        alertDialog = builder.create();
+                        alertDialog.show();
+                        break;
+                    }
+                    case "ERROR": {
+                        Toast.makeText(context, "Some error occurred! Please try again.", Toast.LENGTH_LONG).show();
+                        break;
+                    }
                 }
-                case "EXISTED": {
-                    builder.setMessage("Couldn't add donor because donor already exists!");
-                    alertDialog = builder.create();
-                    alertDialog.show();
-                    break;
-                }
-                case "ERROR": {
-                    builder.setMessage("Some error occurred! Please try again.");
-                    alertDialog = builder.create();
-                    alertDialog.show();
-                    break;
-                }
+            } else {
+                Toast.makeText(context, "Some error occurred! Please try again.", Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -374,21 +376,25 @@ public class BloodBankModal {
                     alertDialog.cancel();
                 }
             });
-            switch (result) {
-                case "UPDATED": {
-                    Toast.makeText(context, "Bleeding date updated successfully!", Toast.LENGTH_LONG).show();
-                    break;
+            if (result != null) {
+                switch (result) {
+                    case "UPDATED": {
+                        Toast.makeText(context, "Bleeding date updated successfully!", Toast.LENGTH_LONG).show();
+                        break;
+                    }
+                    case "ERROR": {
+                        builder.setMessage("Some error occurred! Please try again.");
+                        alertDialog = builder.create();
+                        alertDialog.show();
+                        break;
+                    }
+                    default: {
+                        Toast.makeText(context, "Some error occurred! Please try again.", Toast.LENGTH_LONG).show();
+                        break;
+                    }
                 }
-                case "ERROR": {
-                    builder.setMessage("Some error occurred! Please try again.");
-                    alertDialog = builder.create();
-                    alertDialog.show();
-                    break;
-                }
-                default: {
-                    Toast.makeText(context, "Some error occurred! Please try again.", Toast.LENGTH_LONG).show();
-                    break;
-                }
+            }else {
+                Toast.makeText(context, "Some error occurred! Please try again.", Toast.LENGTH_LONG).show();
             }
         }
     }

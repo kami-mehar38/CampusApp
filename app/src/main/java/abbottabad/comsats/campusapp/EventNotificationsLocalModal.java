@@ -63,32 +63,29 @@ public class EventNotificationsLocalModal extends SQLiteOpenHelper {
 
     public void retrieveNotifications(){
 
-        Handler handler = new Handler(Looper.getMainLooper());
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                SQLiteDatabase db = EventNotificationsLocalModal.this.getReadableDatabase();
-                String selectQuery= "SELECT * FROM " +TABLE_NAME;
-                cursor = db.rawQuery(selectQuery, null);
-                cursor.moveToFirst();
-
-                eventNotificationInfos = new EventNotificationInfo[cursor.getCount()];
-                while (!cursor.isAfterLast()){
-                    eventNotificationInfos[cursor.getPosition()] = new EventNotificationInfo();
-                    eventNotificationInfos[cursor.getPosition()].setNotification(cursor.getString(1));
-                    eventNotificationInfos[cursor.getPosition()].setDateTime(cursor.getString(2));
-                    eventNotificationInfos[cursor.getPosition()].setMine(cursor.getInt(3));
-                    if (NotificationsView.eventNotificationsAdapter != null) {
-                        NotificationsView.eventNotificationsAdapter.add(eventNotificationInfos[cursor.getPosition()]);
-                    }
-                    cursor.moveToNext();
-                }
-                NotificationsView.listView.smoothScrollToPosition(NotificationsView.eventNotificationsAdapter.getCount() - 1);
-                cursor.close();
-                db.close();
+        SQLiteDatabase db = EventNotificationsLocalModal.this.getReadableDatabase();
+        String selectQuery= "SELECT * FROM " +TABLE_NAME;
+        cursor = db.rawQuery(selectQuery, null);
+        cursor.moveToFirst();
+        List<EventNotificationInfo> eventNotificationInfoList = new ArrayList<>();
+        eventNotificationInfos = new EventNotificationInfo[cursor.getCount()];
+        while (!cursor.isAfterLast()){
+            eventNotificationInfos[cursor.getPosition()] = new EventNotificationInfo();
+            eventNotificationInfos[cursor.getPosition()].setNotification(cursor.getString(1));
+            eventNotificationInfos[cursor.getPosition()].setDateTime(cursor.getString(2));
+            eventNotificationInfos[cursor.getPosition()].setMine(cursor.getInt(3));
+            eventNotificationInfoList.add(eventNotificationInfos[cursor.getPosition()]);
+            cursor.moveToNext();
+        }
+        if (NotificationsView.eventNotificationsAdapter != null && NotificationsView.listView != null){
+            for (int i = 0; i < eventNotificationInfoList.size(); i++) {
+                NotificationsView.eventNotificationsAdapter.add(eventNotificationInfoList.get(i));
             }
-        });
+            NotificationsView.listView.setSelection(NotificationsView.eventNotificationsAdapter.getCount());
+        }
 
+        cursor.close();
+        db.close();
     }
 
 }

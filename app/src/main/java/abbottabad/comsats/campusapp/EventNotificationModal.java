@@ -123,7 +123,7 @@ public class EventNotificationModal {
 
                         NotificationsView.eventNotificationsAdapter.add(eventNotificationInfo);
                         NotificationsView.eventNotificationsAdapter.notifyDataSetChanged();
-                        NotificationsView.listView.smoothScrollToPosition(NotificationsView.eventNotificationsAdapter.getCount()-1);
+                        NotificationsView.listView.setSelection(NotificationsView.eventNotificationsAdapter.getCount());
                         break;
                     }
                     case "ERROR": {
