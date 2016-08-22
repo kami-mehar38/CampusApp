@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:maxWidth="300dp"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textColor="#fff"
             android:background="@drawable/chatbubbleleft_shape"
             />

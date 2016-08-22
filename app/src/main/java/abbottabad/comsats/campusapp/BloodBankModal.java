@@ -7,7 +7,6 @@ import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.NumberPicker;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -30,7 +29,7 @@ import java.util.List;
 import static abbottabad.comsats.campusapp.BloodDonorsFragment.*;
 
 /**
- * Created by Kamran Ramzan on 6/4/16.
+ * This project CampusApp is created by Kamran Ramzan on 6/4/16.
  */
 public class BloodBankModal {
 
@@ -105,7 +104,7 @@ public class BloodBankModal {
                 InputStream inputStream = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
                 StringBuilder stringBuilder = new StringBuilder();
-                String line = "";
+                String line;
                 while ((line = bufferedReader.readLine()) != null){
                     stringBuilder.append(line);
                 }
@@ -118,9 +117,7 @@ public class BloodBankModal {
                 inputStream.close();
                 httpURLConnection.disconnect();
                 return RESPONSE;
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
+            } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
             return null;
@@ -183,7 +180,7 @@ public class BloodBankModal {
                     InputStream inputStream = httpURLConnection.getInputStream();
                     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
                     StringBuilder stringBuilder = new StringBuilder();
-                    String line = "";
+                    String line;
                     while ((line = bufferedReader.readLine()) != null) {
                         stringBuilder.append(line);
                     }
@@ -266,7 +263,7 @@ public class BloodBankModal {
                 InputStream inputStream = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
                 StringBuilder stringBuilder = new StringBuilder();
-                String line = "";
+                String line;
                 while ((line = bufferedReader.readLine()) != null){
                     stringBuilder.append(line);
                 }
@@ -348,7 +345,7 @@ public class BloodBankModal {
                 InputStream inputStream = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
                 StringBuilder stringBuilder = new StringBuilder();
-                String line = "";
+                String line;
                 while ((line = bufferedReader.readLine()) != null){
                     stringBuilder.append(line);
                 }
@@ -386,6 +383,10 @@ public class BloodBankModal {
                     builder.setMessage("Some error occurred! Please try again.");
                     alertDialog = builder.create();
                     alertDialog.show();
+                    break;
+                }
+                default: {
+                    Toast.makeText(context, "Some error occurred! Please try again.", Toast.LENGTH_LONG).show();
                     break;
                 }
             }

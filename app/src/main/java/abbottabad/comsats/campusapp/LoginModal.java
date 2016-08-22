@@ -22,7 +22,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 /**
- * Created by Kamran Ramzan on 5/29/16.
+ * This project CampusApp is created by Kamran Ramzan on 5/29/16.
  */
 public class LoginModal extends AsyncTask<String, Void, String>{
 
@@ -65,7 +65,7 @@ public class LoginModal extends AsyncTask<String, Void, String>{
             InputStream inputStream = httpURLConnection.getInputStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
             StringBuilder stringBuilder = new StringBuilder();
-            String line = "";
+            String line;
             while ((line = bufferedReader.readLine()) != null){
                 stringBuilder.append(line);
             }

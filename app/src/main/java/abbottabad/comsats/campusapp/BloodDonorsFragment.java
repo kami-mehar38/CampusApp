@@ -226,6 +226,7 @@ public class BloodDonorsFragment extends Fragment implements  android.support.v7
                                     String.valueOf(curr_date);
                             final String registration = TV_donorRegistration.getText().toString().trim();
                             AlertDialog.Builder builder = new AlertDialog.Builder(itemView.getContext());
+                            builder.setCancelable(false);
                             builder.setTitle("Alert");
                             builder.setMessage("If you are sure about the bleeding of donor then press OK, otherwise press CANCEL.");
                             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {

@@ -8,7 +8,6 @@ import android.os.AsyncTask;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -106,7 +105,7 @@ public class TrackFacultyModal {
                 InputStream inputStream = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
                 StringBuilder stringBuilder = new StringBuilder();
-                String line = "";
+                String line;
                 while ((line = bufferedReader.readLine()) != null) {
                     stringBuilder.append(line);
                 }
@@ -210,7 +209,7 @@ public class TrackFacultyModal {
                 InputStream inputStream = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
                 StringBuilder stringBuilder = new StringBuilder();
-                String line = "";
+                String line;
                 while ((line = bufferedReader.readLine()) != null){
                     stringBuilder.append(line);
                 }
@@ -262,8 +261,6 @@ public class TrackFacultyModal {
 
     public class sendStatusNotification extends AsyncTask<String, Void, String> {
 
-        private AlertDialog alertDialog;
-
         @Override
         protected String doInBackground(String... params) {
             String stringUrl = "http://hostellocator.com/sendStatusNotification.php";
@@ -286,7 +283,7 @@ public class TrackFacultyModal {
                 InputStream inputStream = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
                 StringBuilder stringBuilder = new StringBuilder();
-                String line = "";
+                String line;
                 while ((line = bufferedReader.readLine()) != null){
                     stringBuilder.append(line);
                 }

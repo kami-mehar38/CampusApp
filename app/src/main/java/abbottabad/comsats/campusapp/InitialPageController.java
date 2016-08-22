@@ -25,6 +25,7 @@ public class InitialPageController extends AsyncTask<Void, Void, String> {
         super.onPreExecute();
         progressDialog = new ProgressDialog(context);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setCancelable(false);
         progressDialog.setTitle("Please wait");
         progressDialog.setMessage("Checking internet connection");
         progressDialog.show();
@@ -48,6 +49,7 @@ public class InitialPageController extends AsyncTask<Void, Void, String> {
         progressDialog.cancel();
         if (s.equals("false")){
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setCancelable(false);
             builder.setTitle("No internet connection");
             builder.setMessage("Please check your internet connection is working or not.");
             builder.setPositiveButton("Exit", new DialogInterface.OnClickListener() {

@@ -13,6 +13,9 @@ import android.util.Log;
 
 import com.google.android.gms.gcm.GcmListenerService;
 
+import java.text.DateFormat;
+import java.util.Date;
+
 /**
  * Created by Kamran Ramzan on 6/3/16.
  */
@@ -38,12 +41,45 @@ public class MyGcmListenerService extends GcmListenerService {
         if (PURPOSE != null && PURPOSE.equals("STATUS_NOTIFICATION")) {
             receiveStatusNotification(data);
         }
+
+        if (PURPOSE != null && PURPOSE.equals("EVENT_NOTIFICATION")) {
+            receiveEventNotification(data);
+        }
     }
 
     private void receiveStatusNotification(Bundle data) {
         String status = data.getString("status");
         String name = data.getString("name");
         createStatusNotification(name + " is " + status + " now");
+    }
+
+    private void receiveEventNotification(Bundle data){
+        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+        String message = data.getString("message");
+        NotificationsController.setNotification(message);
+        NotificationsController.setDateTime(currentDateTimeString);
+        NotificationsController.setMine(0);
+        new EventNotificationsLocalModal(this).addEventNotification();
+        new EventNotificationsLocalModal(this).retrieveNotifications();
+        createEventNotification(message);
+    }
+
+    private void createEventNotification(String message) {
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        long[] pattern = {1000,1000,1000,1000,1000};
+
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
+                new Intent(this, NotificationsView.class), 0);
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
+                this).setSmallIcon(R.drawable.notification)
+                .setContentTitle("Event Notifications").setVibrate(pattern)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
+                .setContentText(message)
+                .setAutoCancel(true).setSound(sound);
+        mBuilder.setContentIntent(contentIntent);
+        notificationManager.notify(GCM_NOTIFICATION_ID, mBuilder.build());
     }
 
     private void createStatusNotification(String status) {

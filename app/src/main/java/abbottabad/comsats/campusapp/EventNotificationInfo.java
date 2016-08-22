@@ -6,19 +6,30 @@ package abbottabad.comsats.campusapp;
 public class EventNotificationInfo {
 
     private String notification;
-    private boolean isMine;
+    private String dateTime;
+    private int mine;
 
-    public EventNotificationInfo(String notification, boolean isMine) {
+    public void setNotification(String notification) {
         this.notification = notification;
-        this.isMine = isMine;
     }
 
-    public String getNotification() {
+    public  String getNotification() {
         return notification;
     }
 
-    public boolean isMine() {
-        return isMine;
+    public  String getDateTime() {
+        return dateTime;
     }
 
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    public  int getMine() {
+        return mine;
+    }
+
+    public void setMine(int mine) {
+        this.mine = mine;
+    }
 }

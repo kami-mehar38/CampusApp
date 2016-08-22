@@ -67,17 +67,25 @@
             android:exported="false">
         </service>
 
-        <activity android:name=".LoginView" />
+        <activity android:name=".LoginView"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
 
-        <activity android:name=".SignUpView" />
+        <activity android:name=".SignUpView"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
 
-        <activity android:name=".HomePageView" />
+        <activity android:name=".HomePageView"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
 
-        <activity android:name=".BloodBankView" />
+        <activity android:name=".BloodBankView"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="stateHidden"/>
 
-        <activity android:name=".TrackFacultyView" />
+        <activity android:name=".TrackFacultyView"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
 
-        <activity android:name=".NotificationsView" />
+        <activity android:name=".NotificationsView"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="stateHidden"/>
 
     </application>
 

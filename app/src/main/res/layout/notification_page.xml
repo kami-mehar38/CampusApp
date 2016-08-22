@@ -49,7 +49,12 @@
             android:backgroundTint="#bbbbbb"
             android:background="@drawable/ic_action_send_now"
             />
+        <ProgressBar
+            android:id="@+id/waiting"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:indeterminate="true"
+            android:layout_gravity="center"/>
     </LinearLayout>
-
 
 </RelativeLayout>
