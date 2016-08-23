@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <android.support.v7.widget.CardView
@@ -20,7 +21,9 @@
                 android:textColor="#000"
                 android:textSize="15sp"
                 android:paddingBottom="10dp"
-                android:text="Name:                 " />
+                android:layout_marginRight="3dp"
+                android:layout_marginEnd="3dp"
+                android:text="@string/name" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -30,7 +33,9 @@
                 android:textColor="#000"
                 android:textSize="15sp"
                 android:paddingBottom="10dp"
-                android:text="Reg ID:                " />
+                android:layout_marginRight="3dp"
+                android:layout_marginEnd="3dp"
+                android:text="@string/reg_id" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -40,7 +45,9 @@
                 android:textColor="#000"
                 android:textSize="15sp"
                 android:paddingBottom="10dp"
-                android:text="Blood required: "/>
+                android:layout_marginRight="3dp"
+                android:layout_marginEnd="3dp"
+                android:text="@string/blood_required"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -49,16 +56,20 @@
                 android:layout_below="@+id/TV_Bloodtype"
                 android:textColor="#000"
                 android:textSize="15sp"
-                android:text="Contact #:          "/>
+                android:layout_marginRight="3dp"
+                android:layout_marginEnd="3dp"
+                android:text="@string/contact"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/TV_requesterName"
                 android:layout_toEndOf="@+id/TV_name"
+                android:layout_toRightOf="@id/TV_name"
                 android:textColor="#000"
                 android:textSize="15sp"
-                android:text="Name"/>
+                android:text="sfse"
+                tools:ignore="RelativeOverlap" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -66,9 +77,10 @@
                 android:id="@+id/TV_requesterReg"
                 android:textColor="#000"
                 android:textSize="15sp"
-                android:text="Reg"
+                android:text=""
                 android:layout_below="@+id/TV_name"
-                android:layout_toEndOf="@+id/TV_reg" />
+                android:layout_toEndOf="@+id/TV_reg"
+                android:layout_toRightOf="@+id/TV_reg"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -76,9 +88,10 @@
                 android:id="@+id/TV_requesterBloodType"
                 android:textColor="#000"
                 android:textSize="15sp"
-                android:text="O+"
+                android:text=""
                 android:layout_below="@+id/TV_reg"
-                android:layout_toEndOf="@+id/TV_Bloodtype" />
+                android:layout_toEndOf="@+id/TV_Bloodtype"
+                android:layout_toRightOf="@+id/TV_Bloodtype"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -86,38 +99,47 @@
                 android:id="@+id/TV_requesterContact"
                 android:textColor="#000"
                 android:textSize="15sp"
-                android:text="123456"
+                android:text=""
                 android:paddingBottom="10dp"
                 android:layout_below="@+id/TV_Bloodtype"
-                android:layout_toEndOf="@+id/TV_Contact" />
+                android:layout_toEndOf="@+id/TV_Contact"
+                android:layout_toRightOf="@+id/TV_Contact"/>
 
             <Button
-                android:layout_width="70dp"
-                android:layout_height="35dp"
+                android:layout_width="64dp"
+                android:layout_height="30dp"
                 android:id="@+id/btnCall"
                 android:textColor="#000"
-                android:textSize="10sp"
+                android:textSize="12sp"
                 android:layout_alignParentRight="true"
-                android:text="Call"/>
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/button_background"
+                android:text="@string/call"/>
 
             <Button
-                android:layout_width="70dp"
-                android:layout_height="35dp"
+                android:layout_width="64dp"
+                android:layout_height="30dp"
                 android:id="@+id/btnMessage"
                 android:textColor="#000"
-                android:textSize="10sp"
+                android:textSize="12sp"
                 android:layout_below="@+id/btnCall"
                 android:layout_alignParentEnd="true"
-                android:text="Message"/>
+                android:layout_alignParentRight="true"
+                android:background="@drawable/button_background"
+                android:layout_marginTop="5dp"
+                android:text="@string/message"/>
 
             <Button
-                android:layout_width="70dp"
-                android:layout_height="35dp"
+                android:layout_width="64dp"
+                android:layout_height="30dp"
                 android:id="@+id/btnDelete"
-                android:text="Delete"
+                android:text="@string/delete"
                 android:textColor="#000"
-                android:textSize="10sp"
+                android:textSize="12sp"
                 android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/button_background"
+                android:layout_marginTop="5dp"
                 android:layout_below="@+id/btnMessage"/>
 
         </RelativeLayout>

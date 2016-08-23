@@ -58,7 +58,7 @@
             android:text="@string/sign_up"
             android:fontFamily="serif"
             android:drawableEnd="@drawable/icon_signup"
-            android:background="@color/colorButton"
+            android:background="@drawable/button_background"
             android:paddingEnd="@dimen/activity_horizontal_margin"
             android:textColor="#000"
             />
@@ -77,7 +77,7 @@
             android:text="@string/log_in"
             android:fontFamily="serif"
             android:drawableEnd="@drawable/icon_login"
-            android:background="@color/colorButton"
+            android:background="@drawable/button_background"
             android:paddingEnd="@dimen/activity_horizontal_margin"
             android:textColor="#000"
             />

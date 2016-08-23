@@ -70,7 +70,7 @@
             android:textSize="17sp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="39dp"
-            android:text="Please check to pick last bleeding date"/>
+            android:text="@string/please_check_to_pick_last_bleeding_date"/>
 
     <DatePicker
         android:layout_width="wrap_content"
@@ -93,10 +93,11 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add"
+        android:text="@string/add"
         android:id="@+id/btnAdd"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="39dp"
+        android:background="@drawable/button_background"
         android:layout_marginBottom="50dp"/>
     </LinearLayout>
 

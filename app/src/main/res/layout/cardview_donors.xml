@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <android.support.v7.widget.CardView
@@ -19,7 +20,9 @@
                 android:textColor="#000"
                 android:textSize="15sp"
                 android:paddingBottom="10dp"
-                android:text="Name:               " />
+                android:layout_marginRight="3dp"
+                android:layout_marginEnd="3dp"
+                android:text="@string/name" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -29,7 +32,9 @@
                 android:textColor="#000"
                 android:textSize="15sp"
                 android:paddingBottom="10dp"
-                android:text="Reg ID:              " />
+                android:layout_marginRight="3dp"
+                android:layout_marginEnd="3dp"
+                android:text="@string/reg_id" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -39,7 +44,9 @@
                 android:textColor="#000"
                 android:textSize="15sp"
                 android:paddingBottom="10dp"
-                android:text="Blood Group:                "/>
+                android:layout_marginRight="3dp"
+                android:layout_marginEnd="3dp"
+                android:text="@string/blood_group"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -48,23 +55,28 @@
                 android:layout_below="@+id/TV_Bloodtype"
                 android:textColor="#000"
                 android:textSize="15sp"
-                android:text="Contact #:                "
-                android:paddingBottom="10dp"/>
+                android:text="@string/contact"
+                android:paddingBottom="10dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginEnd="3dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/TV_donorName"
                 android:layout_toEndOf="@+id/TV_name"
+                android:layout_toRightOf="@+id/TV_name"
                 android:textColor="#000"
                 android:textSize="15sp"
-                android:text=""/>
+                android:text=""
+                tools:ignore="RelativeOverlap" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/TV_donorRegistration"
                 android:layout_toEndOf="@+id/TV_registration"
+                android:layout_toRightOf="@+id/TV_registration"
                 android:layout_below="@+id/TV_name"
                 android:textColor="#000"
                 android:textSize="15sp"
@@ -78,7 +90,8 @@
                 android:textSize="15sp"
                 android:text=""
                 android:layout_below="@+id/TV_registration"
-                android:layout_toEndOf="@+id/TV_name" />
+                android:layout_toEndOf="@+id/TV_name"
+                android:layout_toRightOf="@id/TV_name"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -88,7 +101,8 @@
                 android:textSize="15sp"
                 android:text=""
                 android:layout_below="@+id/TV_Bloodtype"
-                android:layout_alignStart="@+id/TV_donorName" />
+                android:layout_alignStart="@+id/TV_donorName"
+                android:layout_alignLeft="@id/TV_donorName"/>
 
             <CheckBox
                 android:layout_width="wrap_content"
@@ -96,30 +110,35 @@
                 android:id="@+id/CB_bleed"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                android:text="Please check if donor is agree to donate blood"
+                android:text="@string/please_check_if_donor_is_agree_to_donate_blood"
                 android:textColor="#006699"
                 android:layout_below="@id/TV_Contact"
-                android:layout_alignParentStart="true" />
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"/>
 
             <Button
-                android:layout_width="70dp"
-                android:layout_height="35dp"
+                android:layout_width="64dp"
+                android:layout_height="30dp"
                 android:id="@+id/btnCall"
                 android:textColor="#000"
-                android:textSize="10sp"
+                android:textSize="12sp"
                 android:layout_alignParentEnd="true"
-                android:text="Call"/>
+                android:layout_alignParentRight="true"
+                android:background="@drawable/button_background"
+                android:text="@string/call"/>
 
             <Button
-                android:layout_width="70dp"
-                android:layout_height="35dp"
+                android:layout_width="64dp"
+                android:layout_height="30dp"
                 android:id="@+id/btnMessage"
                 android:textColor="#000"
-                android:textSize="10sp"
+                android:textSize="12sp"
                 android:layout_below="@+id/btnCall"
                 android:layout_alignParentEnd="true"
-                android:paddingBottom="10dp"
-                android:text="Message"/>
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/button_background"
+                android:text="@string/message"/>
 
         </RelativeLayout>
 

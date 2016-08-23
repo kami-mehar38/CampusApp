@@ -32,7 +32,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.9"
-            android:hint="Input message"
+            android:hint="@string/input_message"
             android:ems="10"
             android:maxHeight="80dp"
             android:textColor="#707070"
@@ -47,6 +47,7 @@
             android:layout_height="match_parent"
             android:maxHeight="10dp"
             android:backgroundTint="#bbbbbb"
+            android:contentDescription="@string/send"
             android:background="@drawable/ic_action_send_now"
             />
         <ProgressBar

@@ -12,6 +12,9 @@ import android.support.v7.widget.CardView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -33,21 +36,49 @@ public class HomePageView extends AppCompatActivity {
         new InitialPageController(this).execute();
         isPlayServicesAvailable();
 
-        CardView cv_bloodBank = (CardView) findViewById(R.id.CV_bloodBank);
+        Animation bounceAnimation = AnimationUtils.loadAnimation(this, R.anim.accelerate_decelerate_aimation);
 
-        if (cv_bloodBank != null) {
-            cv_bloodBank.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        startActivity(new Intent(HomePageView.this, BloodBankView.class));
-                    }
-                });
-            }
+        RelativeLayout RL_notifications = (RelativeLayout) findViewById(R.id.RL_notifications);
 
-        CardView cv_tracking = (CardView) findViewById(R.id.CV_tracking);
+        if (RL_notifications != null) {
+            RL_notifications.startAnimation(bounceAnimation);
+            RL_notifications.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(HomePageView.this, NotificationsView.class));
+                }
+            });
+        }
 
-        if (cv_tracking != null) {
-            cv_tracking.setOnClickListener(new View.OnClickListener() {
+        RelativeLayout RL_timetable = (RelativeLayout) findViewById(R.id.RL_timetable);
+
+        if (RL_timetable != null) {
+            RL_timetable.startAnimation(bounceAnimation);
+            RL_timetable.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+        }
+
+        RelativeLayout RL_complaintPoll = (RelativeLayout) findViewById(R.id.RL_complaintPoll);
+
+        if (RL_complaintPoll != null) {
+            RL_complaintPoll.startAnimation(bounceAnimation);
+            RL_complaintPoll.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+        }
+
+        RelativeLayout RL_tracking = (RelativeLayout) findViewById(R.id.RL_trackFaculty);
+
+        if (RL_tracking != null) {
+            RL_tracking.startAnimation(bounceAnimation);
+            RL_tracking.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     startActivity(new Intent(HomePageView.this, TrackFacultyView.class));
@@ -55,13 +86,26 @@ public class HomePageView extends AppCompatActivity {
             });
         }
 
-        CardView cv_notifications = (CardView) findViewById(R.id.CV_notifications);
+        RelativeLayout RL_parking = (RelativeLayout) findViewById(R.id.RL_parking);
 
-        if (cv_notifications != null) {
-            cv_notifications.setOnClickListener(new View.OnClickListener() {
+        if (RL_parking != null) {
+            RL_parking.startAnimation(bounceAnimation);
+            RL_parking.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(HomePageView.this, NotificationsView.class));
+
+                }
+            });
+        }
+
+        RelativeLayout RL_bloodBank = (RelativeLayout) findViewById(R.id.RL_bloodBank);
+
+        if (RL_bloodBank != null) {
+            RL_bloodBank.startAnimation(bounceAnimation);
+            RL_bloodBank.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(HomePageView.this, BloodBankView.class));
                 }
             });
         }

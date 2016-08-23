@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:textSize="18sp"
-            android:padding="10dp"
+            android:padding="7dp"
             android:maxWidth="300dp"
             android:textColor="#fff"
             android:textStyle="normal"

@@ -17,73 +17,52 @@
         android:layout_height="160dp"
         android:orientation="horizontal"
         android:padding="@dimen/activity_vertical_margin"
-        >
+        android:baselineAligned="false">
 
-        <android.support.v7.widget.CardView
+        <RelativeLayout
+            android:id="@+id/RL_notifications"
             android:layout_width="110dp"
             android:layout_height="120dp"
-            android:id="@+id/CV_notifications"
             android:layout_weight="1"
+            android:layout_gravity="center"
             android:layout_marginEnd="@dimen/activity_vertical_margin"
-            android:layout_marginRight="16dp"
-            app:cardBackgroundColor="@color/colorLightGrey"
-            android:stateListAnimator="@anim/cardview_animation"
-            android:elevation="7dp"
+            android:layout_marginRight="@dimen/activity_vertical_margin"
+            android:background="@drawable/homebutton_background"
             >
-            <LinearLayout
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="center"
+                android:drawableTop="@drawable/notification"
+                android:drawablePadding="@dimen/activity_vertical_margin"
+                android:layout_centerInParent="true"
+                android:text="Notifications"
+                android:drawableTint="#786351"
+                android:textColor="#786351"
+                android:textStyle="bold"
+                android:textSize="16sp"/>
+        </RelativeLayout>
 
-                >
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/notification"
-                    android:layout_gravity="center_horizontal"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Notifications"
-                    android:layout_marginTop="@dimen/activity_vertical_margin"
-                    android:textColor="#000"
-                    android:textSize="16sp"/>
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
 
-        <android.support.v7.widget.CardView
+        <RelativeLayout
+            android:id="@+id/RL_timetable"
             android:layout_width="110dp"
             android:layout_height="120dp"
             android:layout_weight="1"
-            app:cardBackgroundColor="@color/colorLightGrey"
-            android:stateListAnimator="@anim/cardview_animation"
-            android:elevation="7dp"
+            android:layout_gravity="center"
+            android:background="@drawable/homebutton_background"
             >
-            <LinearLayout
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="center"
-                >
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/calendar"
-                    android:id="@+id/IV_notificatio"
-                    android:layout_gravity="center_horizontal"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Timetable"
-                    android:layout_marginTop="@dimen/activity_vertical_margin"
-                    android:textColor="#000"
-                    android:textSize="16sp"/>
-            </LinearLayout>
+                android:drawableTop="@drawable/calendar"
+                android:drawablePadding="@dimen/activity_vertical_margin"
+                android:layout_centerInParent="true"
+                android:drawableTint="#786351"
+                android:text="Timetable"
+                android:textColor="#786351"
+                android:textSize="16sp"/>
+        </RelativeLayout>
 
-        </android.support.v7.widget.CardView>
     </LinearLayout>
 
     <LinearLayout
@@ -91,70 +70,48 @@
         android:layout_height="160dp"
         android:orientation="horizontal"
         android:padding="@dimen/activity_vertical_margin"
-        >
+        android:baselineAligned="false">
 
-        <android.support.v7.widget.CardView
+        <RelativeLayout
+            android:id="@+id/RL_complaintPoll"
             android:layout_width="110dp"
             android:layout_height="120dp"
-            android:id="@+id/CV_blodBank"
             android:layout_weight="1"
+            android:layout_gravity="center"
             android:layout_marginEnd="@dimen/activity_vertical_margin"
-            app:cardBackgroundColor="@color/colorLightGrey"
-            android:stateListAnimator="@anim/cardview_animation"
+            android:layout_marginRight="@dimen/activity_vertical_margin"
+            android:background="@drawable/homebutton_background"
             >
-            <LinearLayout
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="center"
-
-                >
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/complaint"
-                    android:layout_gravity="center_horizontal"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Complaint Poll"
-                    android:layout_marginTop="@dimen/activity_vertical_margin"
-                    android:textColor="#000"
-                    android:textSize="16sp"/>
-            </LinearLayout>
-
-        </android.support.v7.widget.CardView>
-        <android.support.v7.widget.CardView
+                android:drawableTop="@drawable/complaint"
+                android:drawablePadding="@dimen/activity_vertical_margin"
+                android:layout_centerInParent="true"
+                android:text="Complaint Poll"
+                android:drawableTint="#786351"
+                android:textColor="#786351"
+                android:textSize="16sp"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/RL_trackFaculty"
             android:layout_width="110dp"
             android:layout_height="120dp"
             android:layout_weight="1"
-            android:id="@+id/CV_tracking"
-            app:cardBackgroundColor="@color/colorLightGrey"
-            android:stateListAnimator="@anim/cardview_animation"
+            android:layout_gravity="center"
+            android:background="@drawable/homebutton_background"
             >
-            <LinearLayout
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="center"
-                >
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/tracking"
-                    android:id="@+id/IV_notificato"
-                    android:layout_gravity="center_horizontal"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Track Faculty"
-                    android:layout_marginTop="@dimen/activity_vertical_margin"
-                    android:textColor="#000"
-                    android:textSize="16sp"/>
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
+                android:drawableTop="@drawable/tracking"
+                android:drawablePadding="@dimen/activity_vertical_margin"
+                android:layout_centerInParent="true"
+                android:drawableTint="#786351"
+                android:text="Track Faculty"
+                android:textColor="#786351"
+                android:textSize="16sp"/>
+        </RelativeLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -162,71 +119,47 @@
         android:layout_height="160dp"
         android:orientation="horizontal"
         android:padding="@dimen/activity_vertical_margin"
-        >
+        android:baselineAligned="false">
 
-        <android.support.v7.widget.CardView
+        <RelativeLayout
+            android:id="@+id/RL_parking"
             android:layout_width="110dp"
             android:layout_height="120dp"
-            android:id="@+id/CV_parking"
             android:layout_weight="1"
+            android:layout_gravity="center"
             android:layout_marginEnd="@dimen/activity_vertical_margin"
-            app:cardBackgroundColor="@color/colorLightGrey"
-            android:stateListAnimator="@anim/cardview_animation"
+            android:layout_marginRight="@dimen/activity_vertical_margin"
+            android:background="@drawable/homebutton_background"
             >
-            <LinearLayout
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="center"
-
-                >
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/parking"
-                    android:id="@+id/IV_notiicati"
-                    android:layout_gravity="center_horizontal"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Parking"
-                    android:layout_marginTop="@dimen/activity_vertical_margin"
-                    android:textColor="#000"
-                    android:textSize="16sp"/>
-            </LinearLayout>
-
-        </android.support.v7.widget.CardView>
-        <android.support.v7.widget.CardView
+                android:drawableTop="@drawable/parking"
+                android:drawablePadding="@dimen/activity_vertical_margin"
+                android:layout_centerInParent="true"
+                android:drawableTint="#786351"
+                android:text="Parking"
+                android:textColor="#786351"
+                android:textSize="16sp"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/RL_bloodBank"
             android:layout_width="110dp"
             android:layout_height="120dp"
             android:layout_weight="1"
-            android:id="@+id/CV_bloodBank"
-            app:cardBackgroundColor="@color/colorLightGrey"
-            android:stateListAnimator="@anim/cardview_animation"
+            android:layout_gravity="center"
+            android:background="@drawable/homebutton_background"
             >
-            <LinearLayout
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="center"
-                >
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/blood"
-                    android:layout_gravity="center_horizontal"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Blood Bank"
-                    android:layout_marginTop="@dimen/activity_vertical_margin"
-                    android:textColor="#000"
-                    android:textSize="16sp"/>
-            </LinearLayout>
-
-        </android.support.v7.widget.CardView>
+                android:drawableTop="@drawable/blood"
+                android:drawablePadding="@dimen/activity_vertical_margin"
+                android:layout_centerInParent="true"
+                android:text="Blood Bank"
+                android:textColor="#786351"
+                android:textSize="16sp"/>
+        </RelativeLayout>
     </LinearLayout>
 
 </LinearLayout>
