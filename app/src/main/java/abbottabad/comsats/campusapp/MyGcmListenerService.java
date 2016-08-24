@@ -19,7 +19,7 @@ import java.text.DateFormat;
 import java.util.Date;
 
 /**
- * Created by Kamran Ramzan on 6/3/16.
+ * This project CampusApp is created by Kamran Ramzan on 6/3/16.
  */
 public class MyGcmListenerService extends GcmListenerService {
     private static final int GCM_NOTIFICATION_ID = 13548;

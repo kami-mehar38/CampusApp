@@ -13,14 +13,13 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 /**
- * Created by Kamran Ramzan on 5/25/16.
+ * This project CampusApp is created by Kamran Ramzan on 5/25/16.
  */
 public class SignUpView extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
     private static TextInputLayout TILname, TILreg;
     private static int spinnerOption;
     private AlertDialog alertDialog = null;
-    private static final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
     private EditText ETname;
     private EditText ETregistration;
     private Validation validation;

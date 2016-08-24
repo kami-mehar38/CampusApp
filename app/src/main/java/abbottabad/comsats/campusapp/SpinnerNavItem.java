@@ -1,7 +1,7 @@
 package abbottabad.comsats.campusapp;
 
 /**
- * Created by Kamran Ramzan on 6/30/16.
+ * This project CampusApp is created by Kamran Ramzan on 6/30/16.
  */
 public class SpinnerNavItem {
     private String title;

@@ -11,9 +11,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
@@ -50,7 +48,6 @@ public class InitialPage extends Activity implements View.OnClickListener {
             }
         }
 
-        ImageView iv_comsats_logo = (ImageView) findViewById(R.id.IV_comsats_logo);
         TextView tv_ciit = (TextView) findViewById(R.id.TV_ciit);
         TextView tv_forSignup = (TextView) findViewById(R.id.TV_forSignup);
         TextView tv_forLogin = (TextView) findViewById(R.id.TV_forLogin);
@@ -65,7 +62,7 @@ public class InitialPage extends Activity implements View.OnClickListener {
             btn_login.setOnClickListener(this);
         }
 
-        setAnimations(iv_comsats_logo, tv_ciit, tv_forSignup, tv_forLogin, btn_signup, btn_login);
+        setAnimations(tv_ciit, tv_forSignup, tv_forLogin, btn_signup, btn_login);
 
     }
 
@@ -89,11 +86,10 @@ public class InitialPage extends Activity implements View.OnClickListener {
         }
     }
 
-    private void setAnimations(ImageView iv_comsats_logo, TextView tv_ciit,
+    private void setAnimations(TextView tv_ciit,
                                TextView tv_forSignup, TextView tv_forLogin,
                                Button btn_signup, Button btn_login) {
         Animation zoomInAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom_in_animation);
-        iv_comsats_logo.startAnimation(zoomInAnimation);
         tv_ciit.startAnimation(zoomInAnimation);
 
         Animation bounceAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.accelerate_decelerate_aimation);

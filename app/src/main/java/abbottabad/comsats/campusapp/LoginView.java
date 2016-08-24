@@ -10,16 +10,14 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 /**
- * Created by Kamran Ramzan on 5/25/16.
+ * This project CampusApp is created by Kamran Ramzan on 5/25/16.
  */
 public class LoginView extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
     private static EditText ETuname;
     private EditText ETpassword;
-    private TextInputLayout TIname, TIpass;
     private int spinnerOption;
     private AlertDialog alertDialog = null;
     private Spinner SPloginOptions;
@@ -31,11 +29,11 @@ public class LoginView extends AppCompatActivity implements AdapterView.OnItemSe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_page);
 
-        TIname = (TextInputLayout) findViewById(R.id.TILname);
+        TextInputLayout TIname = (TextInputLayout) findViewById(R.id.TILname);
         if (TIname != null) {
             TIname.setHint("Username");
         }
-        TIpass = (TextInputLayout) findViewById(R.id.TILpass);
+        TextInputLayout TIpass = (TextInputLayout) findViewById(R.id.TILpass);
         if (TIpass != null) {
             TIpass.setHint("Password");
         }

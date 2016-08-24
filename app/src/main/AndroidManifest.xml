@@ -81,7 +81,8 @@
             android:windowSoftInputMode="stateHidden"/>
 
         <activity android:name=".TrackFacultyView"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="stateHidden"/>
 
         <activity android:name=".NotificationsView"
             android:configChanges="keyboardHidden|orientation|screenSize"

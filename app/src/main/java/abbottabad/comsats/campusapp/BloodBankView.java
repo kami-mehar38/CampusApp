@@ -2,16 +2,15 @@ package abbottabad.comsats.campusapp;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-
-import abbottabad.comsats.campusapp.BloodBankController;
-import abbottabad.comsats.campusapp.R;
+import android.support.v7.widget.Toolbar;
 
 /**
- * Created by Kamran Ramzan on 6/4/16.
+ * This project CampusApp is created by Kamran Ramzan on 6/4/16.
  */
 public class BloodBankView extends AppCompatActivity {
 
@@ -21,8 +20,8 @@ public class BloodBankView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bloodbank_page_admin);
-
-        setActionBarLogo();
+        Toolbar toolbar = (Toolbar) findViewById(R.id.bloodbank_toolbar);
+        setSupportActionBar(toolbar);
 
         SharedPreferences sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         final String APPLICATION_STATUS = sharedPreferences.getString("APPLICATION_STATUS", "NULL");
@@ -33,6 +32,7 @@ public class BloodBankView extends AppCompatActivity {
             TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
             if (tabLayout != null) {
                 tabLayout.setupWithViewPager(viewPager);
+                tabLayout.setSelectedTabIndicatorColor(Color.WHITE);
             }
         }else if (APPLICATION_STATUS.equals("BLOOD_BANK")){
 
@@ -41,13 +41,8 @@ public class BloodBankView extends AppCompatActivity {
             TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
             if (tabLayout != null) {
                 tabLayout.setupWithViewPager(viewPagerAdmin);
+                tabLayout.setSelectedTabIndicatorColor(Color.WHITE);
             }
         }
-    }
-
-    public void setActionBarLogo() {
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setIcon(R.drawable.comsats_logo);
-        getSupportActionBar().setElevation(0);
     }
 }

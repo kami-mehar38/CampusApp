@@ -13,17 +13,14 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.SearchView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
-import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
 /**
  * This project CampusApp is created by Kamran Ramzan on 8/15/16.
@@ -32,7 +29,6 @@ public class TrackFacultyView extends Activity {
 
     private static final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
     private SwipeRefreshLayout SRL_facultyStatus;
-    private FloatingActionButton FAB_edit;
     private TextView TV_myStatus;
     private String TEACHER_ID;
     private SharedPreferences.Editor editor;
@@ -92,7 +88,7 @@ public class TrackFacultyView extends Activity {
             }
         });
         alertDialog = builder.create();
-        FAB_edit = (FloatingActionButton) findViewById(R.id.FAB_edit);
+        FloatingActionButton FAB_edit = (FloatingActionButton) findViewById(R.id.FAB_edit);
         FAB_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,46 +119,42 @@ public class TrackFacultyView extends Activity {
             }
         });
 
-        final SearchView SV_facultyStatus = (SearchView) findViewById(R.id.SV_facultyStatus);
-        SV_facultyStatus.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        final EditText ET_trackFaculty = (EditText) findViewById(R.id.ET_trackFaculty);
+        ET_trackFaculty.addTextChangedListener(new TextWatcher() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                    return false;
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
 
             @Override
-            public boolean onQueryTextChange(String newText) {
-                newText = newText.toLowerCase().trim();
-                final List<StatusInfo> filteredList = new ArrayList<StatusInfo>();
-                if (newText.isEmpty()){
-                    StatusViewAdapter statusViewAdapter = new StatusViewAdapter(statusInfoList);
-                    recyclerView.setLayoutManager(layoutManager);
-                    recyclerView.setAdapter(statusViewAdapter);
-                    statusViewAdapter.notifyDataSetChanged();
-                } else {
-                    for (int i = 0; i < statusInfoList.size(); i++) {
-                        StatusInfo statusInfo = statusInfoList.get(i);
-                        String teacherName = statusInfo.getTeacherName().toLowerCase();
-                        if (teacherName.contains(newText)) {
-                            filteredList.add(statusInfoList.get(i));
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                final List<StatusInfo> filteredList = new ArrayList<>();
+                String text = s.toString().toLowerCase().trim();
+                if (statusInfoList != null) {
+                    if (text.isEmpty()) {
+                        StatusViewAdapter statusViewAdapter = new StatusViewAdapter(statusInfoList);
+                        recyclerView.setLayoutManager(layoutManager);
+                        recyclerView.setAdapter(statusViewAdapter);
+                        statusViewAdapter.notifyDataSetChanged();
+                    } else {
+                        for (int i = 0; i < statusInfoList.size(); i++) {
+                            StatusInfo statusInfo = statusInfoList.get(i);
+                            String teacherName = statusInfo.getTeacherName().toLowerCase();
+                            if (teacherName.contains(text)) {
+                                filteredList.add(statusInfoList.get(i));
+                            }
                         }
+                        StatusViewAdapter statusViewAdapter = new StatusViewAdapter(filteredList);
+                        recyclerView.setLayoutManager(layoutManager);
+                        recyclerView.setAdapter(statusViewAdapter);
+                        statusViewAdapter.notifyDataSetChanged();
                     }
-                    StatusViewAdapter statusViewAdapter = new StatusViewAdapter(filteredList);
-                    recyclerView.setLayoutManager(layoutManager);
-                    recyclerView.setAdapter(statusViewAdapter);
-                    statusViewAdapter.notifyDataSetChanged();
                 }
-                return true;
             }
-        });
-        SV_facultyStatus.setOnCloseListener(new SearchView.OnCloseListener() {
+
             @Override
-            public boolean onClose() {
-                if(getCurrentFocus()!=null) {
-                    InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                    inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-                }
-                return true;
+            public void afterTextChanged(Editable s) {
+
             }
         });
     }

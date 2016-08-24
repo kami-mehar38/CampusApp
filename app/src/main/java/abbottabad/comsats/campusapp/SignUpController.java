@@ -5,7 +5,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 /**
- * Created by Kamran Ramzan on 6/1/16.
+ * This project CampusApp is created by Kamran Ramzan on 6/1/16.
  */
 public class SignUpController {
 
@@ -14,10 +14,6 @@ public class SignUpController {
         this.context = context;
     }
 
-
-    public void login(String... params){
-        new LoginModal(context).execute(params[0], params[1]);
-    }
 
     public void populateSpinner(Spinner SPloginOptions) {
         // Create an ArrayAdapter using the string array and a default spinner layout

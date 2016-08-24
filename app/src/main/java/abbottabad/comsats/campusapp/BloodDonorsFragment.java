@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -13,29 +12,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
-
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.TimeZone;
 
-
-import abbottabad.comsats.campusapp.DividerItemDecoration;
-import abbottabad.comsats.campusapp.DonorsInfo;
-import abbottabad.comsats.campusapp.BloodBankModal;
-import abbottabad.comsats.campusapp.R;
-import abbottabad.comsats.campusapp.SpinnerNavItem;
-import abbottabad.comsats.campusapp.TitleNavigationAdapter;
-
 /**
- * Created by Kamran Ramzan on 6/4/16.
+ * This project CampusApp is created by Kamran Ramzan on 6/4/16.
  */
 public class BloodDonorsFragment extends Fragment implements  android.support.v7.app.ActionBar.OnNavigationListener {
 
@@ -56,7 +44,7 @@ public class BloodDonorsFragment extends Fragment implements  android.support.v7
         }
 
         // Spinner title navigation data
-        ArrayList<SpinnerNavItem> navSpinner = new ArrayList<SpinnerNavItem>();
+        ArrayList<SpinnerNavItem> navSpinner = new ArrayList<>();
         navSpinner.add(new SpinnerNavItem("Select Group"));
         navSpinner.add(new SpinnerNavItem("All"));
         navSpinner.add(new SpinnerNavItem("O +ve"));
@@ -89,9 +77,6 @@ public class BloodDonorsFragment extends Fragment implements  android.support.v7
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-        RecyclerView.ItemDecoration itemDecoration =
-                new DividerItemDecoration(view.getContext(), LinearLayoutManager.VERTICAL);
-        recyclerView.addItemDecoration(itemDecoration);
     }
 
     @Override

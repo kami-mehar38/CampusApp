@@ -11,30 +11,24 @@
         android:orientation="horizontal"
         android:weightSum="10"
         android:layout_weight="2"
-        android:paddingTop="40dp"
+        android:paddingTop="60dp"
+        android:paddingLeft="30dp"
+        android:paddingStart="30dp"
+        android:paddingRight="0dp"
+        android:paddingEnd="0dp"
         android:background="@color/colorPrimary">
 
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:paddingTop="50dp"
-            android:id="@+id/IV_comsats_logo"
-            android:src="@drawable/comsats_logo_big"
-            android:contentDescription="@string/content_comsats_logo"/>
-
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/TV_ciit"
-            android:paddingTop="70dp"
             android:text="@string/CIIT"
             android:textColor="#fff"
-            android:fontFamily="cursive"
+            android:textStyle="bold|italic"
+            android:drawableTop="@drawable/comsats_logo_big"
+
+            android:drawablePadding="@dimen/activity_horizontal_margin"
             android:textSize="50sp"/>
-
-
 
     </LinearLayout>
     <LinearLayout
@@ -47,27 +41,32 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="For faculty and students"
+            android:text="@string/for_faculty_and_students"
             android:id="@+id/TV_forSignup"
             android:layout_marginTop="70dp"
+            android:textSize="14sp"
             android:textColor="#000"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/btn_signup"
             android:text="@string/sign_up"
-            android:fontFamily="serif"
+            android:textStyle="bold"
             android:drawableEnd="@drawable/icon_signup"
+            android:drawableRight="@drawable/icon_signup"
             android:background="@drawable/button_background"
             android:paddingEnd="@dimen/activity_horizontal_margin"
-            android:textColor="#000"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:textColor="#786351"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="For admins"
+            android:text="@string/for_admins"
             android:id="@+id/TV_forLogin"
             android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:textSize="14sp"
             android:textColor="#000"/>
 
         <Button
@@ -75,11 +74,14 @@
             android:layout_height="wrap_content"
             android:id="@+id/btn_login"
             android:text="@string/log_in"
-            android:fontFamily="serif"
+            android:textStyle="bold"
             android:drawableEnd="@drawable/icon_login"
+            android:drawableRight="@drawable/icon_login"
             android:background="@drawable/button_background"
             android:paddingEnd="@dimen/activity_horizontal_margin"
-            android:textColor="#000"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:textColor="#786351"
             />
     </LinearLayout>
 

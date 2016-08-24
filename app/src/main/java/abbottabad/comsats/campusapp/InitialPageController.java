@@ -10,7 +10,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 
 /**
- * Created by Kamran Ramzan on 6/11/16.
+ * This project CampusApp is created by Kamran Ramzan on 6/11/16.
  */
 public class InitialPageController extends AsyncTask<Void, Void, String> {
     private ProgressDialog progressDialog;

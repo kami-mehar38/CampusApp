@@ -19,14 +19,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.List;
 
 
 /**
- * Created by Kamran Ramzan on 6/4/16.
+ * This project CampusApp is created by Kamran Ramzan on 6/4/16.
  */
 public class BloodRequestsFragment extends Fragment {
 
@@ -63,9 +61,6 @@ public class BloodRequestsFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         RV_bloodRequests.setLayoutManager(layoutManager);
-        RecyclerView.ItemDecoration itemDecoration =
-                new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL);
-        RV_bloodRequests.addItemDecoration(itemDecoration);
         bloodBankLocalModal.viewBloodRequests();
     }
 

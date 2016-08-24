@@ -11,7 +11,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Created by Kamran Ramzan on 6/30/16.
+ * This project CampusApp is created by Kamran Ramzan on 6/30/16.
  */
 public class TitleNavigationAdapter extends BaseAdapter{
 

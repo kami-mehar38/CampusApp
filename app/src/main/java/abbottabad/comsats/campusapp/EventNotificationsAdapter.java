@@ -7,9 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,8 +55,21 @@ public class EventNotificationsAdapter extends ArrayAdapter<EventNotificationInf
 
         TextView TV_notification = (TextView) row.findViewById(R.id.txt_msg);
         TextView TV_notificationDate = (TextView) row.findViewById(R.id.TV_notificationDate);
-
+        LinearLayout deleteLayout = (LinearLayout) row.findViewById(R.id.deleteLayout);
+        if (!NotificationsView.IS_IN_ACTION_MODE){
+            deleteLayout.setVisibility(View.GONE);
+        } else {
+            deleteLayout.setVisibility(View.VISIBLE);
+        }
         TV_notification.setText(eventNotificationInfo.getNotification());
+        TV_notification.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                NotificationsView.IS_IN_ACTION_MODE = true;
+                NotificationsView.eventNotificationsAdapter.notifyDataSetChanged();
+                return true;
+            }
+        });
         TV_notificationDate.setText(eventNotificationInfo.getDateTime());
         return row;
     }

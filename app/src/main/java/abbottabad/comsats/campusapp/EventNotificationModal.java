@@ -45,7 +45,6 @@ public class EventNotificationModal {
         private AlertDialog alertDialog;
         private String message;
         private String currentDateTimeString;
-        EventNotificationsAdapter adapter;
 
         @Override
         protected void onPreExecute() {

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Kamran Ramzan on 6/4/16.
+ * This project CampusApp is created by Kamran Ramzan on 6/4/16.
  */
 public class BloodBankController {
 
@@ -78,8 +78,8 @@ public class BloodBankController {
     }
     private class ViewPagerAdapterAdmin extends FragmentPagerAdapter {
 
-        private final List<Fragment> fragmentsList = new ArrayList<Fragment>();
-        private final List<String> titlesList = new ArrayList<String>();
+        private final List<Fragment> fragmentsList = new ArrayList<>();
+        private final List<String> titlesList = new ArrayList<>();
 
         public ViewPagerAdapterAdmin(FragmentManager fm) {
             super(fm);
@@ -113,8 +113,8 @@ public class BloodBankController {
     }
     private class ViewPagerAdapterRequester extends FragmentPagerAdapter {
 
-        private final List<Fragment> fragmentsList = new ArrayList<Fragment>();
-        private final List<String> titlesList = new ArrayList<String>();
+        private final List<Fragment> fragmentsList = new ArrayList<>();
+        private final List<String> titlesList = new ArrayList<>();
 
         public ViewPagerAdapterRequester(FragmentManager fm) {
             super(fm);

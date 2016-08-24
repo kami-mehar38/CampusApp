@@ -14,7 +14,6 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -22,13 +21,8 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import abbottabad.comsats.campusapp.BloodBankController;
-import abbottabad.comsats.campusapp.Validation;
-import abbottabad.comsats.campusapp.BloodBankModal;
-import abbottabad.comsats.campusapp.R;
-
 /**
- * Created by Kamran Ramzan on 6/30/16.
+ * This project CampusApp is created by Kamran Ramzan on 6/30/16.
  */
 public class DonorsAddFragment extends Fragment {
     private Spinner SPbloodTypes;

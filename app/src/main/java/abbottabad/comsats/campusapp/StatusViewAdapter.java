@@ -1,13 +1,9 @@
 package abbottabad.comsats.campusapp;
 
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.ScaleAnimation;
 import android.widget.TextView;
 
 import java.util.List;
@@ -44,12 +40,11 @@ public class StatusViewAdapter extends RecyclerView.Adapter<StatusViewAdapter.Vi
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView TV_teacherName;
         private TextView TV_teacherStatus;
-        private CardView CV_facultyStatus;
+
         public ViewHolder(View itemView) {
             super(itemView);
             TV_teacherName = (TextView) itemView.findViewById(R.id.TV_teacherName);
             TV_teacherStatus = (TextView) itemView.findViewById(R.id.TV_teacherStatus);
-            CV_facultyStatus = (CardView) itemView.findViewById(R.id.CV_facultyStatus);
         }
     }
 }

@@ -8,9 +8,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         >
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
         <TextView
             android:id="@+id/txt_msg"
             android:layout_width="wrap_content"
@@ -22,6 +26,7 @@
             android:textColor="#fff"
             android:textStyle="normal"
             android:background="@drawable/chatbubbleright_shape"
+            android:text="busfbksdj"
             />
 
         <TextView
@@ -30,7 +35,20 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:textSize="12sp"
-            android:textColor="#000"/>
+            android:textColor="#000"
+            android:text="fnsiufbd"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/deleteLayout">
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
 
     </LinearLayout>
 

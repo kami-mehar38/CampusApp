@@ -7,7 +7,7 @@ import android.widget.Spinner;
 import abbottabad.comsats.campusapp.R;
 
 /**
- * Created by Kamran Ramzan on 6/1/16.
+ * This project CampusApp is created by Kamran Ramzan on 6/1/16.
  */
 public class LoginController {
 

@@ -105,7 +105,7 @@ public class LoginModal extends AsyncTask<String, Void, String>{
             final int TOKEN_GOT = sharedPreferences.getInt("TOKEN_GOT", 0);
 
             if (TOKEN_GOT != 1){
-                context.startService(new Intent(context, RegistrationIntentService.class));
+                //context.startService(new Intent(context, RegistrationIntentService.class));
             }
 
             context.startActivity(new Intent(context, HomePageView.class));

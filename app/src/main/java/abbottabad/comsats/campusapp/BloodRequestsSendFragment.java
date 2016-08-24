@@ -14,12 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import abbottabad.comsats.campusapp.BloodBankController;
-import abbottabad.comsats.campusapp.BloodBankModal;
-import abbottabad.comsats.campusapp.R;
-
 /**
- * Created by Kamran Ramzan on 6/8/16.
+ * This project CampusApp is created by Kamran Ramzan on 6/8/16.
  */
 public class BloodRequestsSendFragment extends Fragment implements AdapterView.OnItemSelectedListener {
     private TextInputLayout TILname, TILreg, TILcontact;

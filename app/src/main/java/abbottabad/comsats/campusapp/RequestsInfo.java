@@ -1,7 +1,7 @@
 package abbottabad.comsats.campusapp;
 
 /**
- * Created by Kamran Ramzan on 7/6/16.
+ * This project CampusApp is created by Kamran Ramzan on 7/6/16.
  */
 public class RequestsInfo {
     private String name;
