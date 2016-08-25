@@ -5,6 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,6 +55,18 @@ public class EventNotificationsLocalModal extends SQLiteOpenHelper {
         values.put(COL_IS_MINE, NotificationsController.getMine());
         db.insert(TABLE_NAME, null, values);
         db.close();
+    }
+
+    public void deleteNotifications(String[] notifications){
+        SQLiteDatabase db = EventNotificationsLocalModal.this.getWritableDatabase();
+        for (String notification : notifications) {
+            db.delete(TABLE_NAME, COL_NOTIFICATION + " = ?", new String[]{notification});
+        }
+    }
+
+    public void deleteAll(){
+        SQLiteDatabase db = EventNotificationsLocalModal.this.getWritableDatabase();
+        db.delete(TABLE_NAME, null, null);
     }
 
     public void retrieveNotifications(){

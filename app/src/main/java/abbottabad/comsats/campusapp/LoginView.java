@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -29,6 +30,8 @@ public class LoginView extends AppCompatActivity implements AdapterView.OnItemSe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_page);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.loginpage_toolbar);
+        setSupportActionBar(toolbar);
         TextInputLayout TIname = (TextInputLayout) findViewById(R.id.TILname);
         if (TIname != null) {
             TIname.setHint("Username");
@@ -40,8 +43,6 @@ public class LoginView extends AppCompatActivity implements AdapterView.OnItemSe
         ETuname = (EditText) findViewById(R.id.ETname);
         ETpassword = (EditText) findViewById(R.id.ETpassword);
 
-        setActionBarLogo();
-
         SPloginOptions = (Spinner) findViewById(R.id.SPloginOptions);
         new LoginController(this).populateSpinner(SPloginOptions);
         if (SPloginOptions != null) {
@@ -52,18 +53,6 @@ public class LoginView extends AppCompatActivity implements AdapterView.OnItemSe
             btnLogin.setOnClickListener(this);
         }
     }
-
-    /**
-     * This method sets the logo in action bar at the left corner of action bar
-     */
-    private void setActionBarLogo() {
-        if (getSupportActionBar() != null){
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-            getSupportActionBar().setIcon(R.drawable.comsats_logo);
-        }
-
-    }
-
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

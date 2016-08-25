@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -22,7 +23,13 @@ import java.util.List;
 public class EventNotificationsAdapter extends ArrayAdapter<EventNotificationInfo> {
 
     private List<EventNotificationInfo> chatMessageList = new ArrayList<>();
-    private Context context;
+    private NotificationsView notificationsView;
+
+    @Override
+    public void remove(EventNotificationInfo object) {
+        chatMessageList.remove(object);
+        super.remove(object);
+    }
 
     @Override
     public void add(EventNotificationInfo object) {
@@ -32,7 +39,7 @@ public class EventNotificationsAdapter extends ArrayAdapter<EventNotificationInf
 
     public EventNotificationsAdapter(Context context, int textViewResourceId) {
         super(context, textViewResourceId);
-        this.context = context;
+        this.notificationsView = (NotificationsView) context;
     }
 
     public int getCount() {
@@ -43,8 +50,8 @@ public class EventNotificationsAdapter extends ArrayAdapter<EventNotificationInf
         return this.chatMessageList.get(index);
     }
 
-    public View getView(int position, View convertView, ViewGroup parent) {
-        EventNotificationInfo eventNotificationInfo = getItem(position);
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        final EventNotificationInfo eventNotificationInfo = getItem(position);
         View row;
         LayoutInflater inflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if (eventNotificationInfo.getMine() == 1) {
@@ -55,22 +62,22 @@ public class EventNotificationsAdapter extends ArrayAdapter<EventNotificationInf
 
         TextView TV_notification = (TextView) row.findViewById(R.id.txt_msg);
         TextView TV_notificationDate = (TextView) row.findViewById(R.id.TV_notificationDate);
-        LinearLayout deleteLayout = (LinearLayout) row.findViewById(R.id.deleteLayout);
+        CheckBox CB_delete = (CheckBox) row.findViewById(R.id.CB_delete);
         if (!NotificationsView.IS_IN_ACTION_MODE){
-            deleteLayout.setVisibility(View.GONE);
+            CB_delete.setVisibility(View.GONE);
         } else {
-            deleteLayout.setVisibility(View.VISIBLE);
+            CB_delete.setVisibility(View.VISIBLE);
+            CB_delete.setChecked(false);
         }
         TV_notification.setText(eventNotificationInfo.getNotification());
-        TV_notification.setOnLongClickListener(new View.OnLongClickListener() {
+        TV_notification.setOnLongClickListener(notificationsView);
+        TV_notificationDate.setText(eventNotificationInfo.getDateTime());
+        CB_delete.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onLongClick(View v) {
-                NotificationsView.IS_IN_ACTION_MODE = true;
-                NotificationsView.eventNotificationsAdapter.notifyDataSetChanged();
-                return true;
+            public void onClick(View v) {
+                notificationsView.updateSelection(v, position);
             }
         });
-        TV_notificationDate.setText(eventNotificationInfo.getDateTime());
         return row;
     }
 

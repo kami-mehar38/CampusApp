@@ -1,18 +1,19 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="#fff"
+    android:orientation="vertical"
      >
 
-    <include layout="@layout/notifications_toolbar"
-        android:id="@+id/toolbar"/>
+    <include layout="@layout/notifications_toolbar"/>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <ListView
         android:id="@+id/LV_notifications"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-       android:layout_below="@+id/toolbar"
-        android:layout_above="@+id/form"
         android:divider="#fff"
         android:dividerHeight="10dp"
         android:padding="10dp"
@@ -28,7 +29,6 @@
         android:padding="10dp"
         android:background="@color/colorLightGrey"
         android:orientation="horizontal">
-
 
         <EditText
             android:id="@+id/ET_notification"
@@ -66,5 +66,6 @@
             android:layout_marginStart="5dp"
             android:layout_gravity="center"/>
     </LinearLayout>
+    </RelativeLayout>
 
-</RelativeLayout>
+</LinearLayout>

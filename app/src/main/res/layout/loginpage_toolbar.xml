@@ -3,8 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/notifications_toolbar"
-    android:background="#94b8c4"
+    android:id="@+id/loginpage_toolbar"
+    android:background="#eb7b68"
     android:minHeight="?attr/actionBarSize"
     android:theme="@style/Base.Theme.AppCompat.Light.DarkActionBar">
 
@@ -13,10 +13,9 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/notificationTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/notifications"
+            android:text="@string/log_in"
             android:textColor="#fff"
             android:textSize="22sp"
             android:textStyle="bold"/>

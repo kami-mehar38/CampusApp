@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -30,6 +31,8 @@ public class SignUpView extends AppCompatActivity implements AdapterView.OnItemS
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup_page);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.signuppage_toolbar);
+        setSupportActionBar(toolbar);
         validation = new Validation();
         TILname = (TextInputLayout) findViewById(R.id.TILname);
         if (TILname != null) {
@@ -43,7 +46,6 @@ public class SignUpView extends AppCompatActivity implements AdapterView.OnItemS
         ETname = (EditText) findViewById(R.id.ETname);
         ETregistration = (EditText) findViewById(R.id.ETregistration);
 
-        setActionBarLogo();
         Spinner SPsignupOptions = (Spinner) findViewById(R.id.SPsignupOptions);
         new SignUpController(this).populateSpinner(SPsignupOptions);
         if (SPsignupOptions != null) {
@@ -54,17 +56,6 @@ public class SignUpView extends AppCompatActivity implements AdapterView.OnItemS
             btnSignup.setOnClickListener(this);
         }
     }
-
-    /**
-     * This method sets the logo in action bar at the left corner of action bar
-     */
-    private void setActionBarLogo() {
-        if (getSupportActionBar() != null){
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-            getSupportActionBar().setIcon(R.drawable.comsats_logo);
-        }
-    }
-
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

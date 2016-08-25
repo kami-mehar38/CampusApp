@@ -25,6 +25,7 @@
     <string name="search_for_faculty">Search for faculty...</string>
     <string name="blood_bank">Blood Bank</string>
     <string name="notifications">Notifications</string>
+    <string name="logout">Logout</string>
     <string-array name="login_options">
         <item>Select login option</item>
         <item>Blood Bank</item>
