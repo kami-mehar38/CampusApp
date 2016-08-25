@@ -122,7 +122,7 @@ public class EventNotificationModal {
 
                         NotificationsView.eventNotificationsAdapter.add(eventNotificationInfo);
                         NotificationsView.eventNotificationsAdapter.notifyDataSetChanged();
-                        NotificationsView.listView.setSelection(NotificationsView.eventNotificationsAdapter.getCount());
+                        NotificationsView.listView.setSelection(NotificationsView.eventNotificationsAdapter.getCount()-1);
                         break;
                     }
                     case "ERROR": {

@@ -165,8 +165,8 @@ public class TrackFacultyView extends Activity {
         collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
         collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
         collapsingToolbarLayout.setCollapsedTitleTypeface(Typeface.DEFAULT_BOLD);
-        collapsingToolbarLayout.setContentScrimColor(Color.parseColor("#0e494e"));
-        collapsingToolbarLayout.setStatusBarScrimColor(Color.parseColor("#0e494e"));
+        collapsingToolbarLayout.setContentScrimColor(Color.parseColor("#4d9c2d"));
+        collapsingToolbarLayout.setStatusBarScrimColor(Color.parseColor("#4d9c2d"));
     }
 
 }

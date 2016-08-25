@@ -39,7 +39,8 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
     private ArrayList<EventNotificationInfo> eventNotificationInfos;
     private TextView notificationTitle;
     private EventNotificationsLocalModal eventNotificationsLocalModal;
-
+    private  CheckBox CB_selectAll;
+    public static boolean IS_IN_SELECT_ALL_MODE = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,11 +51,16 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
         REG_ID = sharedPreferences.getString("REG_ID", null);
         eventNotificationsLocalModal = new EventNotificationsLocalModal(this);
         IS_IN_ACTION_MODE = false;
+        IS_IN_SELECT_ALL_MODE = false;
 
         listView = (ListView) findViewById(R.id.LV_notifications);
         btnSend = (ImageButton) findViewById(R.id.sendNotification);
         ET_message = (EditText) findViewById(R.id.ET_notification);
         notificationTitle = (TextView) findViewById(R.id.notificationTitle);
+        CB_selectAll = (CheckBox) findViewById(R.id.CB_selectAll);
+        if (CB_selectAll != null) {
+            CB_selectAll.setVisibility(View.GONE);
+        }
 
         progressBar = (ProgressBar) findViewById(R.id.waiting);
         if (progressBar != null) {
@@ -80,44 +86,77 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
                 }
             }
         });
+
+        CB_selectAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (((CheckBox) v).isChecked()) {
+                    IS_IN_SELECT_ALL_MODE = true;
+                    eventNotificationsAdapter.notifyDataSetChanged();
+                } else {
+                    IS_IN_SELECT_ALL_MODE = false;
+                    eventNotificationsAdapter.notifyDataSetChanged();
+                }
+            }
+        });
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_delete: {
-                if (selectedItems.size() > 0) {
-                    for (int i = 0; i < selectedItems.size(); i++) {
-                        eventNotificationInfos.add(eventNotificationsAdapter.getItem(selectedItems.get(i)));
-                    }
+                if (!CB_selectAll.isChecked()) {
+                    if (selectedItems.size() > 0) {
+                        for (int i = 0; i < selectedItems.size(); i++) {
+                            eventNotificationInfos.add(eventNotificationsAdapter.getItem(selectedItems.get(i)));
+                        }
 
-                    for (int i = 0; i < selectedItems.size(); i++) {
-                        eventNotificationsAdapter.remove(eventNotificationInfos.get(i));
-                    }
+                        for (int i = 0; i < selectedItems.size(); i++) {
+                            eventNotificationsAdapter.remove(eventNotificationInfos.get(i));
+                        }
 
-                    getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-                    notificationTitle.setText(R.string.notifications);
-                    IS_IN_ACTION_MODE = false;
-                    eventNotificationsAdapter.notifyDataSetChanged();
-                    notificationTitle.setText("0 item selected");
-                    selectedItems.clear();
-                    counter = 0;
+                        clearActionMode();
 
-                    String[] notifications = new String[eventNotificationInfos.size()];
-                    for (int i = 0; i < eventNotificationInfos.size(); i++){
-                        notifications[i] = eventNotificationInfos.get(i).getNotification();
+                        String[] notifications = new String[eventNotificationInfos.size()];
+                        for (int i = 0; i < eventNotificationInfos.size(); i++) {
+                            notifications[i] = eventNotificationInfos.get(i).getNotification();
+                        }
+                        eventNotificationsLocalModal.deleteNotifications(notifications);
+                        eventNotificationInfos.clear();
+                        Toast.makeText(this, "Deleted", Toast.LENGTH_SHORT).show();
+                        Log.i("TAG", "onOptionsItemSelected: " + Arrays.toString(notifications));
+                    } else {
+                        Toast.makeText(this, "No item is selected", Toast.LENGTH_SHORT).show();
                     }
-                    eventNotificationsLocalModal.deleteNotifications(notifications);
+                }  else {
+                    eventNotificationsLocalModal.deleteAll();
+                    eventNotificationsAdapter.clear();
                     eventNotificationInfos.clear();
-                    Toast.makeText(this, "Deleted", Toast.LENGTH_SHORT).show();
-                    Log.i("TAG", "onOptionsItemSelected: "+ Arrays.toString(notifications));
-                } else {
-                    Toast.makeText(this, "No item is selected", Toast.LENGTH_SHORT).show();
+                    clearActionMode();
                 }
+                break;
+            }
+
+            case android.R.id.home: {
+                clearActionMode();
                 break;
             }
         }
         return true;
+    }
+
+    private void clearActionMode() {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        notificationTitle.setText(R.string.notifications);
+        toolbar.getMenu().clear();
+        CB_selectAll.setChecked(false);
+        CB_selectAll.setVisibility(View.GONE);
+        IS_IN_ACTION_MODE = false;
+        IS_IN_SELECT_ALL_MODE = false;
+        eventNotificationsAdapter.notifyDataSetChanged();
+        notificationTitle.setText("Notifications");
+        selectedItems.clear();
+        counter = 0;
     }
 
     @Override
@@ -125,8 +164,10 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
         toolbar.getMenu().clear();
         notificationTitle.setText("0 item selected");
         toolbar.inflateMenu(R.menu.notifications_menu);
+        CB_selectAll.setVisibility(View.VISIBLE);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         IS_IN_ACTION_MODE = true;
+        IS_IN_SELECT_ALL_MODE = false;
         eventNotificationsAdapter.notifyDataSetChanged();
         return true;
     }
@@ -156,6 +197,15 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
             notificationTitle.setText("0 item selected");
         } else {
             notificationTitle.setText(counter + " items selected");
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (IS_IN_ACTION_MODE){
+            clearActionMode();
+        } else {
+            super.onBackPressed();
         }
     }
 }

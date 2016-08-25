@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
@@ -25,7 +26,7 @@ import java.util.TimeZone;
 /**
  * This project CampusApp is created by Kamran Ramzan on 6/4/16.
  */
-public class BloodDonorsFragment extends Fragment implements  android.support.v7.app.ActionBar.OnNavigationListener {
+public class BloodDonorsFragment extends Fragment {
 
 
     private static RecyclerView recyclerView;
@@ -38,27 +39,54 @@ public class BloodDonorsFragment extends Fragment implements  android.support.v7
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ActionBar supportActionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        if (supportActionBar != null) {
-            supportActionBar.setDisplayShowTitleEnabled(false);
-        }
+        BloodBankView.toolbarSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position){
+                    case 1: {
+                        new BloodBankModal(getContext()).retrieveDonors(recyclerView, "All");
+                        break;
+                    }
+                    case 2: {
+                        new BloodBankModal(getContext()).retrieveDonors(recyclerView, "O+");
+                        break;
+                    }
+                    case 3: {
+                        new BloodBankModal(getContext()).retrieveDonors(recyclerView, "O-");
+                        break;
+                    }
+                    case 4: {
+                        new BloodBankModal(getContext()).retrieveDonors(recyclerView, "A+");
+                        break;
+                    }
+                    case 5: {
+                        new BloodBankModal(getContext()).retrieveDonors(recyclerView, "A-");
+                        break;
+                    }
+                    case 6: {
+                        new BloodBankModal(getContext()).retrieveDonors(recyclerView, "B+");
+                        break;
+                    }
+                    case 7: {
+                        new BloodBankModal(getContext()).retrieveDonors(recyclerView, "B-");
+                        break;
+                    }
+                    case 8: {
+                        new BloodBankModal(getContext()).retrieveDonors(recyclerView, "AB+");
+                        break;
+                    }
+                    case 9: {
+                        new BloodBankModal(getContext()).retrieveDonors(recyclerView, "AB-");
+                        break;
+                    }
+                }
+            }
 
-        // Spinner title navigation data
-        ArrayList<SpinnerNavItem> navSpinner = new ArrayList<>();
-        navSpinner.add(new SpinnerNavItem("Select Group"));
-        navSpinner.add(new SpinnerNavItem("All"));
-        navSpinner.add(new SpinnerNavItem("O +ve"));
-        navSpinner.add(new SpinnerNavItem("O -ve"));
-        navSpinner.add(new SpinnerNavItem("A +ve"));
-        navSpinner.add(new SpinnerNavItem("A -ve"));
-        navSpinner.add(new SpinnerNavItem("B +ve"));
-        navSpinner.add(new SpinnerNavItem("B -ve"));
-        navSpinner.add(new SpinnerNavItem("AB +ve"));
-        navSpinner.add(new SpinnerNavItem("AB -ve"));
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-        supportActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-        TitleNavigationAdapter adapter = new TitleNavigationAdapter(getContext(), navSpinner);
-        supportActionBar.setListNavigationCallbacks(adapter, this);
+            }
+        });
     }
 
     @Override
@@ -84,52 +112,19 @@ public class BloodDonorsFragment extends Fragment implements  android.support.v7
 
         if (isVisibleToUser) {
             new BloodBankModal(getContext()).retrieveDonors(recyclerView, "All");
+            BloodBankView.toolbarSpinner.setVisibility(View.VISIBLE);
+            BloodBankView.toolbarSpinner.setSelection(0);
+        } else {
+            BloodBankView.toolbarSpinner.setVisibility(View.GONE);
         }
 
     }
 
     @Override
-    public boolean onNavigationItemSelected(int itemPosition, long itemId) {
-        switch (itemPosition){
-            case 1: {
-                new BloodBankModal(getContext()).retrieveDonors(recyclerView, "All");
-                break;
-            }
-            case 2: {
-                new BloodBankModal(getContext()).retrieveDonors(recyclerView, "O+");
-                break;
-            }
-            case 3: {
-                new BloodBankModal(getContext()).retrieveDonors(recyclerView, "O-");
-                break;
-            }
-            case 4: {
-                new BloodBankModal(getContext()).retrieveDonors(recyclerView, "A+");
-                break;
-            }
-            case 5: {
-                new BloodBankModal(getContext()).retrieveDonors(recyclerView, "A-");
-                break;
-            }
-            case 6: {
-                new BloodBankModal(getContext()).retrieveDonors(recyclerView, "B+");
-                break;
-            }
-            case 7: {
-                new BloodBankModal(getContext()).retrieveDonors(recyclerView, "B-");
-                break;
-            }
-            case 8: {
-                new BloodBankModal(getContext()).retrieveDonors(recyclerView, "AB+");
-                break;
-            }
-            case 9: {
-                new BloodBankModal(getContext()).retrieveDonors(recyclerView, "AB-");
-                break;
-            }
-        }
-        return true;
+    public boolean getUserVisibleHint() {
+        return super.getUserVisibleHint();
     }
+
 
     /**
      * Created by Kamran Ramzan on 6/28/16.

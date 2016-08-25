@@ -56,6 +56,14 @@ public class SignUpModal {
             progressDialog = new ProgressDialog(context);
             progressDialog.setMessage("Singing you up... Please wait");
             progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressDialog.setCancelable(false);
+            progressDialog.setButton(ProgressDialog.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    cancel(true);
+                    progressDialog.cancel();
+                }
+            });
             progressDialog.show();
         }
 

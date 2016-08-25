@@ -127,6 +127,7 @@ public class HomePageView extends AppCompatActivity {
             case R.id.action_logout:{
                 AlertDialog.Builder  builder = new AlertDialog.Builder(this);
                 builder.setTitle("Alert?");
+                builder.setCancelable(false);
                 builder.setMessage("Are you sure you want to logout?");
                 builder.setPositiveButton("yes i'm", new DialogInterface.OnClickListener() {
                     @Override

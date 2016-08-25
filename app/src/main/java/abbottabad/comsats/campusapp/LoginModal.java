@@ -2,6 +2,7 @@ package abbottabad.comsats.campusapp;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -39,7 +40,15 @@ public class LoginModal extends AsyncTask<String, Void, String>{
     protected void onPreExecute() {
         progressDialog = new ProgressDialog(context);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.setMessage("Logging in...");
+        progressDialog.setMessage("Logging you in... Please wait!");
+        progressDialog.setCancelable(false);
+        progressDialog.setButton(ProgressDialog.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                cancel(true);
+                progressDialog.cancel();
+            }
+        });
         progressDialog.show();
     }
 
@@ -105,7 +114,7 @@ public class LoginModal extends AsyncTask<String, Void, String>{
             final int TOKEN_GOT = sharedPreferences.getInt("TOKEN_GOT", 0);
 
             if (TOKEN_GOT != 1){
-                //context.startService(new Intent(context, RegistrationIntentService.class));
+                context.startService(new Intent(context, RegistrationIntentService.class));
             }
 
             context.startActivity(new Intent(context, HomePageView.class));

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.Toolbar
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/notifications_toolbar"
     android:background="#94b8c4"
     android:minHeight="?attr/actionBarSize"
-    android:theme="@style/Base.Theme.AppCompat.Light.DarkActionBar">
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -19,7 +20,18 @@
             android:text="@string/notifications"
             android:textColor="#fff"
             android:textSize="22sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:layout_centerVertical="true"
+            tools:ignore="RelativeOverlap" />
+
+        <CheckBox
+            android:id="@+id/CB_selectAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:checked="false"
+            />
 
     </RelativeLayout>
 

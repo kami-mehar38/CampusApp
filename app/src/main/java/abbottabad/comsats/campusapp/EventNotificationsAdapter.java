@@ -42,6 +42,12 @@ public class EventNotificationsAdapter extends ArrayAdapter<EventNotificationInf
         this.notificationsView = (NotificationsView) context;
     }
 
+    @Override
+    public void clear() {
+        chatMessageList.clear();
+        super.clear();
+    }
+
     public int getCount() {
         return this.chatMessageList.size();
     }
@@ -68,6 +74,9 @@ public class EventNotificationsAdapter extends ArrayAdapter<EventNotificationInf
         } else {
             CB_delete.setVisibility(View.VISIBLE);
             CB_delete.setChecked(false);
+        }
+        if (NotificationsView.IS_IN_SELECT_ALL_MODE){
+            CB_delete.setChecked(true);
         }
         TV_notification.setText(eventNotificationInfo.getNotification());
         TV_notification.setOnLongClickListener(notificationsView);

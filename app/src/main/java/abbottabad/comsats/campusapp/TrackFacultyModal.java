@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -87,55 +88,56 @@ public class TrackFacultyModal {
             StatusInfo[] statusInfo;
             List<StatusInfo> statusInfoList = new ArrayList<>();
             String TEACHER_ID = params[0];
-            try {
-                URL url = new URL(stringUrl);
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                httpURLConnection.setRequestMethod("POST");
-                httpURLConnection.setDoOutput(true);
 
-                OutputStream outputStream = httpURLConnection.getOutputStream();
-                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String data = URLEncoder.encode("TEACHER_ID", "UTF-8") + "=" + URLEncoder.encode(TEACHER_ID, "UTF-8");
+                try {
+                    URL url = new URL(stringUrl);
+                    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                    httpURLConnection.setRequestMethod("POST");
+                    httpURLConnection.setDoOutput(true);
 
-                bufferedWriter.write(data);
-                bufferedWriter.flush();
-                bufferedWriter.close();
-                outputStream.close();
+                    OutputStream outputStream = httpURLConnection.getOutputStream();
+                    BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                    String data = URLEncoder.encode("TEACHER_ID", "UTF-8") + "=" + URLEncoder.encode(TEACHER_ID, "UTF-8");
 
-                InputStream inputStream = httpURLConnection.getInputStream();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
-                StringBuilder stringBuilder = new StringBuilder();
-                String line;
-                while ((line = bufferedReader.readLine()) != null) {
-                    stringBuilder.append(line);
+                    bufferedWriter.write(data);
+                    bufferedWriter.flush();
+                    bufferedWriter.close();
+                    outputStream.close();
+
+                    InputStream inputStream = httpURLConnection.getInputStream();
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+                    StringBuilder stringBuilder = new StringBuilder();
+                    String line;
+                    while ((line = bufferedReader.readLine()) != null) {
+                        stringBuilder.append(line);
+                    }
+                    JSONObject parentObject = new JSONObject(stringBuilder.toString());
+                    JSONArray othersArray = parentObject.getJSONArray("others");
+
+                    statusInfo = new StatusInfo[othersArray.length()];
+                    for (int index = 0; index < othersArray.length(); index++) {
+                        JSONObject finalObject = othersArray.getJSONObject(index);
+                        statusInfo[index] = new StatusInfo();
+                        statusInfo[index].setTeacherName(finalObject.getString("name"));
+                        statusInfo[index].setStatus(finalObject.getString("status"));
+                        statusInfoList.add(statusInfo[index]);
+                    }
+
+
+                    if (APPLICATION_STATUS.equals("TEACHER")) {
+                        JSONArray myArray = parentObject.getJSONArray("my");
+                        JSONObject finalObject = myArray.getJSONObject(0);
+                        StatusInfo statusInfo1 = new StatusInfo();
+                        statusInfo1.setTeacherName(finalObject.getString("name"));
+                        statusInfo1.setStatus(finalObject.getString("status"));
+                        statusInfoList.add(0, statusInfo1);
+                    }
+                    inputStream.close();
+                    httpURLConnection.disconnect();
+                    return statusInfoList;
+                } catch (IOException | JSONException e) {
+                    e.printStackTrace();
                 }
-                JSONObject parentObject = new JSONObject(stringBuilder.toString());
-                JSONArray othersArray = parentObject.getJSONArray("others");
-
-                statusInfo = new StatusInfo[othersArray.length()];
-                for (int index = 0; index < othersArray.length(); index++) {
-                    JSONObject finalObject = othersArray.getJSONObject(index);
-                    statusInfo[index] = new StatusInfo();
-                    statusInfo[index].setTeacherName(finalObject.getString("name"));
-                    statusInfo[index].setStatus(finalObject.getString("status"));
-                    statusInfoList.add(statusInfo[index]);
-                }
-
-
-                if (APPLICATION_STATUS.equals("TEACHER")) {
-                    JSONArray myArray = parentObject.getJSONArray("my");
-                    JSONObject finalObject = myArray.getJSONObject(0);
-                    StatusInfo statusInfo1 = new StatusInfo();
-                    statusInfo1.setTeacherName(finalObject.getString("name"));
-                    statusInfo1.setStatus(finalObject.getString("status"));
-                    statusInfoList.add(0, statusInfo1);
-                }
-                inputStream.close();
-                httpURLConnection.disconnect();
-                return statusInfoList;
-            } catch (IOException | JSONException e) {
-                e.printStackTrace();
-            }
             return null;
         }
 

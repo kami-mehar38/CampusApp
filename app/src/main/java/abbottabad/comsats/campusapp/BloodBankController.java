@@ -69,6 +69,17 @@ public class BloodBankController {
         SPbloodTypeOptions.setAdapter(spinnerAdapter);
     }
 
+    public void populateToolbarSpinner(Spinner SPbloodTypeOptions) {
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(context,
+                R.array.toolbar_bloodGroup_options,
+                android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Set the adapter to Spinner
+        SPbloodTypeOptions.setAdapter(spinnerAdapter);
+    }
+
     public void setupViewPagerAdmin(ViewPager viewPagerAdmin, FragmentManager supportFragmentManager) {
         ViewPagerAdapterAdmin viewPagerAdapterAdmin = new ViewPagerAdapterAdmin(supportFragmentManager);
         viewPagerAdapterAdmin.addFragment(new BloodRequestsFragment(), "Requests");

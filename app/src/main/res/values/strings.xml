@@ -47,4 +47,17 @@
         <item>AB+</item>
         <item>AB-</item>
     </string-array>
+
+    <string-array name="toolbar_bloodGroup_options">
+        <item>Blood group</item>
+        <item>All</item>
+        <item>O+</item>
+        <item>O-</item>
+        <item>A+</item>
+        <item>A-</item>
+        <item>B+</item>
+        <item>B-</item>
+        <item>AB+</item>
+        <item>AB-</item>
+    </string-array>
 </resources>
