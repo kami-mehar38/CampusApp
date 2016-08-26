@@ -41,6 +41,7 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
     private EventNotificationsLocalModal eventNotificationsLocalModal;
     private  CheckBox CB_selectAll;
     public static boolean IS_IN_SELECT_ALL_MODE = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,7 +83,6 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
 
                     new EventNotificationModal(NotificationsView.this).
                             sendEventNotification(REG_ID, ET_message.getText().toString().trim());
-
                 }
             }
         });
@@ -93,9 +93,11 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
                 if (((CheckBox) v).isChecked()) {
                     IS_IN_SELECT_ALL_MODE = true;
                     eventNotificationsAdapter.notifyDataSetChanged();
+                    notificationTitle.setText(eventNotificationsAdapter.getCount() + " items selected");
                 } else {
                     IS_IN_SELECT_ALL_MODE = false;
                     eventNotificationsAdapter.notifyDataSetChanged();
+                    notificationTitle.setText("0 item selected");
                 }
             }
         });
@@ -132,6 +134,7 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
                     eventNotificationsLocalModal.deleteAll();
                     eventNotificationsAdapter.clear();
                     eventNotificationInfos.clear();
+                    Toast.makeText(this, "Deleted", Toast.LENGTH_SHORT).show();
                     clearActionMode();
                 }
                 break;
@@ -154,7 +157,7 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
         IS_IN_ACTION_MODE = false;
         IS_IN_SELECT_ALL_MODE = false;
         eventNotificationsAdapter.notifyDataSetChanged();
-        notificationTitle.setText("Notifications");
+        notificationTitle.setText(R.string.notifications);
         selectedItems.clear();
         counter = 0;
     }

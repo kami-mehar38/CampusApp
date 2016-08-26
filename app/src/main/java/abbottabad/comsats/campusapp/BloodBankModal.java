@@ -283,7 +283,6 @@ public class BloodBankModal {
 
         @Override
         protected void onPostExecute(String result) {
-            super.onPostExecute(result);
             progressDialog.cancel();
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {

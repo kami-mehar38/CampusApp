@@ -39,7 +39,7 @@
             <item android:bottom="5px">
                 <shape>
                     <padding android:bottom="5dp"/>
-                    <solid android:color="#f1efed"/>
+                    <solid android:color="#d4b6a1"/>
 
                     <padding
                         android:left="10dp"

@@ -34,4 +34,8 @@ public class Validation {
         }
         return true;
     }
+
+    public   boolean validateEmail(String email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
 }

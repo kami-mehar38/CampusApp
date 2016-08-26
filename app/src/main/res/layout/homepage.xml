@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff">
 
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    >
-
     <include layout="@layout/homepage_toolbar"/>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="160dp"
@@ -38,7 +39,7 @@
                 android:drawableTop="@drawable/notification"
                 android:drawablePadding="@dimen/activity_vertical_margin"
                 android:layout_centerInParent="true"
-                android:text="Notifications"
+                android:text="@string/notifications"
                 android:textColor="#786351"
                 android:textStyle="bold"
                 android:textSize="16sp"/>
@@ -59,8 +60,8 @@
                 android:drawableTop="@drawable/calendar"
                 android:drawablePadding="@dimen/activity_vertical_margin"
                 android:layout_centerInParent="true"
-                android:drawableTint="#786351"
-                android:text="Timetable"
+                android:text="@string/timetable"
+                android:textStyle="bold"
                 android:textColor="#786351"
                 android:textSize="16sp"/>
         </RelativeLayout>
@@ -90,9 +91,9 @@
                 android:drawableTop="@drawable/complaint"
                 android:drawablePadding="@dimen/activity_vertical_margin"
                 android:layout_centerInParent="true"
-                android:text="Complaint Poll"
-                android:drawableTint="#786351"
+                android:text="@string/complaint_poll"
                 android:textColor="#786351"
+                android:textStyle="bold"
                 android:textSize="16sp"/>
         </RelativeLayout>
         <RelativeLayout
@@ -109,9 +110,9 @@
                 android:drawableTop="@drawable/tracking"
                 android:drawablePadding="@dimen/activity_vertical_margin"
                 android:layout_centerInParent="true"
-                android:drawableTint="#786351"
-                android:text="Track Faculty"
+                android:text="@string/track_faculty"
                 android:textColor="#786351"
+                android:textStyle="bold"
                 android:textSize="16sp"/>
         </RelativeLayout>
     </LinearLayout>
@@ -139,9 +140,9 @@
                 android:drawableTop="@drawable/parking"
                 android:drawablePadding="@dimen/activity_vertical_margin"
                 android:layout_centerInParent="true"
-                android:drawableTint="#786351"
-                android:text="Parking"
+                android:text="@string/parking"
                 android:textColor="#786351"
+                android:textStyle="bold"
                 android:textSize="16sp"/>
         </RelativeLayout>
         <RelativeLayout
@@ -158,12 +159,13 @@
                 android:drawableTop="@drawable/blood"
                 android:drawablePadding="@dimen/activity_vertical_margin"
                 android:layout_centerInParent="true"
-                android:text="Blood Bank"
+                android:text="@string/blood_bank"
                 android:textColor="#786351"
+                android:textStyle="bold"
                 android:textSize="16sp"/>
         </RelativeLayout>
     </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
-
-</ScrollView>
