@@ -6,20 +6,20 @@
     android:padding="25dp">
 
     <ProgressBar
-        android:id="@+id/isChangingPassword"
+        android:id="@+id/isChangingEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/btn_changePassword"
+        android:layout_above="@+id/btn_changeEmail"
         android:layout_marginBottom="25dp"
         android:indeterminate="true"
         />
 
     <EditText
-        android:id="@+id/ET_changePassword"
+        android:id="@+id/ET_changeEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textWebPassword"
+        android:inputType="textEmailAddress"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:paddingTop="10dp"
@@ -30,15 +30,15 @@
         android:textSize="16sp"
         android:textColor="#909090"
         android:textColorHint="#909090"
-        android:hint="@string/enter_new_password"
+        android:hint="@string/enter_email_id"
         />
 
     <Button
-        android:id="@+id/btn_changePassword"
+        android:id="@+id/btn_changeEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/change_password"
-        android:layout_below="@+id/ET_changePassword"
+        android:text="@string/change_email"
+        android:layout_below="@+id/ET_changeEmail"
         android:layout_centerHorizontal="true"
         android:background="@drawable/change_button_style"
         android:textSize="14sp"
@@ -49,14 +49,14 @@
         />
 
     <Button
-        android:id="@+id/btn_cancelPDialog"
+        android:id="@+id/btn_cancelEDialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/cancel"
         android:textAllCaps="false"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/btn_changePassword"
+        android:layout_below="@+id/btn_changeEmail"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="5dp"
         android:background="@drawable/change_button_style"

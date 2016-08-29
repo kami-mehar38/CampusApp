@@ -36,6 +36,36 @@ public class Validation {
     }
 
     public   boolean validateEmail(String email) {
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+        String EMAIL = email.trim();
+        if (EMAIL.isEmpty()){
+            return false;
+        } else if (EMAIL.length() > 30){
+            return false;
+        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            return false;
+        }
+        return true;
+    }
+
+    public boolean validatePassword(String password){
+        String PASSWORD = password.trim();
+        if (PASSWORD.isEmpty()){
+            return false;
+        } else if (PASSWORD.length() > 30){
+            return false;
+        }
+        return true;
+    }
+
+    public boolean validateUsername(String username){
+        String USERNAME = username.trim();
+        if (USERNAME.isEmpty()){
+            return false;
+        } else if (USERNAME.length() > 30){
+            return false;
+        }else if (USERNAME.contains(".") || USERNAME.contains("#")) {
+            return false;
+        }
+        return true;
     }
 }

@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -29,9 +30,16 @@ public class HomePageView extends AppCompatActivity {
 
     private static final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
     private AlertDialog AD_logout;
-    private AlertDialog AD_cancelDialog;
+    private AlertDialog AD_passwordDialog;
+    private AlertDialog AD_emailDialog;
+    private AlertDialog AD_unameDialig;
     public static EditText ET_changePassword;
+    public static EditText ET_changeEmail;
+    public static EditText ET_changeUname;
     public static ProgressBar isChangingPassword;
+    public static ProgressBar isChangingEmail;
+    public static ProgressBar isChangingUnam;
+    private Validation validation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,22 +125,86 @@ public class HomePageView extends AppCompatActivity {
             });
         }
 
+        validation = new Validation();
+        newUnameAlertDialog();
+        newPasswordAlertDiaog();
+        newEmailAlertDialog();
 
-        View view = LayoutInflater.from(HomePageView.this).inflate(R.layout.change_password, null);
+    }
+
+    public void newUnameAlertDialog(){
+        View view = LayoutInflater.from(HomePageView.this).inflate(R.layout.change_uname, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(HomePageView.this);
         builder.setView(view);
         builder.setCancelable(false);
-        AD_cancelDialog = builder.create();
+        AD_unameDialig = builder.create();
+        ET_changeUname = (EditText) view.findViewById(R.id.ET_changeUname);
+        isChangingUnam = (ProgressBar) view.findViewById(R.id.isChangingUname);
+        isChangingUnam.setVisibility(View.GONE);
+
+        Button btn_cancelUDialog = (Button) view.findViewById(R.id.btn_cancelUDialog);
+        if (btn_cancelUDialog != null) {
+            btn_cancelUDialog.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AD_unameDialig.cancel();
+                    isChangingUnam.setVisibility(View.GONE);
+                    ET_changeUname.setVisibility(View.VISIBLE);
+                }
+            });
+        }
+
+
+        Button btn_changeUname = (Button) view.findViewById(R.id.btn_changeUname);
+        btn_changeUname.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String newUname = ET_changeUname.getText().toString().trim();
+                if (validation.validateUsername(newUname)) {
+                    new HomePageModal(HomePageView.this).changeUname(newUname);
+                    Animation compress = AnimationUtils.loadAnimation(HomePageView.this, R.anim.compress);
+                    ET_changeUname.startAnimation(compress);
+                    compress.setAnimationListener(new Animation.AnimationListener() {
+                        @Override
+                        public void onAnimationStart(Animation animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+                            isChangingUnam.setVisibility(View.VISIBLE);
+                            ET_changeUname.setVisibility(View.GONE);
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
+
+                        }
+                    });
+
+                }else {
+                    Toast.makeText(HomePageView.this, "Invalid username", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private void newPasswordAlertDiaog() {
+        View view = LayoutInflater.from(HomePageView.this).inflate(R.layout.change_password, null);
+        AlertDialog.Builder pBuilder = new AlertDialog.Builder(HomePageView.this);
+        pBuilder.setView(view);
+        pBuilder.setCancelable(false);
+        AD_passwordDialog = pBuilder.create();
         ET_changePassword = (EditText) view.findViewById(R.id.ET_changePassword);
         isChangingPassword = (ProgressBar) view.findViewById(R.id.isChangingPassword);
         isChangingPassword.setVisibility(View.GONE);
 
-        Button btn_cancelDialog = (Button) view.findViewById(R.id.btn_cancelDialog);
-        if (btn_cancelDialog != null) {
-            btn_cancelDialog.setOnClickListener(new View.OnClickListener() {
+        Button btn_cancelPDialog = (Button) view.findViewById(R.id.btn_cancelPDialog);
+        if (btn_cancelPDialog != null) {
+            btn_cancelPDialog.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    AD_cancelDialog.cancel();
+                    AD_passwordDialog.cancel();
                     isChangingPassword.setVisibility(View.GONE);
                     ET_changePassword.setVisibility(View.VISIBLE);
                 }
@@ -145,30 +217,90 @@ public class HomePageView extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String newPassword = ET_changePassword.getText().toString().trim();
-                new HomePageModal(HomePageView.this).changePassword(newPassword, "Blood Bank");
-                Animation compress = AnimationUtils.loadAnimation(HomePageView.this, R.anim.compress);
-                ET_changePassword.startAnimation(compress);
-                compress.setAnimationListener(new Animation.AnimationListener() {
-                    @Override
-                    public void onAnimationStart(Animation animation) {
+                if (validation.validatePassword(newPassword)) {
+                    new HomePageModal(HomePageView.this).changePassword(newPassword);
+                    Animation compress = AnimationUtils.loadAnimation(HomePageView.this, R.anim.compress);
+                    ET_changePassword.startAnimation(compress);
+                    compress.setAnimationListener(new Animation.AnimationListener() {
+                        @Override
+                        public void onAnimationStart(Animation animation) {
 
-                    }
+                        }
 
-                    @Override
-                    public void onAnimationEnd(Animation animation) {
-                        isChangingPassword.setVisibility(View.VISIBLE);
-                        ET_changePassword.setVisibility(View.GONE);
-                    }
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+                            isChangingPassword.setVisibility(View.VISIBLE);
+                            ET_changePassword.setVisibility(View.GONE);
+                        }
 
-                    @Override
-                    public void onAnimationRepeat(Animation animation) {
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
 
-                    }
-                });
+                        }
+                    });
 
+                }else {
+                    Toast.makeText(HomePageView.this, "Invalid Password", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+    }
 
+    public void newEmailAlertDialog(){
+        View view = LayoutInflater.from(HomePageView.this).inflate(R.layout.change_email, null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(HomePageView.this);
+        builder.setView(view);
+        builder.setCancelable(false);
+        AD_emailDialog = builder.create();
+        ET_changeEmail = (EditText) view.findViewById(R.id.ET_changeEmail);
+        isChangingEmail = (ProgressBar) view.findViewById(R.id.isChangingEmail);
+        isChangingEmail.setVisibility(View.GONE);
+
+        Button btn_cancelEDialog = (Button) view.findViewById(R.id.btn_cancelEDialog);
+        if (btn_cancelEDialog != null) {
+            btn_cancelEDialog.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AD_emailDialog.cancel();
+                    isChangingEmail.setVisibility(View.GONE);
+                    ET_changeEmail.setVisibility(View.VISIBLE);
+                }
+            });
+        }
+
+
+        Button btn_changeEmail = (Button) view.findViewById(R.id.btn_changeEmail);
+        btn_changeEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String newEmail = ET_changeEmail.getText().toString().trim();
+                if (validation.validateEmail(newEmail)) {
+                    new HomePageModal(HomePageView.this).changeEmail(newEmail);
+                    Animation compress = AnimationUtils.loadAnimation(HomePageView.this, R.anim.compress);
+                    ET_changeEmail.startAnimation(compress);
+                    compress.setAnimationListener(new Animation.AnimationListener() {
+                        @Override
+                        public void onAnimationStart(Animation animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+                            isChangingEmail.setVisibility(View.VISIBLE);
+                            ET_changeEmail.setVisibility(View.GONE);
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
+
+                        }
+                    });
+
+                }else {
+                    Toast.makeText(HomePageView.this, "Invalid Email Id", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @Override
@@ -212,15 +344,30 @@ public class HomePageView extends AppCompatActivity {
                 AD_logout.show();
                 break;
             }
+            case R.id.action_change_uname: {
+                ET_changeUname.setText("");
+                HomePageView.isChangingUnam.setVisibility(View.GONE);
+                HomePageView.ET_changeUname.setVisibility(View.VISIBLE);
+                AD_unameDialig.show();
+                break;
+            }
             case R.id.action_change_password: {
                 ET_changePassword.setText("");
                 HomePageView.isChangingPassword.setVisibility(View.GONE);
                 HomePageView.ET_changePassword.setVisibility(View.VISIBLE);
-                AD_cancelDialog.show();
+                AD_passwordDialog.show();
+                break;
+            }
+
+            case R.id.action_change_email: {
+                ET_changeEmail.setText("");
+                isChangingEmail.setVisibility(View.GONE);
+                ET_changeEmail.setVisibility(View.VISIBLE);
+                AD_emailDialog.show();
                 break;
             }
         }
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 
     private boolean isPlayServicesAvailable() {
