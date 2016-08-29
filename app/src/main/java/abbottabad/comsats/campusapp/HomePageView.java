@@ -31,9 +31,7 @@ public class HomePageView extends AppCompatActivity {
     private AlertDialog AD_logout;
     private AlertDialog AD_cancelDialog;
     public static EditText ET_changePassword;
-    private View view;
     public static ProgressBar isChangingPassword;
-    private AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,8 +118,8 @@ public class HomePageView extends AppCompatActivity {
         }
 
 
-        view = LayoutInflater.from(HomePageView.this).inflate(R.layout.change_password, null);
-        builder = new AlertDialog.Builder(HomePageView.this);
+        View view = LayoutInflater.from(HomePageView.this).inflate(R.layout.change_password, null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(HomePageView.this);
         builder.setView(view);
         builder.setCancelable(false);
         AD_cancelDialog = builder.create();
