@@ -6,6 +6,8 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -16,11 +18,11 @@ import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * This project CampusApp is created by Kamran Ramzan on 5/25/16.
  */
+
 public class LoginView extends AppCompatActivity {
 
     private static EditText ETuname;
@@ -33,6 +35,7 @@ public class LoginView extends AppCompatActivity {
     private ScrollView SV_loginPage;
     private Button btnLogin;
     public static Button btnSendMail;
+    private Button btnGoBack;
     private TextView TV_enterAccountMail;
     private EditText ET_accountMail;
     private Spinner SP_forgotPassword;
@@ -95,7 +98,7 @@ public class LoginView extends AppCompatActivity {
                     else{
                         AlertDialog.Builder builder = new AlertDialog.Builder(LoginView.this);
                         builder.setTitle("Error");
-                        builder.setMessage("Please select designation");
+                        builder.setMessage("Please select account");
                         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int which) {
@@ -113,11 +116,17 @@ public class LoginView extends AppCompatActivity {
 
         validation = new Validation();
         SV_forgotPassword = (ScrollView) findViewById(R.id.SV_forgotPassword);
-        SV_forgotPassword.setVisibility(View.GONE);
+        if (SV_forgotPassword != null) {
+            SV_forgotPassword.setVisibility(View.GONE);
+        }
         TV_enterAccountMail = (TextView) findViewById(R.id.TV_enterAccountMail);
-        TV_enterAccountMail.setVisibility(View.GONE);
+        if (TV_enterAccountMail != null) {
+            TV_enterAccountMail.setVisibility(View.GONE);
+        }
         ET_accountMail = (EditText) findViewById(R.id.ET_accountMail);
-        ET_accountMail.setVisibility(View.GONE);
+        if (ET_accountMail != null) {
+            ET_accountMail.setVisibility(View.GONE);
+        }
         SP_forgotPassword = (Spinner) findViewById(R.id.SP_forgotPassword);
         SP_forgotPassword.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -134,7 +143,9 @@ public class LoginView extends AppCompatActivity {
         SP_forgotPassword.setVisibility(View.GONE);
         new LoginController(this).populateSpinner(SP_forgotPassword);
         isSending = (ProgressBar) findViewById(R.id.isSending);
-        isSending.setVisibility(View.GONE);
+        if (isSending != null) {
+            isSending.setVisibility(View.GONE);
+        }
         btnSendMail = (Button) findViewById(R.id.btnSendMail);
         btnSendMail.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,7 +163,7 @@ public class LoginView extends AppCompatActivity {
                     } else {
                         AlertDialog.Builder builder = new AlertDialog.Builder(LoginView.this);
                         builder.setTitle("Error");
-                        builder.setMessage("Please select disignation");
+                        builder.setMessage("Please select account");
                         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int which) {
@@ -185,13 +196,50 @@ public class LoginView extends AppCompatActivity {
             }
         });
         btnSendMail.setVisibility(View.GONE);
+        btnGoBack = (Button) findViewById(R.id.goBack);
+        btnGoBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation scaleIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.forgot_password_in);
+                SV_loginPage.startAnimation(scaleIn);
+                scaleIn.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+                        ETuname.setVisibility(View.VISIBLE);
+                        ETpassword.setVisibility(View.VISIBLE);
+                        SPloginOptions.setVisibility(View.VISIBLE);
+                        btnLogin.setVisibility(View.VISIBLE);
+                        TV_forgotPassword.setVisibility(View.VISIBLE);
+
+                        SV_forgotPassword.setVisibility(View.GONE);
+                        TV_enterAccountMail.setVisibility(View.GONE);
+                        ET_accountMail.setVisibility(View.GONE);
+                        SP_forgotPassword.setVisibility(View.GONE);
+                        btnSendMail.setVisibility(View.GONE);
+                        btnGoBack.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+
+                    }
+                });
+            }
+        });
+        btnGoBack.setVisibility(View.GONE);
+
 
         SV_loginPage = (ScrollView) findViewById(R.id.SV_loginPage);
         TV_forgotPassword = (TextView) findViewById(R.id.TV_forgotPassword);
         TV_forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Animation scaleOut = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.forgot_password);
+                Animation scaleOut = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.forgot_password_out);
                 scaleOut.setAnimationListener(new Animation.AnimationListener() {
                     @Override
                     public void onAnimationStart(Animation animation) {
@@ -209,8 +257,11 @@ public class LoginView extends AppCompatActivity {
                         SV_forgotPassword.setVisibility(View.VISIBLE);
                         TV_enterAccountMail.setVisibility(View.VISIBLE);
                         ET_accountMail.setVisibility(View.VISIBLE);
+                        ET_accountMail.setText("");
                         SP_forgotPassword.setVisibility(View.VISIBLE);
+                        SP_forgotPassword.setSelection(0);
                         btnSendMail.setVisibility(View.VISIBLE);
+                        btnGoBack.setVisibility(View.VISIBLE);
                     }
 
                     @Override

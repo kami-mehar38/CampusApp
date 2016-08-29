@@ -25,7 +25,7 @@ public class Validation {
 
     public boolean validateReg(String reg){
         String REG = reg.trim();
-        if (REG.equals("")){
+        if (REG.isEmpty()){
             return false;
         } else if (REG.length() > 30){
             return false;

@@ -41,6 +41,17 @@ public class BloodBankModal {
         this.context = context;
     }
 
+    /**
+     *
+     * @param name name of the student, teacher who sends request
+     * @param registration registration id of the student, teacher who sends request
+     * @param contact contact# of the student, teacher who sends request
+     * @param bloodType blood group required by the student or teacher
+     *
+     *                  This method call to the sendRequestInBackground class extended by AsynchTask,
+     *                  to send the Blood Request using HTTP Protocol
+     */
+
     public void sendRequest(String name, String registration, String contact, String bloodType){
         new sendRequestInBackground().execute(name, registration, contact, bloodType);
     }
@@ -134,7 +145,8 @@ public class BloodBankModal {
 
         }
     }
-    public class RetrieveDonors extends AsyncTask<String, Void, List<DonorsInfo>> {
+
+    private class RetrieveDonors extends AsyncTask<String, Void, List<DonorsInfo>> {
 
         private ProgressDialog progressDialog;
         private RecyclerView recyclerView;
@@ -214,7 +226,8 @@ public class BloodBankModal {
             }
         }
     }
-    public class AddDonor extends AsyncTask<String, Void, String>{
+
+    private class AddDonor extends AsyncTask<String, Void, String>{
 
         private ProgressDialog progressDialog;
 

@@ -48,6 +48,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/btn_signup"
             android:text="@string/sign_up"
+            android:textAllCaps="false"
             android:textStyle="bold"
             android:drawableEnd="@drawable/icon_signup"
             android:drawableRight="@drawable/icon_signup"
@@ -55,7 +56,7 @@
             android:paddingEnd="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:textColor="#786351"
+            android:textColor="@color/colorPrimary"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -71,6 +72,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/btn_login"
             android:text="@string/log_in"
+            android:textAllCaps="false"
             android:textStyle="bold"
             android:drawableEnd="@drawable/icon_login"
             android:drawableRight="@drawable/icon_login"
@@ -78,7 +80,7 @@
             android:paddingEnd="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:textColor="#786351"
+            android:textColor="@color/colorPrimary"
             />
     </LinearLayout>
 

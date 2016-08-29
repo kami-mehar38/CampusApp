@@ -63,7 +63,7 @@ public class LoginModal {
 
     @Override
     protected String doInBackground(String... params) {
-        String stringUrl = "http://hostellocator.com/getData.php";
+        String stringUrl = "http://10.0.2.2/CampusApp/getData.php";
         String username, password;
         try {
             URL url = new URL(stringUrl);

@@ -11,8 +11,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Spinner;
 
-import static abbottabad.comsats.campusapp.R.drawable.button_background;
-
 /**
  * This project CampusApp is created by Kamran Ramzan on 6/4/16.
  */
@@ -24,7 +22,7 @@ public class BloodBankView extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.bloodbank_page_admin);
+        setContentView(R.layout.bloodbank_page);
         Toolbar toolbar = (Toolbar) findViewById(R.id.bloodbank_toolbar);
         setSupportActionBar(toolbar);
 

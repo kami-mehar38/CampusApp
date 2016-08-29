@@ -82,7 +82,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/login"
-        android:textColor="#786351"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimary"
         android:id="@+id/btnLogin"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="70dp"
@@ -159,8 +160,21 @@
                 android:textColor="#786351"
                 android:id="@+id/btnSendMail"
                 android:text="@string/send_mail"
+                android:textAllCaps="false"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="50dp"
+                android:background="@drawable/button_background"/>
+
+            <Button
+                android:id="@+id/goBack"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/back"
+                android:textAllCaps="false"
+                android:textColor="#786351"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="40dp"
                 android:background="@drawable/button_background"/>
         </LinearLayout>
     </ScrollView>

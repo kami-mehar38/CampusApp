@@ -120,24 +120,26 @@
                 android:layout_width="64dp"
                 android:layout_height="30dp"
                 android:id="@+id/btnCall"
-                android:textColor="#fff"
+                android:textColor="@color/colorPrimary"
                 android:textSize="12sp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:background="@drawable/button_background"
+                android:textAllCaps="false"
                 android:text="@string/call"/>
 
             <Button
                 android:layout_width="64dp"
                 android:layout_height="30dp"
                 android:id="@+id/btnMessage"
-                android:textColor="#fff"
+                android:textColor="@color/colorPrimary"
                 android:textSize="12sp"
                 android:layout_below="@+id/btnCall"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/button_background"
+                android:textAllCaps="false"
                 android:text="@string/message"/>
 
         </RelativeLayout>

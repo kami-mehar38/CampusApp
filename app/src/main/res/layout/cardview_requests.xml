@@ -109,24 +109,26 @@
                 android:layout_width="64dp"
                 android:layout_height="30dp"
                 android:id="@+id/btnCall"
-                android:textColor="#fff"
+                android:textColor="@color/colorPrimary"
                 android:textSize="12sp"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:background="@drawable/button_background"
+                android:textAllCaps="false"
                 android:text="@string/call"/>
 
             <Button
                 android:layout_width="64dp"
                 android:layout_height="30dp"
                 android:id="@+id/btnMessage"
-                android:textColor="#fff"
+                android:textColor="@color/colorPrimary"
                 android:textSize="12sp"
                 android:layout_below="@+id/btnCall"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:background="@drawable/button_background"
                 android:layout_marginTop="5dp"
+                android:textAllCaps="false"
                 android:text="@string/message"/>
 
             <Button
@@ -134,7 +136,8 @@
                 android:layout_height="30dp"
                 android:id="@+id/btnDelete"
                 android:text="@string/delete"
-                android:textColor="#fff"
+                android:textColor="@color/colorPrimary"
+                android:textAllCaps="false"
                 android:textSize="12sp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"

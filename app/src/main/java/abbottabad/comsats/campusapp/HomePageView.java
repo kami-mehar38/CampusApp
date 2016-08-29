@@ -8,12 +8,17 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
@@ -23,7 +28,12 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 public class HomePageView extends AppCompatActivity {
 
     private static final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
-    private AlertDialog alertDialog;
+    private AlertDialog AD_logout;
+    private AlertDialog AD_cancelDialog;
+    public static EditText ET_changePassword;
+    private View view;
+    public static ProgressBar isChangingPassword;
+    private AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +118,59 @@ public class HomePageView extends AppCompatActivity {
                 }
             });
         }
+
+
+        view = LayoutInflater.from(HomePageView.this).inflate(R.layout.change_password, null);
+        builder = new AlertDialog.Builder(HomePageView.this);
+        builder.setView(view);
+        builder.setCancelable(false);
+        AD_cancelDialog = builder.create();
+        ET_changePassword = (EditText) view.findViewById(R.id.ET_changePassword);
+        isChangingPassword = (ProgressBar) view.findViewById(R.id.isChangingPassword);
+        isChangingPassword.setVisibility(View.GONE);
+
+        Button btn_cancelDialog = (Button) view.findViewById(R.id.btn_cancelDialog);
+        if (btn_cancelDialog != null) {
+            btn_cancelDialog.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AD_cancelDialog.cancel();
+                    isChangingPassword.setVisibility(View.GONE);
+                    ET_changePassword.setVisibility(View.VISIBLE);
+                }
+            });
+        }
+
+
+        Button btn_changePassword = (Button) view.findViewById(R.id.btn_changePassword);
+        btn_changePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String newPassword = ET_changePassword.getText().toString().trim();
+                new HomePageModal(HomePageView.this).changePassword(newPassword, "Blood Bank");
+                Animation compress = AnimationUtils.loadAnimation(HomePageView.this, R.anim.compress);
+                ET_changePassword.startAnimation(compress);
+                compress.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        isChangingPassword.setVisibility(View.VISIBLE);
+                        ET_changePassword.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+
+                    }
+                });
+
+            }
+        });
+
     }
 
     @Override
@@ -116,9 +179,10 @@ public class HomePageView extends AppCompatActivity {
         SharedPreferences sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         final String APPLICATION_STATUS = sharedPreferences.getString("APPLICATION_STATUS", "NULL");
         if (APPLICATION_STATUS.equals("BLOOD_BANK")) {
-            getMenuInflater().inflate(R.menu.menu, menu);
+            getMenuInflater().inflate(R.menu.menu_main, menu);
+
         }
-        return super.onCreateOptionsMenu(menu);
+        return true;
     }
 
     @Override
@@ -143,11 +207,18 @@ public class HomePageView extends AppCompatActivity {
                 builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        alertDialog.cancel();
+                        AD_logout.cancel();
                     }
                 });
-                alertDialog = builder.create();
-                alertDialog.show();
+                AD_logout = builder.create();
+                AD_logout.show();
+                break;
+            }
+            case R.id.action_change_password: {
+                ET_changePassword.setText("");
+                HomePageView.isChangingPassword.setVisibility(View.GONE);
+                HomePageView.ET_changePassword.setVisibility(View.VISIBLE);
+                AD_cancelDialog.show();
                 break;
             }
         }

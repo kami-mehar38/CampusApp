@@ -33,7 +33,6 @@
             android:textSize="18sp"
             android:textColor="#fff"
             android:background="@drawable/chatbubbleleft_shape"
-            android:text="jroisrh"
             />
 
         <TextView
