@@ -36,18 +36,18 @@ public class BloodBankView extends AppCompatActivity {
         final String APPLICATION_STATUS = sharedPreferences.getString("APPLICATION_STATUS", "NULL");
 
         if (APPLICATION_STATUS.equals("STUDENT") || APPLICATION_STATUS.equals("TEACHER")){
-            ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
+            ViewPager viewPager = (ViewPager) findViewById(R.id.viewPagerBB);
             bloodBankController.setupViewPagerRequester(viewPager, getSupportFragmentManager());
-            TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+            TabLayout tabLayout = (TabLayout) findViewById(R.id.tabsBB);
             if (tabLayout != null) {
                 tabLayout.setupWithViewPager(viewPager);
                 tabLayout.setSelectedTabIndicatorColor(Color.WHITE);
             }
         }else if (APPLICATION_STATUS.equals("BLOOD_BANK")){
             bloodBankController.populateToolbarSpinner(toolbarSpinner);
-            ViewPager viewPagerAdmin = (ViewPager) findViewById(R.id.viewPager);
+            ViewPager viewPagerAdmin = (ViewPager) findViewById(R.id.viewPagerBB);
             bloodBankController.setupViewPagerAdmin(viewPagerAdmin, getSupportFragmentManager());
-            TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+            TabLayout tabLayout = (TabLayout) findViewById(R.id.tabsBB);
             if (tabLayout != null) {
                 tabLayout.setupWithViewPager(viewPagerAdmin);
                 tabLayout.setSelectedTabIndicatorColor(Color.WHITE);

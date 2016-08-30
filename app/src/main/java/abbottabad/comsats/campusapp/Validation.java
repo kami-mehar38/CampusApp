@@ -31,6 +31,8 @@ public class Validation {
             return false;
         } else if (!REG.matches(".*\\d.*")){
             return false;
+        } else if (!REG.contains("-")){
+            return false;
         }
         return true;
     }

@@ -22,7 +22,7 @@
     <string name="login">Login</string>
     <string name="for_admins">For admins</string>
     <string name="for_faculty_and_students">For faculty and students</string>
-    <string name="search_for_faculty">Search for faculty...</string>
+    <string name="search_for_faculty">Search for faculty…</string>
     <string name="blood_bank">Blood Bank</string>
     <string name="notifications">Notifications</string>
     <string name="logout">Logout</string>
@@ -40,6 +40,8 @@
     <string name="change_email">Change Email</string>
     <string name="change_uname">Change Uname</string>
     <string name="enter_username">Enter username</string>
+    <string name="enter_description">Enter description (optional)</string>
+    <string name="add_image_optional">Add Image (optional)</string>
     <string-array name="login_options">
         <item>Select Account</item>
         <item>Blood Bank</item>

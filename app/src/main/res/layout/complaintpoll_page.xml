@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="#fff">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include layout="@layout/complaintpoll_toolbar"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:orientation="vertical">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Name"
+                >
+                <android.support.design.widget.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/ET_name"
+                    android:layout_alignParentTop="true"
+                    android:padding="12dp"
+                    android:background="@drawable/editext_style"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000"
+                    />
+
+            </android.support.design.widget.TextInputLayout>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:hint="Registration ID">
+                <android.support.design.widget.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="text"
+                    android:ems="10"
+                    android:id="@+id/ET_regID"
+                    android:padding="12dp"
+                    android:background="@drawable/editext_style"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000"
+                    />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:hint="Contact #">
+                <android.support.design.widget.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="number"
+                    android:ems="10"
+                    android:id="@+id/ET_contact"
+                    android:padding="12dp"
+                    android:background="@drawable/editext_style"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:textColor="#000"
+                    />
+            </android.support.design.widget.TextInputLayout>
+
+            <EditText
+                android:id="@+id/ET_desciption"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:hint="@string/enter_description"
+                android:ems="10"
+                android:padding="10dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/editext_style"
+                android:textStyle="normal"
+                android:textSize="16sp"
+                android:textColor="#000"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_image_optional"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:id="@+id/btn_addImage"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:background="@drawable/button_background"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/send"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:id="@+id/btn_sendComplaint"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="70dp"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/button_background"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

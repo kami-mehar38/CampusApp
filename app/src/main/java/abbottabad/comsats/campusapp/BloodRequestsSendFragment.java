@@ -13,12 +13,13 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 /**
  * This project CampusApp is created by Kamran Ramzan on 6/8/16.
  */
 public class BloodRequestsSendFragment extends Fragment implements AdapterView.OnItemSelectedListener {
-    private TextInputLayout TILname, TILreg, TILcontact;
+
     private EditText ETname;
     private EditText ETregistration;
     private EditText ETcontact;
@@ -38,18 +39,6 @@ public class BloodRequestsSendFragment extends Fragment implements AdapterView.O
         super.onViewCreated(view, savedInstanceState);
 
         final Validation validation = new Validation();
-        TILname = (TextInputLayout) view.findViewById(R.id.TILname);
-        if (TILname != null) {
-            TILname.setHint("Name");
-        }
-        TILreg = (TextInputLayout) view.findViewById(R.id.TILreg);
-        if (TILreg != null) {
-            TILreg.setHint("Registration ID");
-        }
-        TILcontact = (TextInputLayout) view.findViewById(R.id.TILcontact);
-        if (TILcontact != null) {
-            TILcontact.setHint("Contact no");
-        }
 
         SPbloodTypeOptions = (Spinner) view.findViewById(R.id.SPbloodType);
         new BloodBankController(getContext()).populateSpinner(SPbloodTypeOptions);
@@ -71,9 +60,9 @@ public class BloodRequestsSendFragment extends Fragment implements AdapterView.O
                         if (validation.validateReg(registration)){
                             if (validation.validatePhoneNumber(contact)){
                                 new BloodBankModal(view.getContext()).sendRequest(name, registration, contact, bloodType);
-                            } else TILcontact.setError("Invalid contact#");
-                        } else TILreg.setError("Invalid registration");
-                    } else TILname.setError("Invalid name");
+                            } else Toast.makeText(getContext(), "Invalid contac#", Toast.LENGTH_SHORT).show();
+                        } else Toast.makeText(getContext(), "Invalid registration id", Toast.LENGTH_SHORT).show();
+                    } else Toast.makeText(getContext(), "Invalid name", Toast.LENGTH_SHORT).show();
                 }else{
                     AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
                     builder.setTitle("Warning");

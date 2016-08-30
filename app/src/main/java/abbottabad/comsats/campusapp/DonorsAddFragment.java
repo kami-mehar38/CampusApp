@@ -14,6 +14,8 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -136,12 +138,6 @@ public class DonorsAddFragment extends Fragment {
                 }
             }
         });
-        final TextInputLayout TILname = (TextInputLayout) view.findViewById(R.id.TILDname);
-        TILname.setHint("Name");
-        final TextInputLayout TILregId = (TextInputLayout) view.findViewById(R.id.TILDregID);
-        TILregId.setHint("Registration ID");
-        final TextInputLayout TILcontact = (TextInputLayout) view.findViewById(R.id.TILDcontact);
-        TILcontact.setHint("Contact #");
 
         final EditText ETname = (EditText) view.findViewById(R.id.ETDname);
         final EditText ETregId = (EditText) view.findViewById(R.id.ETDregID);
@@ -171,11 +167,11 @@ public class DonorsAddFragment extends Fragment {
                                     alertDialogDate.show();
                                 }
                             } else {
-                                TILcontact.setError("Invalid contact#");
+                                Toast.makeText(getContext(), "Invalid contac#", Toast.LENGTH_SHORT).show();
                             }
-                        } else TILregId.setError("Invalid registration");
+                        } else Toast.makeText(getContext(), "Invalid registration id", Toast.LENGTH_SHORT).show();
                     } else {
-                        TILname.setError("Invalid name");
+                        Toast.makeText(getContext(), "Invalid name", Toast.LENGTH_SHORT).show();
                     }
                 } catch (ParseException e) {
                     e.printStackTrace();

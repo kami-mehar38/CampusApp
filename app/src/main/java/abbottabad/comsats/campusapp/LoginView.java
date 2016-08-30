@@ -18,6 +18,7 @@ import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * This project CampusApp is created by Kamran Ramzan on 5/25/16.
@@ -52,14 +53,7 @@ public class LoginView extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.loginpage_toolbar);
         setSupportActionBar(toolbar);
-        TextInputLayout TIname = (TextInputLayout) findViewById(R.id.TILname);
-        if (TIname != null) {
-            TIname.setHint("Username");
-        }
-        TextInputLayout TIpass = (TextInputLayout) findViewById(R.id.TILpass);
-        if (TIpass != null) {
-            TIpass.setHint("Password");
-        }
+
         ETuname = (EditText) findViewById(R.id.ETname);
         ETpassword = (EditText) findViewById(R.id.ETpassword);
 
@@ -84,32 +78,36 @@ public class LoginView extends AppCompatActivity {
             btnLogin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (spinnerOption != 0){
-                        switch (spinnerOption){
-                            case 1:{
-                                String username = ETuname.getText().toString().trim();
-                                String password = ETpassword.getText().toString().trim();
-                                new LoginModal(LoginView.this).login(username, password);
+                    String username = ETuname.getText().toString().trim();
+                    String password = ETpassword.getText().toString().trim();
+                    if (validation.validateUsername(username)) {
+                        if (validation.validatePassword(password)) {
+                            if (spinnerOption != 0) {
+                                switch (spinnerOption) {
+                                    case 1: {
 
-                                break;
-                            }
-                        }
-                    }
-                    else{
-                        AlertDialog.Builder builder = new AlertDialog.Builder(LoginView.this);
-                        builder.setTitle("Error");
-                        builder.setMessage("Please select account");
-                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int which) {
-                                if (alertDialog != null){
-                                    alertDialog.cancel();
+                                        new LoginModal(LoginView.this).login(username, password);
+
+                                        break;
+                                    }
                                 }
+                            } else {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(LoginView.this);
+                                builder.setTitle("Error");
+                                builder.setMessage("Please select account");
+                                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int which) {
+                                        if (alertDialog != null) {
+                                            alertDialog.cancel();
+                                        }
+                                    }
+                                });
+                                alertDialog = builder.create();
+                                alertDialog.show();
                             }
-                        });
-                        alertDialog = builder.create();
-                        alertDialog.show();
-                    }
+                        } else Toast.makeText(LoginView.this, "Invalid password format", Toast.LENGTH_SHORT).show();
+                    } else Toast.makeText(LoginView.this, "Invalid username format", Toast.LENGTH_SHORT).show();
                 }
             });
         }

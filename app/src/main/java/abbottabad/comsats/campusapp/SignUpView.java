@@ -34,14 +34,6 @@ public class SignUpView extends AppCompatActivity implements AdapterView.OnItemS
         Toolbar toolbar = (Toolbar) findViewById(R.id.signuppage_toolbar);
         setSupportActionBar(toolbar);
         validation = new Validation();
-        TILname = (TextInputLayout) findViewById(R.id.TILname);
-        if (TILname != null) {
-            TILname.setHint("Name");
-        }
-        TILreg = (TextInputLayout) findViewById(R.id.TILreg);
-        if (TILreg != null) {
-            TILreg.setHint("Registration ID");
-        }
 
         ETname = (EditText) findViewById(R.id.ETname);
         ETregistration = (EditText) findViewById(R.id.ETregistration);
@@ -71,45 +63,38 @@ public class SignUpView extends AppCompatActivity implements AdapterView.OnItemS
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btnSignup:{
-                if (spinnerOption != 0){
-                    switch (spinnerOption){
-                        case 1:{
-                            String name = ETname.getText().toString().trim();
-                            String reg = ETregistration.getText().toString().trim();
-                            if (validation.validateName(name)) {
-                                if (validation.validateReg(reg)) {
+                String name = ETname.getText().toString().trim();
+                String reg = ETregistration.getText().toString().trim();
+                if (validation.validateName(name)) {
+                    if (validation.validateReg(reg)) {
+                        if (spinnerOption != 0) {
+                            switch (spinnerOption) {
+                                case 1: {
                                     new SignUpModal(SignUpView.this).addTeacher(name, reg);
-                                }else TILreg.setError("Invalid registration");
-                            }else TILname.setError("Invalid name");
-                            break;
-                        }
-                        case 2:{
-                            String name = ETname.getText().toString().trim();
-                            String reg = ETregistration.getText().toString().trim();
-                            if (validation.validateName(name)) {
-                                if (validation.validateReg(reg)) {
+                                    break;
+                                }
+                                case 2: {
                                     new SignUpModal(SignUpView.this).addStudent(name, reg);
-                                }else TILreg.setError("Invalid registration");
-                            }else TILname.setError("Invalid name");
-                            break;
-                        }
-                    }
-                }
-                else{
-                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                    builder.setTitle("Error");
-                    builder.setMessage("Please select sign up option");
-                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int which) {
-                            if (alertDialog != null){
-                                alertDialog.cancel();
+                                    break;
+                                }
                             }
+                        } else {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                            builder.setTitle("Error");
+                            builder.setMessage("Please select sign up option");
+                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int which) {
+                                    if (alertDialog != null) {
+                                        alertDialog.cancel();
+                                    }
+                                }
+                            });
+                            alertDialog = builder.create();
+                            alertDialog.show();
                         }
-                    });
-                    alertDialog = builder.create();
-                    alertDialog.show();
-                }
+                    } else Toast.makeText(SignUpView.this, "Invalid registration id", Toast.LENGTH_SHORT).show();
+                } else Toast.makeText(SignUpView.this, "Invalid name", Toast.LENGTH_SHORT).show();
             }
         }
     }

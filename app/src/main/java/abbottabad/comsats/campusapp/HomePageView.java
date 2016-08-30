@@ -84,7 +84,7 @@ public class HomePageView extends AppCompatActivity {
             RL_complaintPoll.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    startActivity(new Intent(HomePageView.this, ComplaintPollView.class));
                 }
             });
         }
