@@ -5,7 +5,6 @@
     android:orientation="vertical"
     android:background="#fff">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -44,9 +43,7 @@
                     android:textSize="16sp"
                     android:textColor="#000"
                     />
-
             </android.support.design.widget.TextInputLayout>
-
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -98,6 +95,13 @@
                 android:textStyle="normal"
                 android:textSize="16sp"
                 android:textColor="#000"/>
+
+            <ImageView
+                android:id="@+id/IV_visualProof"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:contentDescription="@string/visual_proof"/>
 
             <Button
                 android:layout_width="wrap_content"

@@ -140,7 +140,7 @@ public class HomePageView extends AppCompatActivity {
         AD_unameDialig = builder.create();
         ET_changeUname = (EditText) view.findViewById(R.id.ET_changeUname);
         isChangingUnam = (ProgressBar) view.findViewById(R.id.isChangingUname);
-        isChangingUnam.setVisibility(View.GONE);
+        isChangingUnam.setVisibility(View.INVISIBLE);
 
         Button btn_cancelUDialog = (Button) view.findViewById(R.id.btn_cancelUDialog);
         if (btn_cancelUDialog != null) {
@@ -148,7 +148,7 @@ public class HomePageView extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     AD_unameDialig.cancel();
-                    isChangingUnam.setVisibility(View.GONE);
+                    isChangingUnam.setVisibility(View.INVISIBLE);
                     ET_changeUname.setVisibility(View.VISIBLE);
                 }
             });
@@ -172,7 +172,6 @@ public class HomePageView extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation animation) {
-                            isChangingUnam.setVisibility(View.VISIBLE);
                             ET_changeUname.setVisibility(View.GONE);
                         }
 
@@ -197,7 +196,7 @@ public class HomePageView extends AppCompatActivity {
         AD_passwordDialog = pBuilder.create();
         ET_changePassword = (EditText) view.findViewById(R.id.ET_changePassword);
         isChangingPassword = (ProgressBar) view.findViewById(R.id.isChangingPassword);
-        isChangingPassword.setVisibility(View.GONE);
+        isChangingPassword.setVisibility(View.INVISIBLE);
 
         Button btn_cancelPDialog = (Button) view.findViewById(R.id.btn_cancelPDialog);
         if (btn_cancelPDialog != null) {
@@ -205,7 +204,7 @@ public class HomePageView extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     AD_passwordDialog.cancel();
-                    isChangingPassword.setVisibility(View.GONE);
+                    isChangingPassword.setVisibility(View.INVISIBLE);
                     ET_changePassword.setVisibility(View.VISIBLE);
                 }
             });
@@ -229,7 +228,6 @@ public class HomePageView extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation animation) {
-                            isChangingPassword.setVisibility(View.VISIBLE);
                             ET_changePassword.setVisibility(View.GONE);
                         }
 
@@ -254,7 +252,7 @@ public class HomePageView extends AppCompatActivity {
         AD_emailDialog = builder.create();
         ET_changeEmail = (EditText) view.findViewById(R.id.ET_changeEmail);
         isChangingEmail = (ProgressBar) view.findViewById(R.id.isChangingEmail);
-        isChangingEmail.setVisibility(View.GONE);
+        isChangingEmail.setVisibility(View.INVISIBLE);
 
         Button btn_cancelEDialog = (Button) view.findViewById(R.id.btn_cancelEDialog);
         if (btn_cancelEDialog != null) {
@@ -262,7 +260,7 @@ public class HomePageView extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     AD_emailDialog.cancel();
-                    isChangingEmail.setVisibility(View.GONE);
+                    isChangingEmail.setVisibility(View.INVISIBLE);
                     ET_changeEmail.setVisibility(View.VISIBLE);
                 }
             });
@@ -286,7 +284,6 @@ public class HomePageView extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation animation) {
-                            isChangingEmail.setVisibility(View.VISIBLE);
                             ET_changeEmail.setVisibility(View.GONE);
                         }
 

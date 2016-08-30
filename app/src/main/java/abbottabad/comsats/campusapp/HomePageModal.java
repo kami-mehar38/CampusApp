@@ -57,8 +57,13 @@ public class HomePageModal {
     private class ChangeUname extends AsyncTask<String, Void, String>{
 
         @Override
+        protected void onPreExecute() {
+            HomePageView.isChangingUnam.setVisibility(View.VISIBLE);
+        }
+
+        @Override
         protected String doInBackground(String... params) {
-            String stringUrl = "http://10.0.2.2/CampusApp/changeUname.php";
+            String stringUrl = "http://hostellocator.com/changeUname.php";
             try {
                 URL url = new URL(stringUrl);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -100,7 +105,7 @@ public class HomePageModal {
 
         @Override
         protected void onPostExecute(String response) {
-            HomePageView.isChangingUnam.setVisibility(View.GONE);
+            HomePageView.isChangingUnam.setVisibility(View.INVISIBLE);
             HomePageView.ET_changeUname.setVisibility(View.VISIBLE);
             Animation expand = AnimationUtils.loadAnimation(context, R.anim.expand);
             HomePageView.ET_changeUname.startAnimation(expand);
@@ -130,8 +135,13 @@ public class HomePageModal {
     private class ChangePassword extends AsyncTask<String, Void, String>{
 
         @Override
+        protected void onPreExecute() {
+            HomePageView.isChangingPassword.setVisibility(View.VISIBLE);
+        }
+
+        @Override
         protected String doInBackground(String... params) {
-            String stringUrl = "http://10.0.2.2/CampusApp/changePassword.php";
+            String stringUrl = "http://hostellocator.com/changePassword.php";
             try {
                 URL url = new URL(stringUrl);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -204,8 +214,13 @@ public class HomePageModal {
     private class ChangeEmail extends AsyncTask<String, Void, String>{
 
         @Override
+        protected void onPreExecute() {
+            HomePageView.isChangingEmail.setVisibility(View.VISIBLE);
+        }
+
+        @Override
         protected String doInBackground(String... params) {
-            String stringUrl = "http://10.0.2.2/CampusApp/changeEmail.php";
+            String stringUrl = "http://hostellocator.com/changeEmail.php";
             try {
                 URL url = new URL(stringUrl);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();

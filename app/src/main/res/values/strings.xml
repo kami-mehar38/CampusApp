@@ -42,6 +42,7 @@
     <string name="enter_username">Enter username</string>
     <string name="enter_description">Enter description (optional)</string>
     <string name="add_image_optional">Add Image (optional)</string>
+    <string name="visual_proof">Visual proof</string>
     <string-array name="login_options">
         <item>Select Account</item>
         <item>Blood Bank</item>
