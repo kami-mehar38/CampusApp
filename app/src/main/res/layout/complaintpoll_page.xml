@@ -83,18 +83,63 @@
                     />
             </android.support.design.widget.TextInputLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp">
+
             <EditText
                 android:id="@+id/ET_desciption"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:hint="@string/enter_description"
                 android:ems="10"
                 android:padding="10dp"
-                android:layout_marginTop="20dp"
+                android:layout_weight="0.8"
                 android:background="@drawable/editext_style"
+                android:maxLength="320"
                 android:textStyle="normal"
                 android:textSize="16sp"
                 android:textColor="#000"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="5dp"
+                    android:paddingLeft="5dp"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/TV_descriptionCounter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:textColor="#000"
+                        android:text="0"
+                        />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="12sp"
+                    android:textColor="#000"
+                    android:text="/"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="#000"
+                    android:text="320"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
 
             <ImageView
                 android:id="@+id/IV_visualProof"
