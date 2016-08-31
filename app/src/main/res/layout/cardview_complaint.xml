@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/CV_facultyStatus">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TV_Cname"
+            android:textColor="#000"
+            android:textSize="15sp"
+
+            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
+            android:text="@string/name" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TV_Creg"
+            android:layout_below="@+id/TV_ComplaintName"
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
+            android:text="@string/reg_id" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TV_Ccontact"
+            android:layout_below="@+id/TV_ComplaintRegistration"
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:paddingBottom="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
+            android:text="@string/contact" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TV_Cdesc"
+            android:layout_below="@+id/TV_ComplaintContact"
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
+            android:text="@string/description" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TV_ComplaintName"
+            android:layout_toEndOf="@+id/TV_Cname"
+            android:layout_toRightOf="@+id/TV_Cname"
+            android:layout_toLeftOf="@+id/IV_proof"
+            android:layout_toStartOf="@+id/IV_proof"
+            android:layout_marginBottom="10dp"
+            android:textColor="#000"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TV_ComplaintRegistration"
+            android:layout_toEndOf="@+id/TV_Creg"
+            android:layout_toRightOf="@+id/TV_Creg"
+            android:layout_toLeftOf="@+id/IV_proof"
+            android:layout_toStartOf="@+id/IV_proof"
+            android:layout_below="@+id/TV_ComplaintName"
+            android:layout_marginBottom="10dp"
+            android:textColor="#000"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TV_ComplaintContact"
+            android:layout_toEndOf="@+id/TV_Ccontact"
+            android:layout_toRightOf="@+id/TV_Ccontact"
+            android:layout_toLeftOf="@+id/IV_proof"
+            android:layout_toStartOf="@+id/IV_proof"
+            android:layout_below="@+id/TV_ComplaintRegistration"
+            android:layout_marginBottom="10dp"
+            android:textColor="#000"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TV_ComplaintDescription"
+            android:layout_toEndOf="@+id/TV_Cdesc"
+            android:layout_toRightOf="@+id/TV_Cdesc"
+            android:layout_toLeftOf="@+id/IV_proof"
+            android:layout_toStartOf="@+id/IV_proof"
+            android:layout_below="@+id/TV_ComplaintContact"
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:text="No decription"/>
+
+        <ImageView
+            android:id="@+id/IV_proof"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:contentDescription="@string/visual_proof"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"/>
+
+        <Button
+            android:layout_width="64dp"
+            android:layout_height="30dp"
+            android:id="@+id/btn_callComplaint"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/IV_proof"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/button_background"
+            android:textAllCaps="false"
+            android:text="@string/call"/>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
