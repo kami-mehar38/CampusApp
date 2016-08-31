@@ -85,9 +85,11 @@ public class LoginView extends AppCompatActivity {
                             if (spinnerOption != 0) {
                                 switch (spinnerOption) {
                                     case 1: {
-
-                                        new LoginModal(LoginView.this).login(username, password);
-
+                                        new LoginModal(LoginView.this).login(username, password, "BLOOD_BANK");
+                                        break;
+                                    }
+                                    case 2:{
+                                        new LoginModal(LoginView.this).login(username, password, "FOOD");
                                         break;
                                     }
                                 }

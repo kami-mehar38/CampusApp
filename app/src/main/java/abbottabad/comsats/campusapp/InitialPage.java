@@ -39,7 +39,7 @@ public class InitialPage extends Activity implements View.OnClickListener {
             startActivity(new Intent(this, HomePageView.class));
         }
 
-        if (APPLICATION_STATUS.equals("BLOOD_BANK")){
+        if (APPLICATION_STATUS.equals("BLOOD_BANK") || APPLICATION_STATUS.equals("FOOD")){
             Boolean LOGGED_IN = sharedPreferences.getBoolean("LOGGED_IN", false);
             if (LOGGED_IN){
                 startActivity(new Intent(this, HomePageView.class));

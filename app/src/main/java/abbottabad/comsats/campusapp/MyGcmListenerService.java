@@ -40,6 +40,12 @@ public class MyGcmListenerService extends GcmListenerService {
             }
         }
 
+        if (APPLICATION_STATUS.equals("FOOD")){
+            if (PURPOSE != null && PURPOSE.equals("FOOD_COMPLAINT")) {
+                receiveFoodComplaint(data);
+            }
+        }
+
         if (PURPOSE != null && PURPOSE.equals("STATUS_NOTIFICATION")) {
             receiveStatusNotification(data);
         }
@@ -47,6 +53,45 @@ public class MyGcmListenerService extends GcmListenerService {
         if (PURPOSE != null && PURPOSE.equals("EVENT_NOTIFICATION")) {
             receiveEventNotification(data);
         }
+    }
+
+    private void receiveFoodComplaint(Bundle data) {
+        String name = data.getString("name");
+        String reg = data.getString("reg");
+        String contact = data.getString("contact");
+        String description = data.getString("description");
+        String image = data.getString("image");
+
+        ComplaintPollController.setName(name);
+        ComplaintPollController.setRegistration(reg);
+        ComplaintPollController.setContact(contact);
+        ComplaintPollController.setDescription(description);
+        ComplaintPollController.setImage(image);
+
+        new ComplaintPollLocalModal(this).addComplaint();
+        new ComplaintPollLocalModal(this).retrieveComplaints();
+
+        if (IS_LOGGED_IN) {
+            createComplaintNotification("New Food complaint from " + name);
+        }
+    }
+
+    private void createComplaintNotification(String message) {
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        long[] pattern = {1000,1000,1000,1000,1000};
+
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
+                new Intent(this, ComplaintPollView.class), 0);
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
+                this).setSmallIcon(R.drawable.complaint)
+                .setContentTitle("Blood Bank").setVibrate(pattern)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
+                .setContentText(message)
+                .setAutoCancel(true).setSound(sound);
+        mBuilder.setContentIntent(contentIntent);
+        notificationManager.notify(GCM_NOTIFICATION_ID, mBuilder.build());
     }
 
     private void receiveStatusNotification(Bundle data) {

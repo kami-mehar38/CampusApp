@@ -129,7 +129,9 @@ public class BloodRequestsFragment extends Fragment {
                 @Override
                 public void run() {
                     if (RV_bloodRequests != null) {
-                        RV_bloodRequests.setAdapter(new RequestsViewAdapter(requestsInfoList));
+                        RequestsViewAdapter requestsViewAdapter = new RequestsViewAdapter(requestsInfoList);
+                        RV_bloodRequests.setAdapter(requestsViewAdapter);
+                        RV_bloodRequests.smoothScrollToPosition(0);
                     }
                 }
             });

@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -30,10 +31,17 @@ public class ComplaintPollView extends AppCompatActivity implements View.OnClick
     private static final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
     private final int CAMERA_REQUEST = 98;
     private Button btn_addImage;
+    private Button btn_sendComplaint;
     private ImageView IV_visualProof;
     private EditText ET_description;
+    private EditText ET_name;
+    private EditText ET_regID;
+    private EditText ET_contact;
     private TextView TV_descriptionCounter;
-    private RecyclerView RV_complaints;
+    public static RecyclerView RV_complaints;
+    private Validation validation;
+    private Bitmap photo;
+    private byte[] byte_arr;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,15 +50,15 @@ public class ComplaintPollView extends AppCompatActivity implements View.OnClick
         SharedPreferences applicationStatus = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         String APPLICATION_STATUS = applicationStatus.getString("APPLICATION_STATUS", null);
         if (APPLICATION_STATUS != null) {
-            if (APPLICATION_STATUS.equals("BLOOD_BANK")){
+            if (APPLICATION_STATUS.equals("FOOD")){
                 setContentView(R.layout.complaintpoll_page_admin);
                 RV_complaints = (RecyclerView) findViewById(R.id.RV_complaints);
                 RV_complaints.setHasFixedSize(true);
                 LinearLayoutManager layoutManager = new LinearLayoutManager(this);
                 layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                 RV_complaints.setLayoutManager(layoutManager);
-
-                List<ComplaintsInfo> complaintsInfos = new ArrayList<>();
+                new ComplaintPollLocalModal(this).retrieveComplaints();
+              /*  List<ComplaintsInfo> complaintsInfos = new ArrayList<>();
                 ComplaintsInfo complaintsInfo = new ComplaintsInfo();
                 complaintsInfo.setName("Kamran Ramzan");
                 complaintsInfo.setRegistration("sp13-bse-098");
@@ -58,7 +66,7 @@ public class ComplaintPollView extends AppCompatActivity implements View.OnClick
                 //complaintsInfo.setDescription("Descriptiojiuguivfuibfunyiyfsrwci7 8 68ec64w6uujfbhjjkyrb4ctn of complaint that you are intended to process.");
                 complaintsInfos.add(complaintsInfo);
                 ComplaintPollVIewAdapter complaintPollVIewAdapter = new ComplaintPollVIewAdapter(complaintsInfos);
-                RV_complaints.setAdapter(complaintPollVIewAdapter);
+                RV_complaints.setAdapter(complaintPollVIewAdapter);*/
             } else {
                 setContentView(R.layout.complaintpoll_page_others);
                 btn_addImage = (Button) findViewById(R.id.btn_addImage);
@@ -86,6 +94,13 @@ public class ComplaintPollView extends AppCompatActivity implements View.OnClick
 
                     }
                 });
+
+                ET_name = (EditText) findViewById(R.id.ET_name);
+                ET_regID = (EditText) findViewById(R.id.ET_regID);
+                ET_contact =(EditText) findViewById(R.id.ET_contact);
+                btn_sendComplaint = (Button) findViewById(R.id.btn_sendComplaint);
+                btn_sendComplaint.setOnClickListener(this);
+                validation = new Validation();
             }
         }
     }
@@ -98,14 +113,27 @@ public class ComplaintPollView extends AppCompatActivity implements View.OnClick
                 startActivityForResult(cameraIntent, CAMERA_REQUEST);
                 break;
             }
+            case R.id.btn_sendComplaint: {
+                String name = ET_name.getText().toString();
+                String contact = ET_contact.getText().toString();
+                String regID = ET_regID.getText().toString();
+                String description = ET_description.getText().toString();
+                if (validation.validateName(name)){
+                    if (validation.validateReg(regID)){
+                        if (validation.validatePhoneNumber(contact)){
+                            new ComplaintPollModal(ComplaintPollView.this).sendComplaint(name, regID, contact, description);
+                        } else Toast.makeText(ComplaintPollView.this, "Invalid contact #", Toast.LENGTH_SHORT).show();
+                    } else Toast.makeText(ComplaintPollView.this, "Invalid registration id", Toast.LENGTH_SHORT).show();
+                } else Toast.makeText(ComplaintPollView.this, "Invalid name", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
-            Bitmap photo = (Bitmap) data.getExtras().get("data");
-            byte[] byte_arr = getImageBytes(photo);
+            photo = (Bitmap) data.getExtras().get("data");
+            byte_arr = getImageBytes(photo);
 
            // Toast.makeText(ComplaintPollView.this, byte_arr.toString(), Toast.LENGTH_SHORT).show();
 

@@ -47,7 +47,7 @@
     <string-array name="login_options">
         <item>Select Account</item>
         <item>Blood Bank</item>
-        <item>Food and others</item>
+        <item>Food</item>
     </string-array>
     <string-array name="signup_options">
         <item>Select sign up option</item>
