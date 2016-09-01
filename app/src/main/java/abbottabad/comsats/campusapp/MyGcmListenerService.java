@@ -56,24 +56,37 @@ public class MyGcmListenerService extends GcmListenerService {
     }
 
     private void receiveFoodComplaint(Bundle data) {
-        String name = data.getString("name");
-        String reg = data.getString("reg");
-        String contact = data.getString("contact");
-        String description = data.getString("description");
-        String image = data.getString("image");
+        final String name = data.getString("name");
+        final String reg = data.getString("reg");
+        final String contact = data.getString("contact");
+        final String description = data.getString("description");
 
         ComplaintPollController.setName(name);
         ComplaintPollController.setRegistration(reg);
         ComplaintPollController.setContact(contact);
         ComplaintPollController.setDescription(description);
-        ComplaintPollController.setImage(image);
 
         new ComplaintPollLocalModal(this).addComplaint();
-        new ComplaintPollLocalModal(this).retrieveComplaints();
 
-        if (IS_LOGGED_IN) {
-            createComplaintNotification("New Food complaint from " + name);
-        }
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                if (ComplaintPollView.complaintPollVIewAdapter != null) {
+                    ComplaintsInfo complaintsInfo = new ComplaintsInfo();
+                    complaintsInfo.setName(name);
+                    complaintsInfo.setRegistration(reg);
+                    complaintsInfo.setContact(contact);
+                    complaintsInfo.setDescription(description);
+                    ComplaintPollView.complaintPollVIewAdapter.add(complaintsInfo, 0);
+                    ComplaintPollView.RV_complaints.smoothScrollToPosition(0);
+                }
+
+                if (IS_LOGGED_IN) {
+                    createComplaintNotification("New Food complaint from " + name);
+                }
+            }
+        });
     }
 
     private void createComplaintNotification(String message) {

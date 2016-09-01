@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,10 +23,9 @@ import java.util.List;
 public class ComplaintPollVIewAdapter extends RecyclerView.Adapter<ComplaintPollVIewAdapter.ViewHolder>{
 
 
-    private List<ComplaintsInfo> complaintsInfoList;
+    private List<ComplaintsInfo> complaintsInfoList = new ArrayList<>();
 
-    public ComplaintPollVIewAdapter(List<ComplaintsInfo> complaintsInfoList) {
-        this.complaintsInfoList = complaintsInfoList;
+    public ComplaintPollVIewAdapter() {
     }
 
     @Override
@@ -44,12 +44,6 @@ public class ComplaintPollVIewAdapter extends RecyclerView.Adapter<ComplaintPoll
         if (description != null && !description.isEmpty()){
             holder.TV_complaintDescription.setText(description);
         }
-        String imageString = complaintsInfo.getImage();
-        if (imageString != null && !imageString.isEmpty()){
-            byte[] imageByteArray = Base64.decode(imageString, 0);
-            Bitmap bitmap = BitmapFactory.decodeByteArray(imageByteArray, 0, imageByteArray.length);
-            holder.IV_proof.setImageBitmap(bitmap);
-        }
 
         holder.btn_callComplaint.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,18 +53,21 @@ public class ComplaintPollVIewAdapter extends RecyclerView.Adapter<ComplaintPoll
                 v.getContext().startActivity(intent);
             }
         });
-        holder.btn_deleteComplaint.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new ComplaintPollLocalModal(v.getContext()).
-                        deleteComplaint(holder.TV_complaintRegistrtion.getText().toString().trim());
-            }
-        });
     }
 
     @Override
     public int getItemCount() {
         return complaintsInfoList.size();
+    }
+
+    public void add(ComplaintsInfo complaintsInfo, int position){
+        complaintsInfoList.add(position,complaintsInfo);
+        notifyItemInserted(position);
+    }
+
+    public void remove(int position) {
+        complaintsInfoList.remove(position);
+        notifyItemRemoved(position);
     }
 
     protected class ViewHolder extends RecyclerView.ViewHolder{
@@ -79,7 +76,6 @@ public class ComplaintPollVIewAdapter extends RecyclerView.Adapter<ComplaintPoll
         private TextView TV_complaintRegistrtion;
         private TextView TV_complaintContact;
         private TextView TV_complaintDescription;
-        private ImageView IV_proof;
         private Button btn_callComplaint;
         private Button btn_deleteComplaint;
         public ViewHolder(View itemView) {
@@ -88,9 +84,16 @@ public class ComplaintPollVIewAdapter extends RecyclerView.Adapter<ComplaintPoll
             TV_complaintRegistrtion = (TextView) itemView.findViewById(R.id.TV_ComplaintRegistration);
             TV_complaintContact = (TextView) itemView.findViewById(R.id.TV_ComplaintContact);
             TV_complaintDescription = (TextView) itemView.findViewById(R.id.TV_ComplaintDescription);
-            IV_proof = (ImageView) itemView.findViewById(R.id.IV_proof);
             btn_callComplaint = (Button) itemView.findViewById(R.id.btn_callComplaint);
             btn_deleteComplaint = (Button) itemView.findViewById(R.id.btn_deleteComplaint);
+            btn_deleteComplaint.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new ComplaintPollLocalModal(v.getContext()).
+                            deleteComplaint(TV_complaintRegistrtion.getText().toString().trim());
+                    remove(getAdapterPosition());
+                }
+            });
         }
     }
 }

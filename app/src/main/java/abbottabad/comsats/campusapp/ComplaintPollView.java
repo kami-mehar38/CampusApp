@@ -25,26 +25,23 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
+import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
+
 /**
  * This project CampusApp is created by Kamran Ramzan on 8/30/16.
  */
 public class ComplaintPollView extends AppCompatActivity implements View.OnClickListener {
 
     private static final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
-    private final int CAMERA_REQUEST = 98;
-    private Button btn_addImage;
     private Button btn_sendComplaint;
-    private ImageView IV_visualProof;
     private EditText ET_description;
     private EditText ET_name;
     private EditText ET_regID;
     private EditText ET_contact;
     private TextView TV_descriptionCounter;
     public static RecyclerView RV_complaints;
+    public static ComplaintPollVIewAdapter complaintPollVIewAdapter;
     private Validation validation;
-    private Bitmap photo;
-    private byte[] byte_arr;
-    private String encodedImage;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,15 +59,13 @@ public class ComplaintPollView extends AppCompatActivity implements View.OnClick
                     layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                     RV_complaints.setLayoutManager(layoutManager);
                     RV_complaints.addItemDecoration(new RecyclerViewDivider(this));
+                    complaintPollVIewAdapter = new ComplaintPollVIewAdapter();
+                    ScaleInAnimationAdapter scaleInAnimationAdapter = new ScaleInAnimationAdapter(complaintPollVIewAdapter);
+                    RV_complaints.setAdapter(scaleInAnimationAdapter);
                     new ComplaintPollLocalModal(this).retrieveComplaints();
                 }
             } else {
                 setContentView(R.layout.complaintpoll_page_others);
-                btn_addImage = (Button) findViewById(R.id.btn_addImage);
-                if (btn_addImage != null) {
-                    btn_addImage.setOnClickListener(this);
-                }
-                IV_visualProof = (ImageView) findViewById(R.id.IV_visualProof);
                 TV_descriptionCounter = (TextView) findViewById(R.id.TV_descriptionCounter);
                 ET_description = (EditText) findViewById(R.id.ET_desciption);
                 ET_description.addTextChangedListener(new TextWatcher() {
@@ -102,25 +97,11 @@ public class ComplaintPollView extends AppCompatActivity implements View.OnClick
                 validation = new Validation();
             }
         }
-        photo = BitmapFactory.decodeResource(ComplaintPollView.this.getResources(),
-                R.drawable.check);
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        photo.compress(Bitmap.CompressFormat.JPEG, 50, stream);
-        byte[] byte_arr = stream.toByteArray();
-        encodedImage = Base64.encodeToString(byte_arr, 0);
-        /*byte[] imageByteArray = Base64.decode(encodedString, 0);
-        Bitmap bitmap = BitmapFactory.decodeByteArray(imageByteArray, 0, imageByteArray.length);
-        IV_visualProof.setImageBitmap(bitmap);*/
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.btn_addImage: {
-                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(cameraIntent, CAMERA_REQUEST);
-                break;
-            }
             case R.id.btn_sendComplaint: {
                 String name = ET_name.getText().toString();
                 String contact = ET_contact.getText().toString();
@@ -129,7 +110,7 @@ public class ComplaintPollView extends AppCompatActivity implements View.OnClick
                 if (validation.validateName(name)){
                     if (validation.validateReg(regID)){
                         if (validation.validatePhoneNumber(contact)){
-                            new ComplaintPollModal(ComplaintPollView.this).sendComplaint(name, regID, contact, description, encodedImage);
+                            new ComplaintPollModal(ComplaintPollView.this).sendComplaint(name, regID, contact, description);
                         } else Toast.makeText(ComplaintPollView.this, "Invalid contact #", Toast.LENGTH_SHORT).show();
                     } else Toast.makeText(ComplaintPollView.this, "Invalid registration id", Toast.LENGTH_SHORT).show();
                 } else Toast.makeText(ComplaintPollView.this, "Invalid name", Toast.LENGTH_SHORT).show();
@@ -137,19 +118,4 @@ public class ComplaintPollView extends AppCompatActivity implements View.OnClick
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
-            //photo = (Bitmap) data.getExtras().get("data");
-            photo = BitmapFactory.decodeResource(ComplaintPollView.this.getResources(),
-                    R.drawable.track);
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            photo.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-            byte[] byte_arr = stream.toByteArray();
-            String encodedString = Base64.encodeToString(byte_arr, 0);
-            byte[] imageByteArray = Base64.decode(encodedString, 0);
-            Bitmap bitmap = BitmapFactory.decodeByteArray(imageByteArray, 0, imageByteArray.length);
-            IV_visualProof.setImageBitmap(bitmap);
-        }
-    }
 }

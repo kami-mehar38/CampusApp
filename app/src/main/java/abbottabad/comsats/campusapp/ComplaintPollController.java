@@ -9,7 +9,6 @@ public class ComplaintPollController {
     private static String registration;
     private static String contact;
     private static String description;
-    private static String image;
 
     public static String getName() {
         return name;
@@ -41,13 +40,5 @@ public class ComplaintPollController {
 
     public static void setDescription(String description) {
         ComplaintPollController.description = description;
-    }
-
-    public static String getImage() {
-        return image;
-    }
-
-    public static void setImage(String image) {
-        ComplaintPollController.image = image;
     }
 }

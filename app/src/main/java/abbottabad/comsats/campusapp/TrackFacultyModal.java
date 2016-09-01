@@ -29,6 +29,8 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
+
 /**
  * This project CampusApp is created by Kamran Ramzan on 8/16/16.
  */
@@ -151,7 +153,10 @@ public class TrackFacultyModal {
                     textView.setText(statusInfo.getStatus());
                 }
                 TrackFacultyView.statusInfoList = s;
-                recyclerView.setAdapter(new StatusViewAdapter(s));
+                StatusViewAdapter statusViewAdapter = new StatusViewAdapter(s);
+                ScaleInAnimationAdapter scaleInAnimationAdapter = new ScaleInAnimationAdapter(statusViewAdapter);
+                scaleInAnimationAdapter.setFirstOnly(false);
+                recyclerView.setAdapter(scaleInAnimationAdapter);
                 swipeRefreshLayout.setRefreshing(false);
 
             } else {

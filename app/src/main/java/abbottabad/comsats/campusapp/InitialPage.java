@@ -72,7 +72,7 @@ public class InitialPage extends Activity implements View.OnClickListener {
         isPlayServicesAvailable();
         SharedPreferences sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         final String APPLICATION_STATUS = sharedPreferences.getString("APPLICATION_STATUS", "NULL");
-        if (APPLICATION_STATUS.equals("STUDENT")){
+        if (APPLICATION_STATUS.equals("STUDENT") || APPLICATION_STATUS.equals("TEACHER")){
             finish();
         }
 

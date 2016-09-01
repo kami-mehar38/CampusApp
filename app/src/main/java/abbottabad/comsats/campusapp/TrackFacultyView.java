@@ -116,7 +116,9 @@ public class TrackFacultyView extends Activity {
                 if (APPLICATION_STATUS.equals("TEACHER")) {
                     new TrackFacultyModal(TrackFacultyView.this).
                             retrieveStatus(recyclerView, SRL_facultyStatus, TV_myStatus, TEACHER_ID);
-                }else if (APPLICATION_STATUS.equals("BLOOD_BANK") || APPLICATION_STATUS.equals("STUDENT")){
+                }else if (APPLICATION_STATUS.equals("BLOOD_BANK")
+                        || APPLICATION_STATUS.equals("STUDENT") ||
+                        APPLICATION_STATUS.equals("FOOD")){
                     new TrackFacultyModal(TrackFacultyView.this).retrieveStatus(recyclerView, SRL_facultyStatus, TV_myStatus, "ALL");
                 }
             }

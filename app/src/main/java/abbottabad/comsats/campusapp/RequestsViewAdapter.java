@@ -39,7 +39,6 @@ public class RequestsViewAdapter extends RecyclerView.Adapter <RequestsViewAdapt
         holder.TV_requesterContact.setText(requestsInfo.getContact());
     }
 
-
     @Override
     public int getItemCount() {
         return requestsInfoList.size();

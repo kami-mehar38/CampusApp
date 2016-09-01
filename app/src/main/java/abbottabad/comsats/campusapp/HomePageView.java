@@ -72,7 +72,7 @@ public class HomePageView extends AppCompatActivity {
             RL_timetable.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    startActivity(new Intent(HomePageView.this, TimeTableView.class));
                 }
             });
         }
@@ -305,7 +305,7 @@ public class HomePageView extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         final String APPLICATION_STATUS = sharedPreferences.getString("APPLICATION_STATUS", "NULL");
-        if (APPLICATION_STATUS.equals("BLOOD_BANK")) {
+        if (APPLICATION_STATUS.equals("BLOOD_BANK") || APPLICATION_STATUS.equals("FOOD")) {
             getMenuInflater().inflate(R.menu.menu_main, menu);
 
         }
