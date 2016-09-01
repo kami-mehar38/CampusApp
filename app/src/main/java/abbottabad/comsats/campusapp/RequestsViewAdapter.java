@@ -8,7 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,11 +18,11 @@ import java.util.List;
  */
 public class RequestsViewAdapter extends RecyclerView.Adapter <RequestsViewAdapter.ViewHolder> {
 
-    private List<RequestsInfo> requestsInfoList;
+    private List<RequestsInfo> requestsInfoList = new ArrayList<>();
 
-    public RequestsViewAdapter(List<RequestsInfo> requestsInfoList){
+   /* public RequestsViewAdapter(List<RequestsInfo> requestsInfoList){
         this.requestsInfoList = requestsInfoList;
-    }
+    }*/
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -41,6 +43,16 @@ public class RequestsViewAdapter extends RecyclerView.Adapter <RequestsViewAdapt
     @Override
     public int getItemCount() {
         return requestsInfoList.size();
+    }
+
+    public void add(RequestsInfo requestsInfo, int position){
+        requestsInfoList.add(position,requestsInfo);
+        notifyItemInserted(position);
+    }
+
+    public void remove(int position) {
+        requestsInfoList.remove(position);
+        notifyItemRemoved(position);
     }
 
     protected class ViewHolder extends RecyclerView.ViewHolder{
@@ -85,6 +97,7 @@ public class RequestsViewAdapter extends RecyclerView.Adapter <RequestsViewAdapt
                 @Override
                 public void onClick(View v) {
                     new BloodBankLocalModal(itemView.getContext()).deleteRequest(TV_requesterReg.getText().toString());
+                    remove(getAdapterPosition());
                 }
             });
         }

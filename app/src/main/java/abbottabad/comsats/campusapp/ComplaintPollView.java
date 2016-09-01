@@ -12,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,15 +63,6 @@ public class ComplaintPollView extends AppCompatActivity implements View.OnClick
                     RV_complaints.addItemDecoration(new RecyclerViewDivider(this));
                     new ComplaintPollLocalModal(this).retrieveComplaints();
                 }
-              /*  List<ComplaintsInfo> complaintsInfos = new ArrayList<>();
-                ComplaintsInfo complaintsInfo = new ComplaintsInfo();
-                complaintsInfo.setName("Kamran Ramzan");
-                complaintsInfo.setRegistration("sp13-bse-098");
-                complaintsInfo.setContact("03450578052");
-                //complaintsInfo.setDescription("Descriptiojiuguivfuibfunyiyfsrwci7 8 68ec64w6uujfbhjjkyrb4ctn of complaint that you are intended to process.");
-                complaintsInfos.add(complaintsInfo);
-                ComplaintPollVIewAdapter complaintPollVIewAdapter = new ComplaintPollVIewAdapter(complaintsInfos);
-                RV_complaints.setAdapter(complaintPollVIewAdapter);*/
             } else {
                 setContentView(R.layout.complaintpoll_page_others);
                 btn_addImage = (Button) findViewById(R.id.btn_addImage);
@@ -138,13 +131,19 @@ public class ComplaintPollView extends AppCompatActivity implements View.OnClick
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
             photo = (Bitmap) data.getExtras().get("data");
-            byte_arr = getImageBytes(photo);
 
-/*
-            Toast.makeText(ComplaintPollView.this, byte_arr.toString(), Toast.LENGTH_SHORT).show();
-*/
 
-            Bitmap bitmap = BitmapFactory.decodeByteArray(byte_arr, 0, byte_arr.length);
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+
+            photo.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+            byte[] byte_arr = stream.toByteArray();
+
+            String encodedString = Base64.encodeToString(byte_arr, 0);
+
+
+            byte[] imageByteArray = Base64.decode(encodedString, 0);
+
+            Bitmap bitmap = BitmapFactory.decodeByteArray(imageByteArray, 0, imageByteArray.length);
             IV_visualProof.setImageBitmap(bitmap);
         }
     }

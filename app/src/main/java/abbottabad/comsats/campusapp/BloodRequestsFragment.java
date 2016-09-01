@@ -9,6 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
+import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
+import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
+
 /**
  * This project CampusApp is created by Kamran Ramzan on 6/4/16.
  */
@@ -18,6 +22,7 @@ public class BloodRequestsFragment extends Fragment {
 
     private BloodBankLocalModal bloodBankLocalModal;
     public static RecyclerView RV_bloodRequests;
+    public static RequestsViewAdapter requestsViewAdapter;
 
     public BloodRequestsFragment() {
     }
@@ -48,6 +53,12 @@ public class BloodRequestsFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         RV_bloodRequests.setLayoutManager(layoutManager);
+        RV_bloodRequests.addItemDecoration(new RecyclerViewDivider(getContext()));
+        RV_bloodRequests.setItemAnimator(new SlideInLeftAnimator());
+        requestsViewAdapter = new RequestsViewAdapter();
+        ScaleInAnimationAdapter scaleInAnimationAdapter = new ScaleInAnimationAdapter(requestsViewAdapter);
+        scaleInAnimationAdapter.setFirstOnly(false);
+        RV_bloodRequests.setAdapter(scaleInAnimationAdapter);
         bloodBankLocalModal.viewBloodRequests();
     }
 }

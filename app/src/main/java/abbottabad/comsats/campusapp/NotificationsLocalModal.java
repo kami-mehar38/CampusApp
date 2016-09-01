@@ -5,8 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +12,7 @@ import java.util.List;
 /**
  * This project CampusApp is created by Kamran Ramzan on 8/21/16.
  */
-public class EventNotificationsLocalModal extends SQLiteOpenHelper {
+public class NotificationsLocalModal extends SQLiteOpenHelper {
 
     private static int VERSION = 1;
     private static String DATABASE_NAME = "TRACKFACULTY.db";
@@ -24,7 +22,7 @@ public class EventNotificationsLocalModal extends SQLiteOpenHelper {
     private static String COL_IS_MINE = "IS_MINE";
 
 
-    public EventNotificationsLocalModal(Context context) {
+    public NotificationsLocalModal(Context context) {
         super(context, DATABASE_NAME, null, VERSION);
     }
 
@@ -58,38 +56,38 @@ public class EventNotificationsLocalModal extends SQLiteOpenHelper {
     }
 
     public void deleteNotifications(String[] notifications){
-        SQLiteDatabase db = EventNotificationsLocalModal.this.getWritableDatabase();
+        SQLiteDatabase db = NotificationsLocalModal.this.getWritableDatabase();
         for (String notification : notifications) {
             db.delete(TABLE_NAME, COL_NOTIFICATION + " = ?", new String[]{notification});
         }
     }
 
     public void deleteAll(){
-        SQLiteDatabase db = EventNotificationsLocalModal.this.getWritableDatabase();
+        SQLiteDatabase db = NotificationsLocalModal.this.getWritableDatabase();
         db.delete(TABLE_NAME, null, null);
     }
 
     public void retrieveNotifications(){
 
-        SQLiteDatabase db = EventNotificationsLocalModal.this.getReadableDatabase();
+        SQLiteDatabase db = NotificationsLocalModal.this.getReadableDatabase();
         String selectQuery= "SELECT * FROM " +TABLE_NAME;
         Cursor cursor = db.rawQuery(selectQuery, null);
         cursor.moveToFirst();
-        List<EventNotificationInfo> eventNotificationInfoList = new ArrayList<>();
-        EventNotificationInfo[] eventNotificationInfos = new EventNotificationInfo[cursor.getCount()];
+        List<NotificationInfo> notificationInfoList = new ArrayList<>();
+        NotificationInfo[] notificationInfos = new NotificationInfo[cursor.getCount()];
         while (!cursor.isAfterLast()){
-            eventNotificationInfos[cursor.getPosition()] = new EventNotificationInfo();
-            eventNotificationInfos[cursor.getPosition()].setNotification(cursor.getString(1));
-            eventNotificationInfos[cursor.getPosition()].setDateTime(cursor.getString(2));
-            eventNotificationInfos[cursor.getPosition()].setMine(cursor.getInt(3));
-            eventNotificationInfoList.add(eventNotificationInfos[cursor.getPosition()]);
+            notificationInfos[cursor.getPosition()] = new NotificationInfo();
+            notificationInfos[cursor.getPosition()].setNotification(cursor.getString(1));
+            notificationInfos[cursor.getPosition()].setDateTime(cursor.getString(2));
+            notificationInfos[cursor.getPosition()].setMine(cursor.getInt(3));
+            notificationInfoList.add(notificationInfos[cursor.getPosition()]);
             cursor.moveToNext();
         }
-        if (NotificationsView.eventNotificationsAdapter != null && NotificationsView.listView != null){
-            for (int i = 0; i < eventNotificationInfoList.size(); i++) {
-                NotificationsView.eventNotificationsAdapter.add(eventNotificationInfoList.get(i));
+        if (NotificationsView.notificationsAdapter != null && NotificationsView.listView != null){
+            for (int i = 0; i < notificationInfoList.size(); i++) {
+                NotificationsView.notificationsAdapter.add(notificationInfoList.get(i));
             }
-            NotificationsView.listView.setSelection(NotificationsView.eventNotificationsAdapter.getCount());
+            NotificationsView.listView.setSelection(NotificationsView.notificationsAdapter.getCount());
         }
 
         cursor.close();

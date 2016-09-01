@@ -62,7 +62,6 @@ public class BloodBankLocalModal extends SQLiteOpenHelper {
         String selectQuery= "SELECT * FROM " +TABLE_NAME+ " ORDER BY " +SERIAL+ " DESC";
         Cursor cursor = db.rawQuery(selectQuery, null);
         cursor.moveToFirst();
-        final List<RequestsInfo> requestsInfoList = new ArrayList<>();
         RequestsInfo[] requestsInfos = new RequestsInfo[cursor.getCount()];
         while (!cursor.isAfterLast()){
             requestsInfos[cursor.getPosition()] = new RequestsInfo();
@@ -70,28 +69,16 @@ public class BloodBankLocalModal extends SQLiteOpenHelper {
             requestsInfos[cursor.getPosition()].setRegistration(cursor.getString(2));
             requestsInfos[cursor.getPosition()].setBloodType(cursor.getString(4));
             requestsInfos[cursor.getPosition()].setContact(cursor.getString(3));
-            requestsInfoList.add(requestsInfos[cursor.getPosition()]);
+            BloodRequestsFragment.requestsViewAdapter.add(requestsInfos[cursor.getPosition()], cursor.getPosition());
             cursor.moveToNext();
         }
         cursor.close();
-        Handler handler = new Handler(Looper.getMainLooper());
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                if (BloodRequestsFragment.RV_bloodRequests != null) {
-                    RequestsViewAdapter requestsViewAdapter = new RequestsViewAdapter(requestsInfoList);
-                    BloodRequestsFragment.RV_bloodRequests.setAdapter(requestsViewAdapter);
-                    BloodRequestsFragment.RV_bloodRequests.smoothScrollToPosition(0);
-                }
-            }
-        });
         db.close();
     }
 
     public void deleteRequest(String reg){
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_NAME, COL_REG + " = ?", new String[]{reg});
-        viewBloodRequests();
     }
 
 }

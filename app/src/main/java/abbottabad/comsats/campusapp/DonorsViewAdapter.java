@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.TimeZone;
@@ -21,7 +22,7 @@ import java.util.TimeZone;
  */
 public class DonorsViewAdapter extends RecyclerView.Adapter <DonorsViewAdapter.ViewHolder> {
 
-    private List<DonorsInfo> donorsInfoList;
+    private List<DonorsInfo> donorsInfoList = new ArrayList<>();
 
     public DonorsViewAdapter(List<DonorsInfo> donorsInfoList) {
         this.donorsInfoList = donorsInfoList;

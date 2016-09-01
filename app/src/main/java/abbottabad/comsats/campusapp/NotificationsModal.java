@@ -28,11 +28,11 @@ import java.util.Date;
 /**
  * This project CampusApp is created by Kamran Ramzan on 8/22/16.
  */
-public class EventNotificationModal {
+public class NotificationsModal {
 
     private Context context;
 
-    public EventNotificationModal(Context context) {
+    public NotificationsModal(Context context) {
         this.context = context;
     }
 
@@ -113,16 +113,16 @@ public class EventNotificationModal {
                         NotificationsController.setNotification(message);
                         NotificationsController.setDateTime(currentDateTimeString);
                         NotificationsController.setMine(1);
-                        new EventNotificationsLocalModal(context).addEventNotification();
+                        new NotificationsLocalModal(context).addEventNotification();
 
-                        EventNotificationInfo eventNotificationInfo = new EventNotificationInfo();
-                        eventNotificationInfo.setNotification(message);
-                        eventNotificationInfo.setDateTime(currentDateTimeString);
-                        eventNotificationInfo.setMine(1);
+                        NotificationInfo notificationInfo = new NotificationInfo();
+                        notificationInfo.setNotification(message);
+                        notificationInfo.setDateTime(currentDateTimeString);
+                        notificationInfo.setMine(1);
 
-                        NotificationsView.eventNotificationsAdapter.add(eventNotificationInfo);
-                        NotificationsView.eventNotificationsAdapter.notifyDataSetChanged();
-                        NotificationsView.listView.setSelection(NotificationsView.eventNotificationsAdapter.getCount()-1);
+                        NotificationsView.notificationsAdapter.add(notificationInfo);
+                        NotificationsView.notificationsAdapter.notifyDataSetChanged();
+                        NotificationsView.listView.setSelection(NotificationsView.notificationsAdapter.getCount()-1);
                         break;
                     }
                     case "ERROR": {

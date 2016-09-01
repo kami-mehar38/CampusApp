@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -24,6 +25,11 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
+
+import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
+import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
+
+import static abbottabad.comsats.campusapp.BloodDonorsFragment.*;
 
 /**
  * This project CampusApp is created by Kamran Ramzan on 6/4/16.
@@ -146,6 +152,9 @@ public class BloodBankModal {
     private class RetrieveDonors extends AsyncTask<String, Void, List<DonorsInfo>> {
 
         private ProgressDialog progressDialog;
+        public RetrieveDonors( ) {
+
+        }
 
         @Override
         protected void onPreExecute() {
@@ -213,9 +222,10 @@ public class BloodBankModal {
         protected void onPostExecute(List<DonorsInfo> s) {
             progressDialog.cancel();
             if (s != null) {
-                if (BloodDonorsFragment.recyclerView != null) {
-                    BloodDonorsFragment.recyclerView.setAdapter(new DonorsViewAdapter(s));
-                }
+                DonorsViewAdapter donorsViewAdapter = new DonorsViewAdapter(s);
+                ScaleInAnimationAdapter scaleInAnimationAdapter = new ScaleInAnimationAdapter(donorsViewAdapter);
+                scaleInAnimationAdapter.setFirstOnly(false);
+                recyclerView.setAdapter(scaleInAnimationAdapter);
             } else {
                 Toast.makeText(context, "Couldn't retrieve donors.", Toast.LENGTH_LONG).show();
             }

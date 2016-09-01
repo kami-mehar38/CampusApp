@@ -3,7 +3,7 @@ package abbottabad.comsats.campusapp;
 /**
  * This project CampusApp is created by Kamran Ramzan on 8/20/16.
  */
-public class EventNotificationInfo {
+public class NotificationInfo {
 
     private String notification;
     private String dateTime;

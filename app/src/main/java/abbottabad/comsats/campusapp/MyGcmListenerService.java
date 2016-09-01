@@ -106,21 +106,21 @@ public class MyGcmListenerService extends GcmListenerService {
         NotificationsController.setNotification(message);
         NotificationsController.setDateTime(currentDateTimeString);
         NotificationsController.setMine(0);
-        new EventNotificationsLocalModal(this).addEventNotification();
+        new NotificationsLocalModal(this).addEventNotification();
 
-        final EventNotificationInfo eventNotificationInfo = new EventNotificationInfo();
-        eventNotificationInfo.setNotification(message);
-        eventNotificationInfo.setDateTime(currentDateTimeString);
-        eventNotificationInfo.setMine(0);
+        final NotificationInfo notificationInfo = new NotificationInfo();
+        notificationInfo.setNotification(message);
+        notificationInfo.setDateTime(currentDateTimeString);
+        notificationInfo.setMine(0);
 
         Handler handler = new Handler(Looper.getMainLooper());
         handler.post(new Runnable() {
             @Override
             public void run() {
-                if (NotificationsView.eventNotificationsAdapter != null && NotificationsView.listView != null){
-                    NotificationsView.eventNotificationsAdapter.add(eventNotificationInfo);
-                    NotificationsView.eventNotificationsAdapter.notifyDataSetChanged();
-                    NotificationsView.listView.setSelection(NotificationsView.eventNotificationsAdapter.getCount());
+                if (NotificationsView.notificationsAdapter != null && NotificationsView.listView != null){
+                    NotificationsView.notificationsAdapter.add(notificationInfo);
+                    NotificationsView.notificationsAdapter.notifyDataSetChanged();
+                    NotificationsView.listView.setSelection(NotificationsView.notificationsAdapter.getCount());
                 }
             }
         });
@@ -165,10 +165,10 @@ public class MyGcmListenerService extends GcmListenerService {
     }
 
     private void receiveBloodRequest(Bundle data) {
-        String stdName = data.getString("stdName");
-        String stdReg = data.getString("stdReg");
-        String stdContact = data.getString("stdContact");
-        String bloodType = data.getString("bloodType");
+        final String stdName = data.getString("stdName");
+        final String stdReg = data.getString("stdReg");
+        final String stdContact = data.getString("stdContact");
+        final String bloodType = data.getString("bloodType");
 
         BloodBankController.setStdName(stdName);
         BloodBankController.setStdReg(stdReg);
@@ -176,7 +176,21 @@ public class MyGcmListenerService extends GcmListenerService {
         BloodBankController.setBloodType(bloodType);
 
         new BloodBankLocalModal(this).addBloodRequest();
-        new BloodBankLocalModal(this).viewBloodRequests();
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                if (BloodRequestsFragment.requestsViewAdapter != null) {
+                    RequestsInfo requestsInfo = new RequestsInfo();
+                    requestsInfo.setName(stdName);
+                    requestsInfo.setRegistration(stdReg);
+                    requestsInfo.setContact(stdContact);
+                    requestsInfo.setBloodType(bloodType);
+                    BloodRequestsFragment.requestsViewAdapter.add(requestsInfo, 0);
+                    BloodRequestsFragment.RV_bloodRequests.smoothScrollToPosition(0);
+                }
+            }
+        });
 
         if (IS_LOGGED_IN) {
             createBloodNotification("New Blood request from " + stdName);

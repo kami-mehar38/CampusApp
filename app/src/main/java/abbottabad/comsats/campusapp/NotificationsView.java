@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
@@ -30,15 +29,15 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
     public static ImageButton btnSend;
     public static EditText ET_message;
     public static ProgressBar progressBar;
-    public static EventNotificationsAdapter eventNotificationsAdapter;
+    public static NotificationsAdapter notificationsAdapter;
     public static boolean IS_IN_ACTION_MODE = false;
     private String REG_ID;
     private Toolbar toolbar;
     private int counter = 0;
     private ArrayList<Integer> selectedItems;
-    private ArrayList<EventNotificationInfo> eventNotificationInfos;
+    private ArrayList<NotificationInfo> notificationInfos;
     private TextView notificationTitle;
-    private EventNotificationsLocalModal eventNotificationsLocalModal;
+    private NotificationsLocalModal notificationsLocalModal;
     private  CheckBox CB_selectAll;
     public static boolean IS_IN_SELECT_ALL_MODE = false;
 
@@ -50,7 +49,7 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
         setSupportActionBar(toolbar);
         SharedPreferences sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         REG_ID = sharedPreferences.getString("REG_ID", null);
-        eventNotificationsLocalModal = new EventNotificationsLocalModal(this);
+        notificationsLocalModal = new NotificationsLocalModal(this);
         IS_IN_ACTION_MODE = false;
         IS_IN_SELECT_ALL_MODE = false;
 
@@ -67,12 +66,12 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
         if (progressBar != null) {
             progressBar.setVisibility(View.GONE);
         }
-        eventNotificationsAdapter = new EventNotificationsAdapter(NotificationsView.this, R.layout.chat_right);
-        listView.setAdapter(eventNotificationsAdapter);
+        notificationsAdapter = new NotificationsAdapter(NotificationsView.this, R.layout.chat_right);
+        listView.setAdapter(notificationsAdapter);
         listView.setClickable(false);
-        eventNotificationsLocalModal.retrieveNotifications();
+        notificationsLocalModal.retrieveNotifications();
         selectedItems = new ArrayList<>();
-        eventNotificationInfos = new ArrayList<>();
+        notificationInfos = new ArrayList<>();
         //event for button SEND
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +80,7 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
                     Toast.makeText(NotificationsView.this, "Please input some text...", Toast.LENGTH_SHORT).show();
                 } else {
 
-                    new EventNotificationModal(NotificationsView.this).
+                    new NotificationsModal(NotificationsView.this).
                             sendEventNotification(REG_ID, ET_message.getText().toString().trim());
                 }
             }
@@ -92,11 +91,11 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
             public void onClick(View v) {
                 if (((CheckBox) v).isChecked()) {
                     IS_IN_SELECT_ALL_MODE = true;
-                    eventNotificationsAdapter.notifyDataSetChanged();
-                    notificationTitle.setText(eventNotificationsAdapter.getCount() + " items selected");
+                    notificationsAdapter.notifyDataSetChanged();
+                    notificationTitle.setText(notificationsAdapter.getCount() + " items selected");
                 } else {
                     IS_IN_SELECT_ALL_MODE = false;
-                    eventNotificationsAdapter.notifyDataSetChanged();
+                    notificationsAdapter.notifyDataSetChanged();
                     notificationTitle.setText("0 item selected");
                 }
             }
@@ -110,30 +109,30 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
                 if (!CB_selectAll.isChecked()) {
                     if (selectedItems.size() > 0) {
                         for (int i = 0; i < selectedItems.size(); i++) {
-                            eventNotificationInfos.add(eventNotificationsAdapter.getItem(selectedItems.get(i)));
+                            notificationInfos.add(notificationsAdapter.getItem(selectedItems.get(i)));
                         }
 
                         for (int i = 0; i < selectedItems.size(); i++) {
-                            eventNotificationsAdapter.remove(eventNotificationInfos.get(i));
+                            notificationsAdapter.remove(notificationInfos.get(i));
                         }
 
                         clearActionMode();
 
-                        String[] notifications = new String[eventNotificationInfos.size()];
-                        for (int i = 0; i < eventNotificationInfos.size(); i++) {
-                            notifications[i] = eventNotificationInfos.get(i).getNotification();
+                        String[] notifications = new String[notificationInfos.size()];
+                        for (int i = 0; i < notificationInfos.size(); i++) {
+                            notifications[i] = notificationInfos.get(i).getNotification();
                         }
-                        eventNotificationsLocalModal.deleteNotifications(notifications);
-                        eventNotificationInfos.clear();
+                        notificationsLocalModal.deleteNotifications(notifications);
+                        notificationInfos.clear();
                         Toast.makeText(this, "Deleted", Toast.LENGTH_SHORT).show();
                         Log.i("TAG", "onOptionsItemSelected: " + Arrays.toString(notifications));
                     } else {
                         Toast.makeText(this, "No item is selected", Toast.LENGTH_SHORT).show();
                     }
                 }  else {
-                    eventNotificationsLocalModal.deleteAll();
-                    eventNotificationsAdapter.clear();
-                    eventNotificationInfos.clear();
+                    notificationsLocalModal.deleteAll();
+                    notificationsAdapter.clear();
+                    notificationInfos.clear();
                     Toast.makeText(this, "Deleted", Toast.LENGTH_SHORT).show();
                     clearActionMode();
                 }
@@ -156,7 +155,7 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
         CB_selectAll.setVisibility(View.GONE);
         IS_IN_ACTION_MODE = false;
         IS_IN_SELECT_ALL_MODE = false;
-        eventNotificationsAdapter.notifyDataSetChanged();
+        notificationsAdapter.notifyDataSetChanged();
         notificationTitle.setText(R.string.notifications);
         selectedItems.clear();
         counter = 0;
@@ -171,7 +170,7 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         IS_IN_ACTION_MODE = true;
         IS_IN_SELECT_ALL_MODE = false;
-        eventNotificationsAdapter.notifyDataSetChanged();
+        notificationsAdapter.notifyDataSetChanged();
         return true;
     }
 
