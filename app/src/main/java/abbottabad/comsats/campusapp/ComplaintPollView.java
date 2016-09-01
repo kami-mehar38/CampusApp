@@ -53,11 +53,14 @@ public class ComplaintPollView extends AppCompatActivity implements View.OnClick
             if (APPLICATION_STATUS.equals("FOOD")){
                 setContentView(R.layout.complaintpoll_page_admin);
                 RV_complaints = (RecyclerView) findViewById(R.id.RV_complaints);
-                RV_complaints.setHasFixedSize(true);
-                LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-                layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-                RV_complaints.setLayoutManager(layoutManager);
-                new ComplaintPollLocalModal(this).retrieveComplaints();
+                if (RV_complaints != null) {
+                    RV_complaints.setHasFixedSize(true);
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+                    layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                    RV_complaints.setLayoutManager(layoutManager);
+                    RV_complaints.addItemDecoration(new RecyclerViewDivider(this));
+                    new ComplaintPollLocalModal(this).retrieveComplaints();
+                }
               /*  List<ComplaintsInfo> complaintsInfos = new ArrayList<>();
                 ComplaintsInfo complaintsInfo = new ComplaintsInfo();
                 complaintsInfo.setName("Kamran Ramzan");
@@ -99,7 +102,9 @@ public class ComplaintPollView extends AppCompatActivity implements View.OnClick
                 ET_regID = (EditText) findViewById(R.id.ET_regID);
                 ET_contact =(EditText) findViewById(R.id.ET_contact);
                 btn_sendComplaint = (Button) findViewById(R.id.btn_sendComplaint);
-                btn_sendComplaint.setOnClickListener(this);
+                if (btn_sendComplaint != null) {
+                    btn_sendComplaint.setOnClickListener(this);
+                }
                 validation = new Validation();
             }
         }
@@ -135,7 +140,9 @@ public class ComplaintPollView extends AppCompatActivity implements View.OnClick
             photo = (Bitmap) data.getExtras().get("data");
             byte_arr = getImageBytes(photo);
 
-           // Toast.makeText(ComplaintPollView.this, byte_arr.toString(), Toast.LENGTH_SHORT).show();
+/*
+            Toast.makeText(ComplaintPollView.this, byte_arr.toString(), Toast.LENGTH_SHORT).show();
+*/
 
             Bitmap bitmap = BitmapFactory.decodeByteArray(byte_arr, 0, byte_arr.length);
             IV_visualProof.setImageBitmap(bitmap);

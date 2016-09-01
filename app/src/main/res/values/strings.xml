@@ -44,6 +44,7 @@
     <string name="add_image_optional">Add Image (optional)</string>
     <string name="visual_proof">Visual proof</string>
     <string name="description">Description:</string>
+    <string name="no_decription">No decription</string>
     <string-array name="login_options">
         <item>Select Account</item>
         <item>Blood Bank</item>

@@ -104,7 +104,7 @@
             android:layout_below="@+id/TV_ComplaintContact"
             android:textColor="#000"
             android:textSize="15sp"
-            android:text="No decription"/>
+            android:text="@string/no_decription"/>
 
         <ImageView
             android:id="@+id/IV_proof"
@@ -122,13 +122,27 @@
             android:id="@+id/btn_callComplaint"
             android:textColor="@color/colorPrimary"
             android:textSize="12sp"
+            android:layout_below="@+id/IV_proof"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/IV_proof"
             android:layout_marginTop="5dp"
             android:background="@drawable/button_background"
             android:textAllCaps="false"
             android:text="@string/call"/>
+
+        <Button
+            android:layout_width="64dp"
+            android:layout_height="30dp"
+            android:id="@+id/btn_deleteComplaint"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            android:layout_toStartOf="@+id/btn_callComplaint"
+            android:layout_toLeftOf="@+id/btn_callComplaint"
+            android:layout_below="@+id/IV_proof"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/button_background"
+            android:textAllCaps="false"
+            android:text="@string/delete"/>
 
     </RelativeLayout>
 

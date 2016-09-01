@@ -175,8 +175,8 @@ public class MyGcmListenerService extends GcmListenerService {
         BloodBankController.setStdContact(stdContact);
         BloodBankController.setBloodType(bloodType);
 
-        new BloodRequestsFragment.BloodBankLocalModal(this).addBloodRequest();
-        new BloodRequestsFragment.BloodBankLocalModal(this).viewBloodRequests();
+        new BloodBankLocalModal(this).addBloodRequest();
+        new BloodBankLocalModal(this).viewBloodRequests();
 
         if (IS_LOGGED_IN) {
             createBloodNotification("New Blood request from " + stdName);

@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,5 +94,12 @@ public class ComplaintPollLocalModal extends SQLiteOpenHelper {
             }
         });
         db.close();
+    }
+
+    public void deleteComplaint(String reg){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_NAME, COL_REG + " = ?", new String[]{reg});
+        db.close();
+        retrieveComplaints();
     }
 }

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -25,8 +24,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
-
-import static abbottabad.comsats.campusapp.BloodDonorsFragment.*;
 
 /**
  * This project CampusApp is created by Kamran Ramzan on 6/4/16.
@@ -56,8 +53,8 @@ public class BloodBankModal {
         new sendRequestInBackground().execute(name, registration, contact, bloodType);
     }
 
-    public void retrieveDonors(RecyclerView recyclerView, String bloodType) {
-        new RetrieveDonors(recyclerView).execute(bloodType);
+    public void retrieveDonors(String bloodType) {
+        new RetrieveDonors().execute(bloodType);
     }
 
     public void addDonor(String name, String regID, String bloodType, String contact, String bleededDate){
@@ -149,10 +146,6 @@ public class BloodBankModal {
     private class RetrieveDonors extends AsyncTask<String, Void, List<DonorsInfo>> {
 
         private ProgressDialog progressDialog;
-        private RecyclerView recyclerView;
-        public RetrieveDonors(RecyclerView recyclerView) {
-            this.recyclerView = recyclerView;
-        }
 
         @Override
         protected void onPreExecute() {
@@ -220,7 +213,9 @@ public class BloodBankModal {
         protected void onPostExecute(List<DonorsInfo> s) {
             progressDialog.cancel();
             if (s != null) {
-                recyclerView.setAdapter(new DonorsViewAdapter(s));
+                if (BloodDonorsFragment.recyclerView != null) {
+                    BloodDonorsFragment.recyclerView.setAdapter(new DonorsViewAdapter(s));
+                }
             } else {
                 Toast.makeText(context, "Couldn't retrieve donors.", Toast.LENGTH_LONG).show();
             }

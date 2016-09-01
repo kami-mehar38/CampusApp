@@ -48,6 +48,7 @@ public class TrackFacultyView extends Activity {
         layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
+        recyclerView.addItemDecoration(new RecyclerViewDivider(this));
 
         TV_myStatus = (TextView) findViewById(R.id.TV_myStatus);
         sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
@@ -102,7 +103,9 @@ public class TrackFacultyView extends Activity {
             TEACHER_ID = sharedPreferences.getString("REG_ID", null);
             Toast.makeText(this, TEACHER_ID, Toast.LENGTH_LONG).show();
             new TrackFacultyModal(this).retrieveStatus(recyclerView, SRL_facultyStatus, TV_myStatus, TEACHER_ID);
-        }else if (APPLICATION_STATUS.equals("BLOOD_BANK") || APPLICATION_STATUS.equals("STUDENT")) {
+        }else if (APPLICATION_STATUS.equals("BLOOD_BANK") ||
+                APPLICATION_STATUS.equals("STUDENT") ||
+                APPLICATION_STATUS.equals("FOOD")) {
             FAB_edit.setVisibility(View.GONE);
             TV_myStatus.setVisibility(View.GONE);
             new TrackFacultyModal(this).retrieveStatus(recyclerView, SRL_facultyStatus, TV_myStatus, "ALL");
