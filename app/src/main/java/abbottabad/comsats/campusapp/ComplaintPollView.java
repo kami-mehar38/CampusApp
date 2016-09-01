@@ -44,6 +44,7 @@ public class ComplaintPollView extends AppCompatActivity implements View.OnClick
     private Validation validation;
     private Bitmap photo;
     private byte[] byte_arr;
+    private String encodedImage;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -101,6 +102,15 @@ public class ComplaintPollView extends AppCompatActivity implements View.OnClick
                 validation = new Validation();
             }
         }
+        photo = BitmapFactory.decodeResource(ComplaintPollView.this.getResources(),
+                R.drawable.check);
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        photo.compress(Bitmap.CompressFormat.JPEG, 50, stream);
+        byte[] byte_arr = stream.toByteArray();
+        encodedImage = Base64.encodeToString(byte_arr, 0);
+        /*byte[] imageByteArray = Base64.decode(encodedString, 0);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(imageByteArray, 0, imageByteArray.length);
+        IV_visualProof.setImageBitmap(bitmap);*/
     }
 
     @Override
@@ -119,7 +129,7 @@ public class ComplaintPollView extends AppCompatActivity implements View.OnClick
                 if (validation.validateName(name)){
                     if (validation.validateReg(regID)){
                         if (validation.validatePhoneNumber(contact)){
-                            new ComplaintPollModal(ComplaintPollView.this).sendComplaint(name, regID, contact, description);
+                            new ComplaintPollModal(ComplaintPollView.this).sendComplaint(name, regID, contact, description, encodedImage);
                         } else Toast.makeText(ComplaintPollView.this, "Invalid contact #", Toast.LENGTH_SHORT).show();
                     } else Toast.makeText(ComplaintPollView.this, "Invalid registration id", Toast.LENGTH_SHORT).show();
                 } else Toast.makeText(ComplaintPollView.this, "Invalid name", Toast.LENGTH_SHORT).show();
@@ -130,27 +140,16 @@ public class ComplaintPollView extends AppCompatActivity implements View.OnClick
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
-            photo = (Bitmap) data.getExtras().get("data");
-
-
+            //photo = (Bitmap) data.getExtras().get("data");
+            photo = BitmapFactory.decodeResource(ComplaintPollView.this.getResources(),
+                    R.drawable.track);
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-
             photo.compress(Bitmap.CompressFormat.JPEG, 100, stream);
             byte[] byte_arr = stream.toByteArray();
-
             String encodedString = Base64.encodeToString(byte_arr, 0);
-
-
             byte[] imageByteArray = Base64.decode(encodedString, 0);
-
             Bitmap bitmap = BitmapFactory.decodeByteArray(imageByteArray, 0, imageByteArray.length);
             IV_visualProof.setImageBitmap(bitmap);
         }
-    }
-
-    private byte[] getImageBytes(Bitmap photo) {
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        photo.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-        return stream.toByteArray();
     }
 }

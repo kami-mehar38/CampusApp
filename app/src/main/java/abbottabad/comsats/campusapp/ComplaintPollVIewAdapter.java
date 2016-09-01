@@ -2,8 +2,11 @@ package abbottabad.comsats.campusapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +43,12 @@ public class ComplaintPollVIewAdapter extends RecyclerView.Adapter<ComplaintPoll
         String description = complaintsInfo.getDescription();
         if (description != null && !description.isEmpty()){
             holder.TV_complaintDescription.setText(description);
+        }
+        String imageString = complaintsInfo.getImage();
+        if (imageString != null && !imageString.isEmpty()){
+            byte[] imageByteArray = Base64.decode(imageString, 0);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(imageByteArray, 0, imageByteArray.length);
+            holder.IV_proof.setImageBitmap(bitmap);
         }
 
         holder.btn_callComplaint.setOnClickListener(new View.OnClickListener() {

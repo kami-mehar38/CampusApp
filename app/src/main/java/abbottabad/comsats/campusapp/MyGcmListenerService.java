@@ -86,7 +86,7 @@ public class MyGcmListenerService extends GcmListenerService {
                 new Intent(this, ComplaintPollView.class), 0);
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
                 this).setSmallIcon(R.drawable.complaint)
-                .setContentTitle("Blood Bank").setVibrate(pattern)
+                .setContentTitle("Complaint Poll").setVibrate(pattern)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
                 .setContentText(message)
                 .setAutoCancel(true).setSound(sound);

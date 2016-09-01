@@ -32,8 +32,8 @@ public class ComplaintPollModal {
         this.context = context;
     }
 
-    public void sendComplaint(String name, String regID, String contact, String description){
-        new SendComplaint().execute(name, regID, contact, description);
+    public void sendComplaint(String name, String regID, String contact, String description, String encodedImage){
+        new SendComplaint().execute(name, regID, contact, description, encodedImage);
     }
 
     private class SendComplaint extends AsyncTask<String, Void, String>{
@@ -59,7 +59,7 @@ public class ComplaintPollModal {
         @Override
         protected String doInBackground(String... params) {
             String stringUrl = "http://hostellocator.com/sendComplaint.php";
-            String name, registration, contact, description, image = "KA";
+            String name, registration, contact, description, image;
             try {
                 URL url = new URL(stringUrl);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -71,7 +71,7 @@ public class ComplaintPollModal {
                 registration = params[1];
                 contact = params[2];
                 description = params[3];
-                //image = params[4];
+                image = params[4];
                 String data = URLEncoder.encode("name", "UTF-8") +"="+ URLEncoder.encode(name, "UTF-8") +"&"+
                         URLEncoder.encode("registration", "UTF-8") +"="+ URLEncoder.encode(registration, "UTF-8") +"&"+
                         URLEncoder.encode("contact", "UTF-8") +"="+ URLEncoder.encode(contact, "UTF-8") +"&"+
