@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -123,10 +124,11 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:background="@drawable/timetable_header_background"
-                        android:layout_marginTop="2dp"
                         android:layout_marginBottom="-2dp"
+                        android:layout_marginTop="2dp"
+                        android:background="@drawable/timetable_header_background"
                         android:padding="12dp">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -146,7 +148,7 @@
                             android:id="@+id/slot1Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
@@ -160,7 +162,7 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot1Subject"
                             android:layout_marginTop="10dp"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/teacher"
                             android:textColor="#fff"
                             android:textSize="14sp"
@@ -498,10 +500,11 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:background="@drawable/timetable_header_background"
-                        android:layout_marginTop="2dp"
                         android:layout_marginBottom="-2dp"
+                        android:layout_marginTop="2dp"
+                        android:background="@drawable/timetable_header_background"
                         android:padding="12dp">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -860,7 +863,6 @@
                             android:layout_marginTop="10dp"
                             android:theme="@style/checkBoxStyle" />
 
-
                     </RelativeLayout>
 
 
@@ -873,10 +875,11 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:background="@drawable/timetable_header_background"
-                        android:layout_marginTop="2dp"
                         android:layout_marginBottom="-2dp"
+                        android:layout_marginTop="2dp"
+                        android:background="@drawable/timetable_header_background"
                         android:padding="12dp">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
