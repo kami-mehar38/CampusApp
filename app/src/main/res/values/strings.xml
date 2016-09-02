@@ -45,6 +45,11 @@
     <string name="visual_proof">Visual proof</string>
     <string name="description">Description:</string>
     <string name="no_decription">No decription</string>
+    <string name="subject">Subject</string>
+    <string name="teacher">Teacher</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="monday">Monday</string>
+    <string name="wednesday">Wednesday</string>
     <string-array name="login_options">
         <item>Select Account</item>
         <item>Blood Bank</item>
