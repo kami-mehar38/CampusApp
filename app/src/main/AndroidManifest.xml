@@ -78,25 +78,27 @@
         <activity android:name=".HomePageView"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
 
-        <activity android:name=".BloodBankView"
+        <activity android:name=".BloodBankView" android:parentActivityName=".HomePageView"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="stateHidden"/>
 
-        <activity android:name=".TrackFacultyView"
+        <activity android:name=".TrackFacultyView" android:parentActivityName=".HomePageView"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="stateHidden"/>
 
-        <activity android:name=".NotificationsView"
+        <activity android:name=".NotificationsView" android:parentActivityName=".HomePageView"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="stateHidden"/>
 
-        <activity android:name=".ComplaintPollView"
+        <activity android:name=".ComplaintPollView" android:parentActivityName=".HomePageView"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="stateHidden"/>
 
-        <activity android:name=".TimeTableView"
+        <activity android:name=".TimeTableView" android:parentActivityName=".HomePageView"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="stateHidden"/>
+
+        <receiver android:name=".TimeTableReceiver" />
 
     </application>
 

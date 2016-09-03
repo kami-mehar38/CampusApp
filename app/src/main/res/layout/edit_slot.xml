@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#00A27C"
+    android:padding="25dp">
+
+    <EditText
+        android:id="@+id/ET_editSlotSubject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:maxLength="30"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/edittext_edit_slot"
+        android:textStyle="normal"
+        android:textSize="16sp"
+        android:textColor="#fff"
+        android:textColorHint="#fff"
+        android:hint="@string/enter_subject_name"
+        />
+
+    <EditText
+        android:id="@+id/ET_editSlotTeacher"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:maxLength="30"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_marginBottom="25dp"
+        android:layout_below="@+id/ET_editSlotSubject"
+        android:background="@drawable/edittext_edit_slot"
+        android:textStyle="normal"
+        android:textSize="16sp"
+        android:textColor="#fff"
+        android:textColorHint="#fff"
+        android:hint="@string/enter_teacher_name"
+        />
+
+     <Button
+        android:id="@+id/btn_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/edit"
+        android:layout_below="@+id/ET_editSlotTeacher"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/edit_button_style"
+        android:textSize="14sp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="#fff"
+        android:textAllCaps="false"
+        />
+
+    <Button
+        android:id="@+id/btn_cancelEditDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel"
+        android:textAllCaps="false"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/btn_edit"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/edit_button_style"
+        android:textSize="14sp"
+        android:textColor="#fff"/>
+
+</RelativeLayout>

@@ -88,7 +88,7 @@ public class LoginView extends AppCompatActivity {
                                         new LoginModal(LoginView.this).login(username, password, "BLOOD_BANK");
                                         break;
                                     }
-                                    case 2:{
+                                    case 2: {
                                         new LoginModal(LoginView.this).login(username, password, "FOOD");
                                         break;
                                     }
@@ -108,8 +108,10 @@ public class LoginView extends AppCompatActivity {
                                 alertDialog = builder.create();
                                 alertDialog.show();
                             }
-                        } else Toast.makeText(LoginView.this, "Invalid password format", Toast.LENGTH_SHORT).show();
-                    } else Toast.makeText(LoginView.this, "Invalid username format", Toast.LENGTH_SHORT).show();
+                        } else
+                            Toast.makeText(LoginView.this, "Invalid password format", Toast.LENGTH_SHORT).show();
+                    } else
+                        Toast.makeText(LoginView.this, "Invalid username format", Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -176,7 +178,7 @@ public class LoginView extends AppCompatActivity {
                         alertDialog.show();
 
                     }
-                }else {
+                } else {
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(LoginView.this);
                     builder.setTitle("Error");

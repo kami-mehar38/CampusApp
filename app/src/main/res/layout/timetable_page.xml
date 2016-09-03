@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
@@ -30,7 +31,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/timetable_header_background"
                         android:padding="12dp"
-                        android:text="SLOT / DAY"
+                        android:text="@string/day_slot"
                         android:textColor="#4c4c4c"
                         android:textSize="16sp"
                         android:textStyle="normal" />
@@ -40,7 +41,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/timetable_header_background"
                         android:padding="12dp"
-                        android:text="08:00 To 09:30"
+                        android:text="@string/_08_00_to_09_30"
                         android:textColor="#4c4c4c"
                         android:textSize="16sp"
                         android:textStyle="normal" />
@@ -50,7 +51,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/timetable_header_background"
                         android:padding="12dp"
-                        android:text="09:45 To 11:15"
+                        android:text="@string/_09_45_to_11_15"
                         android:textColor="#4c4c4c"
                         android:textSize="16sp"
                         android:textStyle="normal" />
@@ -60,7 +61,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/timetable_header_background"
                         android:padding="12dp"
-                        android:text="11:30 To 13:00"
+                        android:text="@string/_11_30_to_13_00"
                         android:textColor="#4c4c4c"
                         android:textSize="16sp"
                         android:textStyle="normal" />
@@ -70,7 +71,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/timetable_header_background"
                         android:padding="12dp"
-                        android:text="13:15 To 14:45"
+                        android:text="@string/_13_15_to_14_45"
                         android:textColor="#4c4c4c"
                         android:textSize="16sp"
                         android:textStyle="normal" />
@@ -80,7 +81,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/timetable_header_background"
                         android:padding="12dp"
-                        android:text="15:00 To 16:30"
+                        android:text="@string/_15_00_to_16_30"
                         android:textColor="#4c4c4c"
                         android:textSize="16sp"
                         android:textStyle="normal" />
@@ -90,7 +91,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/timetable_header_background"
                         android:padding="12dp"
-                        android:text="16:45 To 18:15"
+                        android:text="@string/_16_45_to_18_15"
                         android:textColor="#4c4c4c"
                         android:textSize="16sp"
                         android:textStyle="normal" />
@@ -100,7 +101,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/timetable_header_background"
                         android:padding="12dp"
-                        android:text="18:30 To 20:00"
+                        android:text="@string/_18_30_to_20_00"
                         android:textColor="#4c4c4c"
                         android:textSize="16sp"
                         android:textStyle="normal" />
@@ -110,7 +111,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/timetable_header_background"
                         android:padding="12dp"
-                        android:text="20:00 To 21:30"
+                        android:text="@string/_20_00_to_21_30"
                         android:textColor="#4c4c4c"
                         android:textSize="16sp"
                         android:textStyle="normal" />
@@ -139,6 +140,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/slot1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/timetable_slot"
@@ -171,14 +173,15 @@
                             />
 
                         <CheckBox
+                            android:id="@+id/slot1Reminder"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
                             android:layout_alignParentRight="true"
                             android:layout_below="@+id/slot1Teacher"
                             android:layout_marginTop="10dp"
-                            android:theme="@style/checkBoxStyle" />
-
+                            android:theme="@style/checkBoxStyle"
+                            android:tag="1"/>
 
                     </RelativeLayout>
 
@@ -192,13 +195,11 @@
                             android:id="@+id/slot2Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot2Teacher"
@@ -206,13 +207,11 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot2Subject"
                             android:layout_marginTop="10dp"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/teacher"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="bold"
-
-                            />
+                            android:textStyle="bold" />
 
                         <CheckBox
                             android:layout_width="wrap_content"
@@ -236,13 +235,11 @@
                             android:id="@+id/slot3Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot3Teacher"
@@ -250,13 +247,11 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot3Subject"
                             android:layout_marginTop="10dp"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/teacher"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="bold"
-
-                            />
+                            android:textStyle="bold" />
 
                         <CheckBox
                             android:layout_width="wrap_content"
@@ -280,13 +275,11 @@
                             android:id="@+id/slot4Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot4Teacher"
@@ -294,13 +287,11 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot4Subject"
                             android:layout_marginTop="10dp"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/teacher"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="bold"
-
-                            />
+                            android:textStyle="bold" />
 
                         <CheckBox
                             android:layout_width="wrap_content"
@@ -324,13 +315,11 @@
                             android:id="@+id/slot5Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot5Teacher"
@@ -338,13 +327,11 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot5Subject"
                             android:layout_marginTop="10dp"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/teacher"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="bold"
-
-                            />
+                            android:textStyle="bold" />
 
                         <CheckBox
                             android:layout_width="wrap_content"
@@ -368,13 +355,11 @@
                             android:id="@+id/slot6Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot6Teacher"
@@ -382,13 +367,11 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot6Subject"
                             android:layout_marginTop="10dp"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/teacher"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="bold"
-
-                            />
+                            android:textStyle="bold" />
 
                         <CheckBox
                             android:layout_width="wrap_content"
@@ -412,13 +395,11 @@
                             android:id="@+id/slot7Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot7Teacher"
@@ -426,13 +407,11 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot7Subject"
                             android:layout_marginTop="10dp"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/teacher"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="bold"
-
-                            />
+                            android:textStyle="bold" />
 
                         <CheckBox
                             android:layout_width="wrap_content"
@@ -456,13 +435,11 @@
                             android:id="@+id/slot8Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot8Teacher"
@@ -470,13 +447,11 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot8Subject"
                             android:layout_marginTop="10dp"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/teacher"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="bold"
-
-                            />
+                            android:textStyle="bold" />
 
                         <CheckBox
                             android:layout_width="wrap_content"
@@ -524,13 +499,11 @@
                             android:id="@+id/slot9Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot9Teacher"
@@ -538,13 +511,11 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot9Subject"
                             android:layout_marginTop="10dp"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/teacher"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="bold"
-
-                            />
+                            android:textStyle="bold" />
 
                         <CheckBox
                             android:layout_width="wrap_content"
@@ -568,13 +539,11 @@
                             android:id="@+id/slot10Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot10Teacher"
@@ -582,13 +551,11 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot10Subject"
                             android:layout_marginTop="10dp"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/teacher"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="bold"
-
-                            />
+                            android:textStyle="bold" />
 
                         <CheckBox
                             android:layout_width="wrap_content"
@@ -612,13 +579,11 @@
                             android:id="@+id/slot11Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot11Teacher"
@@ -626,13 +591,11 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot11Subject"
                             android:layout_marginTop="10dp"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/teacher"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="bold"
-
-                            />
+                            android:textStyle="bold" />
 
                         <CheckBox
                             android:layout_width="wrap_content"
@@ -656,13 +619,11 @@
                             android:id="@+id/slot12Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot12Teacher"
@@ -670,13 +631,11 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot12Subject"
                             android:layout_marginTop="10dp"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/teacher"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="bold"
-
-                            />
+                            android:textStyle="bold" />
 
                         <CheckBox
                             android:layout_width="wrap_content"
@@ -700,13 +659,11 @@
                             android:id="@+id/slot13Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot13Teacher"
@@ -714,13 +671,11 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot13Subject"
                             android:layout_marginTop="10dp"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/teacher"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="bold"
-
-                            />
+                            android:textStyle="bold" />
 
                         <CheckBox
                             android:layout_width="wrap_content"
@@ -744,13 +699,11 @@
                             android:id="@+id/slot14Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot14Teacher"
@@ -758,13 +711,11 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot14Subject"
                             android:layout_marginTop="10dp"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/teacher"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="bold"
-
-                            />
+                            android:textStyle="bold" />
 
                         <CheckBox
                             android:layout_width="wrap_content"
@@ -788,13 +739,11 @@
                             android:id="@+id/slot15Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot15Teacher"
@@ -802,13 +751,12 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot15Subject"
                             android:layout_marginTop="10dp"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/teacher"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
-
-                            />
+                            tools:ignore="TooManyViews" />
 
                         <CheckBox
                             android:layout_width="wrap_content"
@@ -832,13 +780,11 @@
                             android:id="@+id/slot16Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot16Teacher"
@@ -846,13 +792,11 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot16Subject"
                             android:layout_marginTop="10dp"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/teacher"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="bold"
-
-                            />
+                            android:textStyle="bold" />
 
                         <CheckBox
                             android:layout_width="wrap_content"
@@ -899,7 +843,7 @@
                             android:id="@+id/slot17Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
@@ -913,7 +857,7 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot17Subject"
                             android:layout_marginTop="10dp"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/teacher"
                             android:textColor="#fff"
                             android:textSize="14sp"
@@ -943,7 +887,7 @@
                             android:id="@+id/slot18Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
@@ -957,7 +901,7 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot18Subject"
                             android:layout_marginTop="10dp"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/teacher"
                             android:textColor="#fff"
                             android:textSize="14sp"
@@ -987,7 +931,7 @@
                             android:id="@+id/slot19Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
@@ -1001,7 +945,7 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot19Subject"
                             android:layout_marginTop="10dp"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/teacher"
                             android:textColor="#fff"
                             android:textSize="14sp"
@@ -1031,7 +975,7 @@
                             android:id="@+id/slot20Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
@@ -1045,7 +989,7 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot20Subject"
                             android:layout_marginTop="10dp"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/teacher"
                             android:textColor="#fff"
                             android:textSize="14sp"
@@ -1075,7 +1019,7 @@
                             android:id="@+id/slot21Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
@@ -1089,7 +1033,7 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot21Subject"
                             android:layout_marginTop="10dp"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/teacher"
                             android:textColor="#fff"
                             android:textSize="14sp"
@@ -1119,7 +1063,7 @@
                             android:id="@+id/slot22Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
@@ -1133,7 +1077,7 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot22Subject"
                             android:layout_marginTop="10dp"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/teacher"
                             android:textColor="#fff"
                             android:textSize="14sp"
@@ -1163,7 +1107,7 @@
                             android:id="@+id/slot23Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
@@ -1177,7 +1121,7 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot23Subject"
                             android:layout_marginTop="10dp"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/teacher"
                             android:textColor="#fff"
                             android:textSize="14sp"
@@ -1207,7 +1151,7 @@
                             android:id="@+id/slot24Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
@@ -1221,7 +1165,7 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot24Subject"
                             android:layout_marginTop="10dp"
-                            android:maxWidth="100dp"
+                            android:maxWidth="106dp"
                             android:text="@string/teacher"
                             android:textColor="#fff"
                             android:textSize="14sp"

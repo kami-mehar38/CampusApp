@@ -70,4 +70,24 @@ public class Validation {
         }
         return true;
     }
+
+    public boolean validateSubjectName(String subject){
+        String SUBJECT = subject.trim();
+        if (SUBJECT.isEmpty()){
+            return false;
+        } else if (SUBJECT.length() > 30){
+            return false;
+        }
+        return true;
+    }
+
+    public boolean validateTeacherName(String teacher){
+        String TEACHER = teacher.trim();
+        if (TEACHER.isEmpty()){
+            return false;
+        } else if (TEACHER.length() > 30){
+            return false;
+        }
+        return true;
+    }
 }

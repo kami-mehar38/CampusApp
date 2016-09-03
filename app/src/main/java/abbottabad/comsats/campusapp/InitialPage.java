@@ -12,13 +12,14 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
 /**
  * @author Kamran Ramzan
- * This class is an activity class, having the layout of Login Page and methods
- * to start the animations
+ *         This class is an activity class, having the layout of Login Page and methods
+ *         to start the animations
  */
 public class InitialPage extends Activity implements View.OnClickListener {
 
@@ -35,13 +36,13 @@ public class InitialPage extends Activity implements View.OnClickListener {
 
         SharedPreferences sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         final String APPLICATION_STATUS = sharedPreferences.getString("APPLICATION_STATUS", "NULL");
-        if (APPLICATION_STATUS.equals("STUDENT") || APPLICATION_STATUS.equals("TEACHER")){
+        if (APPLICATION_STATUS.equals("STUDENT") || APPLICATION_STATUS.equals("TEACHER")) {
             startActivity(new Intent(this, HomePageView.class));
         }
 
-        if (APPLICATION_STATUS.equals("BLOOD_BANK") || APPLICATION_STATUS.equals("FOOD")){
+        if (APPLICATION_STATUS.equals("BLOOD_BANK") || APPLICATION_STATUS.equals("FOOD")) {
             Boolean LOGGED_IN = sharedPreferences.getBoolean("LOGGED_IN", false);
-            if (LOGGED_IN){
+            if (LOGGED_IN) {
                 startActivity(new Intent(this, HomePageView.class));
             } else {
                 startActivity(new Intent(this, LoginView.class));
@@ -72,13 +73,13 @@ public class InitialPage extends Activity implements View.OnClickListener {
         isPlayServicesAvailable();
         SharedPreferences sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         final String APPLICATION_STATUS = sharedPreferences.getString("APPLICATION_STATUS", "NULL");
-        if (APPLICATION_STATUS.equals("STUDENT") || APPLICATION_STATUS.equals("TEACHER")){
+        if (APPLICATION_STATUS.equals("STUDENT") || APPLICATION_STATUS.equals("TEACHER")) {
             finish();
         }
 
-        if (APPLICATION_STATUS.equals("BLOOD_BANK") || APPLICATION_STATUS.equals("FOOD")){
+        if (APPLICATION_STATUS.equals("BLOOD_BANK") || APPLICATION_STATUS.equals("FOOD")) {
             Boolean LOGGED_IN = sharedPreferences.getBoolean("LOGGED_IN", false);
-            if (LOGGED_IN){
+            if (LOGGED_IN) {
                 finish();
             } else {
                 finish();
@@ -101,14 +102,14 @@ public class InitialPage extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.btn_signup:{
+        switch (v.getId()) {
+            case R.id.btn_signup: {
                 Intent intent = new Intent(InitialPage.this, SignUpView.class);
                 startActivity(intent);
                 finish();
                 break;
             }
-            case R.id.btn_login:{
+            case R.id.btn_login: {
                 Intent intent = new Intent(InitialPage.this, LoginView.class);
                 startActivity(intent);
                 finish();
@@ -116,6 +117,7 @@ public class InitialPage extends Activity implements View.OnClickListener {
             }
         }
     }
+
     private boolean isPlayServicesAvailable() {
         int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
         if (resultCode != ConnectionResult.SUCCESS) {

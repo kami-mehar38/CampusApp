@@ -50,6 +50,18 @@
     <string name="tuesday">Tuesday</string>
     <string name="monday">Monday</string>
     <string name="wednesday">Wednesday</string>
+    <string name="day_slot">DAY / SLOT</string>
+    <string name="_08_00_to_09_30">08:00 To 09:30</string>
+    <string name="_09_45_to_11_15">09:45 To 11:15</string>
+    <string name="_11_30_to_13_00">11:30 To 13:00</string>
+    <string name="_13_15_to_14_45">13:15 To 14:45</string>
+    <string name="_15_00_to_16_30">15:00 To 16:30</string>
+    <string name="_16_45_to_18_15">16:45 To 18:15</string>
+    <string name="_18_30_to_20_00">18:30 To 20:00</string>
+    <string name="_20_00_to_21_30">20:00 To 21:30</string>
+    <string name="enter_subject_name">Enter subject name</string>
+    <string name="enter_teacher_name">Enter teacher name</string>
+    <string name="edit">Edit</string>
     <string-array name="login_options">
         <item>Select Account</item>
         <item>Blood Bank</item>
