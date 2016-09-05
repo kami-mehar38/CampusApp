@@ -140,10 +140,10 @@
                     </RelativeLayout>
 
                     <RelativeLayout
-                        android:id="@+id/slot1"
+                        android:id="@+id/slot11"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/timetable_slot"
+                        android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
                         <TextView
@@ -173,7 +173,7 @@
                             />
 
                         <CheckBox
-                            android:id="@+id/slot1Reminder"
+                            android:id="@+id/slot11Reminder"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -188,7 +188,7 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/timetable_slot"
+                        android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
                         <TextView
@@ -228,7 +228,7 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/timetable_slot"
+                        android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
                         <TextView
@@ -268,7 +268,7 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/timetable_slot"
+                        android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
                         <TextView
@@ -308,7 +308,7 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/timetable_slot"
+                        android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
                         <TextView
@@ -348,7 +348,7 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/timetable_slot"
+                        android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
                         <TextView
@@ -388,7 +388,7 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/timetable_slot"
+                        android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
                         <TextView
@@ -428,7 +428,7 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/timetable_slot"
+                        android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
                         <TextView
@@ -490,9 +490,10 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/slot21"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/timetable_slot"
+                        android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
                         <TextView
@@ -518,6 +519,7 @@
                             android:textStyle="bold" />
 
                         <CheckBox
+                            android:id="@+id/slot21Reminder"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -532,7 +534,7 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/timetable_slot"
+                        android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
                         <TextView
@@ -572,7 +574,7 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/timetable_slot"
+                        android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
                         <TextView
@@ -612,7 +614,7 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/timetable_slot"
+                        android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
                         <TextView
@@ -652,7 +654,7 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/timetable_slot"
+                        android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
                         <TextView
@@ -692,7 +694,7 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/timetable_slot"
+                        android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
                         <TextView
@@ -732,7 +734,7 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/timetable_slot"
+                        android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
                         <TextView
@@ -773,7 +775,7 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/timetable_slot"
+                        android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
                         <TextView
@@ -834,9 +836,10 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/slot31"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/timetable_slot"
+                        android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
                         <TextView
@@ -866,6 +869,7 @@
                             />
 
                         <CheckBox
+                            android:id="@+id/slot31Reminder"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -880,7 +884,7 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/timetable_slot"
+                        android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
                         <TextView
@@ -924,7 +928,7 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/timetable_slot"
+                        android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
                         <TextView
@@ -968,7 +972,7 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/timetable_slot"
+                        android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
                         <TextView
@@ -1012,7 +1016,7 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/timetable_slot"
+                        android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
                         <TextView
@@ -1056,7 +1060,7 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/timetable_slot"
+                        android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
                         <TextView
@@ -1100,7 +1104,7 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/timetable_slot"
+                        android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
                         <TextView
@@ -1144,7 +1148,7 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/timetable_slot"
+                        android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
                         <TextView
@@ -1179,6 +1183,762 @@
                             android:layout_alignParentEnd="true"
                             android:layout_alignParentRight="true"
                             android:layout_below="@+id/slot24Teacher"
+                            android:layout_marginTop="10dp"
+                            android:theme="@style/checkBoxStyle" />
+
+
+                    </RelativeLayout>
+
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="-2dp"
+                        android:layout_marginTop="2dp"
+                        android:background="@drawable/timetable_header_background"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/thursday"
+                            android:textColor="#4c4c4c"
+                            android:textSize="16sp"
+                            android:textStyle="normal" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/slot41"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/timetable_slot_unchecked"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:id="@+id/slot25Subject"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxWidth="106dp"
+                            android:text="@string/subject"
+                            android:textColor="#fff"
+                            android:textSize="14sp"
+                            android:textStyle="normal"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/slot25Teacher"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/slot25Subject"
+                            android:layout_marginTop="10dp"
+                            android:maxWidth="106dp"
+                            android:text="@string/teacher"
+                            android:textColor="#fff"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+
+                            />
+
+                        <CheckBox
+                            android:id="@+id/slot41Reminder"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_below="@+id/slot25Teacher"
+                            android:layout_marginTop="10dp"
+                            android:theme="@style/checkBoxStyle" />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/timetable_slot_unchecked"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:id="@+id/slot26Subject"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxWidth="106dp"
+                            android:text="@string/subject"
+                            android:textColor="#fff"
+                            android:textSize="14sp"
+                            android:textStyle="normal"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/slot26Teacher"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/slot26Subject"
+                            android:layout_marginTop="10dp"
+                            android:maxWidth="106dp"
+                            android:text="@string/teacher"
+                            android:textColor="#fff"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+
+                            />
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_below="@+id/slot26Teacher"
+                            android:layout_marginTop="10dp"
+                            android:theme="@style/checkBoxStyle" />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/timetable_slot_unchecked"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:id="@+id/slot27Subject"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxWidth="106dp"
+                            android:text="@string/subject"
+                            android:textColor="#fff"
+                            android:textSize="14sp"
+                            android:textStyle="normal"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/slot27Teacher"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/slot27Subject"
+                            android:layout_marginTop="10dp"
+                            android:maxWidth="106dp"
+                            android:text="@string/teacher"
+                            android:textColor="#fff"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+
+                            />
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_below="@+id/slot27Teacher"
+                            android:layout_marginTop="10dp"
+                            android:theme="@style/checkBoxStyle" />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/timetable_slot_unchecked"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:id="@+id/slot28Subject"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxWidth="106dp"
+                            android:text="@string/subject"
+                            android:textColor="#fff"
+                            android:textSize="14sp"
+                            android:textStyle="normal"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/slot28Teacher"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/slot28Subject"
+                            android:layout_marginTop="10dp"
+                            android:maxWidth="106dp"
+                            android:text="@string/teacher"
+                            android:textColor="#fff"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+
+                            />
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_below="@+id/slot28Teacher"
+                            android:layout_marginTop="10dp"
+                            android:theme="@style/checkBoxStyle" />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/timetable_slot_unchecked"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:id="@+id/slot29Subject"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxWidth="106dp"
+                            android:text="@string/subject"
+                            android:textColor="#fff"
+                            android:textSize="14sp"
+                            android:textStyle="normal"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/slot29Teacher"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/slot29Subject"
+                            android:layout_marginTop="10dp"
+                            android:maxWidth="106dp"
+                            android:text="@string/teacher"
+                            android:textColor="#fff"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+
+                            />
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_below="@+id/slot29Teacher"
+                            android:layout_marginTop="10dp"
+                            android:theme="@style/checkBoxStyle" />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/timetable_slot_unchecked"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:id="@+id/slot30Subject"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxWidth="106dp"
+                            android:text="@string/subject"
+                            android:textColor="#fff"
+                            android:textSize="14sp"
+                            android:textStyle="normal"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/slot30Teacher"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/slot30Subject"
+                            android:layout_marginTop="10dp"
+                            android:maxWidth="106dp"
+                            android:text="@string/teacher"
+                            android:textColor="#fff"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+
+                            />
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_below="@+id/slot30Teacher"
+                            android:layout_marginTop="10dp"
+                            android:theme="@style/checkBoxStyle" />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/timetable_slot_unchecked"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:id="@+id/slot31Subject"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxWidth="106dp"
+                            android:text="@string/subject"
+                            android:textColor="#fff"
+                            android:textSize="14sp"
+                            android:textStyle="normal"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/slot31Teacher"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/slot31Subject"
+                            android:layout_marginTop="10dp"
+                            android:maxWidth="106dp"
+                            android:text="@string/teacher"
+                            android:textColor="#fff"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+
+                            />
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_below="@+id/slot31Teacher"
+                            android:layout_marginTop="10dp"
+                            android:theme="@style/checkBoxStyle" />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/timetable_slot_unchecked"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:id="@+id/slot32Subject"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxWidth="106dp"
+                            android:text="@string/subject"
+                            android:textColor="#fff"
+                            android:textSize="14sp"
+                            android:textStyle="normal"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/slot32Teacher"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/slot32Subject"
+                            android:layout_marginTop="10dp"
+                            android:maxWidth="106dp"
+                            android:text="@string/teacher"
+                            android:textColor="#fff"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+
+                            />
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_below="@+id/slot32Teacher"
+                            android:layout_marginTop="10dp"
+                            android:theme="@style/checkBoxStyle" />
+
+
+                    </RelativeLayout>
+
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="-2dp"
+                        android:layout_marginTop="2dp"
+                        android:background="@drawable/timetable_header_background"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/friday"
+                            android:textColor="#4c4c4c"
+                            android:textSize="16sp"
+                            android:textStyle="normal" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/slot51"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/timetable_slot_unchecked"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:id="@+id/slot33Subject"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxWidth="106dp"
+                            android:text="@string/subject"
+                            android:textColor="#fff"
+                            android:textSize="14sp"
+                            android:textStyle="normal"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/slot33Teacher"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/slot33Subject"
+                            android:layout_marginTop="10dp"
+                            android:maxWidth="106dp"
+                            android:text="@string/teacher"
+                            android:textColor="#fff"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+
+                            />
+
+                        <CheckBox
+                            android:id="@+id/slot51Reminder"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_below="@+id/slot33Teacher"
+                            android:layout_marginTop="10dp"
+                            android:theme="@style/checkBoxStyle" />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/timetable_slot_unchecked"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:id="@+id/slot34Subject"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxWidth="106dp"
+                            android:text="@string/subject"
+                            android:textColor="#fff"
+                            android:textSize="14sp"
+                            android:textStyle="normal"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/slot34Teacher"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/slot34Subject"
+                            android:layout_marginTop="10dp"
+                            android:maxWidth="106dp"
+                            android:text="@string/teacher"
+                            android:textColor="#fff"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+
+                            />
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_below="@+id/slot34Teacher"
+                            android:layout_marginTop="10dp"
+                            android:theme="@style/checkBoxStyle" />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/timetable_slot_unchecked"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:id="@+id/slot35Subject"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxWidth="106dp"
+                            android:text="@string/subject"
+                            android:textColor="#fff"
+                            android:textSize="14sp"
+                            android:textStyle="normal"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/slot35Teacher"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/slot35Subject"
+                            android:layout_marginTop="10dp"
+                            android:maxWidth="106dp"
+                            android:text="@string/teacher"
+                            android:textColor="#fff"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+
+                            />
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_below="@+id/slot35Teacher"
+                            android:layout_marginTop="10dp"
+                            android:theme="@style/checkBoxStyle" />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/timetable_slot_unchecked"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:id="@+id/slot36Subject"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxWidth="106dp"
+                            android:text="@string/subject"
+                            android:textColor="#fff"
+                            android:textSize="14sp"
+                            android:textStyle="normal"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/slot36Teacher"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/slot36Subject"
+                            android:layout_marginTop="10dp"
+                            android:maxWidth="106dp"
+                            android:text="@string/teacher"
+                            android:textColor="#fff"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+
+                            />
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_below="@+id/slot36Teacher"
+                            android:layout_marginTop="10dp"
+                            android:theme="@style/checkBoxStyle" />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/timetable_slot_unchecked"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:id="@+id/slot37Subject"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxWidth="106dp"
+                            android:text="@string/subject"
+                            android:textColor="#fff"
+                            android:textSize="14sp"
+                            android:textStyle="normal"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/slot37Teacher"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/slot37Subject"
+                            android:layout_marginTop="10dp"
+                            android:maxWidth="106dp"
+                            android:text="@string/teacher"
+                            android:textColor="#fff"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+
+                            />
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_below="@+id/slot37Teacher"
+                            android:layout_marginTop="10dp"
+                            android:theme="@style/checkBoxStyle" />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/timetable_slot_unchecked"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:id="@+id/slot38Subject"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxWidth="106dp"
+                            android:text="@string/subject"
+                            android:textColor="#fff"
+                            android:textSize="14sp"
+                            android:textStyle="normal"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/slot38Teacher"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/slot38Subject"
+                            android:layout_marginTop="10dp"
+                            android:maxWidth="106dp"
+                            android:text="@string/teacher"
+                            android:textColor="#fff"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+
+                            />
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_below="@+id/slot38Teacher"
+                            android:layout_marginTop="10dp"
+                            android:theme="@style/checkBoxStyle" />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/timetable_slot_unchecked"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:id="@+id/slot39Subject"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxWidth="106dp"
+                            android:text="@string/subject"
+                            android:textColor="#fff"
+                            android:textSize="14sp"
+                            android:textStyle="normal"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/slot39Teacher"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/slot39Subject"
+                            android:layout_marginTop="10dp"
+                            android:maxWidth="106dp"
+                            android:text="@string/teacher"
+                            android:textColor="#fff"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+
+                            />
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_below="@+id/slot39Teacher"
+                            android:layout_marginTop="10dp"
+                            android:theme="@style/checkBoxStyle" />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/timetable_slot_unchecked"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:id="@+id/slot40Subject"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxWidth="106dp"
+                            android:text="@string/subject"
+                            android:textColor="#fff"
+                            android:textSize="14sp"
+                            android:textStyle="normal"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/slot40Teacher"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/slot40Subject"
+                            android:layout_marginTop="10dp"
+                            android:maxWidth="106dp"
+                            android:text="@string/teacher"
+                            android:textColor="#fff"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+
+                            />
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_below="@+id/slot40Teacher"
                             android:layout_marginTop="10dp"
                             android:theme="@style/checkBoxStyle" />
 

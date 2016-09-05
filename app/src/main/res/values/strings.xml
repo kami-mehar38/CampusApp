@@ -62,6 +62,8 @@
     <string name="enter_subject_name">Enter subject name</string>
     <string name="enter_teacher_name">Enter teacher name</string>
     <string name="edit">Edit</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
     <string-array name="login_options">
         <item>Select Account</item>
         <item>Blood Bank</item>

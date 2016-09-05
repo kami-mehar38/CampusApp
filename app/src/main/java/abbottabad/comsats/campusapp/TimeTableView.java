@@ -3,8 +3,10 @@ package abbottabad.comsats.campusapp;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -23,52 +25,91 @@ import java.util.Calendar;
  */
 public class TimeTableView extends AppCompatActivity implements View.OnLongClickListener, View.OnClickListener {
 
-    private RelativeLayout slot1;
+    private RelativeLayout slot11, slot21, slot31, slot41, slot51;
     private AlertDialog AD_editSlot;
-    private AlertDialog.Builder builder;
     private EditText ET_editSlotSubject;
     private EditText ET_editSlotTeacher;
-    private Button btn_edit;
-    private Button btn_cancelEditDialog;
     private Validation validation;
-    private CheckBox slot1Reminder;
+    private int SELECTED_SLOT;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.timetable_page);
 
+        initializingVariables();
+
+    }
+
+    private void initializingVariables() {
         View view = LayoutInflater.from(TimeTableView.this).inflate(R.layout.edit_slot, null);
-        builder = new AlertDialog.Builder(TimeTableView.this);
-
-        ET_editSlotSubject = (EditText) view.findViewById(R.id.ET_editSlotSubject);
-        ET_editSlotTeacher = (EditText) view.findViewById(R.id.ET_editSlotTeacher);
-        btn_edit = (Button) view.findViewById(R.id.btn_edit);
-        btn_edit.setOnClickListener(this);
-        btn_cancelEditDialog = (Button) view.findViewById(R.id.btn_cancelEditDialog);
-        btn_cancelEditDialog.setOnClickListener(this);
-
+        AlertDialog.Builder builder = new AlertDialog.Builder(TimeTableView.this);
         builder.setView(view);
         builder.setCancelable(false);
         AD_editSlot = builder.create();
 
-        slot1 = (RelativeLayout) findViewById(R.id.slot1);
-        if (slot1 != null) {
-            slot1.setOnLongClickListener(this);
+        ET_editSlotSubject = (EditText) view.findViewById(R.id.ET_editSlotSubject);
+        ET_editSlotTeacher = (EditText) view.findViewById(R.id.ET_editSlotTeacher);
+        Button btn_edit = (Button) view.findViewById(R.id.btn_edit);
+        btn_edit.setOnClickListener(this);
+        Button btn_cancelEditDialog = (Button) view.findViewById(R.id.btn_cancelEditDialog);
+        btn_cancelEditDialog.setOnClickListener(this);
+
+
+        slot11 = (RelativeLayout) findViewById(R.id.slot11);
+        if (slot11 != null) {
+            slot11.setOnLongClickListener(this);
         }
-        slot1Reminder = (CheckBox) findViewById(R.id.slot1Reminder);
-        if (slot1Reminder != null) {
-            slot1Reminder.setOnClickListener(this);
+        slot21 = (RelativeLayout) findViewById(R.id.slot21);
+        if (slot21 != null) {
+            slot21.setOnLongClickListener(this);
+        }
+        slot31 = (RelativeLayout) findViewById(R.id.slot31);
+        if (slot31 != null) {
+            slot31.setOnLongClickListener(this);
+        }
+        slot41 = (RelativeLayout) findViewById(R.id.slot41);
+        if (slot41 != null) {
+            slot41.setOnLongClickListener(this);
+        }
+        slot51 = (RelativeLayout) findViewById(R.id.slot51);
+        if (slot51 != null) {
+            slot51.setOnLongClickListener(this);
+        }
+        CheckBox slot11Reminder = (CheckBox) findViewById(R.id.slot11Reminder);
+        if (slot11Reminder != null) {
+            slot11Reminder.setOnClickListener(this);
+        }
+        CheckBox slot21Reminder = (CheckBox) findViewById(R.id.slot21Reminder);
+        if (slot21Reminder != null) {
+            slot21Reminder.setOnClickListener(this);
+        }
+        CheckBox slot31Reminder = (CheckBox) findViewById(R.id.slot31Reminder);
+        if (slot31Reminder != null) {
+            slot31Reminder.setOnClickListener(this);
+        }
+        CheckBox slot41Reminder = (CheckBox) findViewById(R.id.slot41Reminder);
+        if (slot41Reminder != null) {
+            slot41Reminder.setOnClickListener(this);
+        }
+        CheckBox slot51Reminder = (CheckBox) findViewById(R.id.slot51Reminder);
+        if (slot51Reminder != null) {
+            slot51Reminder.setOnClickListener(this);
         }
 
         validation = new Validation();
-
     }
 
     @Override
     public boolean onLongClick(View v) {
         switch (v.getId()) {
-            case R.id.slot1: {
+            case R.id.slot11: {
+                SELECTED_SLOT = 11;
+                AD_editSlot.show();
+                break;
+            }
+            case R.id.slot21: {
+                SELECTED_SLOT = 21;
                 AD_editSlot.show();
                 break;
             }
@@ -85,11 +126,27 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 String teacherName = ET_editSlotTeacher.getText().toString().trim();
                 if (validation.validateSubjectName(subjectName)){
                     if (validation.validateTeacherName(teacherName)) {
-                        View subject = slot1.getChildAt(0);
-                        ((TextView) subject).setText(subjectName);
+                        View subject = null;
+                        View teacher = null;
+                        switch (SELECTED_SLOT) {
+                            case 11: {
+                                 subject = slot11.getChildAt(0);
+                                 teacher = slot11.getChildAt(1);
+                                break;
+                            }
+                            case 21: {
+                                subject = slot21.getChildAt(0);
+                                teacher = slot21.getChildAt(1);
+                                break;
+                            }
+                        }
+                        if (subject != null) {
+                            ((TextView) subject).setText(subjectName);
+                        }
                         ET_editSlotSubject.setText("");
-                        View teacher = slot1.getChildAt(1);
-                        ((TextView) teacher).setText(teacherName);
+                        if (teacher != null) {
+                            ((TextView) teacher).setText(teacherName);
+                        }
                         ET_editSlotTeacher.setText("");
                         Toast.makeText(TimeTableView.this, "Slot edited", Toast.LENGTH_SHORT).show();
                     } else Toast.makeText(TimeTableView.this, "Invalid teacher name", Toast.LENGTH_SHORT).show();
@@ -102,28 +159,88 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ET_editSlotSubject.setText("");
                 break;
             }
-            case R.id.slot1Reminder: {
+            case R.id.slot11Reminder: {
                 if (((CheckBox)v).isChecked()){
-                    //Toast.makeText(TimeTableView.this, v.getTag().toString(), Toast.LENGTH_SHORT).show();
+                    ((RelativeLayout)v.getParent()).setBackground(ContextCompat
+                            .getDrawable(TimeTableView.this,
+                                    R.drawable.timetable_slot_checked));
                     String subject = ((TextView)((RelativeLayout)v.getParent()).getChildAt(0)).getText().toString();
                     String teacher = ((TextView)((RelativeLayout)v.getParent()).getChildAt(1)).getText().toString();
-                    Toast.makeText(TimeTableView.this, subject, Toast.LENGTH_SHORT).show();
-                    handleNotification();
+                    /*if (!subject.equals("Subject") && !teacher.equals("Teacher")){
+                        handleNotification(1, subject, teacher, 1, 14, 12, 0);
+                    }*/
+                    handleNotification(11, subject, teacher, 1, 22, 52, 0);
+                } else{
+                    ((RelativeLayout)v.getParent()).setBackground(ContextCompat
+                            .getDrawable(TimeTableView.this,
+                                    R.drawable.timetable_slot_unchecked));
+                    cancelSlotNotification(1);
+                    Toast.makeText(TimeTableView.this, "Cancelled", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            }
+            case R.id.slot21Reminder: {
+                if (((CheckBox)v).isChecked()){
+                    ((RelativeLayout)v.getParent()).setBackground(ContextCompat
+                            .getDrawable(TimeTableView.this,
+                                    R.drawable.timetable_slot_checked));
+                    String subject = ((TextView)((RelativeLayout)v.getParent()).getChildAt(0)).getText().toString();
+                    String teacher = ((TextView)((RelativeLayout)v.getParent()).getChildAt(1)).getText().toString();
+                    /*if (!subject.equals("Subject") && !teacher.equals("Teacher")){
+                        handleNotification(1, subject, teacher, 1, 14, 12, 0);
+                    }*/
+                    handleNotification(21, subject, teacher, 2, 22, 52, 0);
+                } else{
+                    ((RelativeLayout)v.getParent()).setBackground(ContextCompat
+                            .getDrawable(TimeTableView.this,
+                                    R.drawable.timetable_slot_unchecked));
+                    cancelSlotNotification(1);
+                    Toast.makeText(TimeTableView.this, "Cancelled", Toast.LENGTH_SHORT).show();
                 }
                 break;
             }
         }
     }
 
-    private void handleNotification() {
+    private void cancelSlotNotification(int id) {
         Intent alarmIntent = new Intent(this, TimeTableReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, id, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        if(pendingIntent != null){
+            alarmManager.cancel(pendingIntent);
+            pendingIntent.cancel();
+        }
+    }
+
+    private void handleNotification(int id, String subject, String teacher, int day, int hours, int minutes, int seconds) {
+        Toast.makeText(TimeTableView.this, "HERE", Toast.LENGTH_SHORT).show();
+        Intent alarmIntent = new Intent(this, TimeTableReceiver.class);
+        alarmIntent.putExtra("SUBJECT", subject);
+        alarmIntent.putExtra("TEACHER", teacher);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, id, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 1);
-        calendar.set(Calendar.MINUTE, 3);
-        calendar.set(Calendar.SECOND, 0);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
-        //alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 24*60*60*1000, pendingIntent);
+        switch (day){
+            case 1: {
+                calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+            }
+            case 2: {
+                calendar.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
+            }
+        }
+
+        calendar.set(Calendar.HOUR_OF_DAY, hours);
+        calendar.set(Calendar.MINUTE, minutes);
+        calendar.set(Calendar.SECOND, seconds);
+
+        //check whether the time is earlier than current time. If so, set it to next week.
+
+        Calendar now = Calendar.getInstance();
+        if (calendar.before(now)){
+            calendar.add(Calendar.DATE, 7);
+            Toast.makeText(TimeTableView.this, "Past", Toast.LENGTH_SHORT).show();
+
+        }
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 7, pendingIntent);
     }
 }
