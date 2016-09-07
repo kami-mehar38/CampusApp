@@ -2,8 +2,11 @@ package abbottabad.comsats.campusapp;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -11,6 +14,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -25,20 +30,24 @@ import java.util.Calendar;
  */
 public class TimeTableView extends AppCompatActivity implements View.OnLongClickListener, View.OnClickListener {
 
+    String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
     private RelativeLayout slot11, slot21, slot31, slot41, slot51;
     private AlertDialog AD_editSlot;
     private EditText ET_editSlotSubject;
     private EditText ET_editSlotTeacher;
     private Validation validation;
     private int SELECTED_SLOT;
+    private SharedPreferences.Editor editor;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.timetable_page);
-
+        setStatusBarColor();
+        sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
         initializingVariables();
-
     }
 
     private void initializingVariables() {
@@ -58,6 +67,12 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
 
         slot11 = (RelativeLayout) findViewById(R.id.slot11);
         if (slot11 != null) {
+            String subjectName = sharedPreferences.getString("SLOT11_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT11_TEACHER", null);
+            if (subjectName != null && teacherName != null) {
+                ((TextView) slot11.getChildAt(0)).setText(subjectName);
+                ((TextView) slot11.getChildAt(1)).setText(teacherName);
+            }
             slot11.setOnLongClickListener(this);
         }
         slot21 = (RelativeLayout) findViewById(R.id.slot21);
@@ -78,6 +93,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
         }
         CheckBox slot11Reminder = (CheckBox) findViewById(R.id.slot11Reminder);
         if (slot11Reminder != null) {
+            slot11Reminder.setChecked(sharedPreferences.getBoolean("SLOT11_CHECKED", false));
             slot11Reminder.setOnClickListener(this);
         }
         CheckBox slot21Reminder = (CheckBox) findViewById(R.id.slot21Reminder);
@@ -124,14 +140,17 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
 
                 String subjectName = ET_editSlotSubject.getText().toString().trim();
                 String teacherName = ET_editSlotTeacher.getText().toString().trim();
-                if (validation.validateSubjectName(subjectName)){
+                if (validation.validateSubjectName(subjectName)) {
                     if (validation.validateTeacherName(teacherName)) {
                         View subject = null;
                         View teacher = null;
                         switch (SELECTED_SLOT) {
                             case 11: {
-                                 subject = slot11.getChildAt(0);
-                                 teacher = slot11.getChildAt(1);
+                                subject = slot11.getChildAt(0);
+                                teacher = slot11.getChildAt(1);
+                                editor.putString("SLOT11_SUBJECT", subjectName);
+                                editor.putString("SLOT11_TEACHER", teacherName);
+                                editor.apply();
                                 break;
                             }
                             case 21: {
@@ -149,8 +168,10 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                         }
                         ET_editSlotTeacher.setText("");
                         Toast.makeText(TimeTableView.this, "Slot edited", Toast.LENGTH_SHORT).show();
-                    } else Toast.makeText(TimeTableView.this, "Invalid teacher name", Toast.LENGTH_SHORT).show();
-                } else Toast.makeText(TimeTableView.this, "Invalid subject name", Toast.LENGTH_SHORT).show();
+                    } else
+                        Toast.makeText(TimeTableView.this, "Invalid teacher name", Toast.LENGTH_SHORT).show();
+                } else
+                    Toast.makeText(TimeTableView.this, "Invalid subject name", Toast.LENGTH_SHORT).show();
 
                 break;
             }
@@ -160,38 +181,41 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 break;
             }
             case R.id.slot11Reminder: {
-                if (((CheckBox)v).isChecked()){
-                    ((RelativeLayout)v.getParent()).setBackground(ContextCompat
+                if (((CheckBox) v).isChecked()) {
+                    ((RelativeLayout) v.getParent()).setBackground(ContextCompat
                             .getDrawable(TimeTableView.this,
                                     R.drawable.timetable_slot_checked));
-                    String subject = ((TextView)((RelativeLayout)v.getParent()).getChildAt(0)).getText().toString();
-                    String teacher = ((TextView)((RelativeLayout)v.getParent()).getChildAt(1)).getText().toString();
-                    /*if (!subject.equals("Subject") && !teacher.equals("Teacher")){
-                        handleNotification(1, subject, teacher, 1, 14, 12, 0);
-                    }*/
-                    handleNotification(11, subject, teacher, 1, 22, 52, 0);
-                } else{
-                    ((RelativeLayout)v.getParent()).setBackground(ContextCompat
+                    String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
+                    String teacher = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(1)).getText().toString();
+                    if (!subject.equals("Subject") && !teacher.equals("Teacher")) {
+                        handleNotification(1, subject, teacher, 1, 7, 45, 0);
+                        editor.putBoolean("SLOT11_CHECKED", true);
+                        editor.apply();
+                    }
+                } else {
+                    ((RelativeLayout) v.getParent()).setBackground(ContextCompat
                             .getDrawable(TimeTableView.this,
                                     R.drawable.timetable_slot_unchecked));
                     cancelSlotNotification(1);
                     Toast.makeText(TimeTableView.this, "Cancelled", Toast.LENGTH_SHORT).show();
+                    editor.putBoolean("SLOT11_CHECKED", false);
+                    editor.apply();
                 }
                 break;
             }
             case R.id.slot21Reminder: {
-                if (((CheckBox)v).isChecked()){
-                    ((RelativeLayout)v.getParent()).setBackground(ContextCompat
+                if (((CheckBox) v).isChecked()) {
+                    ((RelativeLayout) v.getParent()).setBackground(ContextCompat
                             .getDrawable(TimeTableView.this,
                                     R.drawable.timetable_slot_checked));
-                    String subject = ((TextView)((RelativeLayout)v.getParent()).getChildAt(0)).getText().toString();
-                    String teacher = ((TextView)((RelativeLayout)v.getParent()).getChildAt(1)).getText().toString();
-                    /*if (!subject.equals("Subject") && !teacher.equals("Teacher")){
-                        handleNotification(1, subject, teacher, 1, 14, 12, 0);
-                    }*/
-                    handleNotification(21, subject, teacher, 2, 22, 52, 0);
-                } else{
-                    ((RelativeLayout)v.getParent()).setBackground(ContextCompat
+                    String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
+                    String teacher = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(1)).getText().toString();
+                    if (!subject.equals("Subject") && !teacher.equals("Teacher")) {
+                        handleNotification(1, subject, teacher, 2, 7, 45, 0);
+                    }
+
+                } else {
+                    ((RelativeLayout) v.getParent()).setBackground(ContextCompat
                             .getDrawable(TimeTableView.this,
                                     R.drawable.timetable_slot_unchecked));
                     cancelSlotNotification(1);
@@ -206,7 +230,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
         Intent alarmIntent = new Intent(this, TimeTableReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, id, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        if(pendingIntent != null){
+        if (pendingIntent != null) {
             alarmManager.cancel(pendingIntent);
             pendingIntent.cancel();
         }
@@ -220,7 +244,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, id, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         Calendar calendar = Calendar.getInstance();
-        switch (day){
+        switch (day) {
             case 1: {
                 calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
             }
@@ -236,11 +260,21 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
         //check whether the time is earlier than current time. If so, set it to next week.
 
         Calendar now = Calendar.getInstance();
-        if (calendar.before(now)){
+        if (calendar.before(now)) {
             calendar.add(Calendar.DATE, 7);
             Toast.makeText(TimeTableView.this, "Past", Toast.LENGTH_SHORT).show();
 
         }
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 7, pendingIntent);
+    }
+
+    private void setStatusBarColor() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            int color = ContextCompat.getColor(this, R.color.timetableStatusBar);
+
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(color);
+        }
     }
 }

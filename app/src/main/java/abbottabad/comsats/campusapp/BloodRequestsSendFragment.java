@@ -12,13 +12,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 /**
  * This project CampusApp is created by Kamran Ramzan on 6/8/16.
  */
-public class BloodRequestsSendFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+public class BloodRequestsSendFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
     private EditText ETname;
     private EditText ETregistration;
@@ -27,6 +28,7 @@ public class BloodRequestsSendFragment extends Fragment implements AdapterView.O
     private String bloodType;
     private Spinner SPbloodTypeOptions;
     private AlertDialog alertDialog;
+    private ImageView IV_openBloodSpinner;
 
     @Nullable
     @Override
@@ -47,6 +49,8 @@ public class BloodRequestsSendFragment extends Fragment implements AdapterView.O
         ETname = (EditText) view.findViewById(R.id.ETname);
         ETregistration = (EditText) view.findViewById(R.id.ETregistration);
         ETcontact = (EditText) view.findViewById(R.id.ETcontact);
+        IV_openBloodSpinner = (ImageView) view.findViewById(R.id.IV_openBloodSpinner);
+        IV_openBloodSpinner.setOnClickListener(this);
 
         Button btnSendRequest = (Button) view.findViewById(R.id.btnsendRequest);
         btnSendRequest.setOnClickListener(new View.OnClickListener() {
@@ -91,5 +95,15 @@ public class BloodRequestsSendFragment extends Fragment implements AdapterView.O
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.IV_openBloodSpinner: {
+                SPbloodTypeOptions.performClick();
+                break;
+            }
+        }
     }
 }

@@ -64,6 +64,7 @@
     <string name="edit">Edit</string>
     <string name="thursday">Thursday</string>
     <string name="friday">Friday</string>
+    <string name="login_account">Login Account</string>
     <string-array name="login_options">
         <item>Select Account</item>
         <item>Blood Bank</item>

@@ -2,12 +2,17 @@ package abbottabad.comsats.campusapp;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -47,6 +52,7 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
         setContentView(R.layout.notification_page);
         toolbar = (Toolbar) findViewById(R.id.notifications_toolbar);
         setSupportActionBar(toolbar);
+        setStatusBarColor();
         SharedPreferences sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         REG_ID = sharedPreferences.getString("REG_ID", null);
         notificationsLocalModal = new NotificationsLocalModal(this);
@@ -68,7 +74,6 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
         }
         notificationsAdapter = new NotificationsAdapter(NotificationsView.this, R.layout.chat_right);
         listView.setAdapter(notificationsAdapter);
-        listView.setClickable(false);
         notificationsLocalModal.retrieveNotifications();
         selectedItems = new ArrayList<>();
         notificationInfos = new ArrayList<>();
@@ -208,6 +213,16 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
             clearActionMode();
         } else {
             super.onBackPressed();
+        }
+    }
+
+    private void setStatusBarColor() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            int color = ContextCompat.getColor(this, R.color.notificationsStatusBar);
+
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(color);
         }
     }
 }

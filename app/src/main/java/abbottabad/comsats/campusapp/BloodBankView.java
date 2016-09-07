@@ -3,12 +3,16 @@ package abbottabad.comsats.campusapp;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 
@@ -26,6 +30,7 @@ public class BloodBankView extends AppCompatActivity {
         setContentView(R.layout.bloodbank_page);
         Toolbar toolbar = (Toolbar) findViewById(R.id.bloodbank_toolbar);
         setSupportActionBar(toolbar);
+        setStatusBarColor();
 
         toolbarSpinner = (Spinner) findViewById(R.id.toolbarSpinner);
         if (toolbarSpinner != null) {
@@ -103,6 +108,16 @@ public class BloodBankView extends AppCompatActivity {
                 tabLayout.setupWithViewPager(viewPagerAdmin);
                 tabLayout.setSelectedTabIndicatorColor(Color.WHITE);
             }
+        }
+    }
+
+    private void setStatusBarColor() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            int color = ContextCompat.getColor(this, R.color.bloodBankStatusBar);
+
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(color);
         }
     }
 }

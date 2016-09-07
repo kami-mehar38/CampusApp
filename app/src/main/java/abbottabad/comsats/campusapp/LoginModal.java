@@ -28,7 +28,6 @@ import java.net.URLEncoder;
  * This project CampusApp is created by Kamran Ramzan on 5/29/16.
  */
 public class LoginModal {
-    private static final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
     private Context context;
     public LoginModal(Context context) {
         this.context = context;
@@ -117,6 +116,7 @@ public class LoginModal {
         private void startHomePageActivity(String status) {
             if (status != null && status.equals("OK")) {
 
+                String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
                 SharedPreferences applicationStatus = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = applicationStatus.edit();
                 editor.putString("APPLICATION_STATUS", designation);

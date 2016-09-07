@@ -20,6 +20,11 @@ public class NotificationsAdapter extends ArrayAdapter<NotificationInfo> {
     private NotificationsView notificationsView;
 
     @Override
+    public boolean isEnabled(int position) {
+        return false;
+    }
+
+    @Override
     public void remove(NotificationInfo object) {
         chatMessageList.remove(object);
         super.remove(object);
