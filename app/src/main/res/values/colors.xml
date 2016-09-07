@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#786351</color>
     <color name="colorPrimaryDark">#604f40</color>
-    <color name="colorAccent">#d4b6a1</color>
+    <color name="colorAccent">#d7ad97</color>
     <color name="colorButton">#cdd2d9</color>
     <color name="colorLightGrey">#ebedef</color>
     <color name="colorExtraLightGrey">#f7f7f8</color>
@@ -10,5 +10,5 @@
     <color name="timetableStatusBar">#008163</color>
     <color name="complaintPollStatusBar">#615d5c</color>
     <color name="trackFacultyStatusBar">#3d7c24</color>
-    <color name="bloodBankStatusBar">#a82509</color>
+    <color name="bloodBankStatusBar">#cc0000</color>
 </resources>

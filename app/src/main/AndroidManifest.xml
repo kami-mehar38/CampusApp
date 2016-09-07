@@ -2,25 +2,34 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="abbottabad.comsats.campusapp">
 
-    <uses-sdk android:maxSdkVersion="23"/>
+    <uses-sdk android:maxSdkVersion="23" />
 
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
-    <permission android:name="abbottabad.comsats.campusapp.permission.C2D_MESSAGE"
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <permission
+        android:name="abbottabad.comsats.campusapp.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
+
     <uses-permission android:name="abbottabad.comsats.campusapp.permission.C2D_MESSAGE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality. 
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
+        android:fullBackupContent="false"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:fullBackupContent="false"
         android:theme="@style/AppTheme">
         <activity android:name=".InitialPage">
             <intent-filter>
@@ -29,79 +38,89 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
+
         <receiver android:name=".NetworkStateListener">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
-
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
             android:exported="true"
-            android:permission="com.google.android.c2dm.permission.SEND" >
+            android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
                 <category android:name="abbottabad.comsats.campusapp" />
             </intent-filter>
         </receiver>
 
         <service
             android:name=".MyGcmListenerService"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
         </service>
-
         <service
             android:name=".MyInstanceIDListenerService"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.google.android.gms.iid.InstanceID"/>
+                <action android:name="com.google.android.gms.iid.InstanceID" />
             </intent-filter>
         </service>
-
         <service
             android:name=".RegistrationIntentService"
-            android:exported="false">
-        </service>
+            android:exported="false"></service>
 
-        <activity android:name=".LoginView"
+        <activity
+            android:name=".LoginView"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="stateHidden"/>
-
-        <activity android:name=".SignUpView"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".SignUpView"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="stateHidden"/>
-
-        <activity android:name=".HomePageView"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
-
-        <activity android:name=".BloodBankView" android:parentActivityName=".HomePageView"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".HomePageView"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name=".BloodBankView"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="stateHidden"/>
-
-        <activity android:name=".TrackFacultyView" android:parentActivityName=".HomePageView"
+            android:parentActivityName=".HomePageView"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".TrackFacultyView"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="stateHidden"/>
-
-        <activity android:name=".NotificationsView" android:parentActivityName=".HomePageView"
+            android:parentActivityName=".HomePageView"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".NotificationsView"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="stateHidden"/>
-
-        <activity android:name=".ComplaintPollView" android:parentActivityName=".HomePageView"
+            android:parentActivityName=".HomePageView"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ComplaintPollView"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="stateHidden"/>
-
-        <activity android:name=".TimeTableView" android:parentActivityName=".HomePageView"
+            android:parentActivityName=".HomePageView"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".TimeTableView"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="stateHidden"
-            android:screenOrientation="sensorLandscape"/>
+            android:parentActivityName=".HomePageView"
+            android:screenOrientation="sensorLandscape"
+            android:windowSoftInputMode="stateHidden" />
 
-        <receiver android:name="abbottabad.comsats.campusapp.TimeTableReceiver" />
+        <receiver android:name=".TimeTableReceiver" />
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".MapsActivity"
+            android:label="@string/title_activity_maps" />
     </application>
 
 </manifest>

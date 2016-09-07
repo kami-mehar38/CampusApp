@@ -114,7 +114,7 @@ public class HomePageView extends AppCompatActivity {
             RL_parking.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    startActivity(new Intent(HomePageView.this, MapsActivity.class));
                 }
             });
         }
