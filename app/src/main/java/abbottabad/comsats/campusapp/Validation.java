@@ -90,4 +90,14 @@ public class Validation {
         }
         return true;
     }
+
+    public boolean validateRoomNo(String room){
+        String ROOM = room.trim();
+        if (ROOM.isEmpty()){
+            return false;
+        } else if (ROOM.length() > 4){
+            return false;
+        }
+        return true;
+    }
 }

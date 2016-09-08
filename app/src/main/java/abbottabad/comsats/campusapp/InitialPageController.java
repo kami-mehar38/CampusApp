@@ -15,6 +15,7 @@ import android.support.v7.app.AlertDialog;
 public class InitialPageController extends AsyncTask<Void, Void, String> {
     private ProgressDialog progressDialog;
     private Context context;
+    private AlertDialog alertDialog;
 
     public InitialPageController(Context context) {
         this.context = context;
@@ -58,7 +59,13 @@ public class InitialPageController extends AsyncTask<Void, Void, String> {
                     ((Activity)(context)).finish();
                 }
             });
-            AlertDialog alertDialog = builder.create();
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    alertDialog.cancel();
+                }
+            });
+            alertDialog = builder.create();
             alertDialog.show();
         }
     }
