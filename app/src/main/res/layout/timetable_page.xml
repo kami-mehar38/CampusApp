@@ -145,7 +145,6 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
-
                         <TextView
                             android:id="@+id/slot1Subject"
                             android:layout_width="wrap_content"

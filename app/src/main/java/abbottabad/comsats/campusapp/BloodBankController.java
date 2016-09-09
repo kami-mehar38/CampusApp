@@ -84,7 +84,7 @@ public class BloodBankController {
         ViewPagerAdapterAdmin viewPagerAdapterAdmin = new ViewPagerAdapterAdmin(supportFragmentManager);
         viewPagerAdapterAdmin.addFragment(new BloodRequestsFragment(), "Requests");
         viewPagerAdapterAdmin.addFragment(new BloodDonorsFragment(), "Donors");
-        viewPagerAdapterAdmin.addFragment(new DonorsAddFragment(),"Add Donor");
+        viewPagerAdapterAdmin.addFragment(new BloodDonorsAddFragment(),"Add Donor");
        viewPagerAdmin.setAdapter(viewPagerAdapterAdmin);
     }
     private class ViewPagerAdapterAdmin extends FragmentPagerAdapter {
@@ -119,7 +119,7 @@ public class BloodBankController {
     public void setupViewPagerRequester(ViewPager viewPager, FragmentManager supportFragmentManager) {
         ViewPagerAdapterRequester viewPagerAdapterRequester = new ViewPagerAdapterRequester(supportFragmentManager);
         viewPagerAdapterRequester.addFragment(new BloodRequestsSendFragment(), "Blood Request");
-        viewPagerAdapterRequester.addFragment(new DonorsAddFragment(),"Become a Donor");
+        viewPagerAdapterRequester.addFragment(new BloodDonorsAddFragment(),"Become a Donor");
         viewPager.setAdapter(viewPagerAdapterRequester);
     }
     private class ViewPagerAdapterRequester extends FragmentPagerAdapter {

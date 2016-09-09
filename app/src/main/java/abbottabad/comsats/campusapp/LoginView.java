@@ -14,6 +14,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.Spinner;
@@ -24,7 +25,7 @@ import android.widget.Toast;
  * This project CampusApp is created by Kamran Ramzan on 5/25/16.
  */
 
-public class LoginView extends AppCompatActivity {
+public class LoginView extends AppCompatActivity implements View.OnClickListener{
 
     private static EditText ETuname;
     private EditText ETpassword;
@@ -56,6 +57,9 @@ public class LoginView extends AppCompatActivity {
 
         ETuname = (EditText) findViewById(R.id.ETname);
         ETpassword = (EditText) findViewById(R.id.ETpassword);
+        ImageView IV_openBloodSpinner = (ImageView) findViewById(R.id.IV_openBloodSpinner);
+        IV_openBloodSpinner.setOnClickListener(this);
+
 
         SPloginOptions = (Spinner) findViewById(R.id.SPloginOptions);
         new LoginController(this).populateSpinner(SPloginOptions);
@@ -275,5 +279,13 @@ public class LoginView extends AppCompatActivity {
             }
         });
     }
-
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.IV_openBloodSpinner: {
+                SPloginOptions.performClick();
+                break;
+            }
+        }
+    }
 }

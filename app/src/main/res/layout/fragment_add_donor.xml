@@ -13,80 +13,71 @@
         android:paddingStart="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin">
 
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/TILDname"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Name">
-
-            <android.support.design.widget.TextInputEditText
+            <EditText
                 android:id="@+id/ETDname"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="33dp"
-                android:background="@drawable/editext_style"
+                android:background="@drawable/edittext_top_rounded"
                 android:textCursorDrawable="@drawable/edittext_cursor_color"
                 android:ems="10"
+                android:gravity="center"
+                android:hint="@string/name_simple"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
                 android:inputType="textPersonName"
-                android:padding="12dp"
                 android:textColor="#000"
                 android:textSize="16sp"
                 android:textStyle="normal" />
 
-        </android.support.design.widget.TextInputLayout>
 
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/TILDregID"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:hint="Registration ID">
 
-            <android.support.design.widget.TextInputEditText
+            <EditText
                 android:id="@+id/ETDregID"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/editext_style"
+                android:background="@drawable/edittext_middle"
                 android:textCursorDrawable="@drawable/edittext_cursor_color"
                 android:ems="10"
+                android:gravity="center"
+                android:hint="@string/registration_id"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
                 android:inputType="textPersonName"
-                android:padding="12dp"
                 android:textColor="#000"
                 android:textSize="16sp"
                 android:textStyle="normal" />
-        </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/TILDcontact"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:hint="Contact #">
+
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/ETDcontact"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/editext_style"
+                android:background="@drawable/edittext_bottom_radius"
                 android:textCursorDrawable="@drawable/edittext_cursor_color"
                 android:ems="10"
+                android:gravity="center"
+                android:hint="@string/contact_simple"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
                 android:inputType="phone"
-                android:padding="12dp"
                 android:textColor="#000"
                 android:textSize="16sp"
                 android:textStyle="normal" />
-        </android.support.design.widget.TextInputLayout>
-
         <CheckBox
             android:id="@+id/CB_bleeding"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="39dp"
-            android:text="Last bleeding date, if"
+            android:text="@string/last_bleeding_date_if"
             android:textColor="#786351"
             android:textSize="17sp" />
 

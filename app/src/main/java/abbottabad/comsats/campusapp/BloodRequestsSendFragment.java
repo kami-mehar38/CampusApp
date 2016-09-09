@@ -28,7 +28,6 @@ public class BloodRequestsSendFragment extends Fragment implements AdapterView.O
     private String bloodType;
     private Spinner SPbloodTypeOptions;
     private AlertDialog alertDialog;
-    private ImageView IV_openBloodSpinner;
 
     @Nullable
     @Override
@@ -49,7 +48,7 @@ public class BloodRequestsSendFragment extends Fragment implements AdapterView.O
         ETname = (EditText) view.findViewById(R.id.ETname);
         ETregistration = (EditText) view.findViewById(R.id.ETregistration);
         ETcontact = (EditText) view.findViewById(R.id.ETcontact);
-        IV_openBloodSpinner = (ImageView) view.findViewById(R.id.IV_openBloodSpinner);
+        ImageView IV_openBloodSpinner = (ImageView) view.findViewById(R.id.IV_openBloodSpinner);
         IV_openBloodSpinner.setOnClickListener(this);
 
         Button btnSendRequest = (Button) view.findViewById(R.id.btnsendRequest);

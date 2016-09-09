@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -26,7 +27,7 @@ import java.util.TimeZone;
 /**
  * This project CampusApp is created by Kamran Ramzan on 6/30/16.
  */
-public class DonorsAddFragment extends Fragment {
+public class BloodDonorsAddFragment extends Fragment implements View.OnClickListener {
     private Spinner SPbloodTypes;
     private BloodBankController bloodBankController;
     private String bloodType;
@@ -43,7 +44,7 @@ public class DonorsAddFragment extends Fragment {
     private AlertDialog alertDialogBlood;
     private Validation validation;
 
-    public DonorsAddFragment() {
+    public BloodDonorsAddFragment() {
     }
 
     @Override
@@ -78,6 +79,7 @@ public class DonorsAddFragment extends Fragment {
             }
         });
         alertDialogBlood = builderBlood.create();
+
     }
 
     @Override
@@ -178,5 +180,17 @@ public class DonorsAddFragment extends Fragment {
                 }
             }
         });
+        ImageView IV_openBloodSpinner = (ImageView) view.findViewById(R.id.IV_openBloodSpinner);
+        IV_openBloodSpinner.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.IV_openBloodSpinner: {
+                SPbloodTypes.performClick();
+                break;
+            }
+        }
     }
 }

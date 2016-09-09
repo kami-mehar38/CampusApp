@@ -25,66 +25,61 @@
             android:paddingTop="@dimen/activity_vertical_margin"
             android:orientation="vertical">
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Name"
-                >
-                <android.support.design.widget.TextInputEditText
+                <EditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="textPersonName"
                     android:ems="10"
+                    android:gravity="center"
+                    android:hint="@string/name_simple"
                     android:id="@+id/ET_name"
-                    android:layout_alignParentTop="true"
-                    android:padding="12dp"
-                    android:background="@drawable/editext_style"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp"
+                    android:background="@drawable/edittext_top_rounded"
                     android:textCursorDrawable="@drawable/edittext_cursor_color"
                     android:textStyle="normal"
                     android:textSize="16sp"
                     android:textColor="#000"
                     />
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:hint="Registration ID">
-                <android.support.design.widget.TextInputEditText
+                <EditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="text"
                     android:ems="10"
+                    android:gravity="center"
+                    android:hint="@string/registration_id"
                     android:id="@+id/ET_regID"
-                    android:padding="12dp"
-                    android:background="@drawable/editext_style"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp"
+                    android:background="@drawable/edittext_middle"
                     android:textCursorDrawable="@drawable/edittext_cursor_color"
                     android:textStyle="normal"
                     android:textSize="16sp"
                     android:textColor="#000"
                     />
-            </android.support.design.widget.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:hint="Contact #">
-                <android.support.design.widget.TextInputEditText
+                <EditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="number"
                     android:ems="10"
+                    android:gravity="center"
+                    android:hint="@string/contact_simple"
                     android:id="@+id/ET_contact"
-                    android:padding="12dp"
-                    android:background="@drawable/editext_style"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp"
+                    android:background="@drawable/edittext_bottom_radius"
                     android:textCursorDrawable="@drawable/edittext_cursor_color"
                     android:textStyle="normal"
                     android:textSize="16sp"
                     android:textColor="#000"
                     />
-            </android.support.design.widget.TextInputLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -100,7 +95,7 @@
                 android:ems="10"
                 android:padding="10dp"
                 android:layout_weight="0.8"
-                android:background="@drawable/editext_style"
+                android:background="@drawable/edittext_description"
                 android:textCursorDrawable="@drawable/edittext_cursor_color"
                 android:maxLength="320"
                 android:textStyle="normal"

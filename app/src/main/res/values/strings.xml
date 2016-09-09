@@ -101,4 +101,9 @@
     </string-array>
     <string name="title_activity_maps">Map</string>
     <string name="room">Room #</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="registration_id">Registration id</string>
+    <string name="name_simple">Name</string>
+    <string name="contact_simple">Contact #</string>
 </resources>

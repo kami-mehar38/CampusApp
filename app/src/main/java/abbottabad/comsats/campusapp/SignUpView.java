@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ public class SignUpView extends AppCompatActivity implements AdapterView.OnItemS
     private EditText ETname;
     private EditText ETregistration;
     private Validation validation;
+    private Spinner SPsignupOptions;
 
 
     @Override
@@ -37,8 +39,10 @@ public class SignUpView extends AppCompatActivity implements AdapterView.OnItemS
 
         ETname = (EditText) findViewById(R.id.ETname);
         ETregistration = (EditText) findViewById(R.id.ETregistration);
+        ImageView IV_openBloodSpinner = (ImageView) findViewById(R.id.IV_openBloodSpinner);
+        IV_openBloodSpinner.setOnClickListener(this);
 
-        Spinner SPsignupOptions = (Spinner) findViewById(R.id.SPsignupOptions);
+        SPsignupOptions = (Spinner) findViewById(R.id.SPsignupOptions);
         new SignUpController(this).populateSpinner(SPsignupOptions);
         if (SPsignupOptions != null) {
             SPsignupOptions.setOnItemSelectedListener(this);
@@ -96,7 +100,10 @@ public class SignUpView extends AppCompatActivity implements AdapterView.OnItemS
                     } else Toast.makeText(SignUpView.this, "Invalid registration id", Toast.LENGTH_SHORT).show();
                 } else Toast.makeText(SignUpView.this, "Invalid name", Toast.LENGTH_SHORT).show();
             }
+            case R.id.IV_openBloodSpinner: {
+                SPsignupOptions.performClick();
+                break;
+            }
         }
     }
-
 }
