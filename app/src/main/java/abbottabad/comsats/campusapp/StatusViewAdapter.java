@@ -1,5 +1,6 @@
 package abbottabad.comsats.campusapp;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +29,24 @@ public class StatusViewAdapter extends RecyclerView.Adapter<StatusViewAdapter.Vi
     public void onBindViewHolder(ViewHolder holder, int position) {
         StatusInfo statusInfo = statusInfoList.get(position);
         holder.TV_teacherName.setText(statusInfo.getTeacherName());
+        switch (statusInfo.getStatus()){
+            case "Available": {
+                holder.TV_teacherStatus.setTextColor(Color.parseColor("#4d9c2d"));
+                break;
+            }
+            case "Busy": {
+                holder.TV_teacherStatus.setTextColor(Color.DKGRAY);
+                break;
+            }
+            case "Absent": {
+                holder.TV_teacherStatus.setTextColor(Color.parseColor("#FFA500"));
+                break;
+            }
+            case "On Leave": {
+                holder.TV_teacherStatus.setTextColor(Color.RED);
+                break;
+            }
+        }
         holder.TV_teacherStatus.setText(statusInfo.getStatus());
     }
 

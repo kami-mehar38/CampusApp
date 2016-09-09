@@ -26,6 +26,7 @@
         android:paddingBottom="10dp"
         android:layout_marginBottom="25dp"
         android:background="@drawable/edittext_change_password"
+        android:textCursorDrawable="@drawable/edittext_change_cursor_color"
         android:textStyle="normal"
         android:textSize="16sp"
         android:textColor="#909090"

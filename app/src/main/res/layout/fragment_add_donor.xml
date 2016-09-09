@@ -27,6 +27,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="33dp"
                 android:background="@drawable/editext_style"
+                android:textCursorDrawable="@drawable/edittext_cursor_color"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:padding="12dp"
@@ -49,6 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/editext_style"
+                android:textCursorDrawable="@drawable/edittext_cursor_color"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:padding="12dp"
@@ -69,6 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/editext_style"
+                android:textCursorDrawable="@drawable/edittext_cursor_color"
                 android:ems="10"
                 android:inputType="phone"
                 android:padding="12dp"
@@ -83,7 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="39dp"
-            android:text="@string/please_check_to_pick_last_bleeding_date"
+            android:text="Last bleeding date, if"
             android:textColor="#786351"
             android:textSize="17sp" />
 

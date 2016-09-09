@@ -5,16 +5,15 @@
             <!-- SHADOW -->
             <item>
                 <shape>
-                    <solid android:color="#786351"/>
+                    <solid android:color="#f2f2f2"/>
 
                 </shape>
             </item>
 
             <item
-                android:bottom="10px"
+                android:bottom="3dp"
                 >
                 <shape>
-                    <padding android:bottom="5dp"/>
                     <solid android:color="#fff"/>
                     <padding
                         android:left="10dp"
@@ -31,16 +30,14 @@
             <!-- SHADOW -->
             <item>
                 <shape>
-                    <solid android:color="#786351"/>
+                    <solid android:color="#f2f2f2"/>
 
                 </shape>
             </item>
             <!-- BUTTON -->
-            <item android:bottom="5px">
+            <item android:bottom="3dp">
                 <shape>
-                    <padding android:bottom="5dp"/>
-                    <solid android:color="#d4b6a1"/>
-
+                    <solid android:color="#f2f2f2"/>
                     <padding
                         android:left="10dp"
                         android:top="10dp"

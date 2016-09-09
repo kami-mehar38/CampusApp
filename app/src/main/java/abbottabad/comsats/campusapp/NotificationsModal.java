@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -36,20 +38,37 @@ public class NotificationsModal {
         this.context = context;
     }
 
-    public void sendEventNotification(String reg_id, String message){
+    public void sendEventNotification(String reg_id, String message) {
         new SendEventNotification().execute(reg_id, message);
     }
 
     public class SendEventNotification extends AsyncTask<String, Void, String> {
 
-        private AlertDialog alertDialog;
         private String message;
         private String currentDateTimeString;
 
         @Override
         protected void onPreExecute() {
-            NotificationsView.btnSend.setVisibility(View.GONE);
-            NotificationsView.progressBar.setVisibility(View.VISIBLE);
+            Animation scaleOut = AnimationUtils.loadAnimation(context, R.anim.send_out);
+            NotificationsView.btnSend.startAnimation(scaleOut);
+            scaleOut.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    NotificationsView.btnSend.setVisibility(View.GONE);
+                    NotificationsView.progressBar.setVisibility(View.VISIBLE);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+
             currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
             NotificationsView.ET_message.setText("");
         }
@@ -67,8 +86,8 @@ public class NotificationsModal {
 
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String data = URLEncoder.encode("reg_id", "UTF-8") +"="+ URLEncoder.encode(reg_id, "UTF-8") +"&"+
-                        URLEncoder.encode("message", "UTF-8") +"="+ URLEncoder.encode(message, "UTF-8");
+                String data = URLEncoder.encode("reg_id", "UTF-8") + "=" + URLEncoder.encode(reg_id, "UTF-8") + "&" +
+                        URLEncoder.encode("message", "UTF-8") + "=" + URLEncoder.encode(message, "UTF-8");
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -77,7 +96,7 @@ public class NotificationsModal {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
                 StringBuilder stringBuilder = new StringBuilder();
                 String line;
-                while ((line = bufferedReader.readLine()) != null){
+                while ((line = bufferedReader.readLine()) != null) {
                     stringBuilder.append(line);
                 }
 
@@ -97,18 +116,30 @@ public class NotificationsModal {
 
         @Override
         protected void onPostExecute(String result) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            Animation scaleIn = AnimationUtils.loadAnimation(context, R.anim.send_in);
+            NotificationsView.btnSend.startAnimation(scaleIn);
+            scaleIn.setAnimationListener(new Animation.AnimationListener() {
                 @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    alertDialog.cancel();
+                public void onAnimationStart(Animation animation) {
+                    NotificationsView.btnSend.setVisibility(View.VISIBLE);
+                    NotificationsView.progressBar.setVisibility(View.GONE);
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
                 }
             });
+
             if (result != null) {
                 switch (result) {
                     case "OK": {
-                        NotificationsView.btnSend.setVisibility(View.VISIBLE);
-                        NotificationsView.progressBar.setVisibility(View.GONE);
+
                         Toast.makeText(context, "Message sent!", Toast.LENGTH_LONG).show();
                         NotificationsController.setNotification(message);
                         NotificationsController.setDateTime(currentDateTimeString);
@@ -122,23 +153,17 @@ public class NotificationsModal {
 
                         NotificationsView.notificationsAdapter.add(notificationInfo);
                         NotificationsView.notificationsAdapter.notifyDataSetChanged();
-                        NotificationsView.listView.setSelection(NotificationsView.notificationsAdapter.getCount()-1);
+                        NotificationsView.listView.setSelection(NotificationsView.notificationsAdapter.getCount() - 1);
                         break;
                     }
                     case "ERROR": {
-                        NotificationsView.btnSend.setVisibility(View.VISIBLE);
-                        NotificationsView.progressBar.setVisibility(View.GONE);
-
-                        builder.setMessage("Message not sent! Please try again.");
-                        alertDialog = builder.create();
-                        alertDialog.show();
+                        NotificationsView.ET_message.setText(message);
+                        Toast.makeText(context, "Message sending failed", Toast.LENGTH_LONG).show();
                         break;
                     }
                 }
             } else {
-                NotificationsView.btnSend.setVisibility(View.VISIBLE);
-                NotificationsView.progressBar.setVisibility(View.GONE);
-
+                NotificationsView.ET_message.setText(message);
                 Toast.makeText(context, "Some error occurred! Please try again.", Toast.LENGTH_LONG).show();
             }
 
