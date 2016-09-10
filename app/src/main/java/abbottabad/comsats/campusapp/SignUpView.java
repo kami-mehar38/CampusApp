@@ -96,9 +96,16 @@ public class SignUpView extends AppCompatActivity implements AdapterView.OnItemS
                             });
                             alertDialog = builder.create();
                             alertDialog.show();
+                            break;
                         }
-                    } else Toast.makeText(SignUpView.this, "Invalid registration id", Toast.LENGTH_SHORT).show();
-                } else Toast.makeText(SignUpView.this, "Invalid name", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(SignUpView.this, "Invalid registration id", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                } else {
+                    Toast.makeText(SignUpView.this, "Invalid name", Toast.LENGTH_SHORT).show();
+                    break;
+                }
             }
             case R.id.IV_openBloodSpinner: {
                 SPsignupOptions.performClick();

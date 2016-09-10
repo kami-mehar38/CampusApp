@@ -2,72 +2,73 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="#fff"
-    android:orientation="vertical"
-     >
+    android:orientation="vertical">
 
-    <include layout="@layout/notifications_toolbar"/>
+    <include layout="@layout/notifications_toolbar" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <ListView
-        android:id="@+id/LV_notifications"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:divider="#fff"
-        android:dividerHeight="10dp"
-        android:layout_above="@+id/form"
-        android:layout_alignParentTop="true"
-        android:padding="10dp"
-         />
-
-    <LinearLayout
-        android:id="@+id/form"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:padding="10dp"
-        android:background="@color/colorLightGrey"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/ET_notification"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.9"
-            android:hint="@string/input_message"
-            android:ems="10"
-            android:maxHeight="80dp"
-            android:maxLength="320"
-            android:padding="10dp"
-            android:background="@drawable/chatbox_notifications_style"
-            android:textCursorDrawable="@drawable/edittext_cursor_color"
-            android:textStyle="normal"
-            android:textSize="16sp"
-            android:textColor="#000"/>
-
-        <ImageButton
-            android:id="@+id/sendNotification"
+        <ListView
+            android:id="@+id/LV_notifications"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:maxHeight="10dp"
-            android:tint="#81a1ab"
-            android:background="@null"
-            android:contentDescription="@string/send"
-            android:src="@drawable/ic_action_send_now"
-            />
-        <ProgressBar
-            android:id="@+id/waiting"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:indeterminate="true"
-            android:layout_marginLeft="5dp"
-            android:layout_marginStart="5dp"
-            android:layout_gravity="center"/>
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/form"
+            android:layout_alignParentTop="true"
+            android:divider="#fff"
+            android:dividerHeight="10dp"
+            android:padding="10dp" />
+
+        <LinearLayout
+            android:id="@+id/form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:background="@color/colorLightGrey"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <EditText
+                android:id="@+id/ET_notification"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.9"
+                android:background="@drawable/chatbox_notifications_style"
+                android:ems="10"
+                android:hint="@string/input_message"
+                android:maxHeight="80dp"
+                android:maxLength="320"
+                android:padding="10dp"
+                android:textColor="#000"
+                android:textCursorDrawable="@drawable/edittext_cursor_color"
+                android:textSize="16sp"
+                android:textStyle="normal">
+
+                <requestFocus />
+            </EditText>
+
+            <ImageButton
+                android:id="@+id/sendNotification"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:contentDescription="@string/send"
+                android:maxHeight="10dp"
+                android:src="@drawable/ic_action_send_now"
+                android:tint="#81a1ab" />
+
+            <ProgressBar
+                android:id="@+id/waiting"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
+                android:indeterminate="true" />
+        </LinearLayout>
     </RelativeLayout>
 
 </LinearLayout>

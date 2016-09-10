@@ -37,12 +37,12 @@ import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 public class ComplaintPollView extends AppCompatActivity implements View.OnClickListener {
 
     private static final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
-    private Button btn_sendComplaint;
     private EditText ET_description;
     private EditText ET_name;
     private EditText ET_regID;
     private EditText ET_contact;
     private TextView TV_descriptionCounter;
+    private final int descriptionLength = 320;
     public static RecyclerView RV_complaints;
     public static ComplaintPollVIewAdapter complaintPollVIewAdapter;
     private Validation validation;
@@ -54,7 +54,7 @@ public class ComplaintPollView extends AppCompatActivity implements View.OnClick
         SharedPreferences applicationStatus = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         String APPLICATION_STATUS = applicationStatus.getString("APPLICATION_STATUS", null);
         if (APPLICATION_STATUS != null) {
-            if (APPLICATION_STATUS.equals("FOOD")){
+            if (APPLICATION_STATUS.equals("FOOD")) {
                 setContentView(R.layout.complaintpoll_page_admin);
                 RV_complaints = (RecyclerView) findViewById(R.id.RV_complaints);
                 if (RV_complaints != null) {
@@ -80,9 +80,7 @@ public class ComplaintPollView extends AppCompatActivity implements View.OnClick
 
                     @Override
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
-                        if (s.length() > 0 && s.length() <= 320) {
-                            TV_descriptionCounter.setText(String.valueOf(s.length()));
-                        } else if (s.length() == 0) TV_descriptionCounter.setText("0");
+                        TV_descriptionCounter.setText(String.valueOf(descriptionLength - s.length()));
                     }
 
                     @Override
@@ -93,8 +91,8 @@ public class ComplaintPollView extends AppCompatActivity implements View.OnClick
 
                 ET_name = (EditText) findViewById(R.id.ET_name);
                 ET_regID = (EditText) findViewById(R.id.ET_regID);
-                ET_contact =(EditText) findViewById(R.id.ET_contact);
-                btn_sendComplaint = (Button) findViewById(R.id.btn_sendComplaint);
+                ET_contact = (EditText) findViewById(R.id.ET_contact);
+                Button btn_sendComplaint = (Button) findViewById(R.id.btn_sendComplaint);
                 if (btn_sendComplaint != null) {
                     btn_sendComplaint.setOnClickListener(this);
                 }
@@ -105,19 +103,22 @@ public class ComplaintPollView extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btn_sendComplaint: {
                 String name = ET_name.getText().toString();
                 String contact = ET_contact.getText().toString();
                 String regID = ET_regID.getText().toString();
                 String description = ET_description.getText().toString();
-                if (validation.validateName(name)){
-                    if (validation.validateReg(regID)){
-                        if (validation.validatePhoneNumber(contact)){
+                if (validation.validateName(name)) {
+                    if (validation.validateReg(regID)) {
+                        if (validation.validatePhoneNumber(contact)) {
                             new ComplaintPollModal(ComplaintPollView.this).sendComplaint(name, regID, contact, description);
-                        } else Toast.makeText(ComplaintPollView.this, "Invalid contact #", Toast.LENGTH_SHORT).show();
-                    } else Toast.makeText(ComplaintPollView.this, "Invalid registration id", Toast.LENGTH_SHORT).show();
-                } else Toast.makeText(ComplaintPollView.this, "Invalid name", Toast.LENGTH_SHORT).show();
+                        } else
+                            Toast.makeText(ComplaintPollView.this, "Invalid contact #", Toast.LENGTH_SHORT).show();
+                    } else
+                        Toast.makeText(ComplaintPollView.this, "Invalid registration id", Toast.LENGTH_SHORT).show();
+                } else
+                    Toast.makeText(ComplaintPollView.this, "Invalid name", Toast.LENGTH_SHORT).show();
             }
         }
     }

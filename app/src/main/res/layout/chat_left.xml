@@ -32,7 +32,7 @@
             android:textSize="16sp"
             android:textColor="#fff"
             android:text="fffffffffffffffffffffffffffffff"
-            android:background="@drawable/chat_left"
+            android:background="@drawable/chat_bubble_left"
             />
 
         <TextView

@@ -2,163 +2,128 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:background="#fff">
+    android:background="#fff"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <include layout="@layout/complaintpoll_toolbar"/>
+
+        <include layout="@layout/complaintpoll_toolbar" />
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:background="#fafafa"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:orientation="vertical"
             android:paddingEnd="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/activity_vertical_margin"
-            android:orientation="vertical">
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin">
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:inputType="textPersonName"
-                    android:ems="10"
-                    android:gravity="center"
-                    android:hint="@string/name_simple"
-                    android:id="@+id/ET_name"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
-                    android:paddingTop="20dp"
-                    android:paddingBottom="20dp"
-                    android:background="@drawable/edittext_top_rounded"
-                    android:textCursorDrawable="@drawable/edittext_cursor_color"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000"
-                    />
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:inputType="text"
-                    android:ems="10"
-                    android:gravity="center"
-                    android:hint="@string/registration_id"
-                    android:id="@+id/ET_regID"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
-                    android:paddingTop="20dp"
-                    android:paddingBottom="20dp"
-                    android:background="@drawable/edittext_middle"
-                    android:textCursorDrawable="@drawable/edittext_cursor_color"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000"
-                    />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:inputType="number"
-                    android:ems="10"
-                    android:gravity="center"
-                    android:hint="@string/contact_simple"
-                    android:id="@+id/ET_contact"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp"
-                    android:paddingTop="20dp"
-                    android:paddingBottom="20dp"
-                    android:background="@drawable/edittext_bottom_radius"
-                    android:textCursorDrawable="@drawable/edittext_cursor_color"
-                    android:textStyle="normal"
-                    android:textSize="16sp"
-                    android:textColor="#000"
-                    />
-
-            <LinearLayout
+            <EditText
+                android:id="@+id/ET_name"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="20dp">
+                android:layout_height="match_parent"
+                android:background="@drawable/edittext_top_rounded"
+                android:drawableStart="@drawable/ic_username"
+                android:drawableLeft="@drawable/ic_username"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="@string/name_simple"
+                android:inputType="textPersonName"
+                android:paddingBottom="20dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="20dp"
+                android:textColor="#000"
+                android:textCursorDrawable="@drawable/edittext_cursor_color"
+                android:textSize="16sp"
+                android:textStyle="normal">
+                <requestFocus />
+
+            </EditText>
+
+            <EditText
+                android:id="@+id/ET_regID"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/edittext_middle"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="@string/registration_id"
+                android:inputType="text"
+                android:paddingBottom="20dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="20dp"
+                android:textColor="#000"
+                android:textCursorDrawable="@drawable/edittext_cursor_color"
+                android:textSize="16sp"
+                android:textStyle="normal" />
+
+            <EditText
+                android:id="@+id/ET_contact"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/edittext_bottom_radius"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="@string/contact_simple"
+                android:inputType="number"
+                android:paddingBottom="20dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="20dp"
+                android:textColor="#000"
+                android:textCursorDrawable="@drawable/edittext_cursor_color"
+                android:textSize="16sp"
+                android:textStyle="normal" />
+
 
             <EditText
                 android:id="@+id/ET_desciption"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:hint="@string/enter_description"
-                android:ems="10"
-                android:padding="10dp"
-                android:layout_weight="0.8"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:background="@drawable/edittext_description"
-                android:textCursorDrawable="@drawable/edittext_cursor_color"
+                android:ems="10"
+                android:hint="@string/enter_description"
                 android:maxLength="320"
-                android:textStyle="normal"
+                android:padding="10dp"
+                android:textColor="#000"
+                android:textCursorDrawable="@drawable/edittext_cursor_color"
                 android:textSize="16sp"
-                android:textColor="#000"/>
+                android:textStyle="normal" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="5dp"
-                    android:paddingLeft="5dp"
-                    android:paddingStart="5dp"
-                    android:paddingEnd="5dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/TV_descriptionCounter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="12sp"
-                        android:textColor="#000"
-                        android:text="0"
-                        />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="12sp"
-                    android:textColor="#000"
-                    android:text="/"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    android:textColor="#000"
-                    android:text="320"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/IV_visualProof"
+            <TextView
+                android:id="@+id/TV_descriptionCounter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_gravity="center"
-                android:contentDescription="@string/visual_proof"/>
+                android:layout_gravity="end"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="2dp"
+                android:text="320"
+                android:textColor="#000"
+                android:textSize="12sp" />
 
             <Button
+                android:id="@+id/btn_sendComplaint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="50dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button_background"
                 android:text="@string/send"
                 android:textAllCaps="false"
-                android:textColor="@color/colorPrimary"
-                android:id="@+id/btn_sendComplaint"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="50dp"
-                android:background="@drawable/button_background"/>
+                android:textColor="@color/colorPrimary" />
 
         </LinearLayout>
 

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Campus App</string>
-    <string name="CIIT">CIIT</string>
+    <string name="welcome">CAMPUS APP</string>
     <string name="sign_up">Sign Up</string>
     <string name="log_in">Log in</string>
     <string name="content_comsats_logo">Comsats Logo</string>
@@ -106,4 +106,5 @@
     <string name="registration_id">Registration id</string>
     <string name="name_simple">Name</string>
     <string name="contact_simple">Contact #</string>
+    <string name="enter_your_account_email_id_you_will_receive_the_new_password">Enter your account email id. You will receive the new password.</string>
 </resources>

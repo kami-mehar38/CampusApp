@@ -57,8 +57,10 @@ public class LoginView extends AppCompatActivity implements View.OnClickListener
 
         ETuname = (EditText) findViewById(R.id.ETname);
         ETpassword = (EditText) findViewById(R.id.ETpassword);
-        ImageView IV_openBloodSpinner = (ImageView) findViewById(R.id.IV_openBloodSpinner);
-        IV_openBloodSpinner.setOnClickListener(this);
+        ImageView IV_openAccountSpinner = (ImageView) findViewById(R.id.IV_openAccountSpinner);
+        IV_openAccountSpinner.setOnClickListener(this);
+        ImageView IV_openForgotAccountSpinner = (ImageView) findViewById(R.id.IV_openForgotAccountSpinner);
+        IV_openForgotAccountSpinner.setOnClickListener(this);
 
 
         SPloginOptions = (Spinner) findViewById(R.id.SPloginOptions);
@@ -282,8 +284,12 @@ public class LoginView extends AppCompatActivity implements View.OnClickListener
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.IV_openBloodSpinner: {
+            case R.id.IV_openAccountSpinner: {
                 SPloginOptions.performClick();
+                break;
+            }
+            case R.id.IV_openForgotAccountSpinner: {
+                SP_forgotPassword.performClick();
                 break;
             }
         }

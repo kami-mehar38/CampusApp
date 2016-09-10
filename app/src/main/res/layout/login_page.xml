@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#fff"
+    android:background="#fafafa"
     android:orientation="vertical"
     tools:context=".LoginView">
 
@@ -37,12 +37,12 @@
                 android:background="@drawable/edittext_top_rounded"
                 android:ems="10"
                 android:gravity="center"
-                android:inputType="textPersonName"
                 android:hint="@string/username"
+                android:inputType="textPersonName"
+                android:paddingBottom="20dp"
                 android:paddingLeft="12dp"
                 android:paddingRight="12dp"
                 android:paddingTop="20dp"
-                android:paddingBottom="20dp"
                 android:textColor="#000"
                 android:textCursorDrawable="@drawable/edittext_cursor_color"
                 android:textSize="16sp"
@@ -56,12 +56,12 @@
                 android:background="@drawable/edittext_bottom_radius"
                 android:ems="10"
                 android:gravity="center"
-                android:inputType="textPassword"
                 android:hint="@string/password"
+                android:inputType="textPassword"
+                android:paddingBottom="20dp"
                 android:paddingLeft="12dp"
                 android:paddingRight="12dp"
                 android:paddingTop="20dp"
-                android:paddingBottom="20dp"
                 android:textColor="#000"
                 android:textCursorDrawable="@drawable/edittext_cursor_color"
                 android:textSize="16sp"
@@ -92,7 +92,7 @@
                     android:spinnerMode="dropdown" />
 
                 <ImageView
-                    android:id="@+id/IV_openBloodSpinner"
+                    android:id="@+id/IV_openAccountSpinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -135,7 +135,8 @@
     <ScrollView
         android:id="@+id/SV_forgotPassword"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="-120dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -150,7 +151,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:text="Enter the email id of your account. You will receive the new password."
+                android:text="@string/enter_your_account_email_id_you_will_receive_the_new_password"
                 android:textColor="#000"
                 android:textSize="16sp"
                 android:textStyle="normal" />
@@ -159,20 +160,50 @@
                 android:id="@+id/ET_accountMail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/edittext_middle"
+                android:background="@drawable/edittext_description"
                 android:hint="@string/enter_email_id"
                 android:inputType="textWebEmailAddress"
+                android:textCursorDrawable="@drawable/edittext_cursor_color"
                 android:padding="12dp"
                 android:textColor="#000"
                 android:textSize="16sp"
                 android:textStyle="normal" />
 
-            <Spinner
-                android:id="@+id/SP_forgotPassword"
+            <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="44dp" />
+                android:layout_marginTop="44dp"
+                android:layout_weight=".28"
+                android:background="@drawable/spinner_background_style"
+                android:orientation="horizontal"
+                android:paddingBottom="12dp"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:paddingTop="12dp">
+
+                <Spinner
+                    android:id="@+id/SP_forgotPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:spinnerMode="dropdown" />
+
+                <ImageView
+                    android:id="@+id/IV_openForgotAccountSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_toEndOf="@+id/SP_forgotPassword"
+                    android:layout_toRightOf="@+id/SP_forgotPassword"
+                    android:contentDescription="@string/login_account"
+                    android:src="@drawable/ic_action_expand" />
+
+            </RelativeLayout>
 
             <ProgressBar
                 android:id="@+id/isSending"

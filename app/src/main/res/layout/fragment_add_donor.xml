@@ -2,75 +2,73 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff">
+    android:background="#fafafa">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#fff"
+
         android:orientation="vertical"
         android:paddingEnd="@dimen/activity_horizontal_margin"
         android:paddingStart="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin">
 
-            <EditText
-                android:id="@+id/ETDname"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/edittext_top_rounded"
-                android:textCursorDrawable="@drawable/edittext_cursor_color"
-                android:ems="10"
-                android:gravity="center"
-                android:hint="@string/name_simple"
-                android:paddingLeft="12dp"
-                android:paddingRight="12dp"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:inputType="textPersonName"
-                android:textColor="#000"
-                android:textSize="16sp"
-                android:textStyle="normal" />
+        <EditText
+            android:id="@+id/ETDname"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/edittext_top_rounded"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="@string/name_simple"
+            android:inputType="textPersonName"
+            android:paddingBottom="20dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="20dp"
+            android:textColor="#000"
+            android:textCursorDrawable="@drawable/edittext_cursor_color"
+            android:textSize="16sp"
+            android:textStyle="normal" />
 
 
+        <EditText
+            android:id="@+id/ETDregID"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/edittext_middle"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="@string/registration_id"
+            android:inputType="textPersonName"
+            android:paddingBottom="20dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="20dp"
+            android:textColor="#000"
+            android:textCursorDrawable="@drawable/edittext_cursor_color"
+            android:textSize="16sp"
+            android:textStyle="normal" />
 
 
-            <EditText
-                android:id="@+id/ETDregID"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/edittext_middle"
-                android:textCursorDrawable="@drawable/edittext_cursor_color"
-                android:ems="10"
-                android:gravity="center"
-                android:hint="@string/registration_id"
-                android:paddingLeft="12dp"
-                android:paddingRight="12dp"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:inputType="textPersonName"
-                android:textColor="#000"
-                android:textSize="16sp"
-                android:textStyle="normal" />
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/ETDcontact"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/edittext_bottom_radius"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="@string/contact_simple"
+            android:inputType="phone"
+            android:paddingBottom="20dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="20dp"
+            android:textColor="#000"
+            android:textCursorDrawable="@drawable/edittext_cursor_color"
+            android:textSize="16sp"
+            android:textStyle="normal" />
 
-
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/ETDcontact"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/edittext_bottom_radius"
-                android:textCursorDrawable="@drawable/edittext_cursor_color"
-                android:ems="10"
-                android:gravity="center"
-                android:hint="@string/contact_simple"
-                android:paddingLeft="12dp"
-                android:paddingRight="12dp"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:inputType="phone"
-                android:textColor="#000"
-                android:textSize="16sp"
-                android:textStyle="normal" />
         <CheckBox
             android:id="@+id/CB_bleeding"
             android:layout_width="wrap_content"
@@ -78,7 +76,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="39dp"
             android:text="@string/last_bleeding_date_if"
-            android:textColor="#786351"
+            android:textColor="#ff0000"
             android:textSize="17sp" />
 
         <DatePicker
@@ -86,9 +84,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp">
-
-        </DatePicker>
+            android:layout_marginTop="15dp"
+            android:background="#fff"/>
 
 
         <RelativeLayout
