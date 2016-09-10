@@ -28,11 +28,11 @@
             android:id="@+id/txt_msg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="7dp"
             android:maxWidth="300dp"
             android:textSize="16sp"
             android:textColor="#fff"
-            android:background="@drawable/chatbubbleleft_shape"
+            android:text="fffffffffffffffffffffffffffffff"
+            android:background="@drawable/chat_left"
             />
 
         <TextView

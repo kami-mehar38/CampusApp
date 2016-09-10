@@ -145,6 +145,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
+
                         <TextView
                             android:id="@+id/slot1Subject"
                             android:layout_width="wrap_content"
@@ -191,8 +192,8 @@
                             android:layout_alignParentRight="true"
                             android:layout_below="@+id/slot1Teacher"
                             android:layout_marginTop="10dp"
-                            android:theme="@style/checkBoxStyle"
-                            android:tag="1"/>
+                            android:tag="1"
+                            android:theme="@style/checkBoxStyle" />
 
                     </RelativeLayout>
 

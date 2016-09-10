@@ -21,11 +21,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:textSize="16sp"
-            android:padding="7dp"
             android:maxWidth="300dp"
             android:textColor="#fff"
             android:textStyle="normal"
-            android:background="@drawable/chatbubbleright_shape"
+            android:background="@drawable/chat_left"
             />
 
         <TextView
