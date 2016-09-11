@@ -26,7 +26,7 @@ public class TimeTableReceiver extends BroadcastReceiver{
         PendingIntent contentIntent = PendingIntent.getActivity(context, 0,
                 new Intent(context, TimeTableView.class), 0);
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
-                context).setSmallIcon(R.drawable.complaint)
+                context).setSmallIcon(R.drawable.ic_notification_timetable)
                 .setContentTitle("Complaint Poll").setVibrate(pattern)
                 .setStyle(new NotificationCompat.BigTextStyle())
                 .setContentText("Class on " + subject + " of " + teacher + " is ahead, get ready")

@@ -93,13 +93,13 @@ public class MyGcmListenerService extends GcmListenerService {
     private void createComplaintNotification(String message) {
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        Uri sound = Uri.parse("android.resource://" + this.getPackageName() + "/" + R.raw.notification_sound);
         long[] pattern = {1000,1000,1000,1000,1000};
 
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
                 new Intent(this, ComplaintPollView.class), 0);
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
-                this).setSmallIcon(R.drawable.complaint)
+                this).setSmallIcon(R.drawable.ic_notification_complaint)
                 .setContentTitle("Complaint Poll").setVibrate(pattern)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
                 .setContentText(message)
@@ -145,13 +145,13 @@ public class MyGcmListenerService extends GcmListenerService {
     private void createEventNotification(String message) {
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        Uri sound = Uri.parse("android.resource://" + this.getPackageName() + "/" + R.raw.notification_sound);
         long[] pattern = {1000,1000,1000,1000,1000};
 
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
                 new Intent(this, NotificationsView.class), 0);
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
-                this).setSmallIcon(R.drawable.notification)
+                this).setSmallIcon(R.drawable.ic_notification_notifications)
                 .setContentTitle("Event Notifications").setVibrate(pattern)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
                 .setContentText(message)
@@ -163,13 +163,13 @@ public class MyGcmListenerService extends GcmListenerService {
     private void createStatusNotification(String status) {
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        Uri sound = Uri.parse("android.resource://" + this.getPackageName() + "/" + R.raw.notification_sound);
         long[] pattern = {1000,1000,1000,1000,1000};
 
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
                 new Intent(this, TrackFacultyView.class), 0);
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
-                this).setSmallIcon(R.drawable.tracking)
+                this).setSmallIcon(R.drawable.ic_notification_tracking)
                 .setContentTitle("Track Faculty").setVibrate(pattern)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(status))
                 .setContentText(status)
@@ -214,13 +214,13 @@ public class MyGcmListenerService extends GcmListenerService {
     private void createBloodNotification(String message) {
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        Uri sound = Uri.parse("android.resource://" + this.getPackageName() + "/" + R.raw.notification_sound);
         long[] pattern = {1000,1000,1000,1000,1000};
 
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
                 new Intent(this, BloodBankView.class), 0);
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
-                this).setSmallIcon(R.drawable.blood)
+                this).setSmallIcon(R.drawable.ic_notification_blood)
                 .setContentTitle("Blood Bank").setVibrate(pattern)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
                 .setContentText(message)

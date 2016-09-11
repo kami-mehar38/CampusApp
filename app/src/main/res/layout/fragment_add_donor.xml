@@ -18,6 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/edittext_top_rounded"
+            android:drawableStart="@drawable/ic_username"
+            android:drawableLeft="@drawable/ic_username"
             android:ems="10"
             android:gravity="center"
             android:hint="@string/name_simple"
@@ -37,6 +39,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/edittext_middle"
+            android:drawableStart="@drawable/ic_registration"
+            android:drawableLeft="@drawable/ic_registration"
             android:ems="10"
             android:gravity="center"
             android:hint="@string/registration_id"
@@ -51,11 +55,13 @@
             android:textStyle="normal" />
 
 
-        <android.support.design.widget.TextInputEditText
+        <EditText
             android:id="@+id/ETDcontact"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/edittext_bottom_radius"
+            android:drawableStart="@drawable/ic_contact"
+            android:drawableLeft="@drawable/ic_contact"
             android:ems="10"
             android:gravity="center"
             android:hint="@string/contact_simple"
