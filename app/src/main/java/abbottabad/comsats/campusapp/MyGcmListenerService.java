@@ -96,15 +96,21 @@ public class MyGcmListenerService extends GcmListenerService {
         Uri sound = Uri.parse("android.resource://" + this.getPackageName() + "/" + R.raw.notification_sound);
         long[] pattern = {1000,1000,1000,1000,1000};
 
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-                new Intent(this, ComplaintPollView.class), 0);
+        Intent resultIntent = new Intent(this, ComplaintPollView.class);
+        TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(this);
+        taskStackBuilder.addParentStack(ComplaintPollView.class);
+        taskStackBuilder.addNextIntent(resultIntent);
+
+        PendingIntent resultPendingIntent =
+                taskStackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
                 this).setSmallIcon(R.drawable.ic_notification_complaint)
                 .setContentTitle("Complaint Poll").setVibrate(pattern)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
                 .setContentText(message)
                 .setAutoCancel(true).setSound(sound);
-        mBuilder.setContentIntent(contentIntent);
+        mBuilder.setContentIntent(resultPendingIntent);
         notificationManager.notify(GCM_NOTIFICATION_ID, mBuilder.build());
     }
 
@@ -148,15 +154,20 @@ public class MyGcmListenerService extends GcmListenerService {
         Uri sound = Uri.parse("android.resource://" + this.getPackageName() + "/" + R.raw.notification_sound);
         long[] pattern = {1000,1000,1000,1000,1000};
 
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-                new Intent(this, NotificationsView.class), 0);
+        Intent resultIntent = new Intent(this, NotificationsView.class);
+        TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(this);
+        taskStackBuilder.addParentStack(NotificationsView.class);
+        taskStackBuilder.addNextIntent(resultIntent);
+
+        PendingIntent resultPendingIntent = taskStackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
                 this).setSmallIcon(R.drawable.ic_notification_notifications)
                 .setContentTitle("Event Notifications").setVibrate(pattern)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
                 .setContentText(message)
                 .setAutoCancel(true).setSound(sound);
-        mBuilder.setContentIntent(contentIntent);
+        mBuilder.setContentIntent(resultPendingIntent);
         notificationManager.notify(GCM_NOTIFICATION_ID, mBuilder.build());
     }
 
@@ -166,15 +177,20 @@ public class MyGcmListenerService extends GcmListenerService {
         Uri sound = Uri.parse("android.resource://" + this.getPackageName() + "/" + R.raw.notification_sound);
         long[] pattern = {1000,1000,1000,1000,1000};
 
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-                new Intent(this, TrackFacultyView.class), 0);
+        Intent resultIntent = new Intent(this, TrackFacultyView.class);
+        TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(this);
+        taskStackBuilder.addParentStack(TrackFacultyView.class);
+        taskStackBuilder.addNextIntent(resultIntent);
+
+        PendingIntent resultPendingIntent = taskStackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
                 this).setSmallIcon(R.drawable.ic_notification_tracking)
                 .setContentTitle("Track Faculty").setVibrate(pattern)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(status))
                 .setContentText(status)
                 .setAutoCancel(true).setSound(sound);
-        mBuilder.setContentIntent(contentIntent);
+        mBuilder.setContentIntent(resultPendingIntent);
         notificationManager.notify(GCM_NOTIFICATION_ID, mBuilder.build());
     }
 
@@ -212,20 +228,25 @@ public class MyGcmListenerService extends GcmListenerService {
     }
 
     private void createBloodNotification(String message) {
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         Uri sound = Uri.parse("android.resource://" + this.getPackageName() + "/" + R.raw.notification_sound);
         long[] pattern = {1000,1000,1000,1000,1000};
 
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-                new Intent(this, BloodBankView.class), 0);
+        Intent resultIntent = new Intent(this, BloodBankView.class);
+        TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(this);
+        taskStackBuilder.addParentStack(BloodBankView.class);
+        taskStackBuilder.addNextIntent(resultIntent);
+
+        PendingIntent resultPendingIntent = taskStackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
                 this).setSmallIcon(R.drawable.ic_notification_blood)
                 .setContentTitle("Blood Bank").setVibrate(pattern)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
                 .setContentText(message)
                 .setAutoCancel(true).setSound(sound);
-        mBuilder.setContentIntent(contentIntent);
+        mBuilder.setContentIntent(resultPendingIntent);
         notificationManager.notify(GCM_NOTIFICATION_ID, mBuilder.build());
 
     }

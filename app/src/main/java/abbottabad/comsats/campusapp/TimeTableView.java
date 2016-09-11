@@ -874,7 +874,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                     String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
                     String teacher = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(1)).getText().toString();
                     if (!subject.equals("Subject") && !teacher.equals("Teacher")) {
-                        handleNotification(11, subject, teacher, 1, 7, 45, 0);
+                        handleNotification(11, subject, teacher, 1, 1, 5, 0);
                         editor.putBoolean("SLOT11_CHECKED", true);
                         editor.apply();
                     }
@@ -1328,17 +1328,6 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
         }
     }
 
-    private void cancelSlotNotification(int id) {
-        Toast.makeText(TimeTableView.this, "Notification off", Toast.LENGTH_SHORT).show();
-        Intent alarmIntent = new Intent(this, TimeTableReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, id, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        if (pendingIntent != null) {
-            alarmManager.cancel(pendingIntent);
-            pendingIntent.cancel();
-        }
-    }
-
     private void handleNotification(int id, String subject, String teacher, int day, int hours, int minutes, int seconds) {
         Toast.makeText(TimeTableView.this, "Notification on", Toast.LENGTH_SHORT).show();
         Intent alarmIntent = new Intent(this, TimeTableReceiver.class);
@@ -1381,6 +1370,17 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             calendar.add(Calendar.DATE, 7);
         }
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 7, pendingIntent);
+    }
+
+    private void cancelSlotNotification(int id) {
+        Toast.makeText(TimeTableView.this, "Notification off", Toast.LENGTH_SHORT).show();
+        Intent alarmIntent = new Intent(this, TimeTableReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, id, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        if (pendingIntent != null) {
+            alarmManager.cancel(pendingIntent);
+            pendingIntent.cancel();
+        }
     }
 
     private void setStatusBarColor() {
