@@ -112,6 +112,7 @@ public class SignUpView extends AppCompatActivity implements AdapterView.OnItemS
                     Toast.makeText(SignUpView.this, "Invalid name", Toast.LENGTH_SHORT).show();
                     break;
                 }
+                break;
             }
             case R.id.IV_openBloodSpinner: {
                 SPsignupOptions.performClick();

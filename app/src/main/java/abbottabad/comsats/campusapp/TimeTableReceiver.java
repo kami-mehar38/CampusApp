@@ -32,7 +32,7 @@ public class TimeTableReceiver extends BroadcastReceiver{
         PendingIntent resultPendingIntent = taskStackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
                 context).setSmallIcon(R.drawable.ic_notification_timetable)
-                .setContentTitle("Complaint Poll").setVibrate(pattern)
+                .setContentTitle("Timetable").setVibrate(pattern)
                 .setStyle(new NotificationCompat.BigTextStyle())
                 .setContentText("Class on " + subject + " of " + teacher + " is ahead, get ready")
                 .setAutoCancel(true).setSound(sound);

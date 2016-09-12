@@ -360,6 +360,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/slot15"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/timetable_slot_unchecked"
@@ -400,6 +401,7 @@
                             />
 
                         <CheckBox
+                            android:id="@+id/slot15Reminder"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -808,6 +810,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/slot25"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/timetable_slot_unchecked"
@@ -848,6 +851,7 @@
                             />
 
                         <CheckBox
+                            android:id="@+id/slot25Reminder"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -1272,6 +1276,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/slot35"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/timetable_slot_unchecked"
@@ -1316,6 +1321,7 @@
                             />
 
                         <CheckBox
+                            android:id="@+id/slot35Reminder"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -1752,6 +1758,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/slot45"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/timetable_slot_unchecked"
@@ -1796,6 +1803,7 @@
                             />
 
                         <CheckBox
+                            android:id="@+id/slot45Reminder"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -2232,6 +2240,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/slot55"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/timetable_slot_unchecked"
@@ -2276,6 +2285,7 @@
                             />
 
                         <CheckBox
+                            android:id="@+id/slot55Reminder"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
