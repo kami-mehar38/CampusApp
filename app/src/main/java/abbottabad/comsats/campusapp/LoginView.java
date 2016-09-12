@@ -1,14 +1,21 @@
 package abbottabad.comsats.campusapp;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
@@ -46,6 +53,7 @@ public class LoginView extends AppCompatActivity implements View.OnClickListener
     public static String FP_designation;
     private int FP_spinnerOption;
     private Validation validation;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,15 +62,20 @@ public class LoginView extends AppCompatActivity implements View.OnClickListener
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.loginpage_toolbar);
         setSupportActionBar(toolbar);
-
+        setStatusBarColor();
+        final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
+        sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
 
         ETuname = (EditText) findViewById(R.id.ETname);
         ETpassword = (EditText) findViewById(R.id.ETpassword);
         ImageView IV_openAccountSpinner = (ImageView) findViewById(R.id.IV_openAccountSpinner);
-        IV_openAccountSpinner.setOnClickListener(this);
+        if (IV_openAccountSpinner != null) {
+            IV_openAccountSpinner.setOnClickListener(this);
+        }
         ImageView IV_openForgotAccountSpinner = (ImageView) findViewById(R.id.IV_openForgotAccountSpinner);
-        IV_openForgotAccountSpinner.setOnClickListener(this);
-
+        if (IV_openForgotAccountSpinner != null) {
+            IV_openForgotAccountSpinner.setOnClickListener(this);
+        }
 
         SPloginOptions = (Spinner) findViewById(R.id.SPloginOptions);
         new LoginController(this).populateSpinner(SPloginOptions);
@@ -293,6 +306,26 @@ public class LoginView extends AppCompatActivity implements View.OnClickListener
                 SP_forgotPassword.performClick();
                 break;
             }
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (sharedPreferences.getBoolean("LOGGED_IN", false)) {
+            super.onBackPressed();
+        } else {
+            startActivity(new Intent(LoginView.this, InitialPage.class));
+            finish();
+        }
+    }
+
+    private void setStatusBarColor() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            int color = ContextCompat.getColor(this, R.color.loginStatusBar);
+
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(color);
         }
     }
 }

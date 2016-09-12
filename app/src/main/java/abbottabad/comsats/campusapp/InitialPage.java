@@ -24,7 +24,7 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
  */
 public class InitialPage extends Activity implements View.OnClickListener {
 
-    private static final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
+    private final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
 
 
     @Override

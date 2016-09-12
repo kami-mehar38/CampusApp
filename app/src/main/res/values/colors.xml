@@ -11,4 +11,8 @@
     <color name="complaintPollStatusBar">#615d5c</color>
     <color name="trackFacultyStatusBar">#3d7c24</color>
     <color name="bloodBankStatusBar">#cc0000</color>
+    <color name="loginStatusBar">#bc6253</color>
+    <color name="signupStatusBar">#51517a</color>
+
+
 </resources>

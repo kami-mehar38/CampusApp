@@ -6,7 +6,7 @@
     android:id="@+id/signuppage_toolbar"
     android:background="#666699"
     android:minHeight="?attr/actionBarSize"
-    android:theme="@style/Base.Theme.AppCompat.Light.DarkActionBar">
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
     <RelativeLayout
         android:layout_width="match_parent"
