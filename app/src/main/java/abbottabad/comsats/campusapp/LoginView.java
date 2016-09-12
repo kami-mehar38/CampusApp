@@ -55,6 +55,7 @@ public class LoginView extends AppCompatActivity implements View.OnClickListener
         Toolbar toolbar = (Toolbar) findViewById(R.id.loginpage_toolbar);
         setSupportActionBar(toolbar);
 
+
         ETuname = (EditText) findViewById(R.id.ETname);
         ETpassword = (EditText) findViewById(R.id.ETpassword);
         ImageView IV_openAccountSpinner = (ImageView) findViewById(R.id.IV_openAccountSpinner);

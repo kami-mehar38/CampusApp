@@ -1,5 +1,6 @@
 package abbottabad.comsats.campusapp;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -33,6 +34,7 @@ public class InitialPage extends Activity implements View.OnClickListener {
 
         new InitialPageController(this).execute();
         isPlayServicesAvailable();
+        hideStatusBar();
 
         SharedPreferences sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         final String APPLICATION_STATUS = sharedPreferences.getString("APPLICATION_STATUS", "NULL");
@@ -65,6 +67,13 @@ public class InitialPage extends Activity implements View.OnClickListener {
 
         setAnimations(tv_ciit, tv_forSignup, tv_forLogin, btn_signup, btn_login);
 
+    }
+
+    private void hideStatusBar() {
+        View decorView = getWindow().getDecorView();
+        // Hide the status bar.
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
     }
 
     @Override

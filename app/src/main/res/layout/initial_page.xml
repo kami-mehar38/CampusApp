@@ -1,93 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff">
-
+    android:background="@drawable/initial_page_background">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/colorPrimary"
-        android:paddingTop="90dp"
-        android:weightSum="10"
-        android:layout_weight="2">
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/TV_ciit"
-            android:textColor="#ffffff"
-            android:textStyle="bold"
-            android:fontFamily="cursive"
-            android:drawableLeft="@drawable/ic_logo"
-            android:drawableStart="@drawable/ic_logo"
-            android:gravity="center_vertical"
-            android:drawablePadding="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:layout_marginLeft="30dp"
-            android:layout_marginStart="30dp"
-            android:padding="6dp"
-            android:text="@string/welcome"
-            android:textSize="30sp"/>
 
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
-        android:paddingStart="@dimen/activity_horizontal_margin"
-        android:layout_weight="8">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/for_faculty_and_students"
-            android:id="@+id/TV_forSignup"
-            android:layout_marginTop="70dp"
-            android:textSize="14sp"
-            android:textColor="#000"/>
-        <Button
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_signup"
-            android:text="@string/sign_up"
-            android:textAllCaps="false"
-            android:textStyle="bold"
-            android:drawableEnd="@drawable/icon_signup"
-            android:drawableRight="@drawable/icon_signup"
-            android:background="@drawable/button_background"
-            android:paddingEnd="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:textColor="@color/colorPrimary"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/for_admins"
-            android:id="@+id/TV_forLogin"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:textSize="14sp"
-            android:textColor="#000"/>
+            android:layout_weight="2"
+            android:orientation="horizontal"
+            android:paddingTop="90dp"
+            android:weightSum="10">
 
-        <Button
+            <TextView
+                android:id="@+id/TV_ciit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_marginBottom="50dp"
+                android:drawableLeft="@drawable/ic_logo"
+                android:drawablePadding="@dimen/activity_horizontal_margin"
+                android:drawableStart="@drawable/ic_logo"
+                android:fontFamily="cursive"
+                android:gravity="center_vertical"
+                android:padding="10dp"
+                android:text="@string/welcome"
+                android:textColor="#ffffff"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_login"
-            android:text="@string/log_in"
-            android:textAllCaps="false"
-            android:textStyle="bold"
-            android:drawableEnd="@drawable/icon_login"
-            android:drawableRight="@drawable/icon_login"
-            android:background="@drawable/button_background"
+            android:layout_weight="8"
+            android:orientation="vertical"
             android:paddingEnd="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:textColor="@color/colorPrimary"
-            />
-    </LinearLayout>
+            android:paddingStart="@dimen/activity_horizontal_margin">
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/TV_forSignup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="70dp"
+                android:text="@string/for_faculty_and_students"
+                android:textColor="#ffffff"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/btn_signup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/transparent_buttons"
+                android:text="@string/sign_up"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/TV_forLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:text="@string/for_admins"
+                android:textColor="#ffffff"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/transparent_buttons"
+                android:text="@string/log_in"
+                android:textAllCaps="false"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:textSize="16sp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
