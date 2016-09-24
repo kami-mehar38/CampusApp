@@ -28,7 +28,6 @@ import java.util.List;
 
 import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
-
 import static abbottabad.comsats.campusapp.BloodDonorsFragment.*;
 
 /**
