@@ -1,9 +1,10 @@
 package abbottabad.comsats.campusapp;
 
+import android.content.Context;
 import android.content.DialogInterface;
-import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.Fragment;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +29,7 @@ import java.util.TimeZone;
  * This project CampusApp is created by Kamran Ramzan on 6/30/16.
  */
 public class BloodDonorsAddFragment extends Fragment implements View.OnClickListener {
+
     private Spinner SPbloodTypes;
     private BloodBankController bloodBankController;
     private String bloodType;
@@ -90,6 +92,8 @@ public class BloodDonorsAddFragment extends Fragment implements View.OnClickList
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
+        SharedPreferences sharedPreferences = view.getContext().getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         SPbloodTypes = (Spinner) view.findViewById(R.id.SP_bloodTypes);
         bloodBankController.populateSpinner(SPbloodTypes);
         SPbloodTypes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -142,8 +146,11 @@ public class BloodDonorsAddFragment extends Fragment implements View.OnClickList
         });
 
         final EditText ETname = (EditText) view.findViewById(R.id.ETDname);
+        ETname.setText(sharedPreferences.getString("NAME", ""));
         final EditText ETregId = (EditText) view.findViewById(R.id.ETDregID);
+        ETregId.setText(sharedPreferences.getString("REG_ID", ""));
         final EditText ETcontact = (EditText) view.findViewById(R.id.ETDcontact);
+        ETcontact.setText(sharedPreferences.getString("CONTACT", ""));
 
         final Button btnAdd = (Button) view.findViewById(R.id.btnAdd);
         btnAdd.setOnClickListener(new View.OnClickListener() {

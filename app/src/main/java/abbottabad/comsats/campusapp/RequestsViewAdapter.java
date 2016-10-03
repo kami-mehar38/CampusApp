@@ -1,14 +1,13 @@
 package abbottabad.comsats.campusapp;
 
-import android.content.Intent;
-import android.net.Uri;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +15,10 @@ import java.util.List;
 /**
  * This project CampusApp is created by Kamran Ramzan on 9/1/16.
  */
-public class RequestsViewAdapter extends RecyclerView.Adapter <RequestsViewAdapter.ViewHolder> {
+class RequestsViewAdapter extends RecyclerView.Adapter <RequestsViewAdapter.ViewHolder> {
 
     private List<RequestsInfo> requestsInfoList = new ArrayList<>();
-
+    private final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
    /* public RequestsViewAdapter(List<RequestsInfo> requestsInfoList){
         this.requestsInfoList = requestsInfoList;
     }*/
@@ -49,54 +48,49 @@ public class RequestsViewAdapter extends RecyclerView.Adapter <RequestsViewAdapt
         notifyItemInserted(position);
     }
 
-    public void remove(int position) {
+    private void remove(int position) {
         requestsInfoList.remove(position);
         notifyItemRemoved(position);
     }
 
-    protected class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder{
 
         private TextView TV_requesterName;
         private TextView TV_requesterReg;
         private TextView TV_requesterBloodType;
         private TextView TV_requesterContact;
-        private Button btnCall;
-        private Button btnMessage;
-        private Button btnDelete;
+        private TextView btnReply;
+        private TextView btnDelete;
 
-        public ViewHolder(final View itemView) {
+        ViewHolder(final View itemView) {
             super(itemView);
             TV_requesterName = (TextView) itemView.findViewById(R.id.TV_requesterName);
             TV_requesterReg = (TextView) itemView.findViewById(R.id.TV_requesterReg);
             TV_requesterBloodType = (TextView) itemView.findViewById(R.id.TV_requesterBloodType);
             TV_requesterContact = (TextView) itemView.findViewById(R.id.TV_requesterContact);
-            btnDelete = (Button) itemView.findViewById(R.id.btnDelete);
-            btnCall = (Button) itemView.findViewById(R.id.btnCall);
-            btnMessage = (Button) itemView.findViewById(R.id.btnMessage);
-
-            btnCall.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(Intent.ACTION_DIAL,
-                            Uri.parse("tel:" + TV_requesterContact.getText().toString().trim()));
-                    itemView.getContext().startActivity(intent);
-                }
-            });
-
-            btnMessage.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(Intent.ACTION_VIEW,
-                            Uri.parse("sms:" + TV_requesterContact.getText().toString().trim()));
-                    itemView.getContext().startActivity(intent);
-                }
-            });
+            btnReply = (TextView) itemView.findViewById(R.id.btnReply);
+            btnDelete = (TextView) itemView.findViewById(R.id.btnDelete);
 
             btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     new BloodBankLocalModal(itemView.getContext()).deleteRequest(TV_requesterReg.getText().toString());
                     remove(getAdapterPosition());
+                }
+            });
+            btnReply.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SharedPreferences sharedPreferences = itemView.getContext().getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+                    String name = sharedPreferences.getString("NAME", "");
+                    String reg_id = sharedPreferences.getString("REG_ID", "");
+                    String bloodGroup = sharedPreferences.getString("BLOOD_GROUP", "");
+                    String contact = sharedPreferences.getString("CONTACT", "");
+                    String latitude = String.valueOf(LocationController.getLatitide());
+                    String longitude = String.valueOf(LocationController.getLongitude());
+                    new BloodBankModal(itemView.getContext()).replyTorequest(name, reg_id, bloodGroup, contact,
+                            TV_requesterReg.getText().toString(), latitude, longitude);
+                    Log.i("TAG", "onClick: " + latitude+ longitude);
                 }
             });
         }

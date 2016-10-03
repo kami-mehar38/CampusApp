@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/CVrequests">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/RL_cardView"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/TV_name"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:paddingBottom="10dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginEnd="3dp"
+                android:text="@string/name" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/TV_Contact"
+                android:layout_below="@+id/TV_Bloodtype"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:paddingBottom="10dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginEnd="3dp"
+                android:text="@string/contact"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/TV_Distance"
+                android:layout_alignTop="@+id/btnDelete"
+                android:layout_below="@+id/TV_Contact"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginRight="3dp"
+                android:layout_marginEnd="3dp"
+                android:drawableLeft="@drawable/ic_action_place"
+                android:drawableStart="@drawable/ic_action_place"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/TV_requesterName"
+                android:layout_toLeftOf="@+id/btnAccept"
+                android:layout_toStartOf="@+id/btnAccept"
+                android:layout_toEndOf="@+id/TV_name"
+                android:layout_toRightOf="@id/TV_name"
+                android:textColor="#000"
+                android:textSize="15sp"
+                tools:ignore="RelativeOverlap" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/TV_requesterReg"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:text=""
+                android:layout_below="@+id/TV_name"
+                android:layout_toEndOf="@+id/TV_reg"
+                android:layout_toRightOf="@+id/TV_reg"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/TV_requesterBloodType"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:text=""
+                android:layout_below="@+id/TV_reg"
+                android:layout_toEndOf="@+id/TV_Bloodtype"
+                android:layout_toRightOf="@+id/TV_Bloodtype"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/TV_requesterContact"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:text=""
+                android:paddingBottom="10dp"
+                android:layout_below="@+id/TV_Bloodtype"
+                android:layout_toEndOf="@+id/TV_Contact"
+                android:layout_toRightOf="@+id/TV_Contact"/>
+
+            <TextView
+                android:id="@+id/btnAccept"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/reply"
+                android:drawableTop="@drawable/ic_action_accept"
+                android:text="@string/accept"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"/>
+
+            <TextView
+                android:id="@+id/btnCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/delete"
+                android:drawableTop="@drawable/ic_action_cancel"
+                android:text="@string/reject"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/btnAccept"
+                />
+
+            <TextView
+                android:id="@+id/btnDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/delete"
+                android:drawableTop="@drawable/ic_action_discard"
+                android:text="@string/delete"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/btnCancel"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/TV_Bloodtype"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:paddingBottom="10dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginEnd="3dp"
+                android:text="@string/blood_group"
+                android:layout_below="@+id/TV_reg"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/TV_reg"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:paddingBottom="10dp"
+                android:text="@string/reg_id"
+                android:layout_below="@+id/TV_name"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

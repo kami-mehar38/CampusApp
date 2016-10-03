@@ -14,51 +14,52 @@ import java.util.List;
 /**
  * This project CampusApp is created by Kamran Ramzan on 6/4/16.
  */
-public class BloodBankController {
+class BloodBankController {
 
     private static String stdName;
     private static String stdReg;
     private static String stdContact;
     private static String bloodType;
+
     private Context context;
 
-    public static String getBloodType() {
+    static String getBloodType() {
         return bloodType;
     }
 
-    public static void setBloodType(String bloodType) {
+    static void setBloodType(String bloodType) {
         BloodBankController.bloodType = bloodType;
     }
 
-    public static String getStdContact() {
+    static String getStdContact() {
         return stdContact;
     }
 
-    public static void setStdContact(String stdContact) {
+    static void setStdContact(String stdContact) {
         BloodBankController.stdContact = stdContact;
     }
 
-    public static String getStdReg() {
+    static String getStdReg() {
         return stdReg;
     }
 
-    public static void setStdReg(String stdReg) {
+    static void setStdReg(String stdReg) {
         BloodBankController.stdReg = stdReg;
     }
 
-    public static String getStdName() {
+    static String getStdName() {
         return stdName;
     }
 
-    public static void setStdName(String stdName) {
+    static void setStdName(String stdName) {
         BloodBankController.stdName = stdName;
     }
 
-    public BloodBankController(Context context) {
+    BloodBankController(Context context) {
         this.context = context;
     }
 
-    public void populateSpinner(Spinner SPbloodTypeOptions) {
+    void populateSpinner(Spinner SPbloodTypeOptions) {
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(context,
                 R.array.bloodGroup_options,
@@ -69,7 +70,7 @@ public class BloodBankController {
         SPbloodTypeOptions.setAdapter(spinnerAdapter);
     }
 
-    public void populateToolbarSpinner(Spinner SPbloodTypeOptions) {
+    void populateToolbarSpinner(Spinner SPbloodTypeOptions) {
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(context,
                 R.array.toolbar_bloodGroup_options,
@@ -80,7 +81,7 @@ public class BloodBankController {
         SPbloodTypeOptions.setAdapter(spinnerAdapter);
     }
 
-    public void setupViewPagerAdmin(ViewPager viewPagerAdmin, FragmentManager supportFragmentManager) {
+    void setupViewPagerAdmin(ViewPager viewPagerAdmin, FragmentManager supportFragmentManager) {
         ViewPagerAdapterAdmin viewPagerAdapterAdmin = new ViewPagerAdapterAdmin(supportFragmentManager);
         viewPagerAdapterAdmin.addFragment(new BloodRequestsFragment(), "Requests");
         viewPagerAdapterAdmin.addFragment(new BloodDonorsFragment(), "Donors");
@@ -92,7 +93,7 @@ public class BloodBankController {
         private final List<Fragment> fragmentsList = new ArrayList<>();
         private final List<String> titlesList = new ArrayList<>();
 
-        public ViewPagerAdapterAdmin(FragmentManager fm) {
+        ViewPagerAdapterAdmin(FragmentManager fm) {
             super(fm);
         }
 
@@ -105,7 +106,7 @@ public class BloodBankController {
         public int getCount() {
             return fragmentsList.size();
         }
-        public void addFragment(Fragment fragment, String title){
+        void addFragment(Fragment fragment, String title){
             fragmentsList.add(fragment);
             titlesList.add(title);
         }
@@ -116,9 +117,11 @@ public class BloodBankController {
         }
     }
 
-    public void setupViewPagerRequester(ViewPager viewPager, FragmentManager supportFragmentManager) {
+    void setupViewPagerRequester(ViewPager viewPager, FragmentManager supportFragmentManager) {
         ViewPagerAdapterRequester viewPagerAdapterRequester = new ViewPagerAdapterRequester(supportFragmentManager);
-        viewPagerAdapterRequester.addFragment(new BloodRequestsSendFragment(), "Blood Request");
+        viewPagerAdapterRequester.addFragment(new BloodRequestsFragment(), "Requests");
+        viewPagerAdapterRequester.addFragment(new BloodRequestsSendFragment(), "Send Request");
+        viewPagerAdapterRequester.addFragment(new BloodRequestResponseFragment(), "Responses");
         viewPagerAdapterRequester.addFragment(new BloodDonorsAddFragment(),"Become a Donor");
         viewPager.setAdapter(viewPagerAdapterRequester);
     }
@@ -127,7 +130,7 @@ public class BloodBankController {
         private final List<Fragment> fragmentsList = new ArrayList<>();
         private final List<String> titlesList = new ArrayList<>();
 
-        public ViewPagerAdapterRequester(FragmentManager fm) {
+        ViewPagerAdapterRequester(FragmentManager fm) {
             super(fm);
         }
 
@@ -141,7 +144,7 @@ public class BloodBankController {
             return fragmentsList.size();
         }
 
-        public void addFragment(Fragment fragment, String title){
+        void addFragment(Fragment fragment, String title){
             fragmentsList.add(fragment);
             titlesList.add(title);
         }

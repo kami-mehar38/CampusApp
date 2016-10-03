@@ -29,26 +29,29 @@ import java.net.URLEncoder;
  * This project CampusApp is created by Kamran Ramzan on 6/26/16.
  */
 
-public class SignUpModal {
+class SignUpModal {
     protected Context context;
-    public SignUpModal(Context context) {
+    SignUpModal(Context context) {
         this.context = context;
     }
 
-    public void addStudent(String name, String reg){
-        new AddStudent().execute(name, reg);
+    void addStudent(String name, String reg, String contact, String bloodGroup){
+        new AddStudent().execute(name, reg, contact, bloodGroup);
     }
 
-    public void addTeacher(String name, String reg){
-        new AddTeacher().execute(name, reg);
+    void addTeacher(String name, String reg, String contact, String bloodGroup){
+        new AddTeacher().execute(name, reg, contact, bloodGroup);
     }
 
-    public class AddStudent extends AsyncTask<String, Void, String> {
+    private class AddStudent extends AsyncTask<String, Void, String> {
 
-        private static final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
+        private final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
         private AlertDialog alertDialog;
         private ProgressDialog progressDialog;
-        private String std_id;
+        private String name;
+        private String reg_id;
+        private String contact;
+        private String bloodGroup;
 
         @Override
         protected void onPreExecute() {
@@ -70,9 +73,7 @@ public class SignUpModal {
         @Override
         protected String doInBackground(String... params) {
 
-
             String stringUrl = "http://hostellocator.com/addStudent.php";
-            String std_name;
             try {
                 URL url = new URL(stringUrl);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -80,11 +81,14 @@ public class SignUpModal {
                 httpURLConnection.setDoOutput(true);
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                std_name = params[0];
-                std_id = params[1];
-
-                String data = URLEncoder.encode("std_name", "UTF-8") + "=" + URLEncoder.encode(std_name, "UTF-8") +"&"+
-                        URLEncoder.encode("std_id", "UTF-8") + "=" + URLEncoder.encode(std_id, "UTF-8");
+                name = params[0];
+                reg_id = params[1];
+                contact = params[2];
+                bloodGroup = params[3];
+                String data = URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8") +"&"+
+                        URLEncoder.encode("reg_id", "UTF-8") + "=" + URLEncoder.encode(reg_id, "UTF-8") +"&"+
+                        URLEncoder.encode("contact", "UTF-8") + "=" + URLEncoder.encode(contact, "UTF-8") +"&"+
+                        URLEncoder.encode("bloodGroup", "UTF-8") + "=" + URLEncoder.encode(bloodGroup, "UTF-8");
 
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
@@ -127,7 +131,10 @@ public class SignUpModal {
                     SharedPreferences applicationStatus = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = applicationStatus.edit();
                     editor.putString("APPLICATION_STATUS", "STUDENT");
-                    editor.putString("REG_ID", std_id);
+                    editor.putString("NAME", name);
+                    editor.putString("REG_ID", reg_id);
+                    editor.putString("CONTACT", contact);
+                    editor.putString("BLOOD_GROUP", bloodGroup);
                     editor.apply();
                     SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
                     final int TOKEN_GOT = sharedPreferences.getInt("TOKEN_GOT", 0);
@@ -150,17 +157,25 @@ public class SignUpModal {
                     alertDialog.show();
                     break;
                 }
+                case "UNREGISTERED": {
+                    builder.setMessage("You are not a registered person in this institute");
+                    alertDialog = builder.create();
+                    alertDialog.show();
+                    break;
+                }
             }
         }
     }
 
-    public class AddTeacher extends AsyncTask<String, Void, String> {
+    private class AddTeacher extends AsyncTask<String, Void, String> {
 
         private static final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
         private AlertDialog alertDialog;
         private ProgressDialog progressDialog;
-        private String teacher_id;
         private String name;
+        private String reg_id;
+        private String contact;
+        private String bloodGroup;
 
         @Override
         protected void onPreExecute() {
@@ -184,9 +199,13 @@ public class SignUpModal {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
                 name = params[0];
-                teacher_id = params[1];
+                reg_id = params[1];
+                contact = params[2];
+                bloodGroup = params[3];
                 String data = URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8") +"&"+
-                        URLEncoder.encode("teacher_id", "UTF-8") + "=" + URLEncoder.encode(teacher_id, "UTF-8");
+                        URLEncoder.encode("reg_id", "UTF-8") + "=" + URLEncoder.encode(reg_id, "UTF-8") +"&"+
+                        URLEncoder.encode("contact", "UTF-8") + "=" + URLEncoder.encode(contact, "UTF-8") +"&"+
+                        URLEncoder.encode("bloodGroup", "UTF-8") + "=" + URLEncoder.encode(bloodGroup, "UTF-8");
 
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
@@ -229,7 +248,10 @@ public class SignUpModal {
                     SharedPreferences applicationStatus = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = applicationStatus.edit();
                     editor.putString("APPLICATION_STATUS", "TEACHER");
-                    editor.putString("REG_ID", teacher_id);
+                    editor.putString("NAME", name);
+                    editor.putString("REG_ID", reg_id);
+                    editor.putString("CONTACT", contact);
+                    editor.putString("BLOOD_GROUP", bloodGroup);
                     editor.apply();
                     SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
                     final int TOKEN_GOT = sharedPreferences.getInt("TOKEN_GOT", 0);
@@ -248,6 +270,12 @@ public class SignUpModal {
                 }
                 case "ERROR": {
                     builder.setMessage("Some error occurred! Please try again.");
+                    alertDialog = builder.create();
+                    alertDialog.show();
+                    break;
+                }
+                case "UNREGISTERED": {
+                    builder.setMessage("You are not a registered person in this institute");
                     alertDialog = builder.create();
                     alertDialog.show();
                     break;

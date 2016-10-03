@@ -3,7 +3,7 @@ package abbottabad.comsats.campusapp;
 /**
  * This project CampusApp is created by Kamran Ramzan on 8/31/16.
  */
-public class ComplaintPollController {
+class ComplaintPollController {
 
     private static String name;
     private static String registration;

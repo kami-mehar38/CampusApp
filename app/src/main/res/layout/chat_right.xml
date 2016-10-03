@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:text="fnsiufbd"
-                android:textColor="#000"
+                android:textColor="#fff"
                 android:textSize="12sp" />
 
         </LinearLayout>
@@ -43,7 +43,8 @@
             <CheckBox
                 android:id="@+id/CB_delete"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:theme="@style/checkBoxStyle"/>
         </LinearLayout>
 
 

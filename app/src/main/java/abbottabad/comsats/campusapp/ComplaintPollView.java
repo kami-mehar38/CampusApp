@@ -1,33 +1,29 @@
 package abbottabad.comsats.campusapp;
 
 import android.content.Context;
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Base64;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.io.ByteArrayOutputStream;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.List;
 
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 
@@ -46,6 +42,9 @@ public class ComplaintPollView extends AppCompatActivity implements View.OnClick
     public static RecyclerView RV_complaints;
     public static ComplaintPollVIewAdapter complaintPollVIewAdapter;
     private Validation validation;
+    private Spinner SPadminOptions;
+    private int adminOption;
+    private AlertDialog alertDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,6 +69,27 @@ public class ComplaintPollView extends AppCompatActivity implements View.OnClick
                 }
             } else {
                 setContentView(R.layout.complaintpoll_page_others);
+                ImageView IV_openAdminSpinner = (ImageView) findViewById(R.id.IV_openAdminSpinner);
+                if (IV_openAdminSpinner != null) {
+                    IV_openAdminSpinner.setOnClickListener(this);
+                }
+
+                SPadminOptions = (Spinner) findViewById(R.id.SPadmin);
+                populateSpinner();
+                if (SPadminOptions != null) {
+                    SPadminOptions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            adminOption = position;
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
+                }
+
                 TV_descriptionCounter = (TextView) findViewById(R.id.TV_descriptionCounter);
                 ET_description = (EditText) findViewById(R.id.ET_desciption);
                 ET_description.addTextChangedListener(new TextWatcher() {
@@ -101,6 +121,17 @@ public class ComplaintPollView extends AppCompatActivity implements View.OnClick
         }
     }
 
+    void populateSpinner() {
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(ComplaintPollView.this,
+                R.array.admin_options,
+                android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Set the adapter to Spinner
+        SPadminOptions.setAdapter(spinnerAdapter);
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -112,13 +143,38 @@ public class ComplaintPollView extends AppCompatActivity implements View.OnClick
                 if (validation.validateName(name)) {
                     if (validation.validateReg(regID)) {
                         if (validation.validatePhoneNumber(contact)) {
-                            new ComplaintPollModal(ComplaintPollView.this).sendComplaint(name, regID, contact, description);
+                            if (adminOption != 0) {
+                                switch (adminOption){
+                                    case 1:{
+                                        new ComplaintPollModal(ComplaintPollView.this).sendComplaint(name, regID, contact, description);
+                                        break;
+                                    }
+                                }
+                            } else {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                                builder.setTitle("Error");
+                                builder.setMessage("Please select complaint admin");
+                                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int which) {
+                                        if (alertDialog != null) {
+                                            alertDialog.cancel();
+                                        }
+                                    }
+                                });
+                                alertDialog = builder.create();
+                                alertDialog.show();
+                            }
                         } else
                             Toast.makeText(ComplaintPollView.this, "Invalid contact #", Toast.LENGTH_SHORT).show();
                     } else
                         Toast.makeText(ComplaintPollView.this, "Invalid registration id", Toast.LENGTH_SHORT).show();
                 } else
                     Toast.makeText(ComplaintPollView.this, "Invalid name", Toast.LENGTH_SHORT).show();
+            }
+            case R.id.IV_openAdminSpinner: {
+                SPadminOptions.performClick();
+                break;
             }
         }
     }

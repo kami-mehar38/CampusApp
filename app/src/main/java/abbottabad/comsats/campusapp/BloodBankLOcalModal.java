@@ -5,16 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Handler;
-import android.os.Looper;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This project CampusApp is created by Kamran Ramzan on 9/1/16.
  */
-public class BloodBankLocalModal extends SQLiteOpenHelper {
+class BloodBankLocalModal extends SQLiteOpenHelper {
 
     private static int VERSION = 1;
     private static String DATABASE_NAME = "BLOODBANK.db";
@@ -25,7 +20,7 @@ public class BloodBankLocalModal extends SQLiteOpenHelper {
     private static String COL_CONTACT = "CONTACT";
     private static String COL_BLOOD_TYPE = "BLLOD_TYPE";
 
-    public BloodBankLocalModal(Context context) {
+    BloodBankLocalModal(Context context) {
         super(context, DATABASE_NAME, null, VERSION);
     }
 
@@ -47,7 +42,7 @@ public class BloodBankLocalModal extends SQLiteOpenHelper {
         db.execSQL(dropTableQuery);
         onCreate(db);
     }
-    public void addBloodRequest(){
+    void addBloodRequest(){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_NAME, BloodBankController.getStdName());
@@ -57,7 +52,7 @@ public class BloodBankLocalModal extends SQLiteOpenHelper {
         db.insert(TABLE_NAME, null, contentValues);
         db.close();
     }
-    public void viewBloodRequests(){
+    void viewBloodRequests(){
         SQLiteDatabase db = this.getReadableDatabase();
         String selectQuery= "SELECT * FROM " +TABLE_NAME+ " ORDER BY " +SERIAL+ " DESC";
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -76,7 +71,7 @@ public class BloodBankLocalModal extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void deleteRequest(String reg){
+    void deleteRequest(String reg){
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_NAME, COL_REG + " = ?", new String[]{reg});
     }

@@ -70,6 +70,11 @@
         <item>Blood Bank</item>
         <item>Food</item>
     </string-array>
+    <string-array name="admin_options">
+        <item>Select admin</item>
+        <item>Food</item>
+        <item>Management</item>
+    </string-array>
     <string-array name="signup_options">
         <item>Select sign up option</item>
         <item>Teacher</item>
@@ -107,4 +112,22 @@
     <string name="name_simple">Name</string>
     <string name="contact_simple">Contact #</string>
     <string name="enter_your_account_email_id_you_will_receive_the_new_password">Enter your account email id. You will receive the new password.</string>
+    <string name="title_activity_nav">NavActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="comsats_atd">COMSATS ATD</string>
+    <string name="enable_notifications">Enable notifications</string>
+    <string name="silent_during_class">Silent during class</string>
+    <string name="share_timetable">Share timetable</string>
+    <string name="receive_blood_requests">Receive blood requests</string>
+    <string name="reply">Reply</string>
+    <string name="distance_from_you">Distance from you</string>
+    <string name="accept">Accept</string>
+    <string name="donate">Donate</string>
+    <string name="reject">Reject</string>
+    <string name="event_notifiations">Event notifiations</string>
+    <string name="class_notifications">Class notifications</string>
 </resources>

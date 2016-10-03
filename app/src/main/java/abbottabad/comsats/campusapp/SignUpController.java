@@ -7,15 +7,15 @@ import android.widget.Spinner;
 /**
  * This project CampusApp is created by Kamran Ramzan on 6/1/16.
  */
-public class SignUpController {
+class SignUpController {
 
     private Context context;
-    public SignUpController(Context context) {
+    SignUpController(Context context) {
         this.context = context;
     }
 
 
-    public void populateSpinner(Spinner SPloginOptions) {
+    void populateSpinner(Spinner SPloginOptions) {
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(context,
                 R.array.signup_options,

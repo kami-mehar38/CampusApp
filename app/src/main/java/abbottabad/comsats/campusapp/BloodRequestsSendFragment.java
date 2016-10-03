@@ -1,11 +1,13 @@
 package abbottabad.comsats.campusapp;
 
+import android.content.Context;
 import android.content.DialogInterface;
-import android.support.v4.app.Fragment;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputLayout;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,7 @@ import android.widget.Toast;
  */
 public class BloodRequestsSendFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
+    private final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
     private EditText ETname;
     private EditText ETregistration;
     private EditText ETcontact;
@@ -38,7 +41,7 @@ public class BloodRequestsSendFragment extends Fragment implements AdapterView.O
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        SharedPreferences sharedPreferences = view.getContext().getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         final Validation validation = new Validation();
 
         SPbloodTypeOptions = (Spinner) view.findViewById(R.id.SPbloodType);
@@ -46,8 +49,11 @@ public class BloodRequestsSendFragment extends Fragment implements AdapterView.O
         SPbloodTypeOptions.setOnItemSelectedListener(this);
 
         ETname = (EditText) view.findViewById(R.id.ETname);
+        ETname.setText(sharedPreferences.getString("NAME", ""));
         ETregistration = (EditText) view.findViewById(R.id.ETregistration);
+        ETregistration.setText(sharedPreferences.getString("REG_ID", ""));
         ETcontact = (EditText) view.findViewById(R.id.ETcontact);
+        ETcontact.setText(sharedPreferences.getString("CONTACT", ""));
         ImageView IV_openBloodSpinner = (ImageView) view.findViewById(R.id.IV_openBloodSpinner);
         IV_openBloodSpinner.setOnClickListener(this);
 
@@ -63,6 +69,8 @@ public class BloodRequestsSendFragment extends Fragment implements AdapterView.O
                         if (validation.validateReg(registration)){
                             if (validation.validatePhoneNumber(contact)){
                                 new BloodBankModal(view.getContext()).sendRequest(name, registration, contact, bloodType);
+                                Log.i("TAG", "onClick: " + String.valueOf(LocationController.getLatitide()));
+                                Log.i("TAG", "onClick: " + String.valueOf(LocationController.getLongitude()));
                             } else Toast.makeText(getContext(), "Invalid contac#", Toast.LENGTH_SHORT).show();
                         } else Toast.makeText(getContext(), "Invalid registration id", Toast.LENGTH_SHORT).show();
                     } else Toast.makeText(getContext(), "Invalid name", Toast.LENGTH_SHORT).show();

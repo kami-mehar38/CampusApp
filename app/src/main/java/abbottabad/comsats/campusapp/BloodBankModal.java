@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -26,20 +25,20 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
-import static abbottabad.comsats.campusapp.BloodDonorsFragment.*;
+
+import static abbottabad.comsats.campusapp.BloodDonorsFragment.recyclerView;
 
 /**
  * This project CampusApp is created by Kamran Ramzan on 6/4/16.
  */
-public class BloodBankModal {
+class BloodBankModal {
 
 
     private Context context;
     private AlertDialog alertDialog;
 
-    public BloodBankModal(Context context) {
+    BloodBankModal(Context context) {
         this.context = context;
     }
 
@@ -54,20 +53,24 @@ public class BloodBankModal {
      *                  to send the Blood Request using HTTP Protocol
      */
 
-    public void sendRequest(String name, String registration, String contact, String bloodType){
+    void sendRequest(String name, String registration, String contact, String bloodType){
         new sendRequestInBackground().execute(name, registration, contact, bloodType);
     }
 
-    public void retrieveDonors(String bloodType) {
+    void retrieveDonors(String bloodType) {
         new RetrieveDonors().execute(bloodType);
     }
 
-    public void addDonor(String name, String regID, String bloodType, String contact, String bleededDate){
+    void addDonor(String name, String regID, String bloodType, String contact, String bleededDate){
         new AddDonor().execute(name, regID, bloodType, contact, bleededDate);
     }
 
-    public void updateBleedingDate(String registration, String bleededDate){
+    void updateBleedingDate(String registration, String bleededDate){
         new UpdateBleedingDate().execute(registration, bleededDate);
+    }
+
+    void replyTorequest(String name, String reg_id, String bloodGroup, String contact, String to, String latitude, String longitude) {
+        new ReplyToRequest().execute(name, reg_id, bloodGroup, contact, to, latitude, longitude);
     }
 
     private class sendRequestInBackground extends AsyncTask<String, Void, String>{
@@ -151,7 +154,7 @@ public class BloodBankModal {
     private class RetrieveDonors extends AsyncTask<String, Void, List<DonorsInfo>> {
 
         private ProgressDialog progressDialog;
-        public RetrieveDonors( ) {
+        RetrieveDonors() {
 
         }
 
@@ -412,6 +415,89 @@ public class BloodBankModal {
             }else {
                 Toast.makeText(context, "Some error occurred! Please try again.", Toast.LENGTH_LONG).show();
             }
+        }
+    }
+
+    private class ReplyToRequest extends AsyncTask<String, Void, String> {
+        private ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog = new ProgressDialog(context);
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressDialog.setMessage("Sending response...");
+            progressDialog.setCancelable(false);
+            progressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            cancel(true);
+                        }
+                    });
+            progressDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            String stringUrl = "http://hostellocator.com/sendResponseToRequest.php";
+            String name, registration, contact, bloodType, to, latitude, longitude;
+            try {
+                URL url = new URL(stringUrl);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                name = params[0];
+                registration = params[1];
+                bloodType = params[2];
+                contact = params[3];
+                to = params[4];
+                latitude = params[5];
+                longitude = params[6];
+                Log.i("TAG", "Sending in background: " + latitude+ longitude);
+                String data = URLEncoder.encode("name", "UTF-8") +"="+ URLEncoder.encode(name, "UTF-8") +"&"+
+                        URLEncoder.encode("registration", "UTF-8") +"="+ URLEncoder.encode(registration, "UTF-8") +"&"+
+                        URLEncoder.encode("contact", "UTF-8") +"="+ URLEncoder.encode(contact, "UTF-8") +"&"+
+                        URLEncoder.encode("bloodType", "UTF-8") +"="+ URLEncoder.encode(bloodType, "UTF-8") +"&"+
+                        URLEncoder.encode("to", "UTF-8") +"="+ URLEncoder.encode(to, "UTF-8") +"&"+
+                        URLEncoder.encode("latitude", "UTF-8") +"="+ URLEncoder.encode(latitude, "UTF-8") +"&"+
+                        URLEncoder.encode("longitude", "UTF-8") +"="+ URLEncoder.encode(longitude, "UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+                StringBuilder stringBuilder = new StringBuilder();
+                String line;
+                while ((line = bufferedReader.readLine()) != null){
+                    stringBuilder.append(line);
+                }
+
+                JSONArray parentJSON = new JSONArray(stringBuilder.toString());
+                JSONObject finalObject = parentJSON.getJSONObject(0);
+                String RESPONSE = finalObject.getString("RESPONSE");
+
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return RESPONSE;
+            } catch (IOException | JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            progressDialog.cancel();
+            if (s != null && s.equals("OK")) {
+                Toast.makeText(context, "Response sent.", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(context, "Some error occurred, please try again.", Toast.LENGTH_LONG).show();
+            }
+
         }
     }
 }

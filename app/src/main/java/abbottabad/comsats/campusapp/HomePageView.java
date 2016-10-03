@@ -1,24 +1,33 @@
 package abbottabad.comsats.campusapp;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.SharedPreferences;
-import android.os.Build;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -26,14 +35,19 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.readystatesoftware.systembartint.SystemBarTintManager;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 
 /**
  * This project CampusApp is created by Kamran Ramzan on 6/2/16.
  */
-public class HomePageView extends AppCompatActivity {
+public class HomePageView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private static final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
+    private static final int MY_PERMISSIONS_REQUEST_ACCESS_LOCATION = 149;
     private AlertDialog AD_logout;
     private AlertDialog AD_passwordDialog;
     private AlertDialog AD_emailDialog;
@@ -45,11 +59,16 @@ public class HomePageView extends AppCompatActivity {
     public static ProgressBar isChangingEmail;
     public static ProgressBar isChangingUnam;
     private Validation validation;
+    private DrawerLayout mDrawerLayout;
+
+    private GoogleApiClient mGoogleApiClient;
+    public static final String TAG = HomePageView.class.getSimpleName();
+    private LocationRequest mLocationRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.homepage);
+        setContentView(R.layout.activity_nav);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.home_toolbar);
         setSupportActionBar(toolbar);
@@ -114,7 +133,7 @@ public class HomePageView extends AppCompatActivity {
             RL_parking.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                   // startActivity(new Intent(HomePageView.this, MapsActivity.class));
+                    //startActivity(new Intent(HomePageView.this, MapsActivity.class));
                 }
             });
         }
@@ -131,14 +150,65 @@ public class HomePageView extends AppCompatActivity {
             });
         }
 
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mDrawerLayout.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        if (navigationView != null) {
+            navigationView.setNavigationItemSelectedListener(this);
+        }
+
         validation = new Validation();
         newUnameAlertDialog();
         newPasswordAlertDiaog();
         newEmailAlertDialog();
 
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+
+        mLocationRequest = LocationRequest.create()
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                .setInterval(10 * 1000)        // 10 seconds, in milliseconds
+                .setFastestInterval(1000); // 1 second, in milliseconds
+
+        checkIfGpsIsEnabled();
+
     }
 
-    public void newUnameAlertDialog(){
+    private void checkIfGpsIsEnabled() {
+        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setMessage("GPS is disabled in your device. Enable it to make this application better for you?")
+                    .setCancelable(false)
+                    .setPositiveButton("Enable GPS",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    Intent callGPSSettingIntent = new Intent(
+                                            android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                                    startActivity(callGPSSettingIntent);
+                                    dialog.cancel();
+                                }
+                            });
+            alertDialogBuilder.setNegativeButton("Cancel",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alert = alertDialogBuilder.create();
+            alert.show();
+        }
+    }
+
+    private void newUnameAlertDialog() {
         View view = LayoutInflater.from(HomePageView.this).inflate(R.layout.change_uname, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(HomePageView.this);
         builder.setView(view);
@@ -187,7 +257,7 @@ public class HomePageView extends AppCompatActivity {
                         }
                     });
 
-                }else {
+                } else {
                     Toast.makeText(HomePageView.this, "Invalid username", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -243,14 +313,14 @@ public class HomePageView extends AppCompatActivity {
                         }
                     });
 
-                }else {
+                } else {
                     Toast.makeText(HomePageView.this, "Invalid Password", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
-    public void newEmailAlertDialog(){
+    private void newEmailAlertDialog() {
         View view = LayoutInflater.from(HomePageView.this).inflate(R.layout.change_email, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(HomePageView.this);
         builder.setView(view);
@@ -299,7 +369,7 @@ public class HomePageView extends AppCompatActivity {
                         }
                     });
 
-                }else {
+                } else {
                     Toast.makeText(HomePageView.this, "Invalid Email Id", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -320,9 +390,9 @@ public class HomePageView extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.action_logout:{
-                AlertDialog.Builder  builder = new AlertDialog.Builder(this);
+        switch (item.getItemId()) {
+            case R.id.action_logout: {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("Alert?");
                 builder.setCancelable(false);
                 builder.setMessage("Are you sure you want to logout?");
@@ -393,5 +463,108 @@ public class HomePageView extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.nav_blood_requests) {
+            CheckBox checkBox = (CheckBox) item.getActionView().findViewById(R.id.CB_receiveBloodRequest);
+            checkBox.setChecked(!checkBox.isChecked());
+        }
+        return false;
+    }
+
+    @Override
+    public void onConnected(Bundle bundle) {
+        Log.i(TAG, "Location services connected.");
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            ActivityCompat.requestPermissions(HomePageView.this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                    MY_PERMISSIONS_REQUEST_ACCESS_LOCATION);
+            return;
+        }
+        Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        if (location != null) {
+            handleNewLocation(location);
+            LocationController.setLatitide(location.getLatitude());
+            LocationController.setLongitude(location.getLongitude());
+        }
+    }
+
+    private void handleNewLocation(Location location) {
+        Log.d(TAG, location.toString());
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        Log.i(TAG, "Location services suspended. Please reconnect.");
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        if (connectionResult.hasResolution()) {
+            try {
+                // Start an Activity that tries to resolve the error
+                connectionResult.startResolutionForResult(this, 10);
+            } catch (IntentSender.SendIntentException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Log.i(TAG, "Location services connection failed with code " + connectionResult.getErrorCode());
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mGoogleApiClient.connect();
+        checkIfGpsIsEnabled();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.disconnect();
+        }
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        handleNewLocation(location);
+        LocationController.setLatitide(location.getLatitude());
+        LocationController.setLongitude(location.getLongitude());
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String permissions[], @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_ACCESS_LOCATION: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                    Toast.makeText(HomePageView.this, "Permission granted", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
     }
 }

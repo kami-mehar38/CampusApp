@@ -16,58 +16,112 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
-        android:paddingStart="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
+            android:orientation="vertical"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin">
 
             <EditText
                 android:id="@+id/ETname"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/edittext_top_rounded"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/edittext_style"
                 android:drawableLeft="@drawable/ic_username"
                 android:drawableStart="@drawable/ic_username"
                 android:ems="10"
                 android:gravity="center"
                 android:hint="@string/name_simple"
                 android:inputType="textPersonName"
-                android:paddingBottom="20dp"
+                android:paddingBottom="15dp"
                 android:paddingLeft="12dp"
                 android:paddingRight="12dp"
-                android:paddingTop="20dp"
+                android:paddingTop="15dp"
                 android:textColor="#000"
                 android:textCursorDrawable="@drawable/edittext_cursor_color"
                 android:textSize="16sp"
                 android:textStyle="normal" />
 
-
             <EditText
                 android:id="@+id/ETregistration"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/edittext_bottom_radius"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/edittext_style"
                 android:drawableLeft="@drawable/ic_registration"
                 android:drawableStart="@drawable/ic_registration"
                 android:ems="10"
                 android:gravity="center"
                 android:hint="@string/registration_id"
                 android:inputType="text"
-                android:paddingBottom="20dp"
+                android:paddingBottom="15dp"
                 android:paddingLeft="12dp"
                 android:paddingRight="12dp"
-                android:paddingTop="20dp"
+                android:paddingTop="15dp"
                 android:textColor="#000"
                 android:textCursorDrawable="@drawable/edittext_cursor_color"
                 android:textSize="16sp"
                 android:textStyle="normal" />
 
+            <EditText
+                android:id="@+id/ETcontact"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/edittext_style"
+                android:drawableLeft="@drawable/ic_contact"
+                android:drawableStart="@drawable/ic_contact"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="@string/contact_simple"
+                android:inputType="number"
+                android:paddingBottom="15dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="15dp"
+                android:textColor="#000"
+                android:textCursorDrawable="@drawable/edittext_cursor_color"
+                android:textSize="16sp"
+                android:textStyle="normal" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="44dp"
+                android:background="@drawable/spinner_background_style"
+                android:orientation="horizontal"
+                android:paddingBottom="12dp"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:paddingTop="12dp">
+
+                <Spinner
+                    android:id="@+id/SPbloodType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:spinnerMode="dropdown" />
+
+                <ImageView
+                    android:id="@+id/IV_openBloodSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_toEndOf="@+id/SPbloodType"
+                    android:layout_toRightOf="@+id/SPbloodType"
+                    android:contentDescription="@string/login_account"
+                    android:src="@drawable/ic_action_expand" />
+
+            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -92,7 +146,7 @@
                     android:spinnerMode="dropdown" />
 
                 <ImageView
-                    android:id="@+id/IV_openBloodSpinner"
+                    android:id="@+id/IV_openSignupSpinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -103,7 +157,6 @@
                     android:src="@drawable/ic_action_expand" />
 
             </RelativeLayout>
-
 
             <Button
                 android:id="@+id/btnSignup"
