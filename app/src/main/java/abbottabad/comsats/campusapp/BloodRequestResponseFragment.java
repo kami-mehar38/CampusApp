@@ -20,7 +20,7 @@ public class BloodRequestResponseFragment extends Fragment {
 
     public static RecyclerView recyclerView;
     private BloodBankResponseModal bloodBankResponseModal;
-    public static ResponeViewAdapter responeViewAdapter;
+    public static ResponseViewAdapter responseViewAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,8 +43,8 @@ public class BloodRequestResponseFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(new RecyclerViewDivider(getContext()));
         recyclerView.setItemAnimator(new SlideInLeftAnimator());
-        responeViewAdapter = new ResponeViewAdapter();
-        ScaleInAnimationAdapter scaleInAnimationAdapter = new ScaleInAnimationAdapter(responeViewAdapter);
+        responseViewAdapter = new ResponseViewAdapter();
+        ScaleInAnimationAdapter scaleInAnimationAdapter = new ScaleInAnimationAdapter(responseViewAdapter);
         scaleInAnimationAdapter.setFirstOnly(false);
         recyclerView.setAdapter(scaleInAnimationAdapter);
         bloodBankResponseModal.viewBloodRequestResponses();

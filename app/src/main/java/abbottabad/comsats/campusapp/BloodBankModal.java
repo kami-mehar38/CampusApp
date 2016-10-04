@@ -73,6 +73,14 @@ class BloodBankModal {
         new ReplyToRequest().execute(name, reg_id, bloodGroup, contact, to, latitude, longitude);
     }
 
+    void acceptResponse(String reg_id) {
+        new AcceptReponse().execute(reg_id);
+    }
+
+    void rejectResponse(String reg_id) {
+        new RejectReponse().execute(reg_id);
+    }
+
     private class sendRequestInBackground extends AsyncTask<String, Void, String>{
 
         private ProgressDialog progressDialog;
@@ -494,6 +502,150 @@ class BloodBankModal {
             progressDialog.cancel();
             if (s != null && s.equals("OK")) {
                 Toast.makeText(context, "Response sent.", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(context, "Some error occurred, please try again.", Toast.LENGTH_LONG).show();
+            }
+
+        }
+    }
+
+    private class AcceptReponse extends AsyncTask<String, Void, String>{
+
+        private ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog = new ProgressDialog(context);
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressDialog.setMessage("Sending confirmation to donor...");
+            progressDialog.setCancelable(false);
+            progressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            cancel(true);
+                        }
+                    });
+            progressDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            String stringUrl = "http://hostellocator.com/sendAcceptResponseToRequest.php";
+            String registration;
+            try {
+                URL url = new URL(stringUrl);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+
+                registration = params[0];
+                String data = URLEncoder.encode("registration", "UTF-8") +"="+ URLEncoder.encode(registration, "UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+                StringBuilder stringBuilder = new StringBuilder();
+                String line;
+                while ((line = bufferedReader.readLine()) != null){
+                    stringBuilder.append(line);
+                }
+
+                JSONArray parentJSON = new JSONArray(stringBuilder.toString());
+                JSONObject finalObject = parentJSON.getJSONObject(0);
+                String RESPONSE = finalObject.getString("RESPONSE");
+
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return RESPONSE;
+            } catch (IOException | JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            progressDialog.cancel();
+            if (s != null && s.equals("OK")) {
+                Toast.makeText(context, "Confirmation message sent.", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(context, "Some error occurred, please try again.", Toast.LENGTH_LONG).show();
+            }
+
+        }
+    }
+
+    private class RejectReponse extends AsyncTask<String, Void, String> {
+
+        private ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog = new ProgressDialog(context);
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressDialog.setMessage("Sending rejection to donor...");
+            progressDialog.setCancelable(false);
+            progressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            cancel(true);
+                        }
+                    });
+            progressDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            String stringUrl = "http://hostellocator.com/sendRejectResponseToRequest.php";
+            String registration;
+            try {
+                URL url = new URL(stringUrl);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+
+                registration = params[0];
+                String data = URLEncoder.encode("registration", "UTF-8") +"="+ URLEncoder.encode(registration, "UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+                StringBuilder stringBuilder = new StringBuilder();
+                String line;
+                while ((line = bufferedReader.readLine()) != null){
+                    stringBuilder.append(line);
+                }
+
+                JSONArray parentJSON = new JSONArray(stringBuilder.toString());
+                JSONObject finalObject = parentJSON.getJSONObject(0);
+                String RESPONSE = finalObject.getString("RESPONSE");
+
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return RESPONSE;
+            } catch (IOException | JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            progressDialog.cancel();
+            if (s != null && s.equals("OK")) {
+                Toast.makeText(context, "Rejection message sent.", Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(context, "Some error occurred, please try again.", Toast.LENGTH_LONG).show();
             }

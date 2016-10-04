@@ -44,6 +44,12 @@ public class MyGcmListenerService extends GcmListenerService {
             receiveBloodRequestResponse(data);
         }
 
+        if (PURPOSE != null && PURPOSE.equals("BLOOD_REQUEST_RESPONSE_ACCEPT") || PURPOSE != null && PURPOSE.equals("BLOOD_REQUEST_RESPONSE_REJECT")) {
+            receiveBloodRequestResponseStatus(data);
+        }
+
+
+
         if (APPLICATION_STATUS.equals("FOOD")) {
             if (PURPOSE != null && PURPOSE.equals("FOOD_COMPLAINT")) {
                 receiveFoodComplaint(data);
@@ -57,6 +63,33 @@ public class MyGcmListenerService extends GcmListenerService {
         if (PURPOSE != null && PURPOSE.equals("EVENT_NOTIFICATION")) {
             receiveEventNotification(data);
         }
+    }
+
+    private void receiveBloodRequestResponseStatus(Bundle data) {
+        final String message = data.getString("message");
+        createBloodResponseAcceptNotification(message);
+    }
+
+    private void createBloodResponseAcceptNotification(String message) {
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        Uri sound = Uri.parse("android.resource://" + this.getPackageName() + "/" + R.raw.notification_sound);
+        long[] pattern = {1000, 1000, 1000, 1000, 1000};
+
+        Intent resultIntent = new Intent(this, BloodBankView.class);
+        TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(this);
+        taskStackBuilder.addParentStack(BloodBankView.class);
+        taskStackBuilder.addNextIntent(resultIntent);
+
+        PendingIntent resultPendingIntent = taskStackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
+                this).setSmallIcon(R.drawable.ic_notification_blood)
+                .setContentTitle("Blood Bank").setVibrate(pattern)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
+                .setContentText(message)
+                .setAutoCancel(true).setSound(sound);
+        mBuilder.setContentIntent(resultPendingIntent);
+        notificationManager.notify(GCM_NOTIFICATION_ID, mBuilder.build());
     }
 
     private void receiveBloodRequestResponse(Bundle data) {
@@ -91,14 +124,14 @@ public class MyGcmListenerService extends GcmListenerService {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                if (BloodRequestResponseFragment.responeViewAdapter != null) {
+                if (BloodRequestResponseFragment.responseViewAdapter != null) {
                     ResponseInfo responseInfo = new ResponseInfo();
                     responseInfo.setName(stdName);
                     responseInfo.setRegistration(stdReg);
                     responseInfo.setContact(stdContact);
                     responseInfo.setBloodType(bloodType);
                     responseInfo.setDistance(distance);
-                    BloodRequestResponseFragment.responeViewAdapter.add(responseInfo, 0);
+                    BloodRequestResponseFragment.responseViewAdapter.add(responseInfo, 0);
                     BloodRequestResponseFragment.recyclerView.smoothScrollToPosition(0);
                 }
             }

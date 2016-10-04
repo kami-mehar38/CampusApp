@@ -1,9 +1,12 @@
 package abbottabad.comsats.campusapp;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -13,7 +16,7 @@ import java.util.List;
  * This project CampusApp is created by Kamran Ramzan on 03-Oct-16.
  */
 
-class ResponeViewAdapter extends RecyclerView.Adapter <ResponeViewAdapter.ViewHolder> {
+class ResponseViewAdapter extends RecyclerView.Adapter <ResponseViewAdapter.ViewHolder> {
 
     private List<ResponseInfo> responseInfoList = new ArrayList<>();
     private final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
@@ -60,6 +63,7 @@ class ResponeViewAdapter extends RecyclerView.Adapter <ResponeViewAdapter.ViewHo
         private TextView btnAccept;
         private TextView btnCancel;
         private TextView btnDelete;
+        private Button btnCall;
 
         ViewHolder(final View itemView) {
             super(itemView);
@@ -71,12 +75,35 @@ class ResponeViewAdapter extends RecyclerView.Adapter <ResponeViewAdapter.ViewHo
             btnAccept = (TextView) itemView.findViewById(R.id.btnAccept);
             btnCancel = (TextView) itemView.findViewById(R.id.btnCancel);
             btnDelete = (TextView) itemView.findViewById(R.id.btnDelete);
+            btnCall = (Button) itemView.findViewById(R.id.btnCall);
 
             btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     new BloodBankResponseModal(itemView.getContext()).deleteResponse(TV_requesterReg.getText().toString());
                     remove(getAdapterPosition());
+                }
+            });
+            btnAccept.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new BloodBankModal(itemView.getContext()).acceptResponse(TV_requesterReg.getText().toString());
+                }
+            });
+
+            btnCancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new BloodBankModal(itemView.getContext()).rejectResponse(TV_requesterReg.getText().toString());
+                }
+            });
+
+            btnCall.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Intent.ACTION_DIAL,
+                            Uri.parse("tel:" + TV_requesterContact.getText().toString().trim()));
+                    itemView.getContext().startActivity(intent);
                 }
             });
         }

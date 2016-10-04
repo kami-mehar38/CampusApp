@@ -113,9 +113,9 @@
             android:layout_gravity="center"
             android:src="@drawable/ic_action_expand"
             android:contentDescription="@string/login_account"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/SPbloodType"
+            android:layout_toRightOf="@+id/SPbloodType" />
 
     </RelativeLayout>
 

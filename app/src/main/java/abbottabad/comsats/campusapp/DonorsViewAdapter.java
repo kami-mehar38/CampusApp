@@ -20,11 +20,11 @@ import java.util.TimeZone;
 /**
  * This project CampusApp is created by Kamran Ramzan on 9/1/16.
  */
-public class DonorsViewAdapter extends RecyclerView.Adapter <DonorsViewAdapter.ViewHolder> {
+class DonorsViewAdapter extends RecyclerView.Adapter <DonorsViewAdapter.ViewHolder> {
 
     private List<DonorsInfo> donorsInfoList = new ArrayList<>();
 
-    public DonorsViewAdapter(List<DonorsInfo> donorsInfoList) {
+    DonorsViewAdapter(List<DonorsInfo> donorsInfoList) {
         this.donorsInfoList = donorsInfoList;
     }
 
@@ -48,7 +48,7 @@ public class DonorsViewAdapter extends RecyclerView.Adapter <DonorsViewAdapter.V
         return donorsInfoList.size();
     }
 
-    protected class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder{
         private TextView TV_donorName;
         private TextView TV_donorRegistration;
         private TextView TV_donorBloodtype;
@@ -57,7 +57,7 @@ public class DonorsViewAdapter extends RecyclerView.Adapter <DonorsViewAdapter.V
         private Button btnMessage;
         private CheckBox CB_bleed;
         private AlertDialog alertDialog;
-        public ViewHolder(final View itemView) {
+        ViewHolder(final View itemView) {
             super(itemView);
 
             TV_donorName = (TextView) itemView.findViewById(R.id.TV_donorName);

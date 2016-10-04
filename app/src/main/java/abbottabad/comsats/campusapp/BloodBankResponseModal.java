@@ -69,7 +69,7 @@ class BloodBankResponseModal extends SQLiteOpenHelper {
             responseInfos[cursor.getPosition()].setBloodType(cursor.getString(4));
             responseInfos[cursor.getPosition()].setContact(cursor.getString(3));
             responseInfos[cursor.getPosition()].setDistance(cursor.getInt(5));
-            BloodRequestResponseFragment.responeViewAdapter.add(responseInfos[cursor.getPosition()], cursor.getPosition());
+            BloodRequestResponseFragment.responseViewAdapter.add(responseInfos[cursor.getPosition()], cursor.getPosition());
             cursor.moveToNext();
         }
         cursor.close();
