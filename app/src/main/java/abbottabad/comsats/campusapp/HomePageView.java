@@ -11,7 +11,6 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -43,8 +42,8 @@ import com.google.android.gms.location.LocationServices;
 /**
  * This project CampusApp is created by Kamran Ramzan on 6/2/16.
  */
-public class HomePageView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
-        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+public class HomePageView extends AppCompatActivity implements
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener, View.OnClickListener {
 
     private static final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
     private static final int MY_PERMISSIONS_REQUEST_ACCESS_LOCATION = 149;
@@ -63,7 +62,7 @@ public class HomePageView extends AppCompatActivity implements NavigationView.On
 
     private GoogleApiClient mGoogleApiClient;
     public static final String TAG = HomePageView.class.getSimpleName();
-    private LocationRequest mLocationRequest;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +72,16 @@ public class HomePageView extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.home_toolbar);
         setSupportActionBar(toolbar);
 
+        sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+        final int TOKEN_GOT = sharedPreferences.getInt("TOKEN_GOT", 0);
+
+        if (TOKEN_GOT != 1){
+            startService(new Intent(this, RegistrationIntentService.class));
+        }
+
         new InitialPageController(this).execute();
         isPlayServicesAvailable();
+
 
         Animation bounceAnimation = AnimationUtils.loadAnimation(this, R.anim.accelerate_decelerate_aimation);
 
@@ -156,11 +163,6 @@ public class HomePageView extends AppCompatActivity implements NavigationView.On
         mDrawerLayout.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        if (navigationView != null) {
-            navigationView.setNavigationItemSelectedListener(this);
-        }
-
         validation = new Validation();
         newUnameAlertDialog();
         newPasswordAlertDiaog();
@@ -172,13 +174,23 @@ public class HomePageView extends AppCompatActivity implements NavigationView.On
                 .addApi(LocationServices.API)
                 .build();
 
-        mLocationRequest = LocationRequest.create()
+        LocationRequest mLocationRequest = LocationRequest.create()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
                 .setInterval(10 * 1000)        // 10 seconds, in milliseconds
-                .setFastestInterval(1000); // 1 second, in milliseconds
+                .setFastestInterval(1000);
 
         checkIfGpsIsEnabled();
 
+        CheckBox CB_enableNoifications = (CheckBox) findViewById(R.id.CB_enableNotifications);
+        if (CB_enableNoifications != null) {
+            CB_enableNoifications.setOnClickListener(this);
+        }
+
+        CheckBox CB_receiveBloodRequest = (CheckBox) findViewById(R.id.CB_receiveBloodRequest);
+        if (CB_receiveBloodRequest != null) {
+            CB_receiveBloodRequest.setOnClickListener(this);
+            CB_receiveBloodRequest.setChecked(sharedPreferences.getBoolean("RECEIVE_BLOOD_REQUEST", false));
+        }
     }
 
     private void checkIfGpsIsEnabled() {
@@ -378,8 +390,6 @@ public class HomePageView extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
-        SharedPreferences sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         final String APPLICATION_STATUS = sharedPreferences.getString("APPLICATION_STATUS", "NULL");
         if (APPLICATION_STATUS.equals("BLOOD_BANK") || APPLICATION_STATUS.equals("FOOD")) {
             getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -475,15 +485,7 @@ public class HomePageView extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.nav_blood_requests) {
-            CheckBox checkBox = (CheckBox) item.getActionView().findViewById(R.id.CB_receiveBloodRequest);
-            checkBox.setChecked(!checkBox.isChecked());
-        }
-        return false;
-    }
+
 
     @Override
     public void onConnected(Bundle bundle) {
@@ -565,6 +567,32 @@ public class HomePageView extends AppCompatActivity implements NavigationView.On
             }
             // other 'case' lines to check for other
             // permissions this app might request
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.CB_enableNotifications:{
+                if (((CheckBox) v).isChecked()){
+                    Toast.makeText(HomePageView.this, "OK", Toast.LENGTH_LONG).show();
+                }
+                break;
+            }
+            case R.id.CB_receiveBloodRequest:{
+                if (((CheckBox) v).isChecked()){
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean("RECEIVE_BLOOD_REQUEST", true);
+                    editor.apply();
+                    Toast.makeText(HomePageView.this, "Enabled", Toast.LENGTH_LONG).show();
+                } else {
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean("RECEIVE_BLOOD_REQUEST", false);
+                    editor.apply();
+                    Toast.makeText(HomePageView.this, "Disabled", Toast.LENGTH_LONG).show();
+                }
+                break;
+            }
         }
     }
 }

@@ -104,7 +104,6 @@ class SignUpModal {
                 JSONArray parentJSON = new JSONArray(stringBuilder.toString());
                 JSONObject finalObject = parentJSON.getJSONObject(0);
                 String RESPONSE = finalObject.getString("RESPONSE");
-                Log.i("TAG", "doInBackground: " + RESPONSE);
                 bufferedReader.close();
                 inputStream.close();
                 httpURLConnection.disconnect();

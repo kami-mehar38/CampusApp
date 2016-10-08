@@ -41,10 +41,13 @@ public class MyGcmListenerService extends GcmListenerService {
         }
 
         if (PURPOSE != null && PURPOSE.equals("BLOOD_REQUEST_RESPONSE")) {
-            receiveBloodRequestResponse(data);
+            if (sharedPreferences.getBoolean("RECEIVE_BLOOD_REQUEST", false)){
+                receiveBloodRequestResponse(data);
+            }
         }
 
-        if (PURPOSE != null && PURPOSE.equals("BLOOD_REQUEST_RESPONSE_ACCEPT") || PURPOSE != null && PURPOSE.equals("BLOOD_REQUEST_RESPONSE_REJECT")) {
+        if (PURPOSE != null && PURPOSE.equals("BLOOD_REQUEST_RESPONSE_ACCEPT")
+                || PURPOSE != null && PURPOSE.equals("BLOOD_REQUEST_RESPONSE_REJECT")) {
             receiveBloodRequestResponseStatus(data);
         }
 

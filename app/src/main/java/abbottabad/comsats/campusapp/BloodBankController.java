@@ -84,6 +84,7 @@ class BloodBankController {
     void setupViewPagerAdmin(ViewPager viewPagerAdmin, FragmentManager supportFragmentManager) {
         ViewPagerAdapterAdmin viewPagerAdapterAdmin = new ViewPagerAdapterAdmin(supportFragmentManager);
         viewPagerAdapterAdmin.addFragment(new BloodRequestsFragment(), "Requests");
+        viewPagerAdapterAdmin.addFragment(new BloodRequestResponseFragment(), "Responses");
         viewPagerAdapterAdmin.addFragment(new BloodDonorsFragment(), "Donors");
         viewPagerAdapterAdmin.addFragment(new BloodDonorsAddFragment(),"Add Donor");
        viewPagerAdmin.setAdapter(viewPagerAdapterAdmin);
