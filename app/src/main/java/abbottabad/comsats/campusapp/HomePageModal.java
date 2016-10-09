@@ -3,7 +3,6 @@ package abbottabad.comsats.campusapp;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -27,28 +26,28 @@ import java.net.URLEncoder;
 /**
  * This project CampusApp is created by Kamran Ramzan on 8/29/16.
  */
-public class HomePageModal {
+class HomePageModal {
 
     private static final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
     private Context context;
 
-    public HomePageModal(Context context) {
+    HomePageModal(Context context) {
         this.context = context;
     }
 
-    public void changeUname(String newUname){
+    void changeUname(String newUname){
         SharedPreferences applicationStatus = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         String account = applicationStatus.getString("APPLICATION_STATUS", null);
         new ChangeUname().execute(newUname, account);
     }
 
-    public void changePassword(String newPassword){
+    void changePassword(String newPassword){
         SharedPreferences applicationStatus = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         String account = applicationStatus.getString("APPLICATION_STATUS", null);
         new ChangePassword().execute(newPassword, account);
     }
 
-    public void changeEmail(String newEmail){
+    void changeEmail(String newEmail){
         SharedPreferences applicationStatus = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         String account = applicationStatus.getString("APPLICATION_STATUS", null);
         new ChangeEmail().execute(newEmail, account);

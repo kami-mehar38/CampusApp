@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
 
@@ -55,7 +54,7 @@ public class BloodRequestsFragment extends Fragment {
         RV_bloodRequests.setLayoutManager(layoutManager);
         RV_bloodRequests.addItemDecoration(new RecyclerViewDivider(getContext()));
         RV_bloodRequests.setItemAnimator(new SlideInLeftAnimator());
-        requestsViewAdapter = new RequestsViewAdapter();
+        requestsViewAdapter = new RequestsViewAdapter(getContext());
         ScaleInAnimationAdapter scaleInAnimationAdapter = new ScaleInAnimationAdapter(requestsViewAdapter);
         scaleInAnimationAdapter.setFirstOnly(false);
         RV_bloodRequests.setAdapter(scaleInAnimationAdapter);

@@ -20,6 +20,15 @@ class BloodBankController {
     private static String stdReg;
     private static String stdContact;
     private static String bloodType;
+    private static int isDonated;
+
+    public static int getIsDonated() {
+        return isDonated;
+    }
+
+    static void setIsDonated(int isDonated) {
+        BloodBankController.isDonated = isDonated;
+    }
 
     private Context context;
 

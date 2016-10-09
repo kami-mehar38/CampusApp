@@ -5,18 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Handler;
-import android.os.Looper;
-import android.util.Log;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This project CampusApp is created by Kamran Ramzan on 8/31/16.
  */
-public class ComplaintPollLocalModal extends SQLiteOpenHelper {
+class ComplaintPollLocalModal extends SQLiteOpenHelper {
 
     private static int VERSION = 1;
     private static String DATABASE_NAME = "COMPLAINTPOLL.db";
@@ -27,7 +20,7 @@ public class ComplaintPollLocalModal extends SQLiteOpenHelper {
     private static String COL_CONTACT = "CONTACT";
     private static String COL_DESCRIPTION = "DESCRIPTION";
 
-    public ComplaintPollLocalModal(Context context) {
+    ComplaintPollLocalModal(Context context) {
         super(context, DATABASE_NAME, null, VERSION);
     }
 

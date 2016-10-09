@@ -10,11 +10,11 @@ import android.view.View;
 /**
  * This project CampusApp is created by Kamran Ramzan on 9/1/16.
  */
-public class RecyclerViewDivider extends RecyclerView.ItemDecoration{
+class RecyclerViewDivider extends RecyclerView.ItemDecoration{
 
     private Drawable mDivider;
 
-    public RecyclerViewDivider(Context context) {
+    RecyclerViewDivider(Context context) {
         mDivider = ContextCompat.getDrawable(context,R.drawable.recyclerview_divider);
     }
 

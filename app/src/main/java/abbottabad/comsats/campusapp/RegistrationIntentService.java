@@ -54,7 +54,6 @@ public class RegistrationIntentService extends IntentService {
 
     private void sendRegTokenToServer() {
         SharedPreferences sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
-        final String APPLICATION_STATUS = sharedPreferences.getString("APPLICATION_STATUS", "NULL");
         final String REG_ID = sharedPreferences.getString("REG_ID", "NULL");
         String stringUrl = "http://hostellocator.com/saveToken.php";
         new SaveTokenInBackground().execute(stringUrl,token, REG_ID);

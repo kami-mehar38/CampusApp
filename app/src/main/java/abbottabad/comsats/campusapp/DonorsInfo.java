@@ -3,7 +3,7 @@ package abbottabad.comsats.campusapp;
 /**
  * This project CampusApp is created by Kamran Ramzan on 6/28/16.
  */
-public class DonorsInfo {
+class DonorsInfo {
     private String name;
     private String registration;
     private String bloodType;
@@ -25,11 +25,11 @@ public class DonorsInfo {
         this.name = name;
     }
 
-    public String getBloodType() {
+    String getBloodType() {
         return bloodType;
     }
 
-    public void setBloodType(String bloodType) {
+    void setBloodType(String bloodType) {
         this.bloodType = bloodType;
     }
 

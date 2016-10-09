@@ -12,12 +12,12 @@ import android.support.v7.app.AlertDialog;
 /**
  * This project CampusApp is created by Kamran Ramzan on 6/11/16.
  */
-public class InitialPageController extends AsyncTask<Void, Void, String> {
+class InitialPageController extends AsyncTask<Void, Void, String> {
     private ProgressDialog progressDialog;
     private Context context;
     private AlertDialog alertDialog;
 
-    public InitialPageController(Context context) {
+    InitialPageController(Context context) {
         this.context = context;
     }
 

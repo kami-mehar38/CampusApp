@@ -135,12 +135,6 @@ class SignUpModal {
                     editor.putString("CONTACT", contact);
                     editor.putString("BLOOD_GROUP", bloodGroup);
                     editor.apply();
-                    SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
-                    final int TOKEN_GOT = sharedPreferences.getInt("TOKEN_GOT", 0);
-
-                    if (TOKEN_GOT != 1){
-                        context.startService(new Intent(context, RegistrationIntentService.class));
-                    }
                     context.startActivity(new Intent(context, HomePageView.class));
                     ((Activity) context).finish();
                     break;
@@ -243,7 +237,7 @@ class SignUpModal {
                 }
             });
             switch (result) {
-                case "ADDED":
+                case "ADDED": {
                     SharedPreferences applicationStatus = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = applicationStatus.edit();
                     editor.putString("APPLICATION_STATUS", "TEACHER");
@@ -252,15 +246,10 @@ class SignUpModal {
                     editor.putString("CONTACT", contact);
                     editor.putString("BLOOD_GROUP", bloodGroup);
                     editor.apply();
-                    SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
-                    final int TOKEN_GOT = sharedPreferences.getInt("TOKEN_GOT", 0);
-
-                    if (TOKEN_GOT != 1){
-                        context.startService(new Intent(context, RegistrationIntentService.class));
-                    }
                     context.startActivity(new Intent(context, HomePageView.class));
                     ((Activity) context).finish();
                     break;
+                }
                 case "EXISTED": {
                     builder.setMessage("Couldn't sign up, teacher already exists!");
                     alertDialog = builder.create();

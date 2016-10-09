@@ -1,17 +1,12 @@
 package abbottabad.comsats.campusapp;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
-import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -20,12 +15,12 @@ import java.util.List;
 /**
  * This project CampusApp is created by Kamran Ramzan on 8/31/16.
  */
-public class ComplaintPollVIewAdapter extends RecyclerView.Adapter<ComplaintPollVIewAdapter.ViewHolder>{
+class ComplaintPollVIewAdapter extends RecyclerView.Adapter<ComplaintPollVIewAdapter.ViewHolder>{
 
 
     private List<ComplaintsInfo> complaintsInfoList = new ArrayList<>();
 
-    public ComplaintPollVIewAdapter() {
+    ComplaintPollVIewAdapter() {
     }
 
     @Override
@@ -65,12 +60,12 @@ public class ComplaintPollVIewAdapter extends RecyclerView.Adapter<ComplaintPoll
         notifyItemInserted(position);
     }
 
-    public void remove(int position) {
+    private void remove(int position) {
         complaintsInfoList.remove(position);
         notifyItemRemoved(position);
     }
 
-    protected class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder{
 
         private TextView TV_complaintName;
         private TextView TV_complaintRegistrtion;
@@ -78,7 +73,7 @@ public class ComplaintPollVIewAdapter extends RecyclerView.Adapter<ComplaintPoll
         private TextView TV_complaintDescription;
         private Button btn_callComplaint;
         private Button btn_deleteComplaint;
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             TV_complaintName = (TextView) itemView.findViewById(R.id.TV_ComplaintName);
             TV_complaintRegistrtion = (TextView) itemView.findViewById(R.id.TV_ComplaintRegistration);

@@ -37,20 +37,19 @@ public class MyGcmListenerService extends GcmListenerService {
         String PURPOSE = data.getString("PURPOSE");
 
         if (PURPOSE != null && PURPOSE.equals("BLOOD_REQUEST")) {
-            receiveBloodRequest(data);
+            if (sharedPreferences.getBoolean("RECEIVE_BLOOD_REQUEST", false)) {
+                receiveBloodRequest(data);
+            }
         }
 
         if (PURPOSE != null && PURPOSE.equals("BLOOD_REQUEST_RESPONSE")) {
-            if (sharedPreferences.getBoolean("RECEIVE_BLOOD_REQUEST", false)){
-                receiveBloodRequestResponse(data);
-            }
+            receiveBloodRequestResponse(data);
         }
 
         if (PURPOSE != null && PURPOSE.equals("BLOOD_REQUEST_RESPONSE_ACCEPT")
                 || PURPOSE != null && PURPOSE.equals("BLOOD_REQUEST_RESPONSE_REJECT")) {
             receiveBloodRequestResponseStatus(data);
         }
-
 
 
         if (APPLICATION_STATUS.equals("FOOD")) {
@@ -114,7 +113,7 @@ public class MyGcmListenerService extends GcmListenerService {
         locationB.setLatitude(LocationController.getLatitide());
         locationB.setLongitude(LocationController.getLongitude());
 
-        final int distance = (int)locationA.distanceTo(locationB);
+        final int distance = (int) locationA.distanceTo(locationB);
 
         BloodBankResponseController.setName(stdName);
         BloodBankResponseController.setRegistration(stdReg);
@@ -313,6 +312,7 @@ public class MyGcmListenerService extends GcmListenerService {
         BloodBankController.setStdReg(stdReg);
         BloodBankController.setStdContact(stdContact);
         BloodBankController.setBloodType(bloodType);
+        BloodBankController.setIsDonated(0);
 
         new BloodBankLocalModal(this).addBloodRequest();
         Handler handler = new Handler(Looper.getMainLooper());

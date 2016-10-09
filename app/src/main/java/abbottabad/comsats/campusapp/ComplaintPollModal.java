@@ -24,15 +24,15 @@ import java.net.URLEncoder;
 /**
  * This project CampusApp is created by Kamran Ramzan on 8/31/16.
  */
-public class ComplaintPollModal {
+class ComplaintPollModal {
 
     private Context context;
 
-    public ComplaintPollModal(Context context) {
+    ComplaintPollModal(Context context) {
         this.context = context;
     }
 
-    public void sendComplaint(String name, String regID, String contact, String description){
+    void sendComplaint(String name, String regID, String contact, String description){
         new SendComplaint().execute(name, regID, contact, description);
     }
 

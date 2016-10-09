@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * This project CampusApp is created by Kamran Ramzan on 8/21/16.
  */
-public class NotificationsLocalModal extends SQLiteOpenHelper {
+class NotificationsLocalModal extends SQLiteOpenHelper {
 
     private static int VERSION = 1;
     private static String DATABASE_NAME = "TRACKFACULTY.db";
@@ -22,7 +22,7 @@ public class NotificationsLocalModal extends SQLiteOpenHelper {
     private static String COL_IS_MINE = "IS_MINE";
 
 
-    public NotificationsLocalModal(Context context) {
+    NotificationsLocalModal(Context context) {
         super(context, DATABASE_NAME, null, VERSION);
     }
 
@@ -45,7 +45,7 @@ public class NotificationsLocalModal extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void addEventNotification(){
+    void addEventNotification(){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COL_NOTIFICATION, NotificationsController.getNotification());
@@ -55,19 +55,19 @@ public class NotificationsLocalModal extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void deleteNotifications(String[] notifications){
+    void deleteNotifications(String[] notifications){
         SQLiteDatabase db = NotificationsLocalModal.this.getWritableDatabase();
         for (String notification : notifications) {
             db.delete(TABLE_NAME, COL_NOTIFICATION + " = ?", new String[]{notification});
         }
     }
 
-    public void deleteAll(){
+    void deleteAll(){
         SQLiteDatabase db = NotificationsLocalModal.this.getWritableDatabase();
         db.delete(TABLE_NAME, null, null);
     }
 
-    public void retrieveNotifications(){
+    void retrieveNotifications(){
 
         SQLiteDatabase db = NotificationsLocalModal.this.getReadableDatabase();
         String selectQuery= "SELECT * FROM " +TABLE_NAME;

@@ -4,19 +4,17 @@ import android.content.Context;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import abbottabad.comsats.campusapp.R;
-
 /**
  * This project CampusApp is created by Kamran Ramzan on 6/1/16.
  */
-public class LoginController {
+class LoginController {
 
     private Context context;
-    public LoginController(Context context) {
+    LoginController(Context context) {
         this.context = context;
     }
 
-    public void populateSpinner(Spinner SPloginOptions) {
+    void populateSpinner(Spinner SPloginOptions) {
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(context,
                 R.array.login_options,

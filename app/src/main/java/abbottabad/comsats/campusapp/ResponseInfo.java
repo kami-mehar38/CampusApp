@@ -11,11 +11,11 @@ class ResponseInfo {
     private String contact;
     private int distance;
 
-    public int getDistance() {
+    int getDistance() {
         return distance;
     }
 
-    public void setDistance(int distance) {
+    void setDistance(int distance) {
         this.distance = distance;
     }
 

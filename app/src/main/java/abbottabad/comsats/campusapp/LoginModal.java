@@ -27,17 +27,17 @@ import java.net.URLEncoder;
 /**
  * This project CampusApp is created by Kamran Ramzan on 5/29/16.
  */
-public class LoginModal {
+class LoginModal {
     private Context context;
-    public LoginModal(Context context) {
+    LoginModal(Context context) {
         this.context = context;
     }
 
-    public void login(String username, String password, String desgination){
+    void login(String username, String password, String desgination){
         new Login().execute(username, password, desgination);
     }
 
-    public void resetPassword(String designation, String email){
+    void resetPassword(String designation, String email){
         new ResetPassword().execute(designation, email);
     }
 

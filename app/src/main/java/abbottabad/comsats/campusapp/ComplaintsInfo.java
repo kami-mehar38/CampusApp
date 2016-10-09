@@ -3,7 +3,7 @@ package abbottabad.comsats.campusapp;
 /**
  * This project CampusApp is created by Kamran Ramzan on 8/31/16.
  */
-public class ComplaintsInfo {
+class ComplaintsInfo {
 
     private String name;
     private String registration;

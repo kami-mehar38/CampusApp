@@ -3,33 +3,33 @@ package abbottabad.comsats.campusapp;
 /**
  * This project CampusApp is created by Kamran Ramzan on 8/20/16.
  */
-public class NotificationInfo {
+class NotificationInfo {
 
     private String notification;
     private String dateTime;
     private int mine;
 
-    public void setNotification(String notification) {
+    void setNotification(String notification) {
         this.notification = notification;
     }
 
-    public  String getNotification() {
+    String getNotification() {
         return notification;
     }
 
-    public  String getDateTime() {
+    String getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(String dateTime) {
+    void setDateTime(String dateTime) {
         this.dateTime = dateTime;
     }
 
-    public  int getMine() {
+    int getMine() {
         return mine;
     }
 
-    public void setMine(int mine) {
+    void setMine(int mine) {
         this.mine = mine;
     }
 }

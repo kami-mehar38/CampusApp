@@ -88,6 +88,7 @@ class ResponseViewAdapter extends RecyclerView.Adapter <ResponseViewAdapter.View
                 @Override
                 public void onClick(View v) {
                     new BloodBankModal(itemView.getContext()).acceptResponse(TV_requesterReg.getText().toString());
+
                 }
             });
 

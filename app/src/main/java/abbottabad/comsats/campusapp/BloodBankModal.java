@@ -37,9 +37,11 @@ class BloodBankModal {
 
     private Context context;
     private AlertDialog alertDialog;
+    private BloodBankLocalModal bloodBankLocalModal;
 
     BloodBankModal(Context context) {
         this.context = context;
+        bloodBankLocalModal = new BloodBankLocalModal(context);
     }
 
     /**
@@ -428,6 +430,7 @@ class BloodBankModal {
 
     private class ReplyToRequest extends AsyncTask<String, Void, String> {
         private ProgressDialog progressDialog;
+        private String registration;
 
         @Override
         protected void onPreExecute() {
@@ -448,7 +451,12 @@ class BloodBankModal {
         @Override
         protected String doInBackground(String... params) {
             String stringUrl = "http://hostellocator.com/sendResponseToRequest.php";
-            String name, registration, contact, bloodType, to, latitude, longitude;
+            String name;
+            String contact;
+            String bloodType;
+            String to;
+            String latitude;
+            String longitude;
             try {
                 URL url = new URL(stringUrl);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -502,6 +510,8 @@ class BloodBankModal {
             progressDialog.cancel();
             if (s != null && s.equals("OK")) {
                 Toast.makeText(context, "Response sent.", Toast.LENGTH_LONG).show();
+                new BloodBankLocalModal(context).setIsDonated(registration.trim());
+                BloodRequestsFragment.requestsViewAdapter.notifyDataSetChanged();
             } else {
                 Toast.makeText(context, "Some error occurred, please try again.", Toast.LENGTH_LONG).show();
             }

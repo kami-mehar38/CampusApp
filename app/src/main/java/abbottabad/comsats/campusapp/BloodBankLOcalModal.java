@@ -19,6 +19,7 @@ class BloodBankLocalModal extends SQLiteOpenHelper {
     private static String COL_REG = "REG_NO";
     private static String COL_CONTACT = "CONTACT";
     private static String COL_BLOOD_TYPE = "BLLOD_TYPE";
+    private static String COL_DONATED = "BLOOD_DONATED";
 
     BloodBankLocalModal(Context context) {
         super(context, DATABASE_NAME, null, VERSION);
@@ -31,7 +32,8 @@ class BloodBankLocalModal extends SQLiteOpenHelper {
                 +COL_NAME+ " TEXT,"
                 +COL_REG+ " TEXT,"
                 +COL_CONTACT+ " TEXT,"
-                +COL_BLOOD_TYPE+ " TEXT"
+                +COL_BLOOD_TYPE+ " TEXT,"
+                +COL_DONATED+ " INTEGER"
                 + " )";
         db.execSQL(createTableQuery);
     }
@@ -49,6 +51,7 @@ class BloodBankLocalModal extends SQLiteOpenHelper {
         contentValues.put(COL_REG, BloodBankController.getStdReg());
         contentValues.put(COL_CONTACT, BloodBankController.getStdContact());
         contentValues.put(COL_BLOOD_TYPE, BloodBankController.getBloodType());
+        contentValues.put(COL_DONATED, BloodBankController.getIsDonated());
         db.insert(TABLE_NAME, null, contentValues);
         db.close();
     }
@@ -64,6 +67,7 @@ class BloodBankLocalModal extends SQLiteOpenHelper {
             requestsInfos[cursor.getPosition()].setRegistration(cursor.getString(2));
             requestsInfos[cursor.getPosition()].setBloodType(cursor.getString(4));
             requestsInfos[cursor.getPosition()].setContact(cursor.getString(3));
+            requestsInfos[cursor.getPosition()].setIsDonated(cursor.getInt(5));
             BloodRequestsFragment.requestsViewAdapter.add(requestsInfos[cursor.getPosition()], cursor.getPosition());
             cursor.moveToNext();
         }
@@ -74,6 +78,28 @@ class BloodBankLocalModal extends SQLiteOpenHelper {
     void deleteRequest(String reg){
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_NAME, COL_REG + " = ?", new String[]{reg});
+    }
+
+    void setIsDonated(String reg){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COL_DONATED, 1);
+        db.update(TABLE_NAME, values, COL_REG + " = ?", new String[]{reg});
+    }
+
+     int getIsDonated(String reg_id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery= "SELECT " +COL_DONATED+ " FROM " +TABLE_NAME+ " WHERE " +COL_REG+ "=?";
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{reg_id.trim()});
+        cursor.moveToFirst();
+         int isDonated = 0;
+        while (!cursor.isAfterLast()){
+            isDonated = cursor.getInt(0);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        db.close();
+        return isDonated;
     }
 
 }

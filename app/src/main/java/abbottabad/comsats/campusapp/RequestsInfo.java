@@ -3,12 +3,20 @@ package abbottabad.comsats.campusapp;
 /**
  * This project CampusApp is created by Kamran Ramzan on 7/6/16.
  */
-public class RequestsInfo {
+class RequestsInfo {
     private String name;
     private String registration;
     private String bloodType;
     private String contact;
+    private int isDonated;
 
+    public int getIsDonated() {
+        return isDonated;
+    }
+
+    public void setIsDonated(int isDonated) {
+        this.isDonated = isDonated;
+    }
     public String getName() {
         return name;
     }
@@ -25,11 +33,11 @@ public class RequestsInfo {
         this.name = name;
     }
 
-    public String getBloodType() {
+    String getBloodType() {
         return bloodType;
     }
 
-    public void setBloodType(String bloodType) {
+    void setBloodType(String bloodType) {
         this.bloodType = bloodType;
     }
 

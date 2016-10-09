@@ -1,6 +1,7 @@
 package abbottabad.comsats.campusapp;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,7 @@ import java.util.List;
 /**
  * This project CampusApp is created by Kamran Ramzan on 8/20/16.
  */
-public class NotificationsAdapter extends ArrayAdapter<NotificationInfo> {
+class NotificationsAdapter extends ArrayAdapter<NotificationInfo> {
 
     private List<NotificationInfo> chatMessageList = new ArrayList<>();
     private NotificationsView notificationsView;
@@ -36,7 +37,7 @@ public class NotificationsAdapter extends ArrayAdapter<NotificationInfo> {
         super.add(object);
     }
 
-    public NotificationsAdapter(Context context, int textViewResourceId) {
+    NotificationsAdapter(Context context, int textViewResourceId) {
         super(context, textViewResourceId);
         this.notificationsView = (NotificationsView) context;
     }
@@ -55,11 +56,12 @@ public class NotificationsAdapter extends ArrayAdapter<NotificationInfo> {
         return this.chatMessageList.get(index);
     }
 
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    @NonNull
+    public View getView(final int position, View convertView, @NonNull ViewGroup parent) {
         final NotificationInfo notificationInfo = getItem(position);
         View row;
         LayoutInflater inflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        if (notificationInfo.getMine() == 1) {
+        if ((notificationInfo != null ? notificationInfo.getMine() : 0) == 1) {
             row = inflater.inflate(R.layout.chat_right, parent, false);
         }else{
             row = inflater.inflate(R.layout.chat_left, parent, false);
@@ -77,9 +79,9 @@ public class NotificationsAdapter extends ArrayAdapter<NotificationInfo> {
         if (NotificationsView.IS_IN_SELECT_ALL_MODE){
             CB_delete.setChecked(true);
         }
-        TV_notification.setText(notificationInfo.getNotification());
+        TV_notification.setText(notificationInfo != null ? notificationInfo.getNotification() : null);
         TV_notification.setOnLongClickListener(notificationsView);
-        TV_notificationDate.setText(notificationInfo.getDateTime());
+        TV_notificationDate.setText(notificationInfo != null ? notificationInfo.getDateTime() : null);
         CB_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,9 +1,7 @@
 package abbottabad.comsats.campusapp;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.AsyncTask;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -30,19 +28,19 @@ import java.util.Date;
 /**
  * This project CampusApp is created by Kamran Ramzan on 8/22/16.
  */
-public class NotificationsModal {
+class NotificationsModal {
 
     private Context context;
 
-    public NotificationsModal(Context context) {
+    NotificationsModal(Context context) {
         this.context = context;
     }
 
-    public void sendEventNotification(String reg_id, String message) {
+    void sendEventNotification(String reg_id, String message) {
         new SendEventNotification().execute(reg_id, message);
     }
 
-    public class SendEventNotification extends AsyncTask<String, Void, String> {
+    private class SendEventNotification extends AsyncTask<String, Void, String> {
 
         private String message;
         private String currentDateTimeString;
