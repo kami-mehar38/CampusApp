@@ -1,7 +1,12 @@
 package abbottabad.comsats.campusapp;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +25,11 @@ class ResponseViewAdapter extends RecyclerView.Adapter <ResponseViewAdapter.View
 
     private List<ResponseInfo> responseInfoList = new ArrayList<>();
     private final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
+    private Context context;
+
+    ResponseViewAdapter(Context context) {
+        this.context = context;
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -36,6 +46,16 @@ class ResponseViewAdapter extends RecyclerView.Adapter <ResponseViewAdapter.View
         holder.TV_requesterContact.setText(responseInfo.getContact());
         String distance = "Distance from you " + String.valueOf(responseInfo.getDistance()) + " meters";
         holder.TV_Distance.setText(distance);
+        if (responseInfo.getIsAccepted() == 1){
+            holder.btnAccept.setTextColor(Color.parseColor("#999999"));
+            Drawable drawableTop = context.getResources().getDrawable(R.drawable.ic_action_accept_disabled);
+            holder.btnAccept.setCompoundDrawablesWithIntrinsicBounds(null, drawableTop, null, null);
+        }
+        if (responseInfo.getIsRejected() == 1){
+            holder.btnCancel.setTextColor(Color.parseColor("#999999"));
+            Drawable drawableTop = context.getResources().getDrawable(R.drawable.ic_action_cancel_disabled);
+            holder.btnCancel.setCompoundDrawablesWithIntrinsicBounds(null, drawableTop, null, null);
+        }
     }
 
     @Override
@@ -64,6 +84,7 @@ class ResponseViewAdapter extends RecyclerView.Adapter <ResponseViewAdapter.View
         private TextView btnCancel;
         private TextView btnDelete;
         private Button btnCall;
+        private AlertDialog alertDialog;
 
         ViewHolder(final View itemView) {
             super(itemView);
@@ -76,26 +97,154 @@ class ResponseViewAdapter extends RecyclerView.Adapter <ResponseViewAdapter.View
             btnCancel = (TextView) itemView.findViewById(R.id.btnCancel);
             btnDelete = (TextView) itemView.findViewById(R.id.btnDelete);
             btnCall = (Button) itemView.findViewById(R.id.btnCall);
+            final AlertDialog.Builder builder = new AlertDialog.Builder(itemView.getContext());
 
             btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new BloodBankResponseModal(itemView.getContext()).deleteResponse(TV_requesterReg.getText().toString());
-                    remove(getAdapterPosition());
+                    builder.setTitle("Delete");
+                    builder.setMessage("Are you sure to delete?");
+                    builder.setCancelable(false);
+                    builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            alertDialog.cancel();
+                            new BloodBankResponseModal(itemView.getContext()).deleteResponse(TV_requesterReg.getText().toString());
+                            remove(getAdapterPosition());
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            alertDialog.cancel();
+                        }
+                    });
+                    alertDialog = builder.create();
+                    alertDialog.show();
                 }
             });
+
             btnAccept.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new BloodBankModal(itemView.getContext()).acceptResponse(TV_requesterReg.getText().toString());
-
+                    if (new BloodBankResponseModal(itemView.getContext()).getIsRejected(TV_requesterReg.getText().toString()) == 0) {
+                        if (new BloodBankResponseModal(itemView.getContext()).getIsAccepted(TV_requesterReg.getText().toString()) == 0) {
+                            builder.setTitle("Accept");
+                            builder.setMessage("Are you sure to accept blood donation from this donor?");
+                            builder.setCancelable(false);
+                            builder.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    alertDialog.cancel();
+                                    new BloodBankModal(itemView.getContext()).acceptResponse(TV_requesterReg.getText().toString());
+                                    new BloodBankResponseModal(context).setIsAccepted(TV_requesterReg.getText().toString());
+                                    new BloodBankResponseModal(context).setIsRejected(TV_requesterReg.getText().toString());
+                                    btnAccept.setTextColor(Color.parseColor("#999999"));
+                                    Drawable drawableTopAccept = context.getResources().getDrawable(R.drawable.ic_action_accept_disabled);
+                                    btnAccept.setCompoundDrawablesWithIntrinsicBounds(null, drawableTopAccept, null, null);
+                                    btnCancel.setTextColor(Color.parseColor("#999999"));
+                                    Drawable drawableTopReject = context.getResources().getDrawable(R.drawable.ic_action_cancel_disabled);
+                                    btnCancel.setCompoundDrawablesWithIntrinsicBounds(null, drawableTopReject, null, null);
+                                }
+                            });
+                            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    alertDialog.cancel();
+                                }
+                            });
+                            alertDialog = builder.create();
+                            alertDialog.show();
+                        } else {
+                            AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+                            builder1.setTitle("Reject");
+                            builder1.setMessage("You have already accepted blood donation from this donor");
+                            builder1.setCancelable(false);
+                            builder1.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    alertDialog.cancel();
+                                }
+                            });
+                            alertDialog = builder1.create();
+                            alertDialog.show();
+                        }
+                    } else {
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+                        builder1.setTitle("Accept");
+                        builder1.setMessage("You have already rejected blood donation from this donor");
+                        builder1.setCancelable(false);
+                        builder1.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                alertDialog.cancel();
+                            }
+                        });
+                        alertDialog = builder1.create();
+                        alertDialog.show();
+                    }
                 }
             });
 
             btnCancel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new BloodBankModal(itemView.getContext()).rejectResponse(TV_requesterReg.getText().toString());
+                    if (new BloodBankResponseModal(itemView.getContext()).getIsRejected(TV_requesterReg.getText().toString()) == 0) {
+                        if (new BloodBankResponseModal(itemView.getContext()).getIsAccepted(TV_requesterReg.getText().toString()) == 0) {
+                            builder.setTitle("Reject");
+                            builder.setMessage("Are you sure to reject blood donation from this donor?");
+                            builder.setCancelable(false);
+                            builder.setPositiveButton("Reject", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    alertDialog.cancel();
+                                    new BloodBankModal(itemView.getContext()).rejectResponse(TV_requesterReg.getText().toString());
+                                    new BloodBankResponseModal(context).setIsRejected(TV_requesterReg.getText().toString());
+                                    new BloodBankResponseModal(context).setIsAccepted(TV_requesterReg.getText().toString());
+                                    btnAccept.setTextColor(Color.parseColor("#999999"));
+                                    Drawable drawableTopAccept = context.getResources().getDrawable(R.drawable.ic_action_accept_disabled);
+                                    btnAccept.setCompoundDrawablesWithIntrinsicBounds(null, drawableTopAccept, null, null);
+                                    btnCancel.setTextColor(Color.parseColor("#999999"));
+                                    Drawable drawableTopReject = context.getResources().getDrawable(R.drawable.ic_action_cancel_disabled);
+                                    btnCancel.setCompoundDrawablesWithIntrinsicBounds(null, drawableTopReject, null, null);
+                                }
+                            });
+                            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    alertDialog.cancel();
+                                }
+                            });
+                            alertDialog = builder.create();
+                            alertDialog.show();
+                        } else {
+                            AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+                            builder1.setTitle("Accept");
+                            builder1.setMessage("You have already rejected blood donation from this donor");
+                            builder1.setCancelable(false);
+                            builder1.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    alertDialog.cancel();
+                                }
+                            });
+                            alertDialog = builder1.create();
+                            alertDialog.show();
+                        }
+                    } else {
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+                        builder1.setTitle("Reject");
+                        builder1.setMessage("You have already accepted blood donation from this donor");
+                        builder1.setCancelable(false);
+                        builder1.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                alertDialog.cancel();
+                            }
+                        });
+                        alertDialog = builder1.create();
+                        alertDialog.show();
+                    }
                 }
             });
 

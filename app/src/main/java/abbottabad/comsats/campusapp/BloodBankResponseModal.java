@@ -21,6 +21,8 @@ class BloodBankResponseModal extends SQLiteOpenHelper {
     private static String COL_CONTACT = "CONTACT";
     private static String COL_BLOOD_TYPE = "BLLOD_TYPE";
     private static String COL_DISTANCE = "DISTANCE";
+    private static String COL_ACCEPTED = "ACCEPTED";
+    private static String COL_REJECTED = "REJECTED";
 
     BloodBankResponseModal(Context context) {
         super(context, DATABASE_NAME, null, VERSION);
@@ -34,7 +36,9 @@ class BloodBankResponseModal extends SQLiteOpenHelper {
                 +COL_REG+ " TEXT,"
                 +COL_CONTACT+ " TEXT,"
                 +COL_BLOOD_TYPE+ " TEXT,"
-                +COL_DISTANCE+ " INTEGER"
+                +COL_DISTANCE+ " INTEGER,"
+                +COL_ACCEPTED+ " INTEGER,"
+                +COL_REJECTED+ " INTEGER"
                 + " )";
         db.execSQL(createTableQuery);
     }
@@ -53,6 +57,8 @@ class BloodBankResponseModal extends SQLiteOpenHelper {
         contentValues.put(COL_CONTACT, BloodBankResponseController.getContact());
         contentValues.put(COL_BLOOD_TYPE, BloodBankResponseController.getBloodGroup());
         contentValues.put(COL_DISTANCE, BloodBankResponseController.getDistance());
+        contentValues.put(COL_ACCEPTED, BloodBankResponseController.getIsAccepted());
+        contentValues.put(COL_REJECTED, BloodBankResponseController.getIsRejected());
         db.insert(TABLE_NAME, null, contentValues);
         db.close();
     }
@@ -69,6 +75,8 @@ class BloodBankResponseModal extends SQLiteOpenHelper {
             responseInfos[cursor.getPosition()].setBloodType(cursor.getString(4));
             responseInfos[cursor.getPosition()].setContact(cursor.getString(3));
             responseInfos[cursor.getPosition()].setDistance(cursor.getInt(5));
+            responseInfos[cursor.getPosition()].setIsAccepted(cursor.getInt(6));
+            responseInfos[cursor.getPosition()].setIsRejected(cursor.getInt(7));
             BloodRequestResponseFragment.responseViewAdapter.add(responseInfos[cursor.getPosition()], cursor.getPosition());
             cursor.moveToNext();
         }
@@ -80,5 +88,51 @@ class BloodBankResponseModal extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_NAME, COL_REG + " = ?", new String[]{reg});
         db.close();
+    }
+
+    void setIsAccepted(String reg){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COL_ACCEPTED, 1);
+        db.update(TABLE_NAME, values, COL_REG + " = ?", new String[]{reg});
+        db.close();
+    }
+
+    int getIsAccepted(String reg_id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery= "SELECT " +COL_ACCEPTED+ " FROM " +TABLE_NAME+ " WHERE " +COL_REG+ "=?";
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{reg_id.trim()});
+        cursor.moveToFirst();
+        int isDonated = 0;
+        while (!cursor.isAfterLast()){
+            isDonated = cursor.getInt(0);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        db.close();
+        return isDonated;
+    }
+
+    void setIsRejected(String reg){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COL_REJECTED, 1);
+        db.update(TABLE_NAME, values, COL_REG + " = ?", new String[]{reg});
+        db.close();
+    }
+
+    int getIsRejected(String reg_id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery= "SELECT " +COL_REJECTED+ " FROM " +TABLE_NAME+ " WHERE " +COL_REG+ "=?";
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{reg_id.trim()});
+        cursor.moveToFirst();
+        int isDonated = 0;
+        while (!cursor.isAfterLast()){
+            isDonated = cursor.getInt(0);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        db.close();
+        return isDonated;
     }
 }

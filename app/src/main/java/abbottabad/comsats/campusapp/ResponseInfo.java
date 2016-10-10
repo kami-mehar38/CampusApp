@@ -10,6 +10,24 @@ class ResponseInfo {
     private String bloodType;
     private String contact;
     private int distance;
+    private int isAccepted;
+    private int isRejected;
+
+    public int getIsAccepted() {
+        return isAccepted;
+    }
+
+    public void setIsAccepted(int isAccepted) {
+        this.isAccepted = isAccepted;
+    }
+
+    public int getIsRejected() {
+        return isRejected;
+    }
+
+    public void setIsRejected(int isRejected) {
+        this.isRejected = isRejected;
+    }
 
     int getDistance() {
         return distance;

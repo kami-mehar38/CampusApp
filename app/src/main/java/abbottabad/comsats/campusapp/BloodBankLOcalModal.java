@@ -78,6 +78,7 @@ class BloodBankLocalModal extends SQLiteOpenHelper {
     void deleteRequest(String reg){
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_NAME, COL_REG + " = ?", new String[]{reg});
+        db.close();
     }
 
     void setIsDonated(String reg){
@@ -85,6 +86,7 @@ class BloodBankLocalModal extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(COL_DONATED, 1);
         db.update(TABLE_NAME, values, COL_REG + " = ?", new String[]{reg});
+        db.close();
     }
 
      int getIsDonated(String reg_id){

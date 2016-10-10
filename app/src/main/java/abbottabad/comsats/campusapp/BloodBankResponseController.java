@@ -11,6 +11,24 @@ class BloodBankResponseController {
     private static String bloodGroup;
     private static String contact;
     private static int distance;
+    private static int isAccepted;
+    private static int isRejected;
+
+    public static int getIsAccepted() {
+        return isAccepted;
+    }
+
+    public static void setIsAccepted(int isAccepted) {
+        BloodBankResponseController.isAccepted = isAccepted;
+    }
+
+    public static int getIsRejected() {
+        return isRejected;
+    }
+
+    public static void setIsRejected(int isRejected) {
+        BloodBankResponseController.isRejected = isRejected;
+    }
 
     public static String getName() {
         return name;

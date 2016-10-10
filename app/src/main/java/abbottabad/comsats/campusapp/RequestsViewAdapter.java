@@ -24,11 +24,9 @@ class RequestsViewAdapter extends RecyclerView.Adapter<RequestsViewAdapter.ViewH
     private List<RequestsInfo> requestsInfoList = new ArrayList<>();
     private final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
     private Context context;
-    private BloodBankLocalModal bloodBankLocalModal;
 
     RequestsViewAdapter(Context context) {
         this.context = context;
-        bloodBankLocalModal = new BloodBankLocalModal(context);
     }
 
     @Override
@@ -44,12 +42,12 @@ class RequestsViewAdapter extends RecyclerView.Adapter<RequestsViewAdapter.ViewH
         holder.TV_requesterReg.setText(requestsInfo.getRegistration());
         holder.TV_requesterBloodType.setText(requestsInfo.getBloodType());
         holder.TV_requesterContact.setText(requestsInfo.getContact());
-        if (requestsInfo.getIsDonated() == 1 ||
-                new BloodBankLocalModal(context).getIsDonated(requestsInfo.getRegistration()) == 1){
+        if (requestsInfo.getIsDonated() == 1){
             holder.btnReply.setTextColor(Color.parseColor("#999999"));
             Drawable drawableTop = context.getResources().getDrawable(R.drawable.ic_action_reply_disabled);
             holder.btnReply.setCompoundDrawablesWithIntrinsicBounds(null, drawableTop, null, null);
         }
+        Log.i("TAG", "onBindViewHolder: " + requestsInfo.getIsDonated());
     }
 
     @Override
@@ -145,6 +143,10 @@ class RequestsViewAdapter extends RecyclerView.Adapter<RequestsViewAdapter.ViewH
                                 new BloodBankModal(itemView.getContext()).replyTorequest(name, reg_id, bloodGroup, contact,
                                         TV_requesterReg.getText().toString(), latitude, longitude);
                                 Log.i("TAG", "onClick: " + latitude + longitude);
+                                new BloodBankLocalModal(context).setIsDonated(TV_requesterReg.getText().toString());
+                                btnReply.setTextColor(Color.parseColor("#999999"));
+                                Drawable drawableTop = context.getResources().getDrawable(R.drawable.ic_action_reply_disabled);
+                                btnReply.setCompoundDrawablesWithIntrinsicBounds(null, drawableTop, null, null);
                             }
                         });
                         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

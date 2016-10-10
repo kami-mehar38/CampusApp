@@ -43,7 +43,7 @@ public class BloodRequestResponseFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(new RecyclerViewDivider(getContext()));
         recyclerView.setItemAnimator(new SlideInLeftAnimator());
-        responseViewAdapter = new ResponseViewAdapter();
+        responseViewAdapter = new ResponseViewAdapter(getContext());
         ScaleInAnimationAdapter scaleInAnimationAdapter = new ScaleInAnimationAdapter(responseViewAdapter);
         scaleInAnimationAdapter.setFirstOnly(false);
         recyclerView.setAdapter(scaleInAnimationAdapter);

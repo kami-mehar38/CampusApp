@@ -120,6 +120,8 @@ public class MyGcmListenerService extends GcmListenerService {
         BloodBankResponseController.setBloodGroup(bloodType);
         BloodBankResponseController.setContact(stdContact);
         BloodBankResponseController.setDistance(distance);
+        BloodBankResponseController.setIsAccepted(0);
+        BloodBankResponseController.setIsRejected(0);
 
         new BloodBankResponseModal(this).addBloodRequestResponse();
         Handler handler = new Handler(Looper.getMainLooper());
@@ -133,6 +135,8 @@ public class MyGcmListenerService extends GcmListenerService {
                     responseInfo.setContact(stdContact);
                     responseInfo.setBloodType(bloodType);
                     responseInfo.setDistance(distance);
+                    responseInfo.setIsAccepted(0);
+                    responseInfo.setIsRejected(0);
                     BloodRequestResponseFragment.responseViewAdapter.add(responseInfo, 0);
                     BloodRequestResponseFragment.recyclerView.smoothScrollToPosition(0);
                 }

@@ -45,17 +45,16 @@ class BloodBankModal {
     }
 
     /**
-     *
-     * @param name name of the student, teacher who sends request
+     * @param name         name of the student, teacher who sends request
      * @param registration registration id of the student, teacher who sends request
-     * @param contact contact# of the student, teacher who sends request
-     * @param bloodType blood group required by the student or teacher
-     *
-     *                  This method call to the sendRequestInBackground class extended by AsynchTask,
-     *                  to send the Blood Request using HTTP Protocol
+     * @param contact      contact# of the student, teacher who sends request
+     * @param bloodType    blood group required by the student or teacher
+     *                     <p>
+     *                     This method call to the sendRequestInBackground class extended by AsynchTask,
+     *                     to send the Blood Request using HTTP Protocol
      */
 
-    void sendRequest(String name, String registration, String contact, String bloodType){
+    void sendRequest(String name, String registration, String contact, String bloodType) {
         new sendRequestInBackground().execute(name, registration, contact, bloodType);
     }
 
@@ -63,11 +62,11 @@ class BloodBankModal {
         new RetrieveDonors().execute(bloodType);
     }
 
-    void addDonor(String name, String regID, String bloodType, String contact, String bleededDate){
+    void addDonor(String name, String regID, String bloodType, String contact, String bleededDate) {
         new AddDonor().execute(name, regID, bloodType, contact, bleededDate);
     }
 
-    void updateBleedingDate(String registration, String bleededDate){
+    void updateBleedingDate(String registration, String bleededDate) {
         new UpdateBleedingDate().execute(registration, bleededDate);
     }
 
@@ -83,7 +82,7 @@ class BloodBankModal {
         new RejectReponse().execute(reg_id);
     }
 
-    private class sendRequestInBackground extends AsyncTask<String, Void, String>{
+    private class sendRequestInBackground extends AsyncTask<String, Void, String> {
 
         private ProgressDialog progressDialog;
 
@@ -118,11 +117,11 @@ class BloodBankModal {
                 registration = params[1];
                 contact = params[2];
                 bloodType = params[3];
-                String data = URLEncoder.encode("name", "UTF-8") +"="+ URLEncoder.encode(name, "UTF-8") +"&"+
-                              URLEncoder.encode("registration", "UTF-8") +"="+ URLEncoder.encode(registration, "UTF-8") +"&"+
-                              URLEncoder.encode("contact", "UTF-8") +"="+ URLEncoder.encode(contact, "UTF-8") +"&"+
-                              URLEncoder.encode("bloodType", "UTF-8") +"="+ URLEncoder.encode(bloodType, "UTF-8") +"&"+
-                              URLEncoder.encode("designation", "UTF-8") +"="+ URLEncoder.encode("BLOOD_BANK", "UTF-8");
+                String data = URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8") + "&" +
+                        URLEncoder.encode("registration", "UTF-8") + "=" + URLEncoder.encode(registration, "UTF-8") + "&" +
+                        URLEncoder.encode("contact", "UTF-8") + "=" + URLEncoder.encode(contact, "UTF-8") + "&" +
+                        URLEncoder.encode("bloodType", "UTF-8") + "=" + URLEncoder.encode(bloodType, "UTF-8") + "&" +
+                        URLEncoder.encode("designation", "UTF-8") + "=" + URLEncoder.encode("BLOOD_BANK", "UTF-8");
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -131,7 +130,7 @@ class BloodBankModal {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
                 StringBuilder stringBuilder = new StringBuilder();
                 String line;
-                while ((line = bufferedReader.readLine()) != null){
+                while ((line = bufferedReader.readLine()) != null) {
                     stringBuilder.append(line);
                 }
 
@@ -164,6 +163,7 @@ class BloodBankModal {
     private class RetrieveDonors extends AsyncTask<String, Void, List<DonorsInfo>> {
 
         private ProgressDialog progressDialog;
+
         RetrieveDonors() {
 
         }
@@ -176,11 +176,11 @@ class BloodBankModal {
             progressDialog.setCancelable(false);
             progressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel",
                     new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    cancel(true);
-                }
-            });
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            cancel(true);
+                        }
+                    });
             progressDialog.show();
         }
 
@@ -190,43 +190,43 @@ class BloodBankModal {
             DonorsInfo[] donorsInfo;
             List<DonorsInfo> donorsInfoList = new ArrayList<>();
             String bloodType = params[0];
-                try {
-                    URL url = new URL(stringUrl);
-                    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                    httpURLConnection.setRequestMethod("POST");
-                    httpURLConnection.setDoOutput(true);
-                    OutputStream outputStream = httpURLConnection.getOutputStream();
-                    BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+            try {
+                URL url = new URL(stringUrl);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
 
-                    String data = URLEncoder.encode("bloodType", "UTF-8") + "=" + URLEncoder.encode(bloodType, "UTF-8");
-                    bufferedWriter.write(data);
-                    bufferedWriter.flush();
-                    bufferedWriter.close();
-                    outputStream.close();
-                    InputStream inputStream = httpURLConnection.getInputStream();
-                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
-                    StringBuilder stringBuilder = new StringBuilder();
-                    String line;
-                    while ((line = bufferedReader.readLine()) != null) {
-                        stringBuilder.append(line);
-                    }
-                    JSONArray parentJson = new JSONArray(stringBuilder.toString());
-                    donorsInfo = new DonorsInfo[parentJson.length()];
-                    for (int index = 0; index < parentJson.length(); index++) {
-                        JSONObject finalObject = parentJson.getJSONObject(index);
-                        donorsInfo[index] = new DonorsInfo();
-                        donorsInfo[index].setName(finalObject.getString("name"));
-                        donorsInfo[index].setRegistration(finalObject.getString("reg_id"));
-                        donorsInfo[index].setBloodType(finalObject.getString("blood_type"));
-                        donorsInfo[index].setContact(finalObject.getString("contact"));
-                        donorsInfoList.add(donorsInfo[index]);
-                    }
-                    inputStream.close();
-                    httpURLConnection.disconnect();
-                    return donorsInfoList;
-                } catch (IOException | JSONException e) {
-                    e.printStackTrace();
+                String data = URLEncoder.encode("bloodType", "UTF-8") + "=" + URLEncoder.encode(bloodType, "UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+                StringBuilder stringBuilder = new StringBuilder();
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(line);
                 }
+                JSONArray parentJson = new JSONArray(stringBuilder.toString());
+                donorsInfo = new DonorsInfo[parentJson.length()];
+                for (int index = 0; index < parentJson.length(); index++) {
+                    JSONObject finalObject = parentJson.getJSONObject(index);
+                    donorsInfo[index] = new DonorsInfo();
+                    donorsInfo[index].setName(finalObject.getString("name"));
+                    donorsInfo[index].setRegistration(finalObject.getString("reg_id"));
+                    donorsInfo[index].setBloodType(finalObject.getString("blood_type"));
+                    donorsInfo[index].setContact(finalObject.getString("contact"));
+                    donorsInfoList.add(donorsInfo[index]);
+                }
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return donorsInfoList;
+            } catch (IOException | JSONException e) {
+                e.printStackTrace();
+            }
             return null;
         }
 
@@ -244,7 +244,7 @@ class BloodBankModal {
         }
     }
 
-    private class AddDonor extends AsyncTask<String, Void, String>{
+    private class AddDonor extends AsyncTask<String, Void, String> {
 
         private ProgressDialog progressDialog;
 
@@ -281,11 +281,11 @@ class BloodBankModal {
                 bloodType = params[2];
                 contact = params[3];
                 bleeded = params[4];
-                String data = URLEncoder.encode("name", "UTF-8") +"="+ URLEncoder.encode(name, "UTF-8") +"&"+
-                        URLEncoder.encode("regID", "UTF-8") +"="+ URLEncoder.encode(regID, "UTF-8") +"&"+
-                        URLEncoder.encode("bloodType", "UTF-8") +"="+ URLEncoder.encode(bloodType, "UTF-8") +"&"+
-                        URLEncoder.encode("contact", "UTF-8") +"="+ URLEncoder.encode(contact, "UTF-8") +"&"+
-                        URLEncoder.encode("bleeded", "UTF-8") +"="+ URLEncoder.encode(bleeded, "UTF-8");
+                String data = URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8") + "&" +
+                        URLEncoder.encode("regID", "UTF-8") + "=" + URLEncoder.encode(regID, "UTF-8") + "&" +
+                        URLEncoder.encode("bloodType", "UTF-8") + "=" + URLEncoder.encode(bloodType, "UTF-8") + "&" +
+                        URLEncoder.encode("contact", "UTF-8") + "=" + URLEncoder.encode(contact, "UTF-8") + "&" +
+                        URLEncoder.encode("bleeded", "UTF-8") + "=" + URLEncoder.encode(bleeded, "UTF-8");
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -294,7 +294,7 @@ class BloodBankModal {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
                 StringBuilder stringBuilder = new StringBuilder();
                 String line;
-                while ((line = bufferedReader.readLine()) != null){
+                while ((line = bufferedReader.readLine()) != null) {
                     stringBuilder.append(line);
                 }
                 JSONArray parentJSON = new JSONArray(stringBuilder.toString());
@@ -346,6 +346,7 @@ class BloodBankModal {
 
     private class UpdateBleedingDate extends AsyncTask<String, Void, String> {
         private ProgressDialog progressDialog;
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -367,8 +368,8 @@ class BloodBankModal {
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
                 regID = params[0];
                 bleedingDate = params[1];
-                String data = URLEncoder.encode("regID", "UTF-8") +"="+ URLEncoder.encode(regID, "UTF-8") +"&"+
-                        URLEncoder.encode("bleedingDate", "UTF-8") +"="+ URLEncoder.encode(bleedingDate, "UTF-8");
+                String data = URLEncoder.encode("regID", "UTF-8") + "=" + URLEncoder.encode(regID, "UTF-8") + "&" +
+                        URLEncoder.encode("bleedingDate", "UTF-8") + "=" + URLEncoder.encode(bleedingDate, "UTF-8");
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -377,7 +378,7 @@ class BloodBankModal {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
                 StringBuilder stringBuilder = new StringBuilder();
                 String line;
-                while ((line = bufferedReader.readLine()) != null){
+                while ((line = bufferedReader.readLine()) != null) {
                     stringBuilder.append(line);
                 }
                 JSONArray parentJSON = new JSONArray(stringBuilder.toString());
@@ -422,7 +423,7 @@ class BloodBankModal {
                         break;
                     }
                 }
-            }else {
+            } else {
                 Toast.makeText(context, "Some error occurred! Please try again.", Toast.LENGTH_LONG).show();
             }
         }
@@ -430,7 +431,6 @@ class BloodBankModal {
 
     private class ReplyToRequest extends AsyncTask<String, Void, String> {
         private ProgressDialog progressDialog;
-        private String registration;
 
         @Override
         protected void onPreExecute() {
@@ -452,6 +452,7 @@ class BloodBankModal {
         protected String doInBackground(String... params) {
             String stringUrl = "http://hostellocator.com/sendResponseToRequest.php";
             String name;
+            String registration;
             String contact;
             String bloodType;
             String to;
@@ -471,14 +472,14 @@ class BloodBankModal {
                 to = params[4];
                 latitude = params[5];
                 longitude = params[6];
-                Log.i("TAG", "Sending in background: " + latitude+ longitude);
-                String data = URLEncoder.encode("name", "UTF-8") +"="+ URLEncoder.encode(name, "UTF-8") +"&"+
-                        URLEncoder.encode("registration", "UTF-8") +"="+ URLEncoder.encode(registration, "UTF-8") +"&"+
-                        URLEncoder.encode("contact", "UTF-8") +"="+ URLEncoder.encode(contact, "UTF-8") +"&"+
-                        URLEncoder.encode("bloodType", "UTF-8") +"="+ URLEncoder.encode(bloodType, "UTF-8") +"&"+
-                        URLEncoder.encode("to", "UTF-8") +"="+ URLEncoder.encode(to, "UTF-8") +"&"+
-                        URLEncoder.encode("latitude", "UTF-8") +"="+ URLEncoder.encode(latitude, "UTF-8") +"&"+
-                        URLEncoder.encode("longitude", "UTF-8") +"="+ URLEncoder.encode(longitude, "UTF-8");
+                Log.i("TAG", "Sending in background: " + latitude + longitude);
+                String data = URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8") + "&" +
+                        URLEncoder.encode("registration", "UTF-8") + "=" + URLEncoder.encode(registration, "UTF-8") + "&" +
+                        URLEncoder.encode("contact", "UTF-8") + "=" + URLEncoder.encode(contact, "UTF-8") + "&" +
+                        URLEncoder.encode("bloodType", "UTF-8") + "=" + URLEncoder.encode(bloodType, "UTF-8") + "&" +
+                        URLEncoder.encode("to", "UTF-8") + "=" + URLEncoder.encode(to, "UTF-8") + "&" +
+                        URLEncoder.encode("latitude", "UTF-8") + "=" + URLEncoder.encode(latitude, "UTF-8") + "&" +
+                        URLEncoder.encode("longitude", "UTF-8") + "=" + URLEncoder.encode(longitude, "UTF-8");
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -487,7 +488,7 @@ class BloodBankModal {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
                 StringBuilder stringBuilder = new StringBuilder();
                 String line;
-                while ((line = bufferedReader.readLine()) != null){
+                while ((line = bufferedReader.readLine()) != null) {
                     stringBuilder.append(line);
                 }
 
@@ -509,9 +510,7 @@ class BloodBankModal {
         protected void onPostExecute(String s) {
             progressDialog.cancel();
             if (s != null && s.equals("OK")) {
-                Toast.makeText(context, "Response sent.", Toast.LENGTH_LONG).show();
-                new BloodBankLocalModal(context).setIsDonated(registration.trim());
-                BloodRequestsFragment.requestsViewAdapter.notifyDataSetChanged();
+                Toast.makeText(context, "Response sent", Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(context, "Some error occurred, please try again.", Toast.LENGTH_LONG).show();
             }
@@ -519,7 +518,7 @@ class BloodBankModal {
         }
     }
 
-    private class AcceptReponse extends AsyncTask<String, Void, String>{
+    private class AcceptReponse extends AsyncTask<String, Void, String> {
 
         private ProgressDialog progressDialog;
 
@@ -552,7 +551,7 @@ class BloodBankModal {
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
 
                 registration = params[0];
-                String data = URLEncoder.encode("registration", "UTF-8") +"="+ URLEncoder.encode(registration, "UTF-8");
+                String data = URLEncoder.encode("registration", "UTF-8") + "=" + URLEncoder.encode(registration, "UTF-8");
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -561,7 +560,7 @@ class BloodBankModal {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
                 StringBuilder stringBuilder = new StringBuilder();
                 String line;
-                while ((line = bufferedReader.readLine()) != null){
+                while ((line = bufferedReader.readLine()) != null) {
                     stringBuilder.append(line);
                 }
 
@@ -624,7 +623,7 @@ class BloodBankModal {
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
 
                 registration = params[0];
-                String data = URLEncoder.encode("registration", "UTF-8") +"="+ URLEncoder.encode(registration, "UTF-8");
+                String data = URLEncoder.encode("registration", "UTF-8") + "=" + URLEncoder.encode(registration, "UTF-8");
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -633,7 +632,7 @@ class BloodBankModal {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
                 StringBuilder stringBuilder = new StringBuilder();
                 String line;
-                while ((line = bufferedReader.readLine()) != null){
+                while ((line = bufferedReader.readLine()) != null) {
                     stringBuilder.append(line);
                 }
 
