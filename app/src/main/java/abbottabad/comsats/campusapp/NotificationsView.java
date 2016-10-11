@@ -52,7 +52,7 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
         toolbar = (Toolbar) findViewById(R.id.notifications_toolbar);
         setSupportActionBar(toolbar);
         setStatusBarColor();
-        SharedPreferences sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+        final SharedPreferences sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         REG_ID = sharedPreferences.getString("REG_ID", null);
         notificationsLocalModal = new NotificationsLocalModal(this);
         IS_IN_ACTION_MODE = false;
@@ -73,7 +73,7 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
         }
         notificationsAdapter = new NotificationsAdapter(NotificationsView.this, R.layout.chat_right);
         listView.setAdapter(notificationsAdapter);
-        notificationsLocalModal.retrieveNotifications();
+        notificationsLocalModal.retrieveNotifications(sharedPreferences.getString("NOTIFICATION_TYPE", null));
         selectedItems = new ArrayList<>();
         notificationInfos = new ArrayList<>();
         //event for button SEND
@@ -85,7 +85,8 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
                 } else {
 
                     new NotificationsModal(NotificationsView.this).
-                            sendEventNotification(REG_ID, ET_message.getText().toString().trim());
+                            sendEventNotification(REG_ID, ET_message.getText().toString().trim(),
+                                    sharedPreferences.getString("NOTIFICATION_TYPE", null));
                 }
             }
         });

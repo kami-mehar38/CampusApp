@@ -20,6 +20,7 @@ class NotificationsLocalModal extends SQLiteOpenHelper {
     private static String COL_NOTIFICATION = "NOTIFICATIONS";
     private static String COL_DATE_TIME = "DATE_NAME";
     private static String COL_IS_MINE = "IS_MINE";
+    private static String COL_NOTIFICATION_TYPE = "NOTIFICATION_TYPE";
 
 
     NotificationsLocalModal(Context context) {
@@ -33,7 +34,8 @@ class NotificationsLocalModal extends SQLiteOpenHelper {
                 + SERIAL + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 +COL_NOTIFICATION+ " TEXT,"
                 +COL_DATE_TIME+ " TEXT,"
-                +COL_IS_MINE+ " INTEGER"
+                +COL_IS_MINE+ " INTEGER,"
+                +COL_NOTIFICATION_TYPE+ " TEXT"
                 + " )";
         db.execSQL(createTableQuery);
     }
@@ -51,6 +53,7 @@ class NotificationsLocalModal extends SQLiteOpenHelper {
         values.put(COL_NOTIFICATION, NotificationsController.getNotification());
         values.put(COL_DATE_TIME, NotificationsController.getDateTime());
         values.put(COL_IS_MINE, NotificationsController.getMine());
+        values.put(COL_NOTIFICATION_TYPE, NotificationsController.getNotificationType());
         db.insert(TABLE_NAME, null, values);
         db.close();
     }
@@ -67,11 +70,11 @@ class NotificationsLocalModal extends SQLiteOpenHelper {
         db.delete(TABLE_NAME, null, null);
     }
 
-    void retrieveNotifications(){
+    void retrieveNotifications(String notification_type){
 
         SQLiteDatabase db = NotificationsLocalModal.this.getReadableDatabase();
-        String selectQuery= "SELECT * FROM " +TABLE_NAME;
-        Cursor cursor = db.rawQuery(selectQuery, null);
+        String selectQuery= "SELECT * FROM " +TABLE_NAME+ " WHERE " +COL_NOTIFICATION_TYPE+ " = ?";
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{notification_type});
         cursor.moveToFirst();
         List<NotificationInfo> notificationInfoList = new ArrayList<>();
         NotificationInfo[] notificationInfos = new NotificationInfo[cursor.getCount()];
@@ -80,6 +83,7 @@ class NotificationsLocalModal extends SQLiteOpenHelper {
             notificationInfos[cursor.getPosition()].setNotification(cursor.getString(1));
             notificationInfos[cursor.getPosition()].setDateTime(cursor.getString(2));
             notificationInfos[cursor.getPosition()].setMine(cursor.getInt(3));
+            //notificationInfos[cursor.getPosition()].setNotificationType(cursor.getString(4));
             notificationInfoList.add(notificationInfos[cursor.getPosition()]);
             cursor.moveToNext();
         }

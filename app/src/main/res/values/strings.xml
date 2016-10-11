@@ -130,4 +130,11 @@
     <string name="reject">Reject</string>
     <string name="event_notifiations">Event notifiations</string>
     <string name="class_notifications">Class notifications</string>
+    <string name="soft_society">Soft Society</string>
+    <string name="funkada">Funkada</string>
+    <string name="hertz_society">Hertz Society</string>
+    <string name="aadrish">Aadrish</string>
+    <string name="comsats_literary_society">Comsats Literary Society</string>
+    <string name="ieee_society">IEEE Society</string>
+    <string name="others">Others</string>
 </resources>

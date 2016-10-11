@@ -63,7 +63,9 @@ public class MyGcmListenerService extends GcmListenerService {
         }
 
         if (PURPOSE != null && PURPOSE.equals("EVENT_NOTIFICATION")) {
-            receiveEventNotification(data);
+            if (sharedPreferences.getBoolean("RECEIVE_EVENT_NOTIFICATIONS", false)) {
+                receiveEventNotification(data);
+            }
         }
     }
 
@@ -235,15 +237,18 @@ public class MyGcmListenerService extends GcmListenerService {
     private void receiveEventNotification(Bundle data) {
         String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
         String message = data.getString("message");
+        String notificationType = data.getString("notificationType");
         NotificationsController.setNotification(message);
         NotificationsController.setDateTime(currentDateTimeString);
         NotificationsController.setMine(0);
+        NotificationsController.setNotificationType(notificationType);
         new NotificationsLocalModal(this).addEventNotification();
 
         final NotificationInfo notificationInfo = new NotificationInfo();
         notificationInfo.setNotification(message);
         notificationInfo.setDateTime(currentDateTimeString);
         notificationInfo.setMine(0);
+        notificationInfo.setNotificationType(notificationType);
 
         Handler handler = new Handler(Looper.getMainLooper());
         handler.post(new Runnable() {
@@ -266,7 +271,7 @@ public class MyGcmListenerService extends GcmListenerService {
         Uri sound = Uri.parse("android.resource://" + this.getPackageName() + "/" + R.raw.notification_sound);
         long[] pattern = {1000, 1000, 1000, 1000, 1000};
 
-        Intent resultIntent = new Intent(this, NotificationsView.class);
+        Intent resultIntent = new Intent(this, NotificationsHomePage.class);
         TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(this);
         taskStackBuilder.addParentStack(NotificationsView.class);
         taskStackBuilder.addNextIntent(resultIntent);

@@ -92,7 +92,7 @@ public class HomePageView extends AppCompatActivity implements
             RL_notifications.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(HomePageView.this, NotificationsView.class));
+                    startActivity(new Intent(HomePageView.this, NotificationsHomePage.class));
                 }
             });
         }
@@ -184,6 +184,7 @@ public class HomePageView extends AppCompatActivity implements
         CheckBox CB_enableNoifications = (CheckBox) findViewById(R.id.CB_enableNotifications);
         if (CB_enableNoifications != null) {
             CB_enableNoifications.setOnClickListener(this);
+            CB_enableNoifications.setChecked(sharedPreferences.getBoolean("RECEIVE_EVENT_NOTIFICATIONS", false));
         }
 
         CheckBox CB_receiveBloodRequest = (CheckBox) findViewById(R.id.CB_receiveBloodRequest);
@@ -575,7 +576,15 @@ public class HomePageView extends AppCompatActivity implements
         switch (v.getId()){
             case R.id.CB_enableNotifications:{
                 if (((CheckBox) v).isChecked()){
-                    Toast.makeText(HomePageView.this, "OK", Toast.LENGTH_LONG).show();
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean("RECEIVE_EVENT_NOTIFICATIONS", true);
+                    editor.apply();
+                    Toast.makeText(HomePageView.this, "Enabled", Toast.LENGTH_LONG).show();
+                } else {
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean("RECEIVE_EVENT_NOTIFICATIONS", false);
+                    editor.apply();
+                    Toast.makeText(HomePageView.this, "Disabled", Toast.LENGTH_LONG).show();
                 }
                 break;
             }

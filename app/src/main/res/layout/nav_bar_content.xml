@@ -3,220 +3,215 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff">
-<LinearLayout
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="@dimen/activity_vertical_margin"
-    >
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:text="@string/event_notifiations"
-        android:textStyle="normal"
-        android:layout_marginBottom="20dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="5dp"
-        android:layout_marginBottom="20dp">
+        android:orientation="vertical"
+        android:padding="@dimen/activity_vertical_margin">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/enable_notifications"
-            android:textStyle="normal"
-            android:textColor="#000"
-            android:drawableLeft="@drawable/ic_list_notification"
-            android:drawableStart="@drawable/ic_list_notification"
-            android:gravity="center"
-            android:drawablePadding="@dimen/activity_horizontal_margin"/>
+            android:layout_marginBottom="20dp"
+            android:text="@string/event_notifiations"
+            android:textSize="16sp"
+            android:textStyle="normal" />
 
-        <CheckBox
-            android:id="@+id/CB_enableNotifications"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            />
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal"
+            android:padding="5dp">
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_list_notification"
+                android:drawablePadding="@dimen/activity_horizontal_margin"
+                android:drawableStart="@drawable/ic_list_notification"
+                android:gravity="center"
+                android:text="@string/enable_notifications"
+                android:textColor="#000"
+                android:textStyle="normal" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#000"
-        android:layout_marginBottom="20dp"
-        />
+            <CheckBox
+                android:id="@+id/CB_enableNotifications"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:text="@string/timetable"
-        android:textStyle="normal"
-        android:layout_marginBottom="20dp"/>
+        </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="5dp"
-        android:layout_marginBottom="20dp">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="20dp"
+            android:background="#000" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/class_notifications"
-            android:textStyle="normal"
-            android:textColor="#000"
-            android:drawableLeft="@drawable/ic_list_timetable"
-            android:drawableStart="@drawable/ic_list_timetable"
-            android:gravity="center"
-            android:drawablePadding="@dimen/activity_horizontal_margin"/>
+            android:layout_marginBottom="20dp"
+            android:text="@string/timetable"
+            android:textSize="16sp"
+            android:textStyle="normal" />
 
-        <CheckBox
-            android:id="@+id/CB_classNotifications"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_list_timetable"
+                android:drawablePadding="@dimen/activity_horizontal_margin"
+                android:drawableStart="@drawable/ic_list_timetable"
+                android:gravity="center"
+                android:text="@string/class_notifications"
+                android:textColor="#000"
+                android:textStyle="normal" />
+
+            <CheckBox
+                android:id="@+id/CB_classNotifications"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
 
-    </LinearLayout>
+        </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="5dp"
-        android:layout_marginBottom="20dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_list_timetable"
+                android:drawablePadding="@dimen/activity_horizontal_margin"
+                android:drawableStart="@drawable/ic_list_timetable"
+                android:gravity="center"
+                android:text="@string/share_timetable"
+                android:textColor="#000"
+                android:textStyle="normal" />
+
+            <CheckBox
+                android:id="@+id/CB_shareTimetable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_list_timetable"
+                android:drawablePadding="@dimen/activity_horizontal_margin"
+                android:drawableStart="@drawable/ic_list_timetable"
+                android:gravity="center"
+                android:text="@string/silent_during_class"
+                android:textColor="#000"
+                android:textStyle="normal" />
+
+            <CheckBox
+                android:id="@+id/CB_silentDuringClass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="20dp"
+            android:background="#000" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/share_timetable"
-            android:textStyle="normal"
-            android:textColor="#000"
-            android:drawableLeft="@drawable/ic_list_timetable"
-            android:drawableStart="@drawable/ic_list_timetable"
-            android:gravity="center"
-            android:drawablePadding="@dimen/activity_horizontal_margin"/>
+            android:layout_marginBottom="20dp"
+            android:text="@string/track_faculty"
+            android:textSize="16sp"
+            android:textStyle="normal" />
 
-        <CheckBox
-            android:id="@+id/CB_shareTimetable"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal"
+            android:padding="5dp">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_list_tracking"
+                android:drawablePadding="@dimen/activity_horizontal_margin"
+                android:drawableStart="@drawable/ic_list_tracking"
+                android:gravity="center"
+                android:text="@string/enable_notifications"
+                android:textColor="#000"
+                android:textStyle="normal" />
 
-    </LinearLayout>
+            <CheckBox
+                android:id="@+id/CB_enableFacultyNotifications"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="5dp"
-        android:layout_marginBottom="20dp">
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="20dp"
+            android:background="#000" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/silent_during_class"
-            android:textStyle="normal"
-            android:textColor="#000"
-            android:drawableLeft="@drawable/ic_list_timetable"
-            android:drawableStart="@drawable/ic_list_timetable"
-            android:gravity="center"
-            android:drawablePadding="@dimen/activity_horizontal_margin"/>
+            android:layout_marginBottom="20dp"
+            android:text="@string/blood_bank"
+            android:textSize="16sp"
+            android:textStyle="normal" />
 
-        <CheckBox
-            android:id="@+id/CB_silentDuringClass"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#000"
-        android:layout_marginBottom="20dp"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:text="@string/track_faculty"
-        android:textStyle="normal"
-        android:layout_marginBottom="20dp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="5dp"
-        android:layout_marginBottom="20dp">
-
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/enable_notifications"
-            android:textStyle="normal"
-            android:textColor="#000"
-            android:drawableLeft="@drawable/ic_list_tracking"
-            android:drawableStart="@drawable/ic_list_tracking"
-            android:gravity="center"
-            android:drawablePadding="@dimen/activity_horizontal_margin"/>
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal"
+            android:padding="5dp">
 
-        <CheckBox
-            android:id="@+id/CB_enableFacultyNotifications"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_list_blood"
+                android:drawablePadding="@dimen/activity_horizontal_margin"
+                android:drawableStart="@drawable/ic_list_blood"
+                android:gravity="center"
+                android:text="@string/receive_blood_requests"
+                android:textColor="#000"
+                android:textStyle="normal" />
 
-    </LinearLayout>
+            <CheckBox
+                android:id="@+id/CB_receiveBloodRequest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#000"
-        android:layout_marginBottom="20dp"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:text="@string/blood_bank"
-        android:textStyle="normal"
-        android:layout_marginBottom="20dp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="5dp"
-        android:layout_marginBottom="20dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/receive_blood_requests"
-            android:textStyle="normal"
-            android:textColor="#000"
-            android:drawableLeft="@drawable/ic_list_blood"
-            android:drawableStart="@drawable/ic_list_blood"
-            android:gravity="center"
-            android:drawablePadding="@dimen/activity_horizontal_margin"/>
-
-        <CheckBox
-            android:id="@+id/CB_receiveBloodRequest"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        </LinearLayout>
 
     </LinearLayout>
-
-
-</LinearLayout>
 
 </ScrollView>

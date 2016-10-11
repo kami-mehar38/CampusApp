@@ -7,6 +7,15 @@ class NotificationsController {
     private static String notification;
     private static String dateTime;
     private static int mine;
+    private static String notificationType;
+
+    public static String getNotificationType() {
+        return notificationType;
+    }
+
+    public static void setNotificationType(String notificationType) {
+        NotificationsController.notificationType = notificationType;
+    }
 
     static void setNotification(String notification) {
         NotificationsController.notification = notification;

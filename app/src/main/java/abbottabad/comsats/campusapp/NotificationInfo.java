@@ -8,6 +8,15 @@ class NotificationInfo {
     private String notification;
     private String dateTime;
     private int mine;
+    private String notificationType;
+
+    public String getNotificationType() {
+        return notificationType;
+    }
+
+    public void setNotificationType(String notificationType) {
+        this.notificationType = notificationType;
+    }
 
     void setNotification(String notification) {
         this.notification = notification;

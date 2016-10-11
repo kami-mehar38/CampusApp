@@ -31,13 +31,14 @@ import java.util.Date;
 class NotificationsModal {
 
     private Context context;
+    private String notificationType;
 
     NotificationsModal(Context context) {
         this.context = context;
     }
 
-    void sendEventNotification(String reg_id, String message) {
-        new SendEventNotification().execute(reg_id, message);
+    void sendEventNotification(String reg_id, String message, String notification_type) {
+        new SendEventNotification().execute(reg_id, message, notification_type);
     }
 
     private class SendEventNotification extends AsyncTask<String, Void, String> {
@@ -76,6 +77,7 @@ class NotificationsModal {
             String stringUrl = "http://hostellocator.com/sendEventNotification.php";
             String reg_id = params[0];
             message = params[1];
+            notificationType = params[2];
             try {
                 URL url = new URL(stringUrl);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -85,7 +87,8 @@ class NotificationsModal {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
                 String data = URLEncoder.encode("reg_id", "UTF-8") + "=" + URLEncoder.encode(reg_id, "UTF-8") + "&" +
-                        URLEncoder.encode("message", "UTF-8") + "=" + URLEncoder.encode(message, "UTF-8");
+                        URLEncoder.encode("message", "UTF-8") + "=" + URLEncoder.encode(message, "UTF-8") + "&" +
+                        URLEncoder.encode("notificationType", "UTF-8") + "=" + URLEncoder.encode(notificationType, "UTF-8");
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -142,6 +145,7 @@ class NotificationsModal {
                         NotificationsController.setNotification(message);
                         NotificationsController.setDateTime(currentDateTimeString);
                         NotificationsController.setMine(1);
+                        NotificationsController.setNotificationType(notificationType);
                         new NotificationsLocalModal(context).addEventNotification();
 
                         NotificationInfo notificationInfo = new NotificationInfo();
