@@ -17,12 +17,14 @@
             android:id="@+id/notificationTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/notifications"
             android:textColor="#fff"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:layout_centerVertical="true"
-            tools:ignore="RelativeOverlap" />
+            android:layout_toStartOf="@+id/CB_selectAll"
+            android:layout_toLeftOf="@+id/CB_selectAll"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true" />
 
         <CheckBox
             android:id="@+id/CB_selectAll"

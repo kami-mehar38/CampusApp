@@ -58,16 +58,18 @@ class NotificationsLocalModal extends SQLiteOpenHelper {
         db.close();
     }
 
-    void deleteNotifications(String[] notifications){
+    void deleteNotifications(String[] notifications, String notification_type){
         SQLiteDatabase db = NotificationsLocalModal.this.getWritableDatabase();
         for (String notification : notifications) {
-            db.delete(TABLE_NAME, COL_NOTIFICATION + " = ?", new String[]{notification});
+            db.delete(TABLE_NAME, COL_NOTIFICATION + " = ? AND " + COL_NOTIFICATION_TYPE + " = ?", new String[]{notification, notification_type});
         }
+        db.close();
     }
 
-    void deleteAll(){
+    void deleteAll(String notification_type){
         SQLiteDatabase db = NotificationsLocalModal.this.getWritableDatabase();
-        db.delete(TABLE_NAME, null, null);
+        db.delete(TABLE_NAME, COL_NOTIFICATION_TYPE + " = ? ", new String[]{notification_type});
+        db.close();
     }
 
     void retrieveNotifications(String notification_type){

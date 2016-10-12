@@ -44,6 +44,7 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
     private NotificationsLocalModal notificationsLocalModal;
     private  CheckBox CB_selectAll;
     public static boolean IS_IN_SELECT_ALL_MODE = false;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,16 +53,22 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
         toolbar = (Toolbar) findViewById(R.id.notifications_toolbar);
         setSupportActionBar(toolbar);
         setStatusBarColor();
-        final SharedPreferences sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+        sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         REG_ID = sharedPreferences.getString("REG_ID", null);
         notificationsLocalModal = new NotificationsLocalModal(this);
         IS_IN_ACTION_MODE = false;
         IS_IN_SELECT_ALL_MODE = false;
 
+        String notificationType = sharedPreferences.getString("NOTIFICATION_TYPE", null);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(notificationType + "_COUNT", 0);
+        editor.apply();
+
         listView = (ListView) findViewById(R.id.LV_notifications);
         btnSend = (ImageButton) findViewById(R.id.sendNotification);
         ET_message = (EditText) findViewById(R.id.ET_notification);
         notificationTitle = (TextView) findViewById(R.id.notificationTitle);
+        notificationTitle.setText(sharedPreferences.getString("NOTIFICATION_TYPE", ""));
         CB_selectAll = (CheckBox) findViewById(R.id.CB_selectAll);
         if (CB_selectAll != null) {
             CB_selectAll.setVisibility(View.GONE);
@@ -127,7 +134,7 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
                         for (int i = 0; i < notificationInfos.size(); i++) {
                             notifications[i] = notificationInfos.get(i).getNotification();
                         }
-                        notificationsLocalModal.deleteNotifications(notifications);
+                        notificationsLocalModal.deleteNotifications(notifications, sharedPreferences.getString("NOTIFICATION_TYPE", null));
                         notificationInfos.clear();
                         Toast.makeText(this, "Deleted", Toast.LENGTH_SHORT).show();
                         Log.i("TAG", "onOptionsItemSelected: " + Arrays.toString(notifications));
@@ -135,7 +142,7 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
                         Toast.makeText(this, "No item is selected", Toast.LENGTH_SHORT).show();
                     }
                 }  else {
-                    notificationsLocalModal.deleteAll();
+                    notificationsLocalModal.deleteAll(sharedPreferences.getString("NOTIFICATION_TYPE", null));
                     notificationsAdapter.clear();
                     notificationInfos.clear();
                     Toast.makeText(this, "Deleted", Toast.LENGTH_SHORT).show();
@@ -154,14 +161,13 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
 
     private void clearActionMode() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        notificationTitle.setText(R.string.notifications);
+        notificationTitle.setText(sharedPreferences.getString("NOTIFICATION_TYPE", ""));
         toolbar.getMenu().clear();
         CB_selectAll.setChecked(false);
         CB_selectAll.setVisibility(View.GONE);
         IS_IN_ACTION_MODE = false;
         IS_IN_SELECT_ALL_MODE = false;
         notificationsAdapter.notifyDataSetChanged();
-        notificationTitle.setText(R.string.notifications);
         selectedItems.clear();
         counter = 0;
     }
@@ -224,5 +230,14 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(color);
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        String notificationType = sharedPreferences.getString("NOTIFICATION_TYPE", null);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(notificationType + "_COUNT", 0);
+        editor.apply();
     }
 }

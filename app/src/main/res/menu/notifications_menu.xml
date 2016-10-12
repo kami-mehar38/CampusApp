@@ -4,7 +4,7 @@
 
     <item android:id="@+id/action_delete"
         app:showAsAction="always"
-        android:icon="@drawable/ic_action_discard"
+        android:icon="@drawable/ic_action_discard_notification"
         android:title="@string/delete"
         />
 

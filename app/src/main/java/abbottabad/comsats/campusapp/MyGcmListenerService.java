@@ -26,12 +26,13 @@ public class MyGcmListenerService extends GcmListenerService {
     private static final int GCM_NOTIFICATION_ID = 13548;
     private static final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
     private Boolean IS_LOGGED_IN;
+    private SharedPreferences sharedPreferences;
 
     @Override
     public void onMessageReceived(String from, Bundle data) {
 
         Log.i("TAG", "From: " + from);
-        SharedPreferences sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+        sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         final String APPLICATION_STATUS = sharedPreferences.getString("APPLICATION_STATUS", "NULL");
         IS_LOGGED_IN = sharedPreferences.getBoolean("LOGGED_IN", false);
         String PURPOSE = data.getString("PURPOSE");
@@ -237,7 +238,7 @@ public class MyGcmListenerService extends GcmListenerService {
     private void receiveEventNotification(Bundle data) {
         String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
         String message = data.getString("message");
-        String notificationType = data.getString("notificationType");
+        final String notificationType = data.getString("notificationType");
         NotificationsController.setNotification(message);
         NotificationsController.setDateTime(currentDateTimeString);
         NotificationsController.setMine(0);
@@ -250,14 +251,31 @@ public class MyGcmListenerService extends GcmListenerService {
         notificationInfo.setMine(0);
         notificationInfo.setNotificationType(notificationType);
 
+        int badgeCount = sharedPreferences.getInt(notificationType + "_COUNT", 0);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        badgeCount++;
+        editor.putInt(notificationType + "_COUNT", badgeCount);
+        editor.apply();
         Handler handler = new Handler(Looper.getMainLooper());
         handler.post(new Runnable() {
             @Override
             public void run() {
+                if (NotificationsHomePage.sharedPreferences != null)
+                NotificationsHomePage.setBadgeCount();
+            }
+        });
+
+        final String NOTIFICATION_TYPE = sharedPreferences.getString("NOTIFICATION_TYPE", null);
+
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
                 if (NotificationsView.notificationsAdapter != null && NotificationsView.listView != null) {
-                    NotificationsView.notificationsAdapter.add(notificationInfo);
-                    NotificationsView.notificationsAdapter.notifyDataSetChanged();
-                    NotificationsView.listView.setSelection(NotificationsView.notificationsAdapter.getCount());
+                    if (notificationType != null && NOTIFICATION_TYPE != null && notificationType.equals(NOTIFICATION_TYPE)) {
+                        NotificationsView.notificationsAdapter.add(notificationInfo);
+                        NotificationsView.notificationsAdapter.notifyDataSetChanged();
+                        NotificationsView.listView.setSelection(NotificationsView.notificationsAdapter.getCount());
+                    }
                 }
             }
         });
