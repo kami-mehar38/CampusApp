@@ -1,21 +1,25 @@
 package abbottabad.comsats.campusapp;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
 /**
  * This project CampusApp is created by Kamran Ramzan on 8/16/16.
  */
-public class StatusViewAdapter extends RecyclerView.Adapter<StatusViewAdapter.ViewHolder> {
+class StatusViewAdapter extends RecyclerView.Adapter<StatusViewAdapter.ViewHolder> {
     private List<StatusInfo> statusInfoList;
 
-    public StatusViewAdapter(List<StatusInfo> statusInfoList) {
+    StatusViewAdapter(List<StatusInfo> statusInfoList) {
         this.statusInfoList = statusInfoList;
     }
 
@@ -48,6 +52,17 @@ public class StatusViewAdapter extends RecyclerView.Adapter<StatusViewAdapter.Vi
             }
         }
         holder.TV_teacherStatus.setText(statusInfo.getStatus());
+        holder.TV_teacherRegistration.setText(statusInfo.getTeacherRegistration());
+        holder.TV_teacherRegistration.setVisibility(View.GONE);
+        if (statusInfo.getMode().equals("Private")){
+            holder.btnTimetable.setVisibility(View.GONE);
+            holder.cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(v.getContext(), "Timetable is not available", Toast.LENGTH_LONG).show();
+                }
+            });
+        }
     }
 
     @Override
@@ -56,14 +71,28 @@ public class StatusViewAdapter extends RecyclerView.Adapter<StatusViewAdapter.Vi
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
         private TextView TV_teacherName;
+        private TextView TV_teacherRegistration;
         private TextView TV_teacherStatus;
+        private ImageView btnTimetable;
+        private RelativeLayout cardView;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(final View itemView) {
             super(itemView);
             TV_teacherName = (TextView) itemView.findViewById(R.id.TV_teacherName);
+            TV_teacherRegistration = (TextView) itemView.findViewById(R.id.TV_teacherRegistration);
             TV_teacherStatus = (TextView) itemView.findViewById(R.id.TV_teacherStatus);
+            btnTimetable = (ImageView) itemView.findViewById(R.id.btnTimetable);
+            cardView = (RelativeLayout) itemView.findViewById(R.id.cardView);
+
+            btnTimetable.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    TrackFacultyUtills.setRegistration(TV_teacherRegistration.getText().toString());
+                    itemView.getContext().startActivity(new Intent(itemView.getContext(), TimetableImage.class));
+                }
+            });
         }
     }
 }

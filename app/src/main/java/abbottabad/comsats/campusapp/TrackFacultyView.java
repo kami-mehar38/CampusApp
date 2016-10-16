@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
@@ -41,6 +42,7 @@ public class TrackFacultyView extends Activity {
     private String status;
     public static List<StatusInfo> statusInfoList;
     private LinearLayoutManager layoutManager;
+    public static ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,8 @@ public class TrackFacultyView extends Activity {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(new RecyclerViewDivider(this));
+
+        imageView = (ImageView) findViewById(R.id.timetable);
 
         TV_myStatus = (TextView) findViewById(R.id.TV_myStatus);
         sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);

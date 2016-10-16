@@ -28,6 +28,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -63,6 +64,7 @@ public class HomePageView extends AppCompatActivity implements
     private GoogleApiClient mGoogleApiClient;
     public static final String TAG = HomePageView.class.getSimpleName();
     private SharedPreferences sharedPreferences;
+    public static CheckBox CB_shareTimetable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,6 +143,7 @@ public class HomePageView extends AppCompatActivity implements
                 @Override
                 public void onClick(View v) {
                     //startActivity(new Intent(HomePageView.this, MapsActivity.class));
+                    startActivity(new Intent(HomePageView.this, TimetableImage.class));
                 }
             });
         }
@@ -191,6 +194,32 @@ public class HomePageView extends AppCompatActivity implements
         if (CB_receiveBloodRequest != null) {
             CB_receiveBloodRequest.setOnClickListener(this);
             CB_receiveBloodRequest.setChecked(sharedPreferences.getBoolean("RECEIVE_BLOOD_REQUEST", false));
+        }
+
+        CheckBox CB_enableFacultyNotifications = (CheckBox) findViewById(R.id.CB_enableFacultyNotifications);
+        if (CB_enableFacultyNotifications != null) {
+            CB_enableFacultyNotifications.setOnClickListener(this);
+            CB_enableFacultyNotifications.setChecked(sharedPreferences.getBoolean("RECEIVE_FACULTY_NOTIFICATIONS", false));
+        }
+
+        CB_shareTimetable = (CheckBox) findViewById(R.id.CB_shareTimetable);
+        if (CB_shareTimetable != null) {
+            CB_shareTimetable.setOnClickListener(this);
+            CB_shareTimetable.setChecked(sharedPreferences.getBoolean("SHARE_TIMETABLE", false));
+        }
+
+        CheckBox CB_classNotifications = (CheckBox) findViewById(R.id.CB_classNotifications);
+        if (CB_classNotifications != null) {
+            CB_classNotifications.setOnClickListener(this);
+            CB_classNotifications.setChecked(sharedPreferences.getBoolean("RECEIVE_CLASS_NOTIFICATIONS", false));
+        }
+
+        String applicationStatus = sharedPreferences.getString("APPLICATION_STATUS", "");
+        if (!applicationStatus.equals("TEACHER")) {
+            LinearLayout linearLayout = (LinearLayout) findViewById(R.id.viewShareTimetable);
+            if (linearLayout != null) {
+                linearLayout.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -597,6 +626,44 @@ public class HomePageView extends AppCompatActivity implements
                 } else {
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putBoolean("RECEIVE_BLOOD_REQUEST", false);
+                    editor.apply();
+                    Toast.makeText(HomePageView.this, "Disabled", Toast.LENGTH_LONG).show();
+                }
+                break;
+            }
+            case R.id.CB_enableFacultyNotifications:{
+                if (((CheckBox) v).isChecked()){
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean("RECEIVE_FACULTY_NOTIFICATIONS", true);
+                    editor.apply();
+                    Toast.makeText(HomePageView.this, "Enabled", Toast.LENGTH_LONG).show();
+                } else {
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean("RECEIVE_FACULTY_NOTIFICATIONS", false);
+                    editor.apply();
+                    Toast.makeText(HomePageView.this, "Disabled", Toast.LENGTH_LONG).show();
+                }
+                break;
+            }
+            case R.id.CB_shareTimetable:{
+                if (((CheckBox) v).isChecked()){
+                    String reg_id =  sharedPreferences.getString("REG_ID", "");
+                    new TimetableModal(HomePageView.this).shareTimetable("Public", reg_id);
+                } else {
+                    String reg_id =  sharedPreferences.getString("REG_ID", "");
+                    new TimetableModal(HomePageView.this).shareTimetable("Private", reg_id);
+                }
+                break;
+            }
+            case R.id.CB_classNotifications:{
+                if (((CheckBox) v).isChecked()){
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean("RECEIVE_CLASS_NOTIFICATIONS", true);
+                    editor.apply();
+                    Toast.makeText(HomePageView.this, "Enabled", Toast.LENGTH_LONG).show();
+                } else {
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean("RECEIVE_CLASS_NOTIFICATIONS", false);
                     editor.apply();
                     Toast.makeText(HomePageView.this, "Disabled", Toast.LENGTH_LONG).show();
                 }

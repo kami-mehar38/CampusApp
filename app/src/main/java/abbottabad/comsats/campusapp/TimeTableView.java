@@ -5,13 +5,15 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -19,10 +21,12 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.HorizontalScrollView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.util.Calendar;
 
 /**
@@ -44,6 +48,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
     private int SELECTED_SLOT;
     private SharedPreferences.Editor editor;
     private SharedPreferences sharedPreferences;
+    private Bitmap bitmap;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,7 +74,6 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
         btn_edit.setOnClickListener(this);
         Button btn_cancelEditDialog = (Button) view.findViewById(R.id.btn_cancelEditDialog);
         btn_cancelEditDialog.setOnClickListener(this);
-
 
         slot11 = (RelativeLayout) findViewById(R.id.slot11);
         if (slot11 != null) {
@@ -1061,9 +1065,9 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                             .getDrawable(TimeTableView.this,
                                     R.drawable.timetable_slot_checked));
                     String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
-                    String teacher = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(1)).getText().toString();
-                    if (!subject.equals("Subject") && !teacher.equals("Teacher")) {
-                        handleNotification(11, subject, teacher, 1, 7, 45, 0);
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(11, subject, room, 1, 7, 45, 0);
                         editor.putBoolean("SLOT11_CHECKED", true);
                         editor.apply();
                     }
@@ -1083,9 +1087,9 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                             .getDrawable(TimeTableView.this,
                                     R.drawable.timetable_slot_checked));
                     String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
-                    String teacher = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(1)).getText().toString();
-                    if (!subject.equals("Subject") && !teacher.equals("Teacher")) {
-                        handleNotification(21, subject, teacher, 2, 7, 45, 0);
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(21, subject, room, 2, 7, 45, 0);
                         editor.putBoolean("SLOT21_CHECKED", true);
                         editor.apply();
                     }
@@ -1106,9 +1110,9 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                             .getDrawable(TimeTableView.this,
                                     R.drawable.timetable_slot_checked));
                     String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
-                    String teacher = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(1)).getText().toString();
-                    if (!subject.equals("Subject") && !teacher.equals("Teacher")) {
-                        handleNotification(31, subject, teacher, 3, 7, 45, 0);
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(31, subject, room, 3, 7, 45, 0);
                         editor.putBoolean("SLOT31_CHECKED", true);
                         editor.apply();
                     }
@@ -1129,9 +1133,9 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                             .getDrawable(TimeTableView.this,
                                     R.drawable.timetable_slot_checked));
                     String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
-                    String teacher = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(1)).getText().toString();
-                    if (!subject.equals("Subject") && !teacher.equals("Teacher")) {
-                        handleNotification(41, subject, teacher, 4, 7, 45, 0);
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(41, subject, room, 4, 7, 45, 0);
                         editor.putBoolean("SLOT41_CHECKED", true);
                         editor.apply();
                     }
@@ -1152,9 +1156,9 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                             .getDrawable(TimeTableView.this,
                                     R.drawable.timetable_slot_checked));
                     String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
-                    String teacher = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(1)).getText().toString();
-                    if (!subject.equals("Subject") && !teacher.equals("Teacher")) {
-                        handleNotification(51, subject, teacher, 5, 7, 45, 0);
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(51, subject, room, 5, 7, 45, 0);
                         editor.putBoolean("SLOT51_CHECKED", true);
                         editor.apply();
                     }
@@ -1175,9 +1179,9 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                             .getDrawable(TimeTableView.this,
                                     R.drawable.timetable_slot_checked));
                     String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
-                    String teacher = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(1)).getText().toString();
-                    if (!subject.equals("Subject") && !teacher.equals("Teacher")) {
-                        handleNotification(12, subject, teacher, 1, 9, 30, 0);
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(12, subject, room, 1, 9, 30, 0);
                         editor.putBoolean("SLOT12_CHECKED", true);
                         editor.apply();
                     }
@@ -1198,9 +1202,9 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                             .getDrawable(TimeTableView.this,
                                     R.drawable.timetable_slot_checked));
                     String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
-                    String teacher = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(1)).getText().toString();
-                    if (!subject.equals("Subject") && !teacher.equals("Teacher")) {
-                        handleNotification(22, subject, teacher, 2, 9, 30, 0);
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(22, subject, room, 2, 9, 30, 0);
                         editor.putBoolean("SLOT22_CHECKED", true);
                         editor.apply();
                     }
@@ -1221,9 +1225,9 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                             .getDrawable(TimeTableView.this,
                                     R.drawable.timetable_slot_checked));
                     String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
-                    String teacher = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(1)).getText().toString();
-                    if (!subject.equals("Subject") && !teacher.equals("Teacher")) {
-                        handleNotification(32, subject, teacher, 3, 9, 30, 0);
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(32, subject, room, 3, 9, 30, 0);
                         editor.putBoolean("SLOT32_CHECKED", true);
                         editor.apply();
                     }
@@ -1244,9 +1248,9 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                             .getDrawable(TimeTableView.this,
                                     R.drawable.timetable_slot_checked));
                     String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
-                    String teacher = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(1)).getText().toString();
-                    if (!subject.equals("Subject") && !teacher.equals("Teacher")) {
-                        handleNotification(42, subject, teacher, 4, 9, 30, 0);
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(42, subject, room, 4, 9, 30, 0);
                         editor.putBoolean("SLOT42_CHECKED", true);
                         editor.apply();
                     }
@@ -1267,9 +1271,9 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                             .getDrawable(TimeTableView.this,
                                     R.drawable.timetable_slot_checked));
                     String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
-                    String teacher = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(1)).getText().toString();
-                    if (!subject.equals("Subject") && !teacher.equals("Teacher")) {
-                        handleNotification(52, subject, teacher, 5, 9, 30, 0);
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(52, subject, room, 5, 9, 30, 0);
                         editor.putBoolean("SLOT52_CHECKED", true);
                         editor.apply();
                     }
@@ -1290,9 +1294,9 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                             .getDrawable(TimeTableView.this,
                                     R.drawable.timetable_slot_checked));
                     String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
-                    String teacher = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(1)).getText().toString();
-                    if (!subject.equals("Subject") && !teacher.equals("Teacher")) {
-                        handleNotification(13, subject, teacher, 1, 11, 15, 0);
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(13, subject, room, 1, 11, 15, 0);
                         editor.putBoolean("SLOT13_CHECKED", true);
                         editor.apply();
                     }
@@ -1313,9 +1317,9 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                             .getDrawable(TimeTableView.this,
                                     R.drawable.timetable_slot_checked));
                     String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
-                    String teacher = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(1)).getText().toString();
-                    if (!subject.equals("Subject") && !teacher.equals("Teacher")) {
-                        handleNotification(23, subject, teacher, 2, 11, 15, 0);
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(23, subject, room, 2, 11, 15, 0);
                         editor.putBoolean("SLOT23_CHECKED", true);
                         editor.apply();
                     }
@@ -1336,9 +1340,9 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                             .getDrawable(TimeTableView.this,
                                     R.drawable.timetable_slot_checked));
                     String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
-                    String teacher = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(1)).getText().toString();
-                    if (!subject.equals("Subject") && !teacher.equals("Teacher")) {
-                        handleNotification(33, subject, teacher, 3, 11, 15, 0);
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(33, subject, room, 3, 11, 15, 0);
                         editor.putBoolean("SLOT33_CHECKED", true);
                         editor.apply();
                     }
@@ -1359,9 +1363,9 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                             .getDrawable(TimeTableView.this,
                                     R.drawable.timetable_slot_checked));
                     String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
-                    String teacher = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(1)).getText().toString();
-                    if (!subject.equals("Subject") && !teacher.equals("Teacher")) {
-                        handleNotification(43, subject, teacher, 4, 11, 15, 0);
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(43, subject, room, 4, 11, 15, 0);
                         editor.putBoolean("SLOT43_CHECKED", true);
                         editor.apply();
                     }
@@ -1382,9 +1386,9 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                             .getDrawable(TimeTableView.this,
                                     R.drawable.timetable_slot_checked));
                     String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
-                    String teacher = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(1)).getText().toString();
-                    if (!subject.equals("Subject") && !teacher.equals("Teacher")) {
-                        handleNotification(53, subject, teacher, 5, 11, 15, 0);
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(53, subject, room, 5, 11, 15, 0);
                         editor.putBoolean("SLOT53_CHECKED", true);
                         editor.apply();
                     }
@@ -1405,9 +1409,9 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                             .getDrawable(TimeTableView.this,
                                     R.drawable.timetable_slot_checked));
                     String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
-                    String teacher = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(1)).getText().toString();
-                    if (!subject.equals("Subject") && !teacher.equals("Teacher")) {
-                        handleNotification(14, subject, teacher, 1, 13, 0, 0);
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(14, subject, room, 1, 13, 0, 0);
                         editor.putBoolean("SLOT14_CHECKED", true);
                         editor.apply();
                     }
@@ -1428,9 +1432,9 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                             .getDrawable(TimeTableView.this,
                                     R.drawable.timetable_slot_checked));
                     String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
-                    String teacher = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(1)).getText().toString();
-                    if (!subject.equals("Subject") && !teacher.equals("Teacher")) {
-                        handleNotification(24, subject, teacher, 2, 13, 0, 0);
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(24, subject, room, 2, 13, 0, 0);
                         editor.putBoolean("SLOT24_CHECKED", true);
                         editor.apply();
                     }
@@ -1451,9 +1455,9 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                             .getDrawable(TimeTableView.this,
                                     R.drawable.timetable_slot_checked));
                     String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
-                    String teacher = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(1)).getText().toString();
-                    if (!subject.equals("Subject") && !teacher.equals("Teacher")) {
-                        handleNotification(34, subject, teacher, 3, 13, 0, 0);
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(34, subject, room, 3, 13, 0, 0);
                         editor.putBoolean("SLOT14_CHECKED", true);
                         editor.apply();
                     }
@@ -1474,9 +1478,9 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                             .getDrawable(TimeTableView.this,
                                     R.drawable.timetable_slot_checked));
                     String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
-                    String teacher = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(1)).getText().toString();
-                    if (!subject.equals("Subject") && !teacher.equals("Teacher")) {
-                        handleNotification(44, subject, teacher, 4, 13, 0, 0);
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(44, subject, room, 4, 13, 0, 0);
                         editor.putBoolean("SLOT44_CHECKED", true);
                         editor.apply();
                     }
@@ -1497,9 +1501,9 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                             .getDrawable(TimeTableView.this,
                                     R.drawable.timetable_slot_checked));
                     String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
-                    String teacher = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(1)).getText().toString();
-                    if (!subject.equals("Subject") && !teacher.equals("Teacher")) {
-                        handleNotification(54, subject, teacher, 5, 13, 0, 0);
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(54, subject, room, 5, 13, 0, 0);
                         editor.putBoolean("SLOT54_CHECKED", true);
                         editor.apply();
                     }
@@ -1520,9 +1524,9 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                             .getDrawable(TimeTableView.this,
                                     R.drawable.timetable_slot_checked));
                     String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
-                    String teacher = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(1)).getText().toString();
-                    if (!subject.equals("Subject") && !teacher.equals("Teacher")) {
-                        handleNotification(15, subject, teacher, 1, 14, 45, 0);
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(15, subject, room, 1, 14, 45, 0);
                         editor.putBoolean("SLOT15_CHECKED", true);
                         editor.apply();
                     }
@@ -1543,9 +1547,9 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                             .getDrawable(TimeTableView.this,
                                     R.drawable.timetable_slot_checked));
                     String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
-                    String teacher = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(1)).getText().toString();
-                    if (!subject.equals("Subject") && !teacher.equals("Teacher")) {
-                        handleNotification(25, subject, teacher, 2, 14, 45, 0);
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(25, subject, room, 2, 14, 45, 0);
                         editor.putBoolean("SLOT25_CHECKED", true);
                         editor.apply();
                     }
@@ -1566,9 +1570,9 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                             .getDrawable(TimeTableView.this,
                                     R.drawable.timetable_slot_checked));
                     String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
-                    String teacher = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(1)).getText().toString();
-                    if (!subject.equals("Subject") && !teacher.equals("Teacher")) {
-                        handleNotification(35, subject, teacher, 3, 14, 45, 0);
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(35, subject, room, 3, 14, 45, 0);
                         editor.putBoolean("SLOT35_CHECKED", true);
                         editor.apply();
                     }
@@ -1589,9 +1593,9 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                             .getDrawable(TimeTableView.this,
                                     R.drawable.timetable_slot_checked));
                     String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
-                    String teacher = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(1)).getText().toString();
-                    if (!subject.equals("Subject") && !teacher.equals("Teacher")) {
-                        handleNotification(45, subject, teacher, 4, 14, 45, 0);
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(45, subject, room, 4, 14, 45, 0);
                         editor.putBoolean("SLOT45_CHECKED", true);
                         editor.apply();
                     }
@@ -1612,9 +1616,9 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                             .getDrawable(TimeTableView.this,
                                     R.drawable.timetable_slot_checked));
                     String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
-                    String teacher = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(1)).getText().toString();
-                    if (!subject.equals("Subject") && !teacher.equals("Teacher")) {
-                        handleNotification(55, subject, teacher, 5, 14, 45, 0);
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(55, subject, room, 5, 14, 45, 0);
                         editor.putBoolean("SLOT55_CHECKED", true);
                         editor.apply();
                     }
@@ -1632,11 +1636,32 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
         }
     }
 
-    private void handleNotification(int id, String subject, String teacher, int day, int hours, int minutes, int seconds) {
-        Toast.makeText(TimeTableView.this, "Notification on", Toast.LENGTH_SHORT).show();
+    private void takeScreenShot() {
+        HorizontalScrollView scrollView = (HorizontalScrollView) findViewById(R.id.SV_parentView);
+        if (scrollView != null) {
+            bitmap = Bitmap.createBitmap(
+                    scrollView.getChildAt(0).getWidth(),
+                    scrollView.getChildAt(0).getHeight(),
+                    Bitmap.Config.ARGB_8888);
+            Canvas c = null;
+            if (bitmap != null) {
+                c = new Canvas(bitmap);
+            }
+            scrollView.getChildAt(0).draw(c);
+        }
+    }
+
+    public String getStringImage(Bitmap bmp){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        return Base64.encodeToString(imageBytes, Base64.DEFAULT);
+    }
+
+    private void handleNotification(int id, String subject, String room, int day, int hours, int minutes, int seconds) {
         Intent alarmIntent = new Intent(this, TimeTableReceiver.class);
         alarmIntent.putExtra("SUBJECT", subject);
-        alarmIntent.putExtra("TEACHER", teacher);
+        alarmIntent.putExtra("ROOM", room);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, id, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         Calendar calendar = Calendar.getInstance();
@@ -1677,7 +1702,6 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
     }
 
     private void cancelSlotNotification(int id) {
-        Toast.makeText(TimeTableView.this, "Notification off", Toast.LENGTH_SHORT).show();
         Intent alarmIntent = new Intent(this, TimeTableReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, id, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
@@ -1694,6 +1718,17 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(color);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        String applicationStatus = sharedPreferences.getString("APPLICATION_STATUS", "");
+        if (applicationStatus.equals("TEACHER")) {
+            takeScreenShot();
+            String imageString = getStringImage(bitmap);
+            new TimetableModal(TimeTableView.this).uploadImage(imageString);
         }
     }
 }

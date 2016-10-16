@@ -3,29 +3,46 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/CV_facultyStatus">
+    >
 
     <RelativeLayout
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@drawable/cardview_status_background"
         android:padding="10dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/TV_teacherName"
-            android:text=""
             android:textStyle="bold|italic"
             android:textColor="#000"
             android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/btnTimetable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/timetable"
+            android:src="@drawable/ic_list_timetable"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/TV_teacherRegistration"
+            android:textStyle="normal"
+            android:layout_below="@+id/TV_teacherName"
+            android:textSize="16sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/TV_teacherStatus"
             android:textStyle="normal"
-            android:text=""
-            android:layout_below="@+id/TV_teacherName"
+            android:layout_below="@+id/TV_teacherRegistration"
             android:textSize="16sp" />
 
     </RelativeLayout>

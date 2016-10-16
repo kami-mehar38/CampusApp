@@ -52,7 +52,6 @@ public class MyGcmListenerService extends GcmListenerService {
             receiveBloodRequestResponseStatus(data);
         }
 
-
         if (APPLICATION_STATUS.equals("FOOD")) {
             if (PURPOSE != null && PURPOSE.equals("FOOD_COMPLAINT")) {
                 receiveFoodComplaint(data);
@@ -60,7 +59,9 @@ public class MyGcmListenerService extends GcmListenerService {
         }
 
         if (PURPOSE != null && PURPOSE.equals("STATUS_NOTIFICATION")) {
-            receiveStatusNotification(data);
+            if (sharedPreferences.getBoolean("RECEIVE_FACULTY_NOTIFICATIONS", false)) {
+                receiveStatusNotification(data);
+            }
         }
 
         if (PURPOSE != null && PURPOSE.equals("EVENT_NOTIFICATION")) {
@@ -261,7 +262,7 @@ public class MyGcmListenerService extends GcmListenerService {
             @Override
             public void run() {
                 if (NotificationsHomePage.sharedPreferences != null)
-                NotificationsHomePage.setBadgeCount();
+                    NotificationsHomePage.setBadgeCount();
             }
         });
 

@@ -8,7 +8,6 @@ import android.os.AsyncTask;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,24 +33,24 @@ import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 /**
  * This project CampusApp is created by Kamran Ramzan on 8/16/16.
  */
-public class TrackFacultyModal {
+class TrackFacultyModal {
 
     private static final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
     private Context context;
 
-    public TrackFacultyModal(Context context) {
+    TrackFacultyModal(Context context) {
         this.context = context;
     }
 
-    public void retrieveStatus(RecyclerView recyclerView, SwipeRefreshLayout SRL_facultyStatus, TextView TV_myStatus, String TEACHER_ID){
+    void retrieveStatus(RecyclerView recyclerView, SwipeRefreshLayout SRL_facultyStatus, TextView TV_myStatus, String TEACHER_ID){
         new RetrieveStatus(recyclerView, SRL_facultyStatus, TV_myStatus).execute(TEACHER_ID);
     }
 
-    public void updateStatus(String status, String teacher_id, TextView TV_myStatus){
+    void updateStatus(String status, String teacher_id, TextView TV_myStatus){
         new UpdateStatus(TV_myStatus).execute(status, teacher_id);
     }
 
-    public class RetrieveStatus extends AsyncTask<String, Void, List<StatusInfo>> {
+    private class RetrieveStatus extends AsyncTask<String, Void, List<StatusInfo>> {
 
         private ProgressDialog progressDialog;
         private RecyclerView recyclerView;
@@ -59,7 +58,7 @@ public class TrackFacultyModal {
         private TextView textView;
         private String APPLICATION_STATUS;
 
-        public RetrieveStatus(RecyclerView recyclerView, SwipeRefreshLayout SRL_facultyStatus, TextView TV_myStatus) {
+        RetrieveStatus(RecyclerView recyclerView, SwipeRefreshLayout SRL_facultyStatus, TextView TV_myStatus) {
             this.recyclerView = recyclerView;
             this.swipeRefreshLayout = SRL_facultyStatus;
             this.textView = TV_myStatus;
@@ -121,7 +120,9 @@ public class TrackFacultyModal {
                         JSONObject finalObject = othersArray.getJSONObject(index);
                         statusInfo[index] = new StatusInfo();
                         statusInfo[index].setTeacherName(finalObject.getString("name"));
+                        statusInfo[index].setTeacherRegistration(finalObject.getString("reg_id"));
                         statusInfo[index].setStatus(finalObject.getString("status"));
+                        statusInfo[index].setMode(finalObject.getString("timetable"));
                         statusInfoList.add(statusInfo[index]);
                     }
 
@@ -165,7 +166,7 @@ public class TrackFacultyModal {
         }
     }
 
-    public class UpdateStatus extends AsyncTask<String, Void, String> {
+    private class UpdateStatus extends AsyncTask<String, Void, String> {
 
         private ProgressDialog progressDialog;
         private AlertDialog alertDialog;
@@ -173,7 +174,7 @@ public class TrackFacultyModal {
         private String status;
         private String teacher_id;
 
-        public UpdateStatus(TextView TV_myStatus) {
+        UpdateStatus(TextView TV_myStatus) {
             this.textView = TV_myStatus;
         }
 
@@ -266,7 +267,7 @@ public class TrackFacultyModal {
         }
     }
 
-    public class sendStatusNotification extends AsyncTask<String, Void, String> {
+    private class sendStatusNotification extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... params) {

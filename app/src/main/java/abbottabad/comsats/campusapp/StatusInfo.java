@@ -3,23 +3,41 @@ package abbottabad.comsats.campusapp;
 /**
  * This project CampusApp is created by Kamran Ramzan on 8/16/16.
  */
-public class StatusInfo {
+class StatusInfo {
     private String teacherName;
+    private String teacherRegistration;
     private String status;
+    private String mode;
 
-    public String getTeacherName() {
+    String getTeacherRegistration() {
+        return teacherRegistration;
+    }
+
+    void setTeacherRegistration(String teacherRegistration) {
+        this.teacherRegistration = teacherRegistration;
+    }
+
+    String getMode() {
+        return mode;
+    }
+
+    void setMode(String mode) {
+        this.mode = mode;
+    }
+
+    String getTeacherName() {
         return teacherName;
     }
 
-    public void setTeacherName(String teacherName) {
+    void setTeacherName(String teacherName) {
         this.teacherName = teacherName;
     }
 
-    public String getStatus() {
+    String getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    void setStatus(String status) {
         this.status = status;
     }
 }
