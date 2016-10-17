@@ -6,9 +6,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.AudioManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
+
 
 /**
  * This project CampusApp is created by Kamran Ramzan on 9/4/16.
@@ -20,6 +22,7 @@ public class TimeTableReceiver extends BroadcastReceiver{
     public void onReceive(Context context, Intent intent) {
 
         SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+
         if (sharedPreferences.getBoolean("RECEIVE_CLASS_NOTIFICATIONS", false)) {
             String subject = intent.getStringExtra("SUBJECT");
             String room = intent.getStringExtra("ROOM");
@@ -42,6 +45,13 @@ public class TimeTableReceiver extends BroadcastReceiver{
                     .setAutoCancel(true).setSound(sound);
             mBuilder.setContentIntent(resultPendingIntent);
             notificationManager.notify(1687, mBuilder.build());
+        }
+
+        if (sharedPreferences.getBoolean("SILENT_DURING_CLASS", false)){
+            AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+            if (audioManager.getRingerMode() != AudioManager.RINGER_MODE_VIBRATE) {
+                audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
+            }
         }
     }
 }

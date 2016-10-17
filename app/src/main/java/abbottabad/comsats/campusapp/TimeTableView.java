@@ -1051,7 +1051,6 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                         Toast.makeText(TimeTableView.this, "Invalid teacher name", Toast.LENGTH_SHORT).show();
                 } else
                     Toast.makeText(TimeTableView.this, "Invalid subject name", Toast.LENGTH_SHORT).show();
-
                 break;
             }
             case R.id.btn_cancelEditDialog: {
@@ -1651,7 +1650,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
         }
     }
 
-    public String getStringImage(Bitmap bmp){
+    public String getStringImage(Bitmap bmp) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] imageBytes = baos.toByteArray();

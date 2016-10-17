@@ -214,6 +214,12 @@ public class HomePageView extends AppCompatActivity implements
             CB_classNotifications.setChecked(sharedPreferences.getBoolean("RECEIVE_CLASS_NOTIFICATIONS", false));
         }
 
+        CheckBox CB_silentDuringClass = (CheckBox) findViewById(R.id.CB_silentDuringClass);
+        if (CB_silentDuringClass != null) {
+            CB_silentDuringClass.setOnClickListener(this);
+            CB_silentDuringClass.setChecked(sharedPreferences.getBoolean("SILENT_DURING_CLASS", false));
+        }
+
         String applicationStatus = sharedPreferences.getString("APPLICATION_STATUS", "");
         if (!applicationStatus.equals("TEACHER")) {
             LinearLayout linearLayout = (LinearLayout) findViewById(R.id.viewShareTimetable);
@@ -664,6 +670,20 @@ public class HomePageView extends AppCompatActivity implements
                 } else {
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putBoolean("RECEIVE_CLASS_NOTIFICATIONS", false);
+                    editor.apply();
+                    Toast.makeText(HomePageView.this, "Disabled", Toast.LENGTH_LONG).show();
+                }
+                break;
+            }
+            case R.id.CB_silentDuringClass:{
+                if (((CheckBox) v).isChecked()){
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean("SILENT_DURING_CLASS", true);
+                    editor.apply();
+                    Toast.makeText(HomePageView.this, "Enabled", Toast.LENGTH_LONG).show();
+                } else {
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean("SILENT_DURING_CLASS", false);
                     editor.apply();
                     Toast.makeText(HomePageView.this, "Disabled", Toast.LENGTH_LONG).show();
                 }
