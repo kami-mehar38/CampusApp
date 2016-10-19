@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -76,6 +77,8 @@ public class TimetableImage extends Activity implements View.OnClickListener {
             isWaiting.setVisibility(View.GONE);
             if (bitmap != null && imageView != null) {
                 imageView.setImageBitmap(bitmap);
+            } else {
+                Toast.makeText(TimetableImage.this, "Error loading timetable", Toast.LENGTH_SHORT).show();
             }
         }
     }

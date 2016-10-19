@@ -78,22 +78,7 @@
             android:background="@drawable/edit_button_style"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:text="@string/edit"
-            android:textAllCaps="false"
-            android:textColor="#fff"
-            android:textSize="14sp" />
-
-        <Button
-            android:id="@+id/btn_cancelEditDialog"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/btn_edit"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="50dp"
-            android:background="@drawable/edit_button_style"
-            android:text="@string/cancel"
+            android:text="@string/ok"
             android:textAllCaps="false"
             android:textColor="#fff"
             android:textSize="14sp" />

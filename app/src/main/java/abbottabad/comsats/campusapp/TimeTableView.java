@@ -40,6 +40,9 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
     private RelativeLayout slot13, slot23, slot33, slot43, slot53;
     private RelativeLayout slot14, slot24, slot34, slot44, slot54;
     private RelativeLayout slot15, slot25, slot35, slot45, slot55;
+    private RelativeLayout slot16, slot26, slot36, slot46, slot56;
+    private RelativeLayout slot17, slot27, slot37, slot47, slot57;
+    private RelativeLayout slot18, slot28, slot38, slot48, slot58;
     private AlertDialog AD_editSlot;
     private EditText ET_editSlotSubject;
     private EditText ET_editSlotTeacher;
@@ -64,7 +67,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
         View view = LayoutInflater.from(TimeTableView.this).inflate(R.layout.edit_slot, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(TimeTableView.this);
         builder.setView(view);
-        builder.setCancelable(false);
+        builder.setCancelable(true);
         AD_editSlot = builder.create();
 
         ET_editSlotSubject = (EditText) view.findViewById(R.id.ET_editSlotSubject);
@@ -72,310 +75,6 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
         ET_editSlotRoom = (EditText) view.findViewById(R.id.ET_editSlotRoom);
         Button btn_edit = (Button) view.findViewById(R.id.btn_edit);
         btn_edit.setOnClickListener(this);
-        Button btn_cancelEditDialog = (Button) view.findViewById(R.id.btn_cancelEditDialog);
-        btn_cancelEditDialog.setOnClickListener(this);
-
-        slot11 = (RelativeLayout) findViewById(R.id.slot11);
-        if (slot11 != null) {
-            String subjectName = sharedPreferences.getString("SLOT11_SUBJECT", null);
-            String teacherName = sharedPreferences.getString("SLOT11_TEACHER", null);
-            String roomNo = sharedPreferences.getString("SLOT11_ROOM", null);
-            if (subjectName != null && teacherName != null && roomNo != null) {
-                ((TextView) slot11.getChildAt(0)).setText(subjectName);
-                ((TextView) slot11.getChildAt(1)).setText(teacherName);
-                ((TextView) slot11.getChildAt(2)).setText(roomNo);
-            }
-            slot11.setOnLongClickListener(this);
-        }
-        slot21 = (RelativeLayout) findViewById(R.id.slot21);
-        if (slot21 != null) {
-            String subjectName = sharedPreferences.getString("SLOT21_SUBJECT", null);
-            String teacherName = sharedPreferences.getString("SLOT21_TEACHER", null);
-            String roomNo = sharedPreferences.getString("SLOT21_ROOM", null);
-            if (subjectName != null && teacherName != null && roomNo != null) {
-                ((TextView) slot21.getChildAt(0)).setText(subjectName);
-                ((TextView) slot21.getChildAt(1)).setText(teacherName);
-                ((TextView) slot21.getChildAt(2)).setText(roomNo);
-            }
-            slot21.setOnLongClickListener(this);
-        }
-        slot31 = (RelativeLayout) findViewById(R.id.slot31);
-        if (slot31 != null) {
-            String subjectName = sharedPreferences.getString("SLOT31_SUBJECT", null);
-            String teacherName = sharedPreferences.getString("SLOT31_TEACHER", null);
-            String roomNo = sharedPreferences.getString("SLOT31_ROOM", null);
-            if (subjectName != null && teacherName != null && roomNo != null) {
-                ((TextView) slot31.getChildAt(0)).setText(subjectName);
-                ((TextView) slot31.getChildAt(1)).setText(teacherName);
-                ((TextView) slot31.getChildAt(2)).setText(roomNo);
-            }
-            slot31.setOnLongClickListener(this);
-        }
-        slot41 = (RelativeLayout) findViewById(R.id.slot41);
-        if (slot41 != null) {
-            String subjectName = sharedPreferences.getString("SLOT41_SUBJECT", null);
-            String teacherName = sharedPreferences.getString("SLOT41_TEACHER", null);
-            String roomNo = sharedPreferences.getString("SLOT41_ROOM", null);
-            if (subjectName != null && teacherName != null && roomNo != null) {
-                ((TextView) slot41.getChildAt(0)).setText(subjectName);
-                ((TextView) slot41.getChildAt(1)).setText(teacherName);
-                ((TextView) slot41.getChildAt(2)).setText(roomNo);
-            }
-            slot41.setOnLongClickListener(this);
-        }
-        slot51 = (RelativeLayout) findViewById(R.id.slot51);
-        if (slot51 != null) {
-            String subjectName = sharedPreferences.getString("SLOT51_SUBJECT", null);
-            String teacherName = sharedPreferences.getString("SLOT51_TEACHER", null);
-            String roomNo = sharedPreferences.getString("SLOT51_ROOM", null);
-            if (subjectName != null && teacherName != null && roomNo != null) {
-                ((TextView) slot51.getChildAt(0)).setText(subjectName);
-                ((TextView) slot51.getChildAt(1)).setText(teacherName);
-                ((TextView) slot51.getChildAt(2)).setText(roomNo);
-            }
-            slot51.setOnLongClickListener(this);
-        }
-        slot12 = (RelativeLayout) findViewById(R.id.slot12);
-        if (slot12 != null) {
-            String subjectName = sharedPreferences.getString("SLOT12_SUBJECT", null);
-            String teacherName = sharedPreferences.getString("SLOT12_TEACHER", null);
-            String roomNo = sharedPreferences.getString("SLOT12_ROOM", null);
-            if (subjectName != null && teacherName != null && roomNo != null) {
-                ((TextView) slot12.getChildAt(0)).setText(subjectName);
-                ((TextView) slot12.getChildAt(1)).setText(teacherName);
-                ((TextView) slot12.getChildAt(2)).setText(roomNo);
-            }
-            slot12.setOnLongClickListener(this);
-        }
-        slot22 = (RelativeLayout) findViewById(R.id.slot22);
-        if (slot22 != null) {
-            String subjectName = sharedPreferences.getString("SLOT22_SUBJECT", null);
-            String teacherName = sharedPreferences.getString("SLOT22_TEACHER", null);
-            String roomNo = sharedPreferences.getString("SLOT22_ROOM", null);
-            if (subjectName != null && teacherName != null && roomNo != null) {
-                ((TextView) slot22.getChildAt(0)).setText(subjectName);
-                ((TextView) slot22.getChildAt(1)).setText(teacherName);
-                ((TextView) slot22.getChildAt(2)).setText(roomNo);
-            }
-            slot22.setOnLongClickListener(this);
-        }
-        slot32 = (RelativeLayout) findViewById(R.id.slot32);
-        if (slot32 != null) {
-            String subjectName = sharedPreferences.getString("SLOT32_SUBJECT", null);
-            String teacherName = sharedPreferences.getString("SLOT32_TEACHER", null);
-            String roomNo = sharedPreferences.getString("SLOT32_ROOM", null);
-            if (subjectName != null && teacherName != null && roomNo != null) {
-                ((TextView) slot32.getChildAt(0)).setText(subjectName);
-                ((TextView) slot32.getChildAt(1)).setText(teacherName);
-                ((TextView) slot32.getChildAt(2)).setText(roomNo);
-            }
-            slot32.setOnLongClickListener(this);
-        }
-        slot42 = (RelativeLayout) findViewById(R.id.slot42);
-        if (slot42 != null) {
-            String subjectName = sharedPreferences.getString("SLOT42_SUBJECT", null);
-            String teacherName = sharedPreferences.getString("SLOT42_TEACHER", null);
-            String roomNo = sharedPreferences.getString("SLOT42_ROOM", null);
-            if (subjectName != null && teacherName != null && roomNo != null) {
-                ((TextView) slot42.getChildAt(0)).setText(subjectName);
-                ((TextView) slot42.getChildAt(1)).setText(teacherName);
-                ((TextView) slot42.getChildAt(2)).setText(roomNo);
-            }
-            slot42.setOnLongClickListener(this);
-        }
-        slot52 = (RelativeLayout) findViewById(R.id.slot52);
-        if (slot52 != null) {
-            String subjectName = sharedPreferences.getString("SLOT52_SUBJECT", null);
-            String teacherName = sharedPreferences.getString("SLOT52_TEACHER", null);
-            String roomNo = sharedPreferences.getString("SLOT52_ROOM", null);
-            if (subjectName != null && teacherName != null && roomNo != null) {
-                ((TextView) slot52.getChildAt(0)).setText(subjectName);
-                ((TextView) slot52.getChildAt(1)).setText(teacherName);
-                ((TextView) slot52.getChildAt(2)).setText(roomNo);
-            }
-            slot52.setOnLongClickListener(this);
-        }
-        slot13 = (RelativeLayout) findViewById(R.id.slot13);
-        if (slot13 != null) {
-            String subjectName = sharedPreferences.getString("SLOT13_SUBJECT", null);
-            String teacherName = sharedPreferences.getString("SLOT13_TEACHER", null);
-            String roomNo = sharedPreferences.getString("SLOT13_ROOM", null);
-            if (subjectName != null && teacherName != null && roomNo != null) {
-                ((TextView) slot13.getChildAt(0)).setText(subjectName);
-                ((TextView) slot13.getChildAt(1)).setText(teacherName);
-                ((TextView) slot13.getChildAt(2)).setText(roomNo);
-            }
-            slot13.setOnLongClickListener(this);
-        }
-        slot23 = (RelativeLayout) findViewById(R.id.slot23);
-        if (slot23 != null) {
-            String subjectName = sharedPreferences.getString("SLOT23_SUBJECT", null);
-            String teacherName = sharedPreferences.getString("SLOT23_TEACHER", null);
-            String roomNo = sharedPreferences.getString("SLOT23_ROOM", null);
-            if (subjectName != null && teacherName != null && roomNo != null) {
-                ((TextView) slot23.getChildAt(0)).setText(subjectName);
-                ((TextView) slot23.getChildAt(1)).setText(teacherName);
-                ((TextView) slot23.getChildAt(2)).setText(roomNo);
-            }
-            slot23.setOnLongClickListener(this);
-        }
-        slot33 = (RelativeLayout) findViewById(R.id.slot33);
-        if (slot33 != null) {
-            String subjectName = sharedPreferences.getString("SLOT33_SUBJECT", null);
-            String teacherName = sharedPreferences.getString("SLOT33_TEACHER", null);
-            String roomNo = sharedPreferences.getString("SLOT33_ROOM", null);
-            if (subjectName != null && teacherName != null && roomNo != null) {
-                ((TextView) slot33.getChildAt(0)).setText(subjectName);
-                ((TextView) slot33.getChildAt(1)).setText(teacherName);
-                ((TextView) slot33.getChildAt(2)).setText(roomNo);
-            }
-            slot33.setOnLongClickListener(this);
-        }
-        slot43 = (RelativeLayout) findViewById(R.id.slot43);
-        if (slot43 != null) {
-            String subjectName = sharedPreferences.getString("SLOT43_SUBJECT", null);
-            String teacherName = sharedPreferences.getString("SLOT43_TEACHER", null);
-            String roomNo = sharedPreferences.getString("SLOT43_ROOM", null);
-            if (subjectName != null && teacherName != null && roomNo != null) {
-                ((TextView) slot43.getChildAt(0)).setText(subjectName);
-                ((TextView) slot43.getChildAt(1)).setText(teacherName);
-                ((TextView) slot43.getChildAt(2)).setText(roomNo);
-            }
-            slot43.setOnLongClickListener(this);
-        }
-        slot53 = (RelativeLayout) findViewById(R.id.slot53);
-        if (slot53 != null) {
-            String subjectName = sharedPreferences.getString("SLOT53_SUBJECT", null);
-            String teacherName = sharedPreferences.getString("SLOT53_TEACHER", null);
-            String roomNo = sharedPreferences.getString("SLOT53_ROOM", null);
-            if (subjectName != null && teacherName != null && roomNo != null) {
-                ((TextView) slot53.getChildAt(0)).setText(subjectName);
-                ((TextView) slot53.getChildAt(1)).setText(teacherName);
-                ((TextView) slot53.getChildAt(2)).setText(roomNo);
-            }
-            slot53.setOnLongClickListener(this);
-        }
-        slot14 = (RelativeLayout) findViewById(R.id.slot14);
-        if (slot14 != null) {
-            String subjectName = sharedPreferences.getString("SLOT14_SUBJECT", null);
-            String teacherName = sharedPreferences.getString("SLOT14_TEACHER", null);
-            String roomNo = sharedPreferences.getString("SLOT14_ROOM", null);
-            if (subjectName != null && teacherName != null && roomNo != null) {
-                ((TextView) slot14.getChildAt(0)).setText(subjectName);
-                ((TextView) slot14.getChildAt(1)).setText(teacherName);
-                ((TextView) slot14.getChildAt(2)).setText(roomNo);
-            }
-            slot14.setOnLongClickListener(this);
-        }
-        slot24 = (RelativeLayout) findViewById(R.id.slot24);
-        if (slot24 != null) {
-            String subjectName = sharedPreferences.getString("SLOT24_SUBJECT", null);
-            String teacherName = sharedPreferences.getString("SLOT24_TEACHER", null);
-            String roomNo = sharedPreferences.getString("SLOT24_ROOM", null);
-            if (subjectName != null && teacherName != null && roomNo != null) {
-                ((TextView) slot24.getChildAt(0)).setText(subjectName);
-                ((TextView) slot24.getChildAt(1)).setText(teacherName);
-                ((TextView) slot24.getChildAt(2)).setText(roomNo);
-            }
-            slot24.setOnLongClickListener(this);
-        }
-        slot34 = (RelativeLayout) findViewById(R.id.slot34);
-        if (slot34 != null) {
-            String subjectName = sharedPreferences.getString("SLOT34_SUBJECT", null);
-            String teacherName = sharedPreferences.getString("SLOT34_TEACHER", null);
-            String roomNo = sharedPreferences.getString("SLOT34_ROOM", null);
-            if (subjectName != null && teacherName != null && roomNo != null) {
-                ((TextView) slot34.getChildAt(0)).setText(subjectName);
-                ((TextView) slot34.getChildAt(1)).setText(teacherName);
-                ((TextView) slot34.getChildAt(2)).setText(roomNo);
-            }
-            slot34.setOnLongClickListener(this);
-        }
-        slot44 = (RelativeLayout) findViewById(R.id.slot44);
-        if (slot44 != null) {
-            String subjectName = sharedPreferences.getString("SLOT44_SUBJECT", null);
-            String teacherName = sharedPreferences.getString("SLOT44_TEACHER", null);
-            String roomNo = sharedPreferences.getString("SLOT44_ROOM", null);
-            if (subjectName != null && teacherName != null && roomNo != null) {
-                ((TextView) slot44.getChildAt(0)).setText(subjectName);
-                ((TextView) slot44.getChildAt(1)).setText(teacherName);
-                ((TextView) slot44.getChildAt(2)).setText(roomNo);
-            }
-            slot44.setOnLongClickListener(this);
-        }
-        slot54 = (RelativeLayout) findViewById(R.id.slot54);
-        if (slot54 != null) {
-            String subjectName = sharedPreferences.getString("SLOT54_SUBJECT", null);
-            String teacherName = sharedPreferences.getString("SLOT54_TEACHER", null);
-            String roomNo = sharedPreferences.getString("SLOT54_ROOM", null);
-            if (subjectName != null && teacherName != null && roomNo != null) {
-                ((TextView) slot54.getChildAt(0)).setText(subjectName);
-                ((TextView) slot54.getChildAt(1)).setText(teacherName);
-                ((TextView) slot54.getChildAt(2)).setText(roomNo);
-            }
-            slot54.setOnLongClickListener(this);
-        }
-        slot15 = (RelativeLayout) findViewById(R.id.slot15);
-        if (slot15 != null) {
-            String subjectName = sharedPreferences.getString("SLOT15_SUBJECT", null);
-            String teacherName = sharedPreferences.getString("SLOT15_TEACHER", null);
-            String roomNo = sharedPreferences.getString("SLOT15_ROOM", null);
-            if (subjectName != null && teacherName != null && roomNo != null) {
-                ((TextView) slot15.getChildAt(0)).setText(subjectName);
-                ((TextView) slot15.getChildAt(1)).setText(teacherName);
-                ((TextView) slot15.getChildAt(2)).setText(roomNo);
-            }
-            slot15.setOnLongClickListener(this);
-        }
-        slot25 = (RelativeLayout) findViewById(R.id.slot25);
-        if (slot25 != null) {
-            String subjectName = sharedPreferences.getString("SLOT25_SUBJECT", null);
-            String teacherName = sharedPreferences.getString("SLOT25_TEACHER", null);
-            String roomNo = sharedPreferences.getString("SLOT25_ROOM", null);
-            if (subjectName != null && teacherName != null && roomNo != null) {
-                ((TextView) slot25.getChildAt(0)).setText(subjectName);
-                ((TextView) slot25.getChildAt(1)).setText(teacherName);
-                ((TextView) slot25.getChildAt(2)).setText(roomNo);
-            }
-            slot25.setOnLongClickListener(this);
-        }
-        slot35 = (RelativeLayout) findViewById(R.id.slot35);
-        if (slot35 != null) {
-            String subjectName = sharedPreferences.getString("SLOT35_SUBJECT", null);
-            String teacherName = sharedPreferences.getString("SLOT35_TEACHER", null);
-            String roomNo = sharedPreferences.getString("SLOT35_ROOM", null);
-            if (subjectName != null && teacherName != null && roomNo != null) {
-                ((TextView) slot35.getChildAt(0)).setText(subjectName);
-                ((TextView) slot35.getChildAt(1)).setText(teacherName);
-                ((TextView) slot35.getChildAt(2)).setText(roomNo);
-            }
-            slot35.setOnLongClickListener(this);
-        }
-        slot45 = (RelativeLayout) findViewById(R.id.slot45);
-        if (slot45 != null) {
-            String subjectName = sharedPreferences.getString("SLOT45_SUBJECT", null);
-            String teacherName = sharedPreferences.getString("SLOT45_TEACHER", null);
-            String roomNo = sharedPreferences.getString("SLOT45_ROOM", null);
-            if (subjectName != null && teacherName != null && roomNo != null) {
-                ((TextView) slot45.getChildAt(0)).setText(subjectName);
-                ((TextView) slot45.getChildAt(1)).setText(teacherName);
-                ((TextView) slot45.getChildAt(2)).setText(roomNo);
-            }
-            slot45.setOnLongClickListener(this);
-        }
-        slot55 = (RelativeLayout) findViewById(R.id.slot55);
-        if (slot55 != null) {
-            String subjectName = sharedPreferences.getString("SLOT55_SUBJECT", null);
-            String teacherName = sharedPreferences.getString("SLOT55_TEACHER", null);
-            String roomNo = sharedPreferences.getString("SLOT55_ROOM", null);
-            if (subjectName != null && teacherName != null && roomNo != null) {
-                ((TextView) slot55.getChildAt(0)).setText(subjectName);
-                ((TextView) slot55.getChildAt(1)).setText(teacherName);
-                ((TextView) slot55.getChildAt(2)).setText(roomNo);
-            }
-            slot55.setOnLongClickListener(this);
-        }
-
 
         CheckBox slot11Reminder = (CheckBox) findViewById(R.id.slot11Reminder);
         if (slot11Reminder != null) {
@@ -628,6 +327,747 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot55Reminder.setOnClickListener(this);
         }
 
+        CheckBox slot16Reminder = (CheckBox) findViewById(R.id.slot16Reminder);
+        if (slot16Reminder != null) {
+            boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT16_CHECKED", false);
+            if (IS_CHECKED)
+                ((RelativeLayout) slot16Reminder.getParent()).setBackground(ContextCompat
+                        .getDrawable(TimeTableView.this,
+                                R.drawable.timetable_slot_checked));
+            slot16Reminder.setChecked(IS_CHECKED);
+            slot16Reminder.setOnClickListener(this);
+        }
+
+        CheckBox slot26Reminder = (CheckBox) findViewById(R.id.slot26Reminder);
+        if (slot26Reminder != null) {
+            boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT26_CHECKED", false);
+            if (IS_CHECKED)
+                ((RelativeLayout) slot26Reminder.getParent()).setBackground(ContextCompat
+                        .getDrawable(TimeTableView.this,
+                                R.drawable.timetable_slot_checked));
+            slot26Reminder.setChecked(IS_CHECKED);
+            slot26Reminder.setOnClickListener(this);
+        }
+
+        CheckBox slot36Reminder = (CheckBox) findViewById(R.id.slot36Reminder);
+        if (slot36Reminder != null) {
+            boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT36_CHECKED", false);
+            if (IS_CHECKED)
+                ((RelativeLayout) slot36Reminder.getParent()).setBackground(ContextCompat
+                        .getDrawable(TimeTableView.this,
+                                R.drawable.timetable_slot_checked));
+            slot36Reminder.setChecked(IS_CHECKED);
+            slot36Reminder.setOnClickListener(this);
+        }
+
+        CheckBox slot46Reminder = (CheckBox) findViewById(R.id.slot46Reminder);
+        if (slot46Reminder != null) {
+            boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT46_CHECKED", false);
+            if (IS_CHECKED)
+                ((RelativeLayout) slot46Reminder.getParent()).setBackground(ContextCompat
+                        .getDrawable(TimeTableView.this,
+                                R.drawable.timetable_slot_checked));
+            slot46Reminder.setChecked(IS_CHECKED);
+            slot46Reminder.setOnClickListener(this);
+        }
+
+        CheckBox slot56Reminder = (CheckBox) findViewById(R.id.slot56Reminder);
+        if (slot56Reminder != null) {
+            boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT56_CHECKED", false);
+            if (IS_CHECKED)
+                ((RelativeLayout) slot56Reminder.getParent()).setBackground(ContextCompat
+                        .getDrawable(TimeTableView.this,
+                                R.drawable.timetable_slot_checked));
+            slot56Reminder.setChecked(IS_CHECKED);
+            slot56Reminder.setOnClickListener(this);
+        }
+
+        CheckBox slot17Reminder = (CheckBox) findViewById(R.id.slot17Reminder);
+        if (slot17Reminder != null) {
+            boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT17_CHECKED", false);
+            if (IS_CHECKED)
+                ((RelativeLayout) slot17Reminder.getParent()).setBackground(ContextCompat
+                        .getDrawable(TimeTableView.this,
+                                R.drawable.timetable_slot_checked));
+            slot17Reminder.setChecked(IS_CHECKED);
+            slot17Reminder.setOnClickListener(this);
+        }
+
+        CheckBox slot27Reminder = (CheckBox) findViewById(R.id.slot27Reminder);
+        if (slot27Reminder != null) {
+            boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT27_CHECKED", false);
+            if (IS_CHECKED)
+                ((RelativeLayout) slot27Reminder.getParent()).setBackground(ContextCompat
+                        .getDrawable(TimeTableView.this,
+                                R.drawable.timetable_slot_checked));
+            slot27Reminder.setChecked(IS_CHECKED);
+            slot27Reminder.setOnClickListener(this);
+        }
+
+        CheckBox slot37Reminder = (CheckBox) findViewById(R.id.slot37Reminder);
+        if (slot37Reminder != null) {
+            boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT37_CHECKED", false);
+            if (IS_CHECKED)
+                ((RelativeLayout) slot37Reminder.getParent()).setBackground(ContextCompat
+                        .getDrawable(TimeTableView.this,
+                                R.drawable.timetable_slot_checked));
+            slot37Reminder.setChecked(IS_CHECKED);
+            slot37Reminder.setOnClickListener(this);
+        }
+
+        CheckBox slot47Reminder = (CheckBox) findViewById(R.id.slot47Reminder);
+        if (slot47Reminder != null) {
+            boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT47_CHECKED", false);
+            if (IS_CHECKED)
+                ((RelativeLayout) slot47Reminder.getParent()).setBackground(ContextCompat
+                        .getDrawable(TimeTableView.this,
+                                R.drawable.timetable_slot_checked));
+            slot47Reminder.setChecked(IS_CHECKED);
+            slot47Reminder.setOnClickListener(this);
+        }
+
+        CheckBox slot57Reminder = (CheckBox) findViewById(R.id.slot57Reminder);
+        if (slot57Reminder != null) {
+            boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT57_CHECKED", false);
+            if (IS_CHECKED)
+                ((RelativeLayout) slot57Reminder.getParent()).setBackground(ContextCompat
+                        .getDrawable(TimeTableView.this,
+                                R.drawable.timetable_slot_checked));
+            slot57Reminder.setChecked(IS_CHECKED);
+            slot57Reminder.setOnClickListener(this);
+        }
+
+        CheckBox slot18Reminder = (CheckBox) findViewById(R.id.slot18Reminder);
+        if (slot18Reminder != null) {
+            boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT18_CHECKED", false);
+            if (IS_CHECKED)
+                ((RelativeLayout) slot18Reminder.getParent()).setBackground(ContextCompat
+                        .getDrawable(TimeTableView.this,
+                                R.drawable.timetable_slot_checked));
+            slot18Reminder.setChecked(IS_CHECKED);
+            slot18Reminder.setOnClickListener(this);
+        }
+
+        CheckBox slot28Reminder = (CheckBox) findViewById(R.id.slot28Reminder);
+        if (slot28Reminder != null) {
+            boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT28_CHECKED", false);
+            if (IS_CHECKED)
+                ((RelativeLayout) slot28Reminder.getParent()).setBackground(ContextCompat
+                        .getDrawable(TimeTableView.this,
+                                R.drawable.timetable_slot_checked));
+            slot28Reminder.setChecked(IS_CHECKED);
+            slot28Reminder.setOnClickListener(this);
+        }
+
+        CheckBox slot38Reminder = (CheckBox) findViewById(R.id.slot38Reminder);
+        if (slot38Reminder != null) {
+            boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT38_CHECKED", false);
+            if (IS_CHECKED)
+                ((RelativeLayout) slot38Reminder.getParent()).setBackground(ContextCompat
+                        .getDrawable(TimeTableView.this,
+                                R.drawable.timetable_slot_checked));
+            slot38Reminder.setChecked(IS_CHECKED);
+            slot38Reminder.setOnClickListener(this);
+        }
+
+        CheckBox slot48Reminder = (CheckBox) findViewById(R.id.slot48Reminder);
+        if (slot48Reminder != null) {
+            boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT48_CHECKED", false);
+            if (IS_CHECKED)
+                ((RelativeLayout) slot48Reminder.getParent()).setBackground(ContextCompat
+                        .getDrawable(TimeTableView.this,
+                                R.drawable.timetable_slot_checked));
+            slot48Reminder.setChecked(IS_CHECKED);
+            slot48Reminder.setOnClickListener(this);
+        }
+
+        CheckBox slot58Reminder = (CheckBox) findViewById(R.id.slot58Reminder);
+        if (slot58Reminder != null) {
+            boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT58_CHECKED", false);
+            if (IS_CHECKED)
+                ((RelativeLayout) slot58Reminder.getParent()).setBackground(ContextCompat
+                        .getDrawable(TimeTableView.this,
+                                R.drawable.timetable_slot_checked));
+            slot58Reminder.setChecked(IS_CHECKED);
+            slot58Reminder.setOnClickListener(this);
+        }
+
+        slot11 = (RelativeLayout) findViewById(R.id.slot11);
+        if (slot11 != null) {
+            String subjectName = sharedPreferences.getString("SLOT11_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT11_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT11_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot11.getChildAt(0)).setText(subjectName);
+                ((TextView) slot11.getChildAt(1)).setText(teacherName);
+                ((TextView) slot11.getChildAt(2)).setText(roomNo);
+            }else if (slot11Reminder != null){
+                slot11Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot11.setOnLongClickListener(this);
+        }
+        slot21 = (RelativeLayout) findViewById(R.id.slot21);
+        if (slot21 != null) {
+            String subjectName = sharedPreferences.getString("SLOT21_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT21_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT21_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot21.getChildAt(0)).setText(subjectName);
+                ((TextView) slot21.getChildAt(1)).setText(teacherName);
+                ((TextView) slot21.getChildAt(2)).setText(roomNo);
+            }else if (slot21Reminder != null){
+                slot21Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot21.setOnLongClickListener(this);
+        }
+        slot31 = (RelativeLayout) findViewById(R.id.slot31);
+        if (slot31 != null) {
+            String subjectName = sharedPreferences.getString("SLOT31_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT31_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT31_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot31.getChildAt(0)).setText(subjectName);
+                ((TextView) slot31.getChildAt(1)).setText(teacherName);
+                ((TextView) slot31.getChildAt(2)).setText(roomNo);
+            }else if (slot31Reminder != null){
+                slot31Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot31.setOnLongClickListener(this);
+        }
+        slot41 = (RelativeLayout) findViewById(R.id.slot41);
+        if (slot41 != null) {
+            String subjectName = sharedPreferences.getString("SLOT41_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT41_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT41_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot41.getChildAt(0)).setText(subjectName);
+                ((TextView) slot41.getChildAt(1)).setText(teacherName);
+                ((TextView) slot41.getChildAt(2)).setText(roomNo);
+            }else if (slot41Reminder != null){
+                slot41Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot41.setOnLongClickListener(this);
+        }
+        slot51 = (RelativeLayout) findViewById(R.id.slot51);
+        if (slot51 != null) {
+            String subjectName = sharedPreferences.getString("SLOT51_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT51_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT51_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot51.getChildAt(0)).setText(subjectName);
+                ((TextView) slot51.getChildAt(1)).setText(teacherName);
+                ((TextView) slot51.getChildAt(2)).setText(roomNo);
+            } else if (slot51Reminder != null){
+                slot51Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot51.setOnLongClickListener(this);
+        }
+        slot12 = (RelativeLayout) findViewById(R.id.slot12);
+        if (slot12 != null) {
+            String subjectName = sharedPreferences.getString("SLOT12_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT12_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT12_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot12.getChildAt(0)).setText(subjectName);
+                ((TextView) slot12.getChildAt(1)).setText(teacherName);
+                ((TextView) slot12.getChildAt(2)).setText(roomNo);
+            }else if (slot12Reminder != null){
+                slot12Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot12.setOnLongClickListener(this);
+        }
+        slot22 = (RelativeLayout) findViewById(R.id.slot22);
+        if (slot22 != null) {
+            String subjectName = sharedPreferences.getString("SLOT22_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT22_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT22_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot22.getChildAt(0)).setText(subjectName);
+                ((TextView) slot22.getChildAt(1)).setText(teacherName);
+                ((TextView) slot22.getChildAt(2)).setText(roomNo);
+            }else if (slot22Reminder != null){
+                slot22Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot22.setOnLongClickListener(this);
+        }
+        slot32 = (RelativeLayout) findViewById(R.id.slot32);
+        if (slot32 != null) {
+            String subjectName = sharedPreferences.getString("SLOT32_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT32_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT32_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot32.getChildAt(0)).setText(subjectName);
+                ((TextView) slot32.getChildAt(1)).setText(teacherName);
+                ((TextView) slot32.getChildAt(2)).setText(roomNo);
+            }else if (slot32Reminder != null){
+                slot32Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot32.setOnLongClickListener(this);
+        }
+        slot42 = (RelativeLayout) findViewById(R.id.slot42);
+        if (slot42 != null) {
+            String subjectName = sharedPreferences.getString("SLOT42_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT42_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT42_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot42.getChildAt(0)).setText(subjectName);
+                ((TextView) slot42.getChildAt(1)).setText(teacherName);
+                ((TextView) slot42.getChildAt(2)).setText(roomNo);
+            }else if (slot42Reminder != null){
+                slot42Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot42.setOnLongClickListener(this);
+        }
+        slot52 = (RelativeLayout) findViewById(R.id.slot52);
+        if (slot52 != null) {
+            String subjectName = sharedPreferences.getString("SLOT52_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT52_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT52_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot52.getChildAt(0)).setText(subjectName);
+                ((TextView) slot52.getChildAt(1)).setText(teacherName);
+                ((TextView) slot52.getChildAt(2)).setText(roomNo);
+            }else if (slot52Reminder != null){
+                slot52Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot52.setOnLongClickListener(this);
+        }
+        slot13 = (RelativeLayout) findViewById(R.id.slot13);
+        if (slot13 != null) {
+            String subjectName = sharedPreferences.getString("SLOT13_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT13_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT13_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot13.getChildAt(0)).setText(subjectName);
+                ((TextView) slot13.getChildAt(1)).setText(teacherName);
+                ((TextView) slot13.getChildAt(2)).setText(roomNo);
+            }else if (slot13Reminder != null){
+                slot13Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot13.setOnLongClickListener(this);
+        }
+        slot23 = (RelativeLayout) findViewById(R.id.slot23);
+        if (slot23 != null) {
+            String subjectName = sharedPreferences.getString("SLOT23_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT23_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT23_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot23.getChildAt(0)).setText(subjectName);
+                ((TextView) slot23.getChildAt(1)).setText(teacherName);
+                ((TextView) slot23.getChildAt(2)).setText(roomNo);
+            }else if (slot23Reminder != null){
+                slot23Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot23.setOnLongClickListener(this);
+        }
+        slot33 = (RelativeLayout) findViewById(R.id.slot33);
+        if (slot33 != null) {
+            String subjectName = sharedPreferences.getString("SLOT33_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT33_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT33_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot33.getChildAt(0)).setText(subjectName);
+                ((TextView) slot33.getChildAt(1)).setText(teacherName);
+                ((TextView) slot33.getChildAt(2)).setText(roomNo);
+            }else if (slot33Reminder != null){
+                slot33Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot33.setOnLongClickListener(this);
+        }
+        slot43 = (RelativeLayout) findViewById(R.id.slot43);
+        if (slot43 != null) {
+            String subjectName = sharedPreferences.getString("SLOT43_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT43_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT43_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot43.getChildAt(0)).setText(subjectName);
+                ((TextView) slot43.getChildAt(1)).setText(teacherName);
+                ((TextView) slot43.getChildAt(2)).setText(roomNo);
+            }else if (slot43Reminder != null){
+                slot43Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot43.setOnLongClickListener(this);
+        }
+        slot53 = (RelativeLayout) findViewById(R.id.slot53);
+        if (slot53 != null) {
+            String subjectName = sharedPreferences.getString("SLOT53_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT53_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT53_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot53.getChildAt(0)).setText(subjectName);
+                ((TextView) slot53.getChildAt(1)).setText(teacherName);
+                ((TextView) slot53.getChildAt(2)).setText(roomNo);
+            }else if (slot53Reminder != null){
+                slot53Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot53.setOnLongClickListener(this);
+        }
+        slot14 = (RelativeLayout) findViewById(R.id.slot14);
+        if (slot14 != null) {
+            String subjectName = sharedPreferences.getString("SLOT14_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT14_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT14_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot14.getChildAt(0)).setText(subjectName);
+                ((TextView) slot14.getChildAt(1)).setText(teacherName);
+                ((TextView) slot14.getChildAt(2)).setText(roomNo);
+            }else if (slot14Reminder != null){
+                slot14Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot14.setOnLongClickListener(this);
+        }
+        slot24 = (RelativeLayout) findViewById(R.id.slot24);
+        if (slot24 != null) {
+            String subjectName = sharedPreferences.getString("SLOT24_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT24_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT24_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot24.getChildAt(0)).setText(subjectName);
+                ((TextView) slot24.getChildAt(1)).setText(teacherName);
+                ((TextView) slot24.getChildAt(2)).setText(roomNo);
+            }else if (slot24Reminder != null){
+                slot24Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot24.setOnLongClickListener(this);
+        }
+        slot34 = (RelativeLayout) findViewById(R.id.slot34);
+        if (slot34 != null) {
+            String subjectName = sharedPreferences.getString("SLOT34_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT34_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT34_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot34.getChildAt(0)).setText(subjectName);
+                ((TextView) slot34.getChildAt(1)).setText(teacherName);
+                ((TextView) slot34.getChildAt(2)).setText(roomNo);
+            }else if (slot34Reminder != null){
+                slot34Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot34.setOnLongClickListener(this);
+        }
+        slot44 = (RelativeLayout) findViewById(R.id.slot44);
+        if (slot44 != null) {
+            String subjectName = sharedPreferences.getString("SLOT44_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT44_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT44_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot44.getChildAt(0)).setText(subjectName);
+                ((TextView) slot44.getChildAt(1)).setText(teacherName);
+                ((TextView) slot44.getChildAt(2)).setText(roomNo);
+            }else if (slot44Reminder != null){
+                slot44Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot44.setOnLongClickListener(this);
+        }
+        slot54 = (RelativeLayout) findViewById(R.id.slot54);
+        if (slot54 != null) {
+            String subjectName = sharedPreferences.getString("SLOT54_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT54_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT54_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot54.getChildAt(0)).setText(subjectName);
+                ((TextView) slot54.getChildAt(1)).setText(teacherName);
+                ((TextView) slot54.getChildAt(2)).setText(roomNo);
+            }else if (slot54Reminder != null){
+                slot54Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot54.setOnLongClickListener(this);
+        }
+        slot15 = (RelativeLayout) findViewById(R.id.slot15);
+        if (slot15 != null) {
+            String subjectName = sharedPreferences.getString("SLOT15_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT15_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT15_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot15.getChildAt(0)).setText(subjectName);
+                ((TextView) slot15.getChildAt(1)).setText(teacherName);
+                ((TextView) slot15.getChildAt(2)).setText(roomNo);
+            }else if (slot15Reminder != null){
+                slot15Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot15.setOnLongClickListener(this);
+        }
+        slot25 = (RelativeLayout) findViewById(R.id.slot25);
+        if (slot25 != null) {
+            String subjectName = sharedPreferences.getString("SLOT25_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT25_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT25_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot25.getChildAt(0)).setText(subjectName);
+                ((TextView) slot25.getChildAt(1)).setText(teacherName);
+                ((TextView) slot25.getChildAt(2)).setText(roomNo);
+            }else if (slot25Reminder != null){
+                slot25Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot25.setOnLongClickListener(this);
+        }
+        slot35 = (RelativeLayout) findViewById(R.id.slot35);
+        if (slot35 != null) {
+            String subjectName = sharedPreferences.getString("SLOT35_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT35_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT35_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot35.getChildAt(0)).setText(subjectName);
+                ((TextView) slot35.getChildAt(1)).setText(teacherName);
+                ((TextView) slot35.getChildAt(2)).setText(roomNo);
+            }else if (slot35Reminder != null){
+                slot35Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot35.setOnLongClickListener(this);
+        }
+        slot45 = (RelativeLayout) findViewById(R.id.slot45);
+        if (slot45 != null) {
+            String subjectName = sharedPreferences.getString("SLOT45_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT45_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT45_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot45.getChildAt(0)).setText(subjectName);
+                ((TextView) slot45.getChildAt(1)).setText(teacherName);
+                ((TextView) slot45.getChildAt(2)).setText(roomNo);
+            }else if (slot45Reminder != null){
+                slot45Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot45.setOnLongClickListener(this);
+        }
+        slot55 = (RelativeLayout) findViewById(R.id.slot55);
+        if (slot55 != null) {
+            String subjectName = sharedPreferences.getString("SLOT55_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT55_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT55_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot55.getChildAt(0)).setText(subjectName);
+                ((TextView) slot55.getChildAt(1)).setText(teacherName);
+                ((TextView) slot55.getChildAt(2)).setText(roomNo);
+            }else if (slot55Reminder != null){
+                slot55Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot55.setOnLongClickListener(this);
+        }
+
+        slot16 = (RelativeLayout) findViewById(R.id.slot16);
+        if (slot16 != null) {
+            String subjectName = sharedPreferences.getString("SLOT16_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT16_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT16_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot16.getChildAt(0)).setText(subjectName);
+                ((TextView) slot16.getChildAt(1)).setText(teacherName);
+                ((TextView) slot16.getChildAt(2)).setText(roomNo);
+            }else if (slot16Reminder != null){
+                slot16Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot16.setOnLongClickListener(this);
+        }
+
+        slot26 = (RelativeLayout) findViewById(R.id.slot26);
+        if (slot26 != null) {
+            String subjectName = sharedPreferences.getString("SLOT26_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT26_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT26_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot26.getChildAt(0)).setText(subjectName);
+                ((TextView) slot26.getChildAt(1)).setText(teacherName);
+                ((TextView) slot26.getChildAt(2)).setText(roomNo);
+            }else if (slot26Reminder != null){
+                slot26Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot26.setOnLongClickListener(this);
+        }
+
+        slot36 = (RelativeLayout) findViewById(R.id.slot36);
+        if (slot36 != null) {
+            String subjectName = sharedPreferences.getString("SLOT36_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT36_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT36_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot36.getChildAt(0)).setText(subjectName);
+                ((TextView) slot36.getChildAt(1)).setText(teacherName);
+                ((TextView) slot36.getChildAt(2)).setText(roomNo);
+            }else if (slot36Reminder != null){
+                slot36Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot36.setOnLongClickListener(this);
+        }
+
+        slot46 = (RelativeLayout) findViewById(R.id.slot46);
+        if (slot46 != null) {
+            String subjectName = sharedPreferences.getString("SLOT46_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT46_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT46_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot46.getChildAt(0)).setText(subjectName);
+                ((TextView) slot46.getChildAt(1)).setText(teacherName);
+                ((TextView) slot46.getChildAt(2)).setText(roomNo);
+            }else if (slot46Reminder != null){
+                slot46Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot46.setOnLongClickListener(this);
+        }
+
+        slot56 = (RelativeLayout) findViewById(R.id.slot56);
+        if (slot56 != null) {
+            String subjectName = sharedPreferences.getString("SLOT56_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT56_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT56_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot56.getChildAt(0)).setText(subjectName);
+                ((TextView) slot56.getChildAt(1)).setText(teacherName);
+                ((TextView) slot56.getChildAt(2)).setText(roomNo);
+            }else if (slot56Reminder != null){
+                slot56Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot56.setOnLongClickListener(this);
+        }
+
+        slot17 = (RelativeLayout) findViewById(R.id.slot17);
+        if (slot17 != null) {
+            String subjectName = sharedPreferences.getString("SLOT17_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT17_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT17_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot17.getChildAt(0)).setText(subjectName);
+                ((TextView) slot17.getChildAt(1)).setText(teacherName);
+                ((TextView) slot17.getChildAt(2)).setText(roomNo);
+            }else if (slot17Reminder != null){
+                slot17Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot17.setOnLongClickListener(this);
+        }
+
+        slot27 = (RelativeLayout) findViewById(R.id.slot27);
+        if (slot27 != null) {
+            String subjectName = sharedPreferences.getString("SLOT27_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT27_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT27_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot27.getChildAt(0)).setText(subjectName);
+                ((TextView) slot27.getChildAt(1)).setText(teacherName);
+                ((TextView) slot27.getChildAt(2)).setText(roomNo);
+            }else if (slot27Reminder != null){
+                slot27Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot27.setOnLongClickListener(this);
+        }
+
+        slot37 = (RelativeLayout) findViewById(R.id.slot37);
+        if (slot37 != null) {
+            String subjectName = sharedPreferences.getString("SLOT37_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT37_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT37_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot37.getChildAt(0)).setText(subjectName);
+                ((TextView) slot37.getChildAt(1)).setText(teacherName);
+                ((TextView) slot37.getChildAt(2)).setText(roomNo);
+            }else if (slot37Reminder != null){
+                slot37Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot37.setOnLongClickListener(this);
+        }
+
+        slot47 = (RelativeLayout) findViewById(R.id.slot47);
+        if (slot47 != null) {
+            String subjectName = sharedPreferences.getString("SLOT47_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT47_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT47_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot47.getChildAt(0)).setText(subjectName);
+                ((TextView) slot47.getChildAt(1)).setText(teacherName);
+                ((TextView) slot47.getChildAt(2)).setText(roomNo);
+            }else if (slot47Reminder != null){
+                slot47Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot47.setOnLongClickListener(this);
+        }
+
+        slot57 = (RelativeLayout) findViewById(R.id.slot57);
+        if (slot57 != null) {
+            String subjectName = sharedPreferences.getString("SLOT57_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT57_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT57_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot57.getChildAt(0)).setText(subjectName);
+                ((TextView) slot57.getChildAt(1)).setText(teacherName);
+                ((TextView) slot57.getChildAt(2)).setText(roomNo);
+            }else if (slot57Reminder != null){
+                slot57Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot57.setOnLongClickListener(this);
+        }
+
+        slot18 = (RelativeLayout) findViewById(R.id.slot18);
+        if (slot18 != null) {
+            String subjectName = sharedPreferences.getString("SLOT18_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT18_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT18_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot18.getChildAt(0)).setText(subjectName);
+                ((TextView) slot18.getChildAt(1)).setText(teacherName);
+                ((TextView) slot18.getChildAt(2)).setText(roomNo);
+            }else if (slot18Reminder != null){
+                slot18Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot18.setOnLongClickListener(this);
+        }
+
+        slot28 = (RelativeLayout) findViewById(R.id.slot28);
+        if (slot28 != null) {
+            String subjectName = sharedPreferences.getString("SLOT28_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT28_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT28_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot28.getChildAt(0)).setText(subjectName);
+                ((TextView) slot28.getChildAt(1)).setText(teacherName);
+                ((TextView) slot28.getChildAt(2)).setText(roomNo);
+            }else if (slot28Reminder != null){
+                slot28Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot28.setOnLongClickListener(this);
+        }
+
+        slot38 = (RelativeLayout) findViewById(R.id.slot38);
+        if (slot38 != null) {
+            String subjectName = sharedPreferences.getString("SLOT38_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT38_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT38_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot38.getChildAt(0)).setText(subjectName);
+                ((TextView) slot38.getChildAt(1)).setText(teacherName);
+                ((TextView) slot38.getChildAt(2)).setText(roomNo);
+            }else if (slot38Reminder != null){
+                slot38Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot38.setOnLongClickListener(this);
+        }
+
+        slot48 = (RelativeLayout) findViewById(R.id.slot48);
+        if (slot48 != null) {
+            String subjectName = sharedPreferences.getString("SLOT48_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT48_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT48_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot48.getChildAt(0)).setText(subjectName);
+                ((TextView) slot48.getChildAt(1)).setText(teacherName);
+                ((TextView) slot48.getChildAt(2)).setText(roomNo);
+            }else if (slot48Reminder != null){
+                slot48Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot48.setOnLongClickListener(this);
+        }
+
+        slot58 = (RelativeLayout) findViewById(R.id.slot58);
+        if (slot58 != null) {
+            String subjectName = sharedPreferences.getString("SLOT58_SUBJECT", null);
+            String teacherName = sharedPreferences.getString("SLOT58_TEACHER", null);
+            String roomNo = sharedPreferences.getString("SLOT58_ROOM", null);
+            if (subjectName != null && teacherName != null && roomNo != null) {
+                ((TextView) slot58.getChildAt(0)).setText(subjectName);
+                ((TextView) slot58.getChildAt(1)).setText(teacherName);
+                ((TextView) slot58.getChildAt(2)).setText(roomNo);
+            }else if (slot58Reminder != null){
+                slot58Reminder.setVisibility(View.INVISIBLE);
+            }
+            slot58.setOnLongClickListener(this);
+        }
+
         validation = new Validation();
     }
 
@@ -762,6 +1202,81 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 AD_editSlot.show();
                 break;
             }
+            case R.id.slot16: {
+                SELECTED_SLOT = 16;
+                AD_editSlot.show();
+                break;
+            }
+            case R.id.slot26: {
+                SELECTED_SLOT = 26;
+                AD_editSlot.show();
+                break;
+            }
+            case R.id.slot36: {
+                SELECTED_SLOT = 36;
+                AD_editSlot.show();
+                break;
+            }
+            case R.id.slot46: {
+                SELECTED_SLOT = 46;
+                AD_editSlot.show();
+                break;
+            }
+            case R.id.slot56: {
+                SELECTED_SLOT = 56;
+                AD_editSlot.show();
+                break;
+            }
+            case R.id.slot17: {
+                SELECTED_SLOT = 17;
+                AD_editSlot.show();
+                break;
+            }
+            case R.id.slot27: {
+                SELECTED_SLOT = 27;
+                AD_editSlot.show();
+                break;
+            }
+            case R.id.slot37: {
+                SELECTED_SLOT = 37;
+                AD_editSlot.show();
+                break;
+            }
+            case R.id.slot47: {
+                SELECTED_SLOT = 47;
+                AD_editSlot.show();
+                break;
+            }
+            case R.id.slot57: {
+                SELECTED_SLOT = 57;
+                AD_editSlot.show();
+                break;
+            }
+            case R.id.slot18: {
+                SELECTED_SLOT = 18;
+                AD_editSlot.show();
+                break;
+            }
+            case R.id.slot28: {
+                SELECTED_SLOT = 28;
+                AD_editSlot.show();
+                break;
+            }
+            case R.id.slot38: {
+                SELECTED_SLOT = 38;
+                AD_editSlot.show();
+                break;
+            }
+            case R.id.slot48: {
+                SELECTED_SLOT = 48;
+                AD_editSlot.show();
+                break;
+            }
+            case R.id.slot58: {
+                SELECTED_SLOT = 58;
+                AD_editSlot.show();
+                break;
+            }
         }
         return true;
     }
@@ -780,6 +1295,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                             View subject = null;
                             View teacher = null;
                             View room = null;
+                            View reminder = null;
                             switch (SELECTED_SLOT) {
                                 case 11: {
                                     editor.putString("SLOT11_SUBJECT", subjectName);
@@ -789,6 +1305,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                                     subject = slot11.getChildAt(0);
                                     teacher = slot11.getChildAt(1);
                                     room = slot11.getChildAt(2);
+                                    reminder = slot11.getChildAt(3);
                                     break;
                                 }
                                 case 21: {
@@ -799,6 +1316,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                                     subject = slot21.getChildAt(0);
                                     teacher = slot21.getChildAt(1);
                                     room = slot21.getChildAt(2);
+                                    reminder = slot21.getChildAt(3);
                                     break;
                                 }
                                 case 31: {
@@ -809,6 +1327,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                                     subject = slot31.getChildAt(0);
                                     teacher = slot31.getChildAt(1);
                                     room = slot31.getChildAt(2);
+                                    reminder = slot31.getChildAt(3);
                                     break;
                                 }
                                 case 41: {
@@ -819,6 +1338,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                                     subject = slot41.getChildAt(0);
                                     teacher = slot41.getChildAt(1);
                                     room = slot41.getChildAt(2);
+                                    reminder = slot41.getChildAt(3);
                                     break;
                                 }
                                 case 51: {
@@ -829,6 +1349,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                                     subject = slot51.getChildAt(0);
                                     teacher = slot51.getChildAt(1);
                                     room = slot51.getChildAt(2);
+                                    reminder = slot51.getChildAt(3);
                                     break;
                                 }
                                 case 12: {
@@ -839,6 +1360,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                                     subject = slot12.getChildAt(0);
                                     teacher = slot12.getChildAt(1);
                                     room = slot12.getChildAt(2);
+                                    reminder = slot12.getChildAt(3);
                                     break;
                                 }
                                 case 22: {
@@ -849,6 +1371,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                                     subject = slot22.getChildAt(0);
                                     teacher = slot22.getChildAt(1);
                                     room = slot22.getChildAt(2);
+                                    reminder = slot22.getChildAt(3);
                                     break;
                                 }
                                 case 32: {
@@ -859,6 +1382,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                                     subject = slot32.getChildAt(0);
                                     teacher = slot32.getChildAt(1);
                                     room = slot32.getChildAt(2);
+                                    reminder = slot32.getChildAt(3);
                                     break;
                                 }
                                 case 42: {
@@ -869,6 +1393,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                                     subject = slot42.getChildAt(0);
                                     teacher = slot42.getChildAt(1);
                                     room = slot42.getChildAt(2);
+                                    reminder = slot42.getChildAt(3);
                                     break;
                                 }
                                 case 52: {
@@ -879,6 +1404,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                                     subject = slot52.getChildAt(0);
                                     teacher = slot52.getChildAt(1);
                                     room = slot52.getChildAt(2);
+                                    reminder = slot52.getChildAt(3);
                                     break;
                                 }
                                 case 13: {
@@ -889,6 +1415,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                                     subject = slot13.getChildAt(0);
                                     teacher = slot13.getChildAt(1);
                                     room = slot13.getChildAt(2);
+                                    reminder = slot13.getChildAt(3);
                                     break;
                                 }
                                 case 23: {
@@ -899,6 +1426,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                                     subject = slot23.getChildAt(0);
                                     teacher = slot23.getChildAt(1);
                                     room = slot23.getChildAt(2);
+                                    reminder = slot23.getChildAt(3);
                                     break;
                                 }
                                 case 33: {
@@ -909,6 +1437,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                                     subject = slot33.getChildAt(0);
                                     teacher = slot33.getChildAt(1);
                                     room = slot33.getChildAt(2);
+                                    reminder = slot33.getChildAt(3);
                                     break;
                                 }
                                 case 43: {
@@ -919,6 +1448,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                                     subject = slot43.getChildAt(0);
                                     teacher = slot43.getChildAt(1);
                                     room = slot43.getChildAt(2);
+                                    reminder = slot43.getChildAt(3);
                                     break;
                                 }
                                 case 53: {
@@ -929,6 +1459,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                                     subject = slot53.getChildAt(0);
                                     teacher = slot53.getChildAt(1);
                                     room = slot53.getChildAt(2);
+                                    reminder = slot53.getChildAt(3);
                                     break;
                                 }
                                 case 14: {
@@ -939,6 +1470,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                                     subject = slot14.getChildAt(0);
                                     teacher = slot14.getChildAt(1);
                                     room = slot14.getChildAt(2);
+                                    reminder = slot14.getChildAt(3);
                                     break;
                                 }
                                 case 24: {
@@ -949,6 +1481,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                                     subject = slot24.getChildAt(0);
                                     teacher = slot24.getChildAt(1);
                                     room = slot24.getChildAt(2);
+                                    reminder = slot24.getChildAt(3);
                                     break;
                                 }
                                 case 34: {
@@ -959,6 +1492,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                                     subject = slot34.getChildAt(0);
                                     teacher = slot34.getChildAt(1);
                                     room = slot34.getChildAt(2);
+                                    reminder = slot34.getChildAt(3);
                                     break;
                                 }
                                 case 44: {
@@ -969,6 +1503,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                                     subject = slot44.getChildAt(0);
                                     teacher = slot44.getChildAt(1);
                                     room = slot44.getChildAt(2);
+                                    reminder = slot44.getChildAt(3);
                                     break;
                                 }
                                 case 54: {
@@ -979,6 +1514,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                                     subject = slot54.getChildAt(0);
                                     teacher = slot54.getChildAt(1);
                                     room = slot54.getChildAt(2);
+                                    reminder = slot54.getChildAt(3);
                                     break;
                                 }
                                 case 15: {
@@ -989,6 +1525,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                                     subject = slot15.getChildAt(0);
                                     teacher = slot15.getChildAt(1);
                                     room = slot15.getChildAt(2);
+                                    reminder = slot15.getChildAt(3);
                                     break;
                                 }
                                 case 25: {
@@ -999,6 +1536,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                                     subject = slot25.getChildAt(0);
                                     teacher = slot25.getChildAt(1);
                                     room = slot25.getChildAt(2);
+                                    reminder = slot25.getChildAt(3);
                                     break;
                                 }
                                 case 35: {
@@ -1009,6 +1547,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                                     subject = slot35.getChildAt(0);
                                     teacher = slot35.getChildAt(1);
                                     room = slot35.getChildAt(2);
+                                    reminder = slot35.getChildAt(3);
                                     break;
                                 }
                                 case 45: {
@@ -1019,6 +1558,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                                     subject = slot45.getChildAt(0);
                                     teacher = slot45.getChildAt(1);
                                     room = slot45.getChildAt(2);
+                                    reminder = slot45.getChildAt(3);
                                     break;
                                 }
                                 case 55: {
@@ -1029,6 +1569,172 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                                     subject = slot55.getChildAt(0);
                                     teacher = slot55.getChildAt(1);
                                     room = slot55.getChildAt(2);
+                                    reminder = slot55.getChildAt(3);
+                                    break;
+                                }
+                                case 16: {
+                                    editor.putString("SLOT16_SUBJECT", subjectName);
+                                    editor.putString("SLOT16_TEACHER", teacherName);
+                                    editor.putString("SLOT16_ROOM", roomNo);
+                                    editor.apply();
+                                    subject = slot16.getChildAt(0);
+                                    teacher = slot16.getChildAt(1);
+                                    room = slot16.getChildAt(2);
+                                    reminder = slot16.getChildAt(3);
+                                    break;
+                                }
+                                case 26: {
+                                    editor.putString("SLOT26_SUBJECT", subjectName);
+                                    editor.putString("SLOT26_TEACHER", teacherName);
+                                    editor.putString("SLOT26_ROOM", roomNo);
+                                    editor.apply();
+                                    subject = slot26.getChildAt(0);
+                                    teacher = slot26.getChildAt(1);
+                                    room = slot26.getChildAt(2);
+                                    reminder = slot26.getChildAt(3);
+                                    break;
+                                }
+                                case 36: {
+                                    editor.putString("SLOT36_SUBJECT", subjectName);
+                                    editor.putString("SLOT36_TEACHER", teacherName);
+                                    editor.putString("SLOT36_ROOM", roomNo);
+                                    editor.apply();
+                                    subject = slot36.getChildAt(0);
+                                    teacher = slot36.getChildAt(1);
+                                    room = slot36.getChildAt(2);
+                                    reminder = slot36.getChildAt(3);
+                                    break;
+                                }
+                                case 46: {
+                                    editor.putString("SLOT46_SUBJECT", subjectName);
+                                    editor.putString("SLOT46_TEACHER", teacherName);
+                                    editor.putString("SLOT46_ROOM", roomNo);
+                                    editor.apply();
+                                    subject = slot46.getChildAt(0);
+                                    teacher = slot46.getChildAt(1);
+                                    room = slot46.getChildAt(2);
+                                    reminder = slot46.getChildAt(3);
+                                    break;
+                                }
+                                case 56: {
+                                    editor.putString("SLOT56_SUBJECT", subjectName);
+                                    editor.putString("SLOT56_TEACHER", teacherName);
+                                    editor.putString("SLOT56_ROOM", roomNo);
+                                    editor.apply();
+                                    subject = slot56.getChildAt(0);
+                                    teacher = slot56.getChildAt(1);
+                                    room = slot56.getChildAt(2);
+                                    reminder = slot56.getChildAt(3);
+                                    break;
+                                }
+                                case 17: {
+                                    editor.putString("SLOT17_SUBJECT", subjectName);
+                                    editor.putString("SLOT17_TEACHER", teacherName);
+                                    editor.putString("SLOT17_ROOM", roomNo);
+                                    editor.apply();
+                                    subject = slot17.getChildAt(0);
+                                    teacher = slot17.getChildAt(1);
+                                    room = slot17.getChildAt(2);
+                                    reminder = slot17.getChildAt(3);
+                                    break;
+                                }
+                                case 27: {
+                                    editor.putString("SLOT27_SUBJECT", subjectName);
+                                    editor.putString("SLOT27_TEACHER", teacherName);
+                                    editor.putString("SLOT27_ROOM", roomNo);
+                                    editor.apply();
+                                    subject = slot27.getChildAt(0);
+                                    teacher = slot27.getChildAt(1);
+                                    room = slot27.getChildAt(2);
+                                    reminder = slot27.getChildAt(3);
+                                    break;
+                                }
+                                case 37: {
+                                    editor.putString("SLOT37_SUBJECT", subjectName);
+                                    editor.putString("SLOT37_TEACHER", teacherName);
+                                    editor.putString("SLOT37_ROOM", roomNo);
+                                    editor.apply();
+                                    subject = slot37.getChildAt(0);
+                                    teacher = slot37.getChildAt(1);
+                                    room = slot37.getChildAt(2);
+                                    reminder = slot37.getChildAt(3);
+                                    break;
+                                }
+                                case 47: {
+                                    editor.putString("SLOT47_SUBJECT", subjectName);
+                                    editor.putString("SLOT47_TEACHER", teacherName);
+                                    editor.putString("SLOT47_ROOM", roomNo);
+                                    editor.apply();
+                                    subject = slot47.getChildAt(0);
+                                    teacher = slot47.getChildAt(1);
+                                    room = slot47.getChildAt(2);
+                                    reminder = slot47.getChildAt(3);
+                                    break;
+                                }
+                                case 57: {
+                                    editor.putString("SLOT57_SUBJECT", subjectName);
+                                    editor.putString("SLOT57_TEACHER", teacherName);
+                                    editor.putString("SLOT57_ROOM", roomNo);
+                                    editor.apply();
+                                    subject = slot57.getChildAt(0);
+                                    teacher = slot57.getChildAt(1);
+                                    room = slot57.getChildAt(2);
+                                    reminder = slot57.getChildAt(3);
+                                    break;
+                                }
+                                case 18: {
+                                    editor.putString("SLOT18_SUBJECT", subjectName);
+                                    editor.putString("SLOT18_TEACHER", teacherName);
+                                    editor.putString("SLOT18_ROOM", roomNo);
+                                    editor.apply();
+                                    subject = slot18.getChildAt(0);
+                                    teacher = slot18.getChildAt(1);
+                                    room = slot18.getChildAt(2);
+                                    reminder = slot18.getChildAt(3);
+                                    break;
+                                }
+                                case 28: {
+                                    editor.putString("SLOT28_SUBJECT", subjectName);
+                                    editor.putString("SLOT28_TEACHER", teacherName);
+                                    editor.putString("SLOT28_ROOM", roomNo);
+                                    editor.apply();
+                                    subject = slot28.getChildAt(0);
+                                    teacher = slot28.getChildAt(1);
+                                    room = slot28.getChildAt(2);
+                                    reminder = slot28.getChildAt(3);
+                                    break;
+                                }
+                                case 38: {
+                                    editor.putString("SLOT38_SUBJECT", subjectName);
+                                    editor.putString("SLOT38_TEACHER", teacherName);
+                                    editor.putString("SLOT38_ROOM", roomNo);
+                                    editor.apply();
+                                    subject = slot38.getChildAt(0);
+                                    teacher = slot38.getChildAt(1);
+                                    room = slot38.getChildAt(2);
+                                    reminder = slot38.getChildAt(3);
+                                    break;
+                                }
+                                case 48: {
+                                    editor.putString("SLOT48_SUBJECT", subjectName);
+                                    editor.putString("SLOT48_TEACHER", teacherName);
+                                    editor.putString("SLOT48_ROOM", roomNo);
+                                    editor.apply();
+                                    subject = slot48.getChildAt(0);
+                                    teacher = slot48.getChildAt(1);
+                                    room = slot48.getChildAt(2);
+                                    reminder = slot48.getChildAt(3);
+                                    break;
+                                }
+                                case 58: {
+                                    editor.putString("SLOT58_SUBJECT", subjectName);
+                                    editor.putString("SLOT58_TEACHER", teacherName);
+                                    editor.putString("SLOT58_ROOM", roomNo);
+                                    editor.apply();
+                                    subject = slot58.getChildAt(0);
+                                    teacher = slot58.getChildAt(1);
+                                    room = slot58.getChildAt(2);
+                                    reminder = slot58.getChildAt(3);
                                     break;
                                 }
                             }
@@ -1044,18 +1750,16 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                                 ((TextView) room).setText(roomNo);
                             }
                             ET_editSlotRoom.setText("");
-                            Toast.makeText(TimeTableView.this, "Slot edited", Toast.LENGTH_SHORT).show();
+                            if (reminder != null){
+                                reminder.setVisibility(View.VISIBLE);
+                            }
+                            AD_editSlot.cancel();
                         } else
                             Toast.makeText(TimeTableView.this, "Invalid room #", Toast.LENGTH_SHORT).show();
                     } else
                         Toast.makeText(TimeTableView.this, "Invalid teacher name", Toast.LENGTH_SHORT).show();
                 } else
                     Toast.makeText(TimeTableView.this, "Invalid subject name", Toast.LENGTH_SHORT).show();
-                break;
-            }
-            case R.id.btn_cancelEditDialog: {
-                AD_editSlot.cancel();
-                ET_editSlotSubject.setText("");
                 break;
             }
             case R.id.slot11Reminder: {
@@ -1632,6 +2336,351 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 }
                 break;
             }
+            case R.id.slot16Reminder: {
+                if (((CheckBox) v).isChecked()) {
+                    ((RelativeLayout) v.getParent()).setBackground(ContextCompat
+                            .getDrawable(TimeTableView.this,
+                                    R.drawable.timetable_slot_checked));
+                    String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(16, subject, room, 1, 16, 30, 0);
+                        editor.putBoolean("SLOT16_CHECKED", true);
+                        editor.apply();
+                    }
+
+                } else {
+                    ((RelativeLayout) v.getParent()).setBackground(ContextCompat
+                            .getDrawable(TimeTableView.this,
+                                    R.drawable.timetable_slot_unchecked));
+                    cancelSlotNotification(16);
+                    editor.putBoolean("SLOT16_CHECKED", false);
+                    editor.apply();
+                }
+                break;
+            }
+            case R.id.slot26Reminder: {
+                if (((CheckBox) v).isChecked()) {
+                    ((RelativeLayout) v.getParent()).setBackground(ContextCompat
+                            .getDrawable(TimeTableView.this,
+                                    R.drawable.timetable_slot_checked));
+                    String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(26, subject, room, 2, 16, 30, 0);
+                        editor.putBoolean("SLOT26_CHECKED", true);
+                        editor.apply();
+                    }
+
+                } else {
+                    ((RelativeLayout) v.getParent()).setBackground(ContextCompat
+                            .getDrawable(TimeTableView.this,
+                                    R.drawable.timetable_slot_unchecked));
+                    cancelSlotNotification(26);
+                    editor.putBoolean("SLOT26_CHECKED", false);
+                    editor.apply();
+                }
+                break;
+            }
+            case R.id.slot36Reminder: {
+                if (((CheckBox) v).isChecked()) {
+                    ((RelativeLayout) v.getParent()).setBackground(ContextCompat
+                            .getDrawable(TimeTableView.this,
+                                    R.drawable.timetable_slot_checked));
+                    String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(36, subject, room, 3, 16, 30, 0);
+                        editor.putBoolean("SLOT36_CHECKED", true);
+                        editor.apply();
+                    }
+
+                } else {
+                    ((RelativeLayout) v.getParent()).setBackground(ContextCompat
+                            .getDrawable(TimeTableView.this,
+                                    R.drawable.timetable_slot_unchecked));
+                    cancelSlotNotification(36);
+                    editor.putBoolean("SLOT36_CHECKED", false);
+                    editor.apply();
+                }
+                break;
+            }
+            case R.id.slot46Reminder: {
+                if (((CheckBox) v).isChecked()) {
+                    ((RelativeLayout) v.getParent()).setBackground(ContextCompat
+                            .getDrawable(TimeTableView.this,
+                                    R.drawable.timetable_slot_checked));
+                    String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(46, subject, room, 4, 16, 30, 0);
+                        editor.putBoolean("SLOT46_CHECKED", true);
+                        editor.apply();
+                    }
+
+                } else {
+                    ((RelativeLayout) v.getParent()).setBackground(ContextCompat
+                            .getDrawable(TimeTableView.this,
+                                    R.drawable.timetable_slot_unchecked));
+                    cancelSlotNotification(46);
+                    editor.putBoolean("SLOT46_CHECKED", false);
+                    editor.apply();
+                }
+                break;
+            }
+            case R.id.slot56Reminder: {
+                if (((CheckBox) v).isChecked()) {
+                    ((RelativeLayout) v.getParent()).setBackground(ContextCompat
+                            .getDrawable(TimeTableView.this,
+                                    R.drawable.timetable_slot_checked));
+                    String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(56, subject, room, 5, 16, 30, 0);
+                        editor.putBoolean("SLOT56_CHECKED", true);
+                        editor.apply();
+                    }
+
+                } else {
+                    ((RelativeLayout) v.getParent()).setBackground(ContextCompat
+                            .getDrawable(TimeTableView.this,
+                                    R.drawable.timetable_slot_unchecked));
+                    cancelSlotNotification(56);
+                    editor.putBoolean("SLOT56_CHECKED", false);
+                    editor.apply();
+                }
+                break;
+            }
+            case R.id.slot17Reminder: {
+                if (((CheckBox) v).isChecked()) {
+                    ((RelativeLayout) v.getParent()).setBackground(ContextCompat
+                            .getDrawable(TimeTableView.this,
+                                    R.drawable.timetable_slot_checked));
+                    String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(17, subject, room, 1, 18, 15, 0);
+                        editor.putBoolean("SLOT17_CHECKED", true);
+                        editor.apply();
+                    }
+
+                } else {
+                    ((RelativeLayout) v.getParent()).setBackground(ContextCompat
+                            .getDrawable(TimeTableView.this,
+                                    R.drawable.timetable_slot_unchecked));
+                    cancelSlotNotification(17);
+                    editor.putBoolean("SLOT17_CHECKED", false);
+                    editor.apply();
+                }
+                break;
+            }
+            case R.id.slot27Reminder: {
+                if (((CheckBox) v).isChecked()) {
+                    ((RelativeLayout) v.getParent()).setBackground(ContextCompat
+                            .getDrawable(TimeTableView.this,
+                                    R.drawable.timetable_slot_checked));
+                    String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(27, subject, room, 2, 18, 15, 0);
+                        editor.putBoolean("SLOT27_CHECKED", true);
+                        editor.apply();
+                    }
+
+                } else {
+                    ((RelativeLayout) v.getParent()).setBackground(ContextCompat
+                            .getDrawable(TimeTableView.this,
+                                    R.drawable.timetable_slot_unchecked));
+                    cancelSlotNotification(27);
+                    editor.putBoolean("SLOT27_CHECKED", false);
+                    editor.apply();
+                }
+                break;
+            }
+            case R.id.slot37Reminder: {
+                if (((CheckBox) v).isChecked()) {
+                    ((RelativeLayout) v.getParent()).setBackground(ContextCompat
+                            .getDrawable(TimeTableView.this,
+                                    R.drawable.timetable_slot_checked));
+                    String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(37, subject, room, 3, 18, 15, 0);
+                        editor.putBoolean("SLOT37_CHECKED", true);
+                        editor.apply();
+                    }
+
+                } else {
+                    ((RelativeLayout) v.getParent()).setBackground(ContextCompat
+                            .getDrawable(TimeTableView.this,
+                                    R.drawable.timetable_slot_unchecked));
+                    cancelSlotNotification(37);
+                    editor.putBoolean("SLOT37_CHECKED", false);
+                    editor.apply();
+                }
+                break;
+            }
+            case R.id.slot47Reminder: {
+                if (((CheckBox) v).isChecked()) {
+                    ((RelativeLayout) v.getParent()).setBackground(ContextCompat
+                            .getDrawable(TimeTableView.this,
+                                    R.drawable.timetable_slot_checked));
+                    String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(47, subject, room, 4, 18, 15, 0);
+                        editor.putBoolean("SLOT47_CHECKED", true);
+                        editor.apply();
+                    }
+
+                } else {
+                    ((RelativeLayout) v.getParent()).setBackground(ContextCompat
+                            .getDrawable(TimeTableView.this,
+                                    R.drawable.timetable_slot_unchecked));
+                    cancelSlotNotification(47);
+                    editor.putBoolean("SLOT47_CHECKED", false);
+                    editor.apply();
+                }
+                break;
+            }
+            case R.id.slot57Reminder: {
+                if (((CheckBox) v).isChecked()) {
+                    ((RelativeLayout) v.getParent()).setBackground(ContextCompat
+                            .getDrawable(TimeTableView.this,
+                                    R.drawable.timetable_slot_checked));
+                    String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(57, subject, room, 5, 18, 15, 0);
+                        editor.putBoolean("SLOT57_CHECKED", true);
+                        editor.apply();
+                    }
+
+                } else {
+                    ((RelativeLayout) v.getParent()).setBackground(ContextCompat
+                            .getDrawable(TimeTableView.this,
+                                    R.drawable.timetable_slot_unchecked));
+                    cancelSlotNotification(57);
+                    editor.putBoolean("SLOT57_CHECKED", false);
+                    editor.apply();
+                }
+                break;
+            }
+            case R.id.slot18Reminder: {
+                if (((CheckBox) v).isChecked()) {
+                    ((RelativeLayout) v.getParent()).setBackground(ContextCompat
+                            .getDrawable(TimeTableView.this,
+                                    R.drawable.timetable_slot_checked));
+                    String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(18, subject, room, 1, 20, 0, 0);
+                        editor.putBoolean("SLOT18_CHECKED", true);
+                        editor.apply();
+                    }
+
+                } else {
+                    ((RelativeLayout) v.getParent()).setBackground(ContextCompat
+                            .getDrawable(TimeTableView.this,
+                                    R.drawable.timetable_slot_unchecked));
+                    cancelSlotNotification(18);
+                    editor.putBoolean("SLOT18_CHECKED", false);
+                    editor.apply();
+                }
+                break;
+            }
+            case R.id.slot28Reminder: {
+                if (((CheckBox) v).isChecked()) {
+                    ((RelativeLayout) v.getParent()).setBackground(ContextCompat
+                            .getDrawable(TimeTableView.this,
+                                    R.drawable.timetable_slot_checked));
+                    String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(28, subject, room, 2, 20, 0, 0);
+                        editor.putBoolean("SLOT28_CHECKED", true);
+                        editor.apply();
+                    }
+
+                } else {
+                    ((RelativeLayout) v.getParent()).setBackground(ContextCompat
+                            .getDrawable(TimeTableView.this,
+                                    R.drawable.timetable_slot_unchecked));
+                    cancelSlotNotification(28);
+                    editor.putBoolean("SLOT28_CHECKED", false);
+                    editor.apply();
+                }
+                break;
+            }
+            case R.id.slot38Reminder: {
+                if (((CheckBox) v).isChecked()) {
+                    ((RelativeLayout) v.getParent()).setBackground(ContextCompat
+                            .getDrawable(TimeTableView.this,
+                                    R.drawable.timetable_slot_checked));
+                    String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(38, subject, room, 3, 20, 0, 0);
+                        editor.putBoolean("SLOT38_CHECKED", true);
+                        editor.apply();
+                    }
+
+                } else {
+                    ((RelativeLayout) v.getParent()).setBackground(ContextCompat
+                            .getDrawable(TimeTableView.this,
+                                    R.drawable.timetable_slot_unchecked));
+                    cancelSlotNotification(38);
+                    editor.putBoolean("SLOT38_CHECKED", false);
+                    editor.apply();
+                }
+                break;
+            }
+            case R.id.slot48Reminder: {
+                if (((CheckBox) v).isChecked()) {
+                    ((RelativeLayout) v.getParent()).setBackground(ContextCompat
+                            .getDrawable(TimeTableView.this,
+                                    R.drawable.timetable_slot_checked));
+                    String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(48, subject, room, 4, 20, 0, 0);
+                        editor.putBoolean("SLOT48_CHECKED", true);
+                        editor.apply();
+                    }
+
+                } else {
+                    ((RelativeLayout) v.getParent()).setBackground(ContextCompat
+                            .getDrawable(TimeTableView.this,
+                                    R.drawable.timetable_slot_unchecked));
+                    cancelSlotNotification(48);
+                    editor.putBoolean("SLOT48_CHECKED", false);
+                    editor.apply();
+                }
+                break;
+            }
+            case R.id.slot58Reminder: {
+                if (((CheckBox) v).isChecked()) {
+                    ((RelativeLayout) v.getParent()).setBackground(ContextCompat
+                            .getDrawable(TimeTableView.this,
+                                    R.drawable.timetable_slot_checked));
+                    String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
+                    String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
+                    if (!subject.isEmpty()) {
+                        handleNotification(58, subject, room, 5, 20, 0, 0);
+                        editor.putBoolean("SLOT58_CHECKED", true);
+                        editor.apply();
+                    }
+
+                } else {
+                    ((RelativeLayout) v.getParent()).setBackground(ContextCompat
+                            .getDrawable(TimeTableView.this,
+                                    R.drawable.timetable_slot_unchecked));
+                    cancelSlotNotification(58);
+                    editor.putBoolean("SLOT58_CHECKED", false);
+                    editor.apply();
+                }
+                break;
+            }
         }
     }
 
@@ -1658,6 +2707,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
     }
 
     private void handleNotification(int id, String subject, String room, int day, int hours, int minutes, int seconds) {
+        Toast.makeText(TimeTableView.this, "Notification on", Toast.LENGTH_SHORT).show();
         Intent alarmIntent = new Intent(this, TimeTableReceiver.class);
         alarmIntent.putExtra("SUBJECT", subject);
         alarmIntent.putExtra("ROOM", room);
@@ -1701,6 +2751,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
     }
 
     private void cancelSlotNotification(int id) {
+        Toast.makeText(TimeTableView.this, "Notification off", Toast.LENGTH_SHORT).show();
         Intent alarmIntent = new Intent(this, TimeTableReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, id, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);

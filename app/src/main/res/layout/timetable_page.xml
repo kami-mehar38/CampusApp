@@ -178,7 +178,6 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot1Teacher"
                             android:layout_marginTop="17dp"
-                            android:text="@string/room"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -232,7 +231,6 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot2Teacher"
                             android:layout_marginTop="17dp"
-                            android:text="@string/room"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -286,7 +284,6 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot3Teacher"
                             android:layout_marginTop="17dp"
-                            android:text="@string/room"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -335,18 +332,6 @@
                             android:textSize="14sp"
                             android:textStyle="bold" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/slot4Teacher"
-                            android:layout_marginTop="17dp"
-                            android:text="@string/room"
-                            android:textColor="#fff"
-                            android:textSize="14sp"
-                            android:textStyle="bold"
-
-                            />
-
                         <CheckBox
                             android:id="@+id/slot14Reminder"
                             android:layout_width="wrap_content"
@@ -356,6 +341,18 @@
                             android:layout_below="@+id/slot4Teacher"
                             android:layout_marginTop="10dp"
                             android:theme="@style/checkBoxStyle" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#fff"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:layout_alignBaseline="@+id/slot14Reminder"
+                            android:layout_alignBottom="@+id/slot14Reminder"
+                            android:layout_toRightOf="@+id/slot4Teacher"
+                            android:layout_toEndOf="@+id/slot4Teacher"
+                             />
 
 
                     </RelativeLayout>
@@ -394,7 +391,6 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot5Teacher"
                             android:layout_marginTop="17dp"
-                            android:text="@string/room"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -415,6 +411,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/slot16"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/timetable_slot_unchecked"
@@ -447,7 +444,6 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot6Teacher"
                             android:layout_marginTop="17dp"
-                            android:text="@string/room"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -455,6 +451,7 @@
                             />
 
                         <CheckBox
+                            android:id="@+id/slot16Reminder"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -467,6 +464,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/slot17"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/timetable_slot_unchecked"
@@ -499,7 +497,6 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot7Teacher"
                             android:layout_marginTop="17dp"
-                            android:text="@string/room"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -507,6 +504,7 @@
                             />
 
                         <CheckBox
+                            android:id="@+id/slot17Reminder"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -519,6 +517,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/slot18"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/timetable_slot_unchecked"
@@ -551,7 +550,6 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot8Teacher"
                             android:layout_marginTop="17dp"
-                            android:text="@string/room"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -559,6 +557,7 @@
                             />
 
                         <CheckBox
+                            android:id="@+id/slot18Reminder"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -628,7 +627,6 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot9Teacher"
                             android:layout_marginTop="17dp"
-                            android:text="@string/room"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -682,7 +680,6 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot10Teacher"
                             android:layout_marginTop="17dp"
-                            android:text="@string/room"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -736,7 +733,6 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot11Teacher"
                             android:layout_marginTop="17dp"
-                            android:text="@string/room"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -790,7 +786,6 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot12Teacher"
                             android:layout_marginTop="17dp"
-                            android:text="@string/room"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -844,7 +839,6 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot13Teacher"
                             android:layout_marginTop="17dp"
-                            android:text="@string/room"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -865,6 +859,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/slot26"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/timetable_slot_unchecked"
@@ -897,7 +892,6 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot14Teacher"
                             android:layout_marginTop="17dp"
-                            android:text="@string/room"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -905,6 +899,7 @@
                             />
 
                         <CheckBox
+                            android:id="@+id/slot26Reminder"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -917,6 +912,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/slot27"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/timetable_slot_unchecked"
@@ -950,7 +946,6 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot15Teacher"
                             android:layout_marginTop="17dp"
-                            android:text="@string/room"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -958,6 +953,7 @@
                             />
 
                         <CheckBox
+                            android:id="@+id/slot27Reminder"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -970,6 +966,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/slot28"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/timetable_slot_unchecked"
@@ -1002,7 +999,6 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot16Teacher"
                             android:layout_marginTop="17dp"
-                            android:text="@string/room"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -1010,6 +1006,7 @@
                             />
 
                         <CheckBox
+                            android:id="@+id/slot28Reminder"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -1082,7 +1079,6 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot17Teacher"
                             android:layout_marginTop="17dp"
-                            android:text="@string/room"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -1140,7 +1136,6 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot18Teacher"
                             android:layout_marginTop="17dp"
-                            android:text="@string/room"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -1198,7 +1193,6 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot19Teacher"
                             android:layout_marginTop="17dp"
-                            android:text="@string/room"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -1256,7 +1250,6 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot20Teacher"
                             android:layout_marginTop="17dp"
-                            android:text="@string/room"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -1314,7 +1307,6 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot21Teacher"
                             android:layout_marginTop="17dp"
-                            android:text="@string/room"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -1335,6 +1327,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/slot36"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/timetable_slot_unchecked"
@@ -1371,7 +1364,6 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot22Teacher"
                             android:layout_marginTop="17dp"
-                            android:text="@string/room"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -1379,6 +1371,7 @@
                             />
 
                         <CheckBox
+                            android:id="@+id/slot36Reminder"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -1391,6 +1384,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/slot37"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/timetable_slot_unchecked"
@@ -1427,7 +1421,6 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot23Teacher"
                             android:layout_marginTop="17dp"
-                            android:text="@string/room"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -1435,6 +1428,7 @@
                             />
 
                         <CheckBox
+                            android:id="@+id/slot37Reminder"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -1447,6 +1441,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/slot38"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/timetable_slot_unchecked"
@@ -1483,7 +1478,6 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot24Teacher"
                             android:layout_marginTop="17dp"
-                            android:text="@string/room"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -1491,6 +1485,7 @@
                             />
 
                         <CheckBox
+                            android:id="@+id/slot38Reminder"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -1564,7 +1559,6 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot25Teacher"
                             android:layout_marginTop="17dp"
-                            android:text="@string/room"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -1622,7 +1616,6 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot26Teacher"
                             android:layout_marginTop="17dp"
-                            android:text="@string/room"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -1680,7 +1673,6 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot27Teacher"
                             android:layout_marginTop="17dp"
-                            android:text="@string/room"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -1738,11 +1730,9 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot28Teacher"
                             android:layout_marginTop="17dp"
-                            android:text="@string/room"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
-
                             />
 
                         <CheckBox
@@ -1796,7 +1786,6 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot29Teacher"
                             android:layout_marginTop="17dp"
-                            android:text="@string/room"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -1817,6 +1806,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/slot46"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/timetable_slot_unchecked"
@@ -1853,7 +1843,6 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot30Teacher"
                             android:layout_marginTop="17dp"
-                            android:text="@string/room"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -1861,6 +1850,7 @@
                             />
 
                         <CheckBox
+                            android:id="@+id/slot46Reminder"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -1873,6 +1863,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/slot47"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/timetable_slot_unchecked"
@@ -1909,7 +1900,6 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot31Teacher"
                             android:layout_marginTop="17dp"
-                            android:text="@string/room"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -1917,6 +1907,7 @@
                             />
 
                         <CheckBox
+                            android:id="@+id/slot47Reminder"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -1929,6 +1920,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/slot48"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/timetable_slot_unchecked"
@@ -1965,7 +1957,6 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot32Teacher"
                             android:layout_marginTop="17dp"
-                            android:text="@string/room"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -1973,6 +1964,7 @@
                             />
 
                         <CheckBox
+                            android:id="@+id/slot48Reminder"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -2046,7 +2038,6 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot33Teacher"
                             android:layout_marginTop="17dp"
-                            android:text="@string/room"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -2104,7 +2095,6 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot34Teacher"
                             android:layout_marginTop="17dp"
-                            android:text="@string/room"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -2162,7 +2152,6 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot35Teacher"
                             android:layout_marginTop="17dp"
-                            android:text="@string/room"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -2220,7 +2209,6 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot36Teacher"
                             android:layout_marginTop="17dp"
-                            android:text="@string/room"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -2278,7 +2266,6 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot37Teacher"
                             android:layout_marginTop="17dp"
-                            android:text="@string/room"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -2299,6 +2286,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/slot56"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/timetable_slot_unchecked"
@@ -2335,7 +2323,6 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot38Teacher"
                             android:layout_marginTop="17dp"
-                            android:text="@string/room"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -2343,6 +2330,7 @@
                             />
 
                         <CheckBox
+                            android:id="@+id/slot56Reminder"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -2355,6 +2343,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/slot57"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/timetable_slot_unchecked"
@@ -2391,7 +2380,6 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot39Teacher"
                             android:layout_marginTop="17dp"
-                            android:text="@string/room"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -2399,6 +2387,7 @@
                             />
 
                         <CheckBox
+                            android:id="@+id/slot57Reminder"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -2411,6 +2400,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/slot58"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/timetable_slot_unchecked"
@@ -2447,7 +2437,6 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/slot40Teacher"
                             android:layout_marginTop="17dp"
-                            android:text="@string/room"
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -2455,6 +2444,7 @@
                             />
 
                         <CheckBox
+                            android:id="@+id/slot58Reminder"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
