@@ -14,7 +14,7 @@ class NotificationInfo {
         return notificationType;
     }
 
-    public void setNotificationType(String notificationType) {
+    void setNotificationType(String notificationType) {
         this.notificationType = notificationType;
     }
 

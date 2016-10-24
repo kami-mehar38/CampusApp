@@ -257,7 +257,7 @@ public class MyGcmListenerService extends GcmListenerService {
         badgeCount++;
         editor.putInt(notificationType + "_COUNT", badgeCount);
         editor.apply();
-        Handler handler = new Handler(Looper.getMainLooper());
+       /* Handler handler = new Handler(Looper.getMainLooper());
         handler.post(new Runnable() {
             @Override
             public void run() {
@@ -281,7 +281,7 @@ public class MyGcmListenerService extends GcmListenerService {
             }
         });
 
-        createEventNotification(message);
+        createEventNotification(message); */
     }
 
     private void createEventNotification(String message) {
