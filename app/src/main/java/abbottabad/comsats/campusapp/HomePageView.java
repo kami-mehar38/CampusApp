@@ -83,7 +83,7 @@ public class HomePageView extends AppCompatActivity implements
 
         new InitialPageController(this).execute();
         isPlayServicesAvailable();
-
+        checkForPermissions();
 
         Animation bounceAnimation = AnimationUtils.loadAnimation(this, R.anim.accelerate_decelerate_aimation);
 
@@ -600,9 +600,30 @@ public class HomePageView extends AppCompatActivity implements
                     Toast.makeText(HomePageView.this, "Permission granted", Toast.LENGTH_SHORT).show();
 
                 }
+                break;
+            }
+            case 52: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                    Toast.makeText(HomePageView.this, "Permission granted", Toast.LENGTH_SHORT).show();
+
+                }
+                break;
             }
             // other 'case' lines to check for other
             // permissions this app might request
+        }
+    }
+
+    private void checkForPermissions() {
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+            // TODO: Consider calling
+            ActivityCompat.requestPermissions(HomePageView.this,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                    52);
         }
     }
 

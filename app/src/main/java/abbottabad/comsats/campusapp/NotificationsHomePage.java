@@ -1,14 +1,17 @@
 package abbottabad.comsats.campusapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -36,6 +39,16 @@ public class NotificationsHomePage extends AppCompatActivity {
             recyclerView.setLayoutManager(layoutManager);
             NotificationsListAdapter notificationsListAdapter = new NotificationsListAdapter();
             recyclerView.setAdapter(notificationsListAdapter);
+        }
+
+        FloatingActionButton FAB_createGroup = (FloatingActionButton) findViewById(R.id.FAB_createGroup);
+        if (FAB_createGroup != null) {
+            FAB_createGroup.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(NotificationsHomePage.this, CreateNotificationsGroup.class));
+                }
+            });
         }
     }
 

@@ -32,8 +32,8 @@
         android:fullBackupContent="false"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:supportsRtl="true"
         android:largeHeap="true"
+        android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".InitialPage"
@@ -156,9 +156,14 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".NotificationsHomePage" />
-        <activity android:name=".TimetableImage"
+        <activity
+            android:name=".TimetableImage"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape" />
+
+        <activity
+            android:name=".CreateNotificationsGroup"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
     </application>
 
 </manifest>
