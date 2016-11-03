@@ -1,7 +1,10 @@
 package abbottabad.comsats.campusapp;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -23,7 +26,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * This project CampusApp is created by Kamran Ramzan on 8/22/16.
@@ -39,6 +44,14 @@ class NotificationsModal {
 
     void sendEventNotification(String reg_id, String message, String notification_type) {
         new SendEventNotification().execute(reg_id, message, notification_type);
+    }
+
+    void createGroup(String imageString, String groupName, String reg_id){
+        new CreateGroup().execute(imageString, groupName, reg_id);
+    }
+
+    void getNotificationGroups(){
+        new GetNotificationGroups().execute();
     }
 
     private class SendEventNotification extends AsyncTask<String, Void, String> {
@@ -169,6 +182,168 @@ class NotificationsModal {
                 Toast.makeText(context, "Some error occurred! Please try again.", Toast.LENGTH_LONG).show();
             }
 
+        }
+    }
+
+    private class CreateGroup extends AsyncTask<String, Void, String> {
+        private String imageString;
+        private String groupName;
+        private String reg_id;
+        private ProgressDialog progressDialog;
+        private AlertDialog alertDialog;
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog = new ProgressDialog(context);
+            progressDialog.setIndeterminate(true);
+            progressDialog.setCancelable(false);
+            progressDialog.setMessage("Creating group...");
+            progressDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            String stringUrl = "http://hostellocator.com/createNotificationsGroup.php";
+            imageString = params[0];
+            groupName = params[1];
+            reg_id = params[2];
+
+            try {
+                URL url = new URL(stringUrl);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String data = URLEncoder.encode("imageString", "UTF-8") + "=" + URLEncoder.encode(imageString, "UTF-8") + "&" +
+                        URLEncoder.encode("groupName", "UTF-8") + "=" + URLEncoder.encode(groupName, "UTF-8") + "&" +
+                        URLEncoder.encode("reg_id", "UTF-8") + "=" + URLEncoder.encode(reg_id, "UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+                StringBuilder stringBuilder = new StringBuilder();
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(line);
+                }
+
+                JSONArray parentJSON = new JSONArray(stringBuilder.toString());
+                JSONObject finalObject = parentJSON.getJSONObject(0);
+                String RESPONSE = finalObject.getString("RESPONSE");
+                Log.i("TAG", "doInBackground: " + RESPONSE);
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return RESPONSE;
+            } catch (IOException | JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            progressDialog.cancel();
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    alertDialog.cancel();
+                }
+            });
+
+            if (result != null) {
+                switch (result) {
+                    case "CREATED": {
+                        Toast.makeText(context, "Succesfully created", Toast.LENGTH_LONG).show();
+                        break;
+                    }
+                    case "EXISTED": {
+                        builder.setMessage("Couldn't create group. Group with the same name already exists.");
+                        alertDialog = builder.create();
+                        alertDialog.show();
+                        break;
+                    }
+                    case "ERROR": {
+                        builder.setMessage("Error occurred");
+                        alertDialog = builder.create();
+                        alertDialog.show();
+                        break;
+                    }
+                }
+            } else {
+                Toast.makeText(context, "Some error occurred! Please try again.", Toast.LENGTH_LONG).show();
+            }
+
+        }
+    }
+
+    private class GetNotificationGroups extends AsyncTask<Void, Void, List<NotificationsListInfo>> {
+
+        private ProgressDialog progressDialog;
+        private NotificationsListInfo[] notificationsListInfo;
+        private List<NotificationsListInfo> notificationsListInfoList = new ArrayList<>();
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog = new ProgressDialog(context);
+            progressDialog.setIndeterminate(true);
+            progressDialog.setCancelable(false);
+            progressDialog.setMessage("Please wait...");
+            progressDialog.show();
+        }
+
+        @Override
+        protected List<NotificationsListInfo> doInBackground(Void... params) {
+            String stringUrl = "http://hostellocator.com/getNotificationsGroups.php";
+
+            try {
+                URL url = new URL(stringUrl);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+                StringBuilder stringBuilder = new StringBuilder();
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(line);
+                }
+
+                JSONArray parentJson = new JSONArray(stringBuilder.toString());
+                notificationsListInfo = new NotificationsListInfo[parentJson.length()];
+                for (int index = 0; index < parentJson.length(); index++) {
+                    JSONObject finalObject = parentJson.getJSONObject(index);
+                    notificationsListInfo[index] = new NotificationsListInfo();
+                    notificationsListInfo[index].setGroupImageUri(finalObject.getString("group_image"));
+                    notificationsListInfo[index].setGroupName(finalObject.getString("group_name"));
+                    notificationsListInfoList.add(notificationsListInfo[index]);
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return notificationsListInfoList;
+            } catch (IOException | JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(List<NotificationsListInfo> notificationsListInfoList) {
+            progressDialog.cancel();
+            if (notificationsListInfoList != null) {
+                if (notificationsListInfoList.size() > 0) {
+                    for (int i = 0; i < notificationsListInfoList.size(); i++){
+                        NotificationsHomePage.notificationsListAdapter.addItem(notificationsListInfoList.get(i), 0);
+                    }
+                } else Toast.makeText(context, "No group is created yet", Toast.LENGTH_LONG).show();
+            } else Toast.makeText(context, "Some error occurred! Please try again.", Toast.LENGTH_LONG).show();
         }
     }
 }

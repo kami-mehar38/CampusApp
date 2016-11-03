@@ -37,11 +37,9 @@ class BloodBankModal {
 
     private Context context;
     private AlertDialog alertDialog;
-    private BloodBankLocalModal bloodBankLocalModal;
 
     BloodBankModal(Context context) {
         this.context = context;
-        bloodBankLocalModal = new BloodBankLocalModal(context);
     }
 
     /**
@@ -163,10 +161,6 @@ class BloodBankModal {
     private class RetrieveDonors extends AsyncTask<String, Void, List<DonorsInfo>> {
 
         private ProgressDialog progressDialog;
-
-        RetrieveDonors() {
-
-        }
 
         @Override
         protected void onPreExecute() {

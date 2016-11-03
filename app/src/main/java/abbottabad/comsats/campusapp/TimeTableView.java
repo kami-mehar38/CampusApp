@@ -52,6 +52,46 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
     private SharedPreferences.Editor editor;
     private SharedPreferences sharedPreferences;
     private Bitmap bitmap;
+    private CheckBox slot11Reminder;
+    private CheckBox slot21Reminder;
+    private CheckBox slot31Reminder;
+    private CheckBox slot41Reminder;
+    private CheckBox slot51Reminder;
+    private CheckBox slot12Reminder;
+    private CheckBox slot22Reminder;
+    private CheckBox slot32Reminder;
+    private CheckBox slot42Reminder;
+    private CheckBox slot52Reminder;
+    private CheckBox slot13Reminder;
+    private CheckBox slot23Reminder;
+    private CheckBox slot33Reminder;
+    private CheckBox slot43Reminder;
+    private CheckBox slot53Reminder;
+    private CheckBox slot14Reminder;
+    private CheckBox slot24Reminder;
+    private CheckBox slot34Reminder;
+    private CheckBox slot44Reminder;
+    private CheckBox slot54Reminder;
+    private CheckBox slot15Reminder;
+    private CheckBox slot25Reminder;
+    private CheckBox slot35Reminder;
+    private CheckBox slot45Reminder;
+    private CheckBox slot55Reminder;
+    private CheckBox slot16Reminder;
+    private CheckBox slot26Reminder;
+    private CheckBox slot36Reminder;
+    private CheckBox slot46Reminder;
+    private CheckBox slot56Reminder;
+    private CheckBox slot17Reminder;
+    private CheckBox slot27Reminder;
+    private CheckBox slot37Reminder;
+    private CheckBox slot47Reminder;
+    private CheckBox slot57Reminder;
+    private CheckBox slot18Reminder;
+    private CheckBox slot28Reminder;
+    private CheckBox slot38Reminder;
+    private CheckBox slot48Reminder;
+    private CheckBox slot58Reminder;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,7 +116,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
         Button btn_edit = (Button) view.findViewById(R.id.btn_edit);
         btn_edit.setOnClickListener(this);
 
-        CheckBox slot11Reminder = (CheckBox) findViewById(R.id.slot11Reminder);
+        slot11Reminder = (CheckBox) findViewById(R.id.slot11Reminder);
         if (slot11Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT11_CHECKED", false);
             if (IS_CHECKED)
@@ -86,7 +126,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot11Reminder.setChecked(IS_CHECKED);
             slot11Reminder.setOnClickListener(this);
         }
-        CheckBox slot21Reminder = (CheckBox) findViewById(R.id.slot21Reminder);
+        slot21Reminder = (CheckBox) findViewById(R.id.slot21Reminder);
         if (slot21Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT21_CHECKED", false);
             if (IS_CHECKED)
@@ -96,7 +136,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot21Reminder.setChecked(IS_CHECKED);
             slot21Reminder.setOnClickListener(this);
         }
-        CheckBox slot31Reminder = (CheckBox) findViewById(R.id.slot31Reminder);
+        slot31Reminder = (CheckBox) findViewById(R.id.slot31Reminder);
         if (slot31Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT31_CHECKED", false);
             if (IS_CHECKED)
@@ -106,7 +146,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot31Reminder.setChecked(IS_CHECKED);
             slot31Reminder.setOnClickListener(this);
         }
-        CheckBox slot41Reminder = (CheckBox) findViewById(R.id.slot41Reminder);
+        slot41Reminder = (CheckBox) findViewById(R.id.slot41Reminder);
         if (slot41Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT41_CHECKED", false);
             if (IS_CHECKED)
@@ -116,7 +156,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot41Reminder.setChecked(IS_CHECKED);
             slot41Reminder.setOnClickListener(this);
         }
-        CheckBox slot51Reminder = (CheckBox) findViewById(R.id.slot51Reminder);
+        slot51Reminder = (CheckBox) findViewById(R.id.slot51Reminder);
         if (slot51Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT51_CHECKED", false);
             if (IS_CHECKED)
@@ -126,7 +166,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot51Reminder.setChecked(IS_CHECKED);
             slot51Reminder.setOnClickListener(this);
         }
-        CheckBox slot12Reminder = (CheckBox) findViewById(R.id.slot12Reminder);
+        slot12Reminder = (CheckBox) findViewById(R.id.slot12Reminder);
         if (slot12Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT12_CHECKED", false);
             if (IS_CHECKED)
@@ -136,7 +176,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot12Reminder.setChecked(IS_CHECKED);
             slot12Reminder.setOnClickListener(this);
         }
-        CheckBox slot22Reminder = (CheckBox) findViewById(R.id.slot22Reminder);
+        slot22Reminder = (CheckBox) findViewById(R.id.slot22Reminder);
         if (slot22Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT22_CHECKED", false);
             if (IS_CHECKED)
@@ -146,7 +186,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot22Reminder.setChecked(IS_CHECKED);
             slot22Reminder.setOnClickListener(this);
         }
-        CheckBox slot32Reminder = (CheckBox) findViewById(R.id.slot32Reminder);
+        slot32Reminder = (CheckBox) findViewById(R.id.slot32Reminder);
         if (slot32Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT32_CHECKED", false);
             if (IS_CHECKED)
@@ -156,7 +196,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot32Reminder.setChecked(IS_CHECKED);
             slot32Reminder.setOnClickListener(this);
         }
-        CheckBox slot42Reminder = (CheckBox) findViewById(R.id.slot42Reminder);
+        slot42Reminder = (CheckBox) findViewById(R.id.slot42Reminder);
         if (slot42Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT42_CHECKED", false);
             if (IS_CHECKED)
@@ -166,7 +206,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot42Reminder.setChecked(IS_CHECKED);
             slot42Reminder.setOnClickListener(this);
         }
-        CheckBox slot52Reminder = (CheckBox) findViewById(R.id.slot52Reminder);
+        slot52Reminder = (CheckBox) findViewById(R.id.slot52Reminder);
         if (slot52Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT52_CHECKED", false);
             if (IS_CHECKED)
@@ -176,7 +216,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot52Reminder.setChecked(IS_CHECKED);
             slot52Reminder.setOnClickListener(this);
         }
-        CheckBox slot13Reminder = (CheckBox) findViewById(R.id.slot13Reminder);
+        slot13Reminder = (CheckBox) findViewById(R.id.slot13Reminder);
         if (slot13Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT13_CHECKED", false);
             if (IS_CHECKED)
@@ -186,7 +226,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot13Reminder.setChecked(IS_CHECKED);
             slot13Reminder.setOnClickListener(this);
         }
-        CheckBox slot23Reminder = (CheckBox) findViewById(R.id.slot23Reminder);
+        slot23Reminder = (CheckBox) findViewById(R.id.slot23Reminder);
         if (slot23Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT23_CHECKED", false);
             if (IS_CHECKED)
@@ -196,7 +236,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot23Reminder.setChecked(IS_CHECKED);
             slot23Reminder.setOnClickListener(this);
         }
-        CheckBox slot33Reminder = (CheckBox) findViewById(R.id.slot33Reminder);
+        slot33Reminder = (CheckBox) findViewById(R.id.slot33Reminder);
         if (slot33Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT33_CHECKED", false);
             if (IS_CHECKED)
@@ -206,7 +246,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot33Reminder.setChecked(IS_CHECKED);
             slot33Reminder.setOnClickListener(this);
         }
-        CheckBox slot43Reminder = (CheckBox) findViewById(R.id.slot43Reminder);
+        slot43Reminder = (CheckBox) findViewById(R.id.slot43Reminder);
         if (slot43Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT43_CHECKED", false);
             if (IS_CHECKED)
@@ -216,7 +256,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot43Reminder.setChecked(IS_CHECKED);
             slot43Reminder.setOnClickListener(this);
         }
-        CheckBox slot53Reminder = (CheckBox) findViewById(R.id.slot53Reminder);
+        slot53Reminder = (CheckBox) findViewById(R.id.slot53Reminder);
         if (slot53Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT53_CHECKED", false);
             if (IS_CHECKED)
@@ -226,7 +266,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot53Reminder.setChecked(IS_CHECKED);
             slot53Reminder.setOnClickListener(this);
         }
-        CheckBox slot14Reminder = (CheckBox) findViewById(R.id.slot14Reminder);
+        slot14Reminder = (CheckBox) findViewById(R.id.slot14Reminder);
         if (slot14Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT14_CHECKED", false);
             if (IS_CHECKED)
@@ -236,7 +276,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot14Reminder.setChecked(IS_CHECKED);
             slot14Reminder.setOnClickListener(this);
         }
-        CheckBox slot24Reminder = (CheckBox) findViewById(R.id.slot24Reminder);
+        slot24Reminder = (CheckBox) findViewById(R.id.slot24Reminder);
         if (slot24Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT24_CHECKED", false);
             if (IS_CHECKED)
@@ -246,7 +286,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot24Reminder.setChecked(IS_CHECKED);
             slot24Reminder.setOnClickListener(this);
         }
-        CheckBox slot34Reminder = (CheckBox) findViewById(R.id.slot34Reminder);
+        slot34Reminder = (CheckBox) findViewById(R.id.slot34Reminder);
         if (slot34Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT34_CHECKED", false);
             if (IS_CHECKED)
@@ -256,7 +296,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot34Reminder.setChecked(IS_CHECKED);
             slot34Reminder.setOnClickListener(this);
         }
-        CheckBox slot44Reminder = (CheckBox) findViewById(R.id.slot44Reminder);
+        slot44Reminder = (CheckBox) findViewById(R.id.slot44Reminder);
         if (slot44Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT44_CHECKED", false);
             if (IS_CHECKED)
@@ -266,7 +306,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot44Reminder.setChecked(IS_CHECKED);
             slot44Reminder.setOnClickListener(this);
         }
-        CheckBox slot54Reminder = (CheckBox) findViewById(R.id.slot54Reminder);
+        slot54Reminder = (CheckBox) findViewById(R.id.slot54Reminder);
         if (slot54Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT54_CHECKED", false);
             if (IS_CHECKED)
@@ -276,7 +316,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot54Reminder.setChecked(IS_CHECKED);
             slot54Reminder.setOnClickListener(this);
         }
-        CheckBox slot15Reminder = (CheckBox) findViewById(R.id.slot15Reminder);
+        slot15Reminder = (CheckBox) findViewById(R.id.slot15Reminder);
         if (slot15Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT15_CHECKED", false);
             if (IS_CHECKED)
@@ -286,7 +326,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot15Reminder.setChecked(IS_CHECKED);
             slot15Reminder.setOnClickListener(this);
         }
-        CheckBox slot25Reminder = (CheckBox) findViewById(R.id.slot25Reminder);
+        slot25Reminder = (CheckBox) findViewById(R.id.slot25Reminder);
         if (slot25Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT25_CHECKED", false);
             if (IS_CHECKED)
@@ -296,7 +336,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot25Reminder.setChecked(IS_CHECKED);
             slot25Reminder.setOnClickListener(this);
         }
-        CheckBox slot35Reminder = (CheckBox) findViewById(R.id.slot35Reminder);
+        slot35Reminder = (CheckBox) findViewById(R.id.slot35Reminder);
         if (slot35Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT35_CHECKED", false);
             if (IS_CHECKED)
@@ -306,7 +346,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot35Reminder.setChecked(IS_CHECKED);
             slot35Reminder.setOnClickListener(this);
         }
-        CheckBox slot45Reminder = (CheckBox) findViewById(R.id.slot45Reminder);
+        slot45Reminder = (CheckBox) findViewById(R.id.slot45Reminder);
         if (slot45Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT45_CHECKED", false);
             if (IS_CHECKED)
@@ -316,7 +356,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot45Reminder.setChecked(IS_CHECKED);
             slot45Reminder.setOnClickListener(this);
         }
-        CheckBox slot55Reminder = (CheckBox) findViewById(R.id.slot55Reminder);
+        slot55Reminder = (CheckBox) findViewById(R.id.slot55Reminder);
         if (slot55Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT55_CHECKED", false);
             if (IS_CHECKED)
@@ -327,7 +367,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot55Reminder.setOnClickListener(this);
         }
 
-        CheckBox slot16Reminder = (CheckBox) findViewById(R.id.slot16Reminder);
+        slot16Reminder = (CheckBox) findViewById(R.id.slot16Reminder);
         if (slot16Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT16_CHECKED", false);
             if (IS_CHECKED)
@@ -338,7 +378,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot16Reminder.setOnClickListener(this);
         }
 
-        CheckBox slot26Reminder = (CheckBox) findViewById(R.id.slot26Reminder);
+        slot26Reminder = (CheckBox) findViewById(R.id.slot26Reminder);
         if (slot26Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT26_CHECKED", false);
             if (IS_CHECKED)
@@ -349,7 +389,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot26Reminder.setOnClickListener(this);
         }
 
-        CheckBox slot36Reminder = (CheckBox) findViewById(R.id.slot36Reminder);
+        slot36Reminder = (CheckBox) findViewById(R.id.slot36Reminder);
         if (slot36Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT36_CHECKED", false);
             if (IS_CHECKED)
@@ -360,7 +400,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot36Reminder.setOnClickListener(this);
         }
 
-        CheckBox slot46Reminder = (CheckBox) findViewById(R.id.slot46Reminder);
+        slot46Reminder = (CheckBox) findViewById(R.id.slot46Reminder);
         if (slot46Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT46_CHECKED", false);
             if (IS_CHECKED)
@@ -371,7 +411,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot46Reminder.setOnClickListener(this);
         }
 
-        CheckBox slot56Reminder = (CheckBox) findViewById(R.id.slot56Reminder);
+        slot56Reminder = (CheckBox) findViewById(R.id.slot56Reminder);
         if (slot56Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT56_CHECKED", false);
             if (IS_CHECKED)
@@ -382,7 +422,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot56Reminder.setOnClickListener(this);
         }
 
-        CheckBox slot17Reminder = (CheckBox) findViewById(R.id.slot17Reminder);
+        slot17Reminder = (CheckBox) findViewById(R.id.slot17Reminder);
         if (slot17Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT17_CHECKED", false);
             if (IS_CHECKED)
@@ -393,7 +433,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot17Reminder.setOnClickListener(this);
         }
 
-        CheckBox slot27Reminder = (CheckBox) findViewById(R.id.slot27Reminder);
+        slot27Reminder = (CheckBox) findViewById(R.id.slot27Reminder);
         if (slot27Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT27_CHECKED", false);
             if (IS_CHECKED)
@@ -404,7 +444,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot27Reminder.setOnClickListener(this);
         }
 
-        CheckBox slot37Reminder = (CheckBox) findViewById(R.id.slot37Reminder);
+        slot37Reminder = (CheckBox) findViewById(R.id.slot37Reminder);
         if (slot37Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT37_CHECKED", false);
             if (IS_CHECKED)
@@ -415,7 +455,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot37Reminder.setOnClickListener(this);
         }
 
-        CheckBox slot47Reminder = (CheckBox) findViewById(R.id.slot47Reminder);
+        slot47Reminder = (CheckBox) findViewById(R.id.slot47Reminder);
         if (slot47Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT47_CHECKED", false);
             if (IS_CHECKED)
@@ -426,7 +466,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot47Reminder.setOnClickListener(this);
         }
 
-        CheckBox slot57Reminder = (CheckBox) findViewById(R.id.slot57Reminder);
+        slot57Reminder = (CheckBox) findViewById(R.id.slot57Reminder);
         if (slot57Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT57_CHECKED", false);
             if (IS_CHECKED)
@@ -437,7 +477,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot57Reminder.setOnClickListener(this);
         }
 
-        CheckBox slot18Reminder = (CheckBox) findViewById(R.id.slot18Reminder);
+        slot18Reminder = (CheckBox) findViewById(R.id.slot18Reminder);
         if (slot18Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT18_CHECKED", false);
             if (IS_CHECKED)
@@ -448,7 +488,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot18Reminder.setOnClickListener(this);
         }
 
-        CheckBox slot28Reminder = (CheckBox) findViewById(R.id.slot28Reminder);
+        slot28Reminder = (CheckBox) findViewById(R.id.slot28Reminder);
         if (slot28Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT28_CHECKED", false);
             if (IS_CHECKED)
@@ -459,7 +499,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot28Reminder.setOnClickListener(this);
         }
 
-        CheckBox slot38Reminder = (CheckBox) findViewById(R.id.slot38Reminder);
+        slot38Reminder = (CheckBox) findViewById(R.id.slot38Reminder);
         if (slot38Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT38_CHECKED", false);
             if (IS_CHECKED)
@@ -470,7 +510,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot38Reminder.setOnClickListener(this);
         }
 
-        CheckBox slot48Reminder = (CheckBox) findViewById(R.id.slot48Reminder);
+        slot48Reminder = (CheckBox) findViewById(R.id.slot48Reminder);
         if (slot48Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT48_CHECKED", false);
             if (IS_CHECKED)
@@ -481,7 +521,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
             slot48Reminder.setOnClickListener(this);
         }
 
-        CheckBox slot58Reminder = (CheckBox) findViewById(R.id.slot58Reminder);
+        slot58Reminder = (CheckBox) findViewById(R.id.slot58Reminder);
         if (slot58Reminder != null) {
             boolean IS_CHECKED = sharedPreferences.getBoolean("SLOT58_CHECKED", false);
             if (IS_CHECKED)
@@ -2776,9 +2816,61 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
         super.onPause();
         String applicationStatus = sharedPreferences.getString("APPLICATION_STATUS", "");
         if (applicationStatus.equals("TEACHER")) {
+            hideSlotReminder();
             takeScreenShot();
             String imageString = getStringImage(bitmap);
             new TimetableModal(TimeTableView.this).uploadImage(imageString);
         }
+    }
+
+    void hideSlotReminder(){
+
+        slot11Reminder.setVisibility(View.INVISIBLE);
+        slot21Reminder.setVisibility(View.INVISIBLE);
+        slot31Reminder.setVisibility(View.INVISIBLE);
+        slot41Reminder.setVisibility(View.INVISIBLE);
+        slot51Reminder.setVisibility(View.INVISIBLE);
+
+        slot12Reminder.setVisibility(View.INVISIBLE);
+        slot22Reminder.setVisibility(View.INVISIBLE);
+        slot32Reminder.setVisibility(View.INVISIBLE);
+        slot42Reminder.setVisibility(View.INVISIBLE);
+        slot52Reminder.setVisibility(View.INVISIBLE);
+
+        slot13Reminder.setVisibility(View.INVISIBLE);
+        slot23Reminder.setVisibility(View.INVISIBLE);
+        slot33Reminder.setVisibility(View.INVISIBLE);
+        slot43Reminder.setVisibility(View.INVISIBLE);
+        slot53Reminder.setVisibility(View.INVISIBLE);
+
+        slot14Reminder.setVisibility(View.INVISIBLE);
+        slot24Reminder.setVisibility(View.INVISIBLE);
+        slot34Reminder.setVisibility(View.INVISIBLE);
+        slot44Reminder.setVisibility(View.INVISIBLE);
+        slot54Reminder.setVisibility(View.INVISIBLE);
+
+        slot15Reminder.setVisibility(View.INVISIBLE);
+        slot25Reminder.setVisibility(View.INVISIBLE);
+        slot35Reminder.setVisibility(View.INVISIBLE);
+        slot45Reminder.setVisibility(View.INVISIBLE);
+        slot55Reminder.setVisibility(View.INVISIBLE);
+
+        slot16Reminder.setVisibility(View.INVISIBLE);
+        slot26Reminder.setVisibility(View.INVISIBLE);
+        slot36Reminder.setVisibility(View.INVISIBLE);
+        slot46Reminder.setVisibility(View.INVISIBLE);
+        slot56Reminder.setVisibility(View.INVISIBLE);
+
+        slot17Reminder.setVisibility(View.INVISIBLE);
+        slot27Reminder.setVisibility(View.INVISIBLE);
+        slot37Reminder.setVisibility(View.INVISIBLE);
+        slot47Reminder.setVisibility(View.INVISIBLE);
+        slot57Reminder.setVisibility(View.INVISIBLE);
+
+        slot18Reminder.setVisibility(View.INVISIBLE);
+        slot28Reminder.setVisibility(View.INVISIBLE);
+        slot38Reminder.setVisibility(View.INVISIBLE);
+        slot48Reminder.setVisibility(View.INVISIBLE);
+        slot58Reminder.setVisibility(View.INVISIBLE);
     }
 }

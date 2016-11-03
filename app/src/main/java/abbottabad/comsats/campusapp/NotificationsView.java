@@ -42,7 +42,7 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
     private ArrayList<NotificationInfo> notificationInfos;
     private TextView notificationTitle;
     private NotificationsLocalModal notificationsLocalModal;
-    private  CheckBox CB_selectAll;
+    private CheckBox CB_selectAll;
     public static boolean IS_IN_SELECT_ALL_MODE = false;
     private SharedPreferences sharedPreferences;
 
@@ -90,7 +90,6 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
                 if (ET_message.getText().toString().trim().equals("")) {
                     Toast.makeText(NotificationsView.this, "Please input some text...", Toast.LENGTH_SHORT).show();
                 } else {
-
                     new NotificationsModal(NotificationsView.this).
                             sendEventNotification(REG_ID, ET_message.getText().toString().trim(),
                                     sharedPreferences.getString("NOTIFICATION_TYPE", null));
@@ -116,7 +115,7 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.action_delete: {
                 if (!CB_selectAll.isChecked()) {
                     if (selectedItems.size() > 0) {
@@ -141,7 +140,7 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
                     } else {
                         Toast.makeText(this, "No item is selected", Toast.LENGTH_SHORT).show();
                     }
-                }  else {
+                } else {
                     notificationsLocalModal.deleteAll(sharedPreferences.getString("NOTIFICATION_TYPE", null));
                     notificationsAdapter.clear();
                     notificationInfos.clear();
@@ -186,8 +185,8 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
     }
 
     public void updateSelection(View v, int position) {
-        if (((CheckBox)v).isChecked()){
-            Log.i("TAG", "updateSelection: "+ position);
+        if (((CheckBox) v).isChecked()) {
+            Log.i("TAG", "updateSelection: " + position);
             counter += 1;
             updateCounter(counter);
             selectedItems.add(position);
@@ -195,7 +194,7 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
             counter -= 1;
             updateCounter(counter);
             if (selectedItems.size() > 0) {
-                for (int i = 0; i < selectedItems.size(); i++){
+                for (int i = 0; i < selectedItems.size(); i++) {
                     if (selectedItems.get(i) == position) {
                         selectedItems.remove(i);
                         break;
@@ -206,7 +205,7 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
     }
 
     private void updateCounter(int counter) {
-        if (counter == 0){
+        if (counter == 0) {
             notificationTitle.setText("0 item selected");
         } else {
             notificationTitle.setText(counter + " items selected");
@@ -215,7 +214,7 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
 
     @Override
     public void onBackPressed() {
-        if (IS_IN_ACTION_MODE){
+        if (IS_IN_ACTION_MODE) {
             clearActionMode();
         } else {
             super.onBackPressed();

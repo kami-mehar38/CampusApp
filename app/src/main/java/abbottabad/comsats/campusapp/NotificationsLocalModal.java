@@ -85,7 +85,6 @@ class NotificationsLocalModal extends SQLiteOpenHelper {
             notificationInfos[cursor.getPosition()].setNotification(cursor.getString(1));
             notificationInfos[cursor.getPosition()].setDateTime(cursor.getString(2));
             notificationInfos[cursor.getPosition()].setMine(cursor.getInt(3));
-            //notificationInfos[cursor.getPosition()].setNotificationType(cursor.getString(4));
             notificationInfoList.add(notificationInfos[cursor.getPosition()]);
             cursor.moveToNext();
         }
@@ -99,5 +98,4 @@ class NotificationsLocalModal extends SQLiteOpenHelper {
         cursor.close();
         db.close();
     }
-
 }

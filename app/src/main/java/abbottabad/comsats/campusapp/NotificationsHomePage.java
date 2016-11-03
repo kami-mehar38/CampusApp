@@ -14,13 +14,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.TextView;
+
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 public class NotificationsHomePage extends AppCompatActivity {
 
-    public static SharedPreferences sharedPreferences;
+    private SharedPreferences sharedPreferences;
+    public static NotificationsListAdapter notificationsListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +34,20 @@ public class NotificationsHomePage extends AppCompatActivity {
         String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
         sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
 
+        // Create default options which will be used for every
+        //  displayImage(...) call if no options will be passed to this method
+        DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
+                .cacheInMemory(true).cacheOnDisk(true).build();
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
+                .defaultDisplayImageOptions(defaultOptions).build();
+        ImageLoader.getInstance().init(config); // Do it on Application start
+
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         if (recyclerView != null) {
             recyclerView.setLayoutManager(layoutManager);
-            NotificationsListAdapter notificationsListAdapter = new NotificationsListAdapter();
+            notificationsListAdapter = new NotificationsListAdapter(this);
             recyclerView.setAdapter(notificationsListAdapter);
         }
 
@@ -50,6 +60,17 @@ public class NotificationsHomePage extends AppCompatActivity {
                 }
             });
         }
+        NotificationsModal notificationsModal = new NotificationsModal(this);
+        notificationsModal.getNotificationGroups();
+
+        NotificationsLocalModal notificationsLocalModal = new NotificationsLocalModal(this);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        notificationsListAdapter.notifyDataSetChanged();
     }
 
     /*public static void setBadgeCount() {
@@ -103,10 +124,7 @@ public class NotificationsHomePage extends AppCompatActivity {
         } else badgeOthers.setVisibility(View.GONE);
     }*/
 
-    private static void setpopupAnimation(TextView textView) {
-        Animation popupAnimation = AnimationUtils.loadAnimation(textView.getContext(), R.anim.popup_animation);
-        textView.startAnimation(popupAnimation);
-    }
+
 
 
     private void setStatusBarColor() {

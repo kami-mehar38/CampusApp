@@ -252,17 +252,25 @@ public class MyGcmListenerService extends GcmListenerService {
         notificationInfo.setMine(0);
         notificationInfo.setNotificationType(notificationType);
 
+        /**
+         * Below is the code to set the message counter of a specific group
+         * It show the number of unread messages
+         */
         int badgeCount = sharedPreferences.getInt(notificationType + "_COUNT", 0);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         badgeCount++;
         editor.putInt(notificationType + "_COUNT", badgeCount);
+        editor.putString(notificationType + "_RECENT_MESSAGE", message);
+        editor.putString(notificationType + "_RECENT_MESSAGE_TIME", currentDateTimeString);
         editor.apply();
-       /* Handler handler = new Handler(Looper.getMainLooper());
+
+        Handler handler = new Handler(Looper.getMainLooper());
         handler.post(new Runnable() {
             @Override
             public void run() {
-                if (NotificationsHomePage.sharedPreferences != null)
-                    NotificationsHomePage.setBadgeCount();
+                if (NotificationsHomePage.notificationsListAdapter != null){
+                    NotificationsHomePage.notificationsListAdapter.notifyDataSetChanged();
+                }
             }
         });
 
@@ -281,7 +289,7 @@ public class MyGcmListenerService extends GcmListenerService {
             }
         });
 
-        createEventNotification(message); */
+        createEventNotification(message);
     }
 
     private void createEventNotification(String message) {
