@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#fff"
-            android:textSize="22sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:layout_toStartOf="@+id/CB_selectAll"
             android:layout_toLeftOf="@+id/CB_selectAll"

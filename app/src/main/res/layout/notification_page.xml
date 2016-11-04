@@ -32,8 +32,8 @@
                 android:maxHeight="80dp"
                 android:maxLength="320"
                 android:padding="10dp"
-                android:textColor="#fff"
-                android:textColorHint="#fff"
+                android:textColor="#000"
+                android:textColorHint="#5b5b5b"
                 android:textCursorDrawable="@drawable/edittext_notifications_cursor_color"
                 android:textSize="16sp"
                 android:textStyle="normal">

@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:text="@string/complaint_poll"
             android:textColor="#fff"
-            android:textSize="22sp"
+            android:textSize="20sp"
             android:textStyle="bold"/>
 
     </RelativeLayout>

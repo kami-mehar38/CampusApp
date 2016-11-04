@@ -392,4 +392,11 @@ public class MyGcmListenerService extends GcmListenerService {
         notificationManager.notify(GCM_NOTIFICATION_ID, mBuilder.build());
 
     }
+
+    private String getCurrentTime(){
+        Date dt = new Date();
+        int hours = dt.getHours();
+        int minutes = dt.getMinutes();
+        return hours + ":" + minutes;
+    }
 }

@@ -30,8 +30,9 @@
             android:layout_height="wrap_content"
             android:maxWidth="300dp"
             android:textSize="16sp"
-            android:textColor="#fff"
-            android:background="@drawable/chat_bubble_left"
+            android:textColor="#5b5b5b"
+            android:padding="8dp"
+            android:background="@drawable/chat_left"
             />
 
         <TextView

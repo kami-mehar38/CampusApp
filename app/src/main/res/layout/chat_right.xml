@@ -19,11 +19,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:background="@drawable/chat_bubble_right"
+                android:background="@drawable/chat_right"
                 android:maxWidth="300dp"
-                android:textColor="#fff"
+                android:textColor="#5b5b5b"
                 android:textSize="16sp"
-                android:textStyle="normal" />
+                android:textStyle="normal"
+                android:padding="8dp" />
 
             <TextView
                 android:id="@+id/TV_notificationDate"

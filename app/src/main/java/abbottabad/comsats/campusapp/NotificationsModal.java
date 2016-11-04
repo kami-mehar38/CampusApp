@@ -3,6 +3,7 @@ package abbottabad.comsats.campusapp;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -37,6 +38,7 @@ class NotificationsModal {
 
     private Context context;
     private String notificationType;
+    private final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
 
     NotificationsModal(Context context) {
         this.context = context;
@@ -58,6 +60,7 @@ class NotificationsModal {
 
         private String message;
         private String currentDateTimeString;
+        private SharedPreferences.Editor editor;
 
         @Override
         protected void onPreExecute() {
@@ -83,6 +86,9 @@ class NotificationsModal {
 
             currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
             NotificationsView.ET_message.setText("");
+
+            SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+            editor = sharedPreferences.edit();
         }
 
         @Override
@@ -169,6 +175,10 @@ class NotificationsModal {
                         NotificationsView.notificationsAdapter.add(notificationInfo);
                         NotificationsView.notificationsAdapter.notifyDataSetChanged();
                         NotificationsView.listView.setSelection(NotificationsView.notificationsAdapter.getCount() - 1);
+
+                        editor.putString(notificationType + "_RECENT_MESSAGE", "You: " + message);
+                        editor.putString(notificationType + "_RECENT_MESSAGE_TIME", currentDateTimeString);
+                        editor.apply();
                         break;
                     }
                     case "ERROR": {
