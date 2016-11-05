@@ -27,8 +27,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -44,8 +45,8 @@ class NotificationsModal {
         this.context = context;
     }
 
-    void sendEventNotification(String reg_id, String message, String notification_type) {
-        new SendEventNotification().execute(reg_id, message, notification_type);
+    void sendEventNotification(String reg_id, String message, String notificationSender, String notification_type) {
+        new SendEventNotification().execute(reg_id, message, notificationSender, notification_type);
     }
 
     void createGroup(String imageString, String groupName, String reg_id){
@@ -84,7 +85,8 @@ class NotificationsModal {
                 }
             });
 
-            currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+            DateFormat df = new SimpleDateFormat("d MMM yyyy/h:mm a");
+            currentDateTimeString = df.format(Calendar.getInstance().getTime());
             NotificationsView.ET_message.setText("");
 
             SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
@@ -96,7 +98,8 @@ class NotificationsModal {
             String stringUrl = "http://hostellocator.com/sendEventNotification.php";
             String reg_id = params[0];
             message = params[1];
-            notificationType = params[2];
+            String notificationSender = params[2];
+            notificationType = params[3];
             try {
                 URL url = new URL(stringUrl);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -107,6 +110,7 @@ class NotificationsModal {
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
                 String data = URLEncoder.encode("reg_id", "UTF-8") + "=" + URLEncoder.encode(reg_id, "UTF-8") + "&" +
                         URLEncoder.encode("message", "UTF-8") + "=" + URLEncoder.encode(message, "UTF-8") + "&" +
+                        URLEncoder.encode("notificationSender", "UTF-8") + "=" + URLEncoder.encode(notificationSender, "UTF-8") + "&" +
                         URLEncoder.encode("notificationType", "UTF-8") + "=" + URLEncoder.encode(notificationType, "UTF-8");
                 bufferedWriter.write(data);
                 bufferedWriter.flush();

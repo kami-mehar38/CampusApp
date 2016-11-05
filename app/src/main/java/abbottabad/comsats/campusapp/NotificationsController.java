@@ -5,9 +5,18 @@ package abbottabad.comsats.campusapp;
  */
 class NotificationsController {
     private static String notification;
+    private static String notificationSender;
     private static String dateTime;
     private static int mine;
     private static String notificationType;
+
+    public static String getNotificationSender() {
+        return notificationSender;
+    }
+
+    public static void setNotificationSender(String notificationSender) {
+        NotificationsController.notificationSender = notificationSender;
+    }
 
     static String getNotificationType() {
         return notificationType;

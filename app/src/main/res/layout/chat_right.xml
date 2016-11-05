@@ -7,11 +7,17 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingEnd="0dp"
+        android:paddingLeft="25dp"
+        android:paddingRight="0dp"
+        android:paddingStart="25dp">
 
         <LinearLayout
+            android:id="@+id/LL_notification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="end"
             android:orientation="vertical">
 
             <TextView
@@ -21,10 +27,10 @@
                 android:layout_gravity="end"
                 android:background="@drawable/chat_right"
                 android:maxWidth="300dp"
+                android:padding="8dp"
                 android:textColor="#5b5b5b"
                 android:textSize="16sp"
-                android:textStyle="normal"
-                android:padding="8dp" />
+                android:textStyle="normal" />
 
             <TextView
                 android:id="@+id/TV_notificationDate"
@@ -45,7 +51,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
-
 
     </LinearLayout>
 

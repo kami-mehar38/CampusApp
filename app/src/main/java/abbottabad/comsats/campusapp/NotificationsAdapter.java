@@ -7,10 +7,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * This project CampusApp is created by Kamran Ramzan on 8/20/16.
@@ -65,10 +72,13 @@ class NotificationsAdapter extends ArrayAdapter<NotificationInfo> {
             row = inflater.inflate(R.layout.chat_right, parent, false);
         }else{
             row = inflater.inflate(R.layout.chat_left, parent, false);
+            TextView TV_notificationsSender = (TextView) row.findViewById(R.id.TV_notificationSender);
+            TV_notificationsSender.setText(notificationInfo != null ? notificationInfo.getNotificationSender() : null);
         }
 
         TextView TV_notification = (TextView) row.findViewById(R.id.txt_msg);
         TextView TV_notificationDate = (TextView) row.findViewById(R.id.TV_notificationDate);
+        LinearLayout LL_notification = (LinearLayout) row.findViewById(R.id.LL_notification);
         CheckBox CB_delete = (CheckBox) row.findViewById(R.id.CB_delete);
         if (!NotificationsView.IS_IN_ACTION_MODE){
             CB_delete.setVisibility(View.GONE);
@@ -80,8 +90,23 @@ class NotificationsAdapter extends ArrayAdapter<NotificationInfo> {
             CB_delete.setChecked(true);
         }
         TV_notification.setText(notificationInfo != null ? notificationInfo.getNotification() : null);
-        TV_notification.setOnLongClickListener(notificationsView);
-        TV_notificationDate.setText(notificationInfo != null ? notificationInfo.getDateTime() : null);
+        LL_notification.setOnLongClickListener(notificationsView);
+
+        if (notificationInfo != null){
+            String[] timeStamp = notificationInfo.getDateTime().split("/");
+            try {
+                DateFormat df = new SimpleDateFormat("d MMM yyyy", Locale.getDefault());
+                String currentDateString = df.format(Calendar.getInstance().getTime());
+                Date currentDate = df.parse(currentDateString);
+                Date messageDate = df.parse(timeStamp[0]);
+                if (messageDate.equals(currentDate)) {
+                    TV_notificationDate.setText(timeStamp[1]);
+                } else TV_notificationDate.setText(timeStamp[0] +" At "+ timeStamp[1]);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
         CB_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

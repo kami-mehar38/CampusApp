@@ -9,6 +9,15 @@ class NotificationInfo {
     private String dateTime;
     private int mine;
     private String notificationType;
+    private String notificationSender;
+
+    public String getNotificationSender() {
+        return notificationSender;
+    }
+
+    public void setNotificationSender(String notificationSender) {
+        this.notificationSender = notificationSender;
+    }
 
     public String getNotificationType() {
         return notificationType;

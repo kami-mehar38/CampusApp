@@ -17,7 +17,10 @@ import android.util.Log;
 import com.google.android.gms.gcm.GcmListenerService;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * This project CampusApp is created by Kamran Ramzan on 6/3/16.
@@ -237,20 +240,17 @@ public class MyGcmListenerService extends GcmListenerService {
     }
 
     private void receiveEventNotification(Bundle data) {
-        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+        DateFormat df = new SimpleDateFormat("d MMM yyyy/h:mm a", Locale.getDefault());
+        String currentDateTimeString = df.format(Calendar.getInstance().getTime());
         String message = data.getString("message");
+        String notificationSender = "From: " + data.getString("notificationSender");
         final String notificationType = data.getString("notificationType");
         NotificationsController.setNotification(message);
+        NotificationsController.setNotificationSender(notificationSender);
         NotificationsController.setDateTime(currentDateTimeString);
         NotificationsController.setMine(0);
         NotificationsController.setNotificationType(notificationType);
         new NotificationsLocalModal(this).addEventNotification();
-
-        final NotificationInfo notificationInfo = new NotificationInfo();
-        notificationInfo.setNotification(message);
-        notificationInfo.setDateTime(currentDateTimeString);
-        notificationInfo.setMine(0);
-        notificationInfo.setNotificationType(notificationType);
 
         /**
          * Below is the code to set the message counter of a specific group
@@ -274,6 +274,12 @@ public class MyGcmListenerService extends GcmListenerService {
             }
         });
 
+        final NotificationInfo notificationInfo = new NotificationInfo();
+        notificationInfo.setNotification(message);
+        notificationInfo.setNotificationSender(notificationSender);
+        notificationInfo.setDateTime(currentDateTimeString);
+        notificationInfo.setMine(0);
+        notificationInfo.setNotificationType(notificationType);
         final String NOTIFICATION_TYPE = sharedPreferences.getString("NOTIFICATION_TYPE", null);
 
         handler.post(new Runnable() {

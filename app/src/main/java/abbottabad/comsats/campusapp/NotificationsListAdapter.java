@@ -14,8 +14,14 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * This project CampusApp is created by Kamran Ramzan on 25-Oct-16.
@@ -59,8 +65,22 @@ class NotificationsListAdapter extends RecyclerView.Adapter<NotificationsListAda
 
         } else holder.TV_counterBadge.setVisibility(View.INVISIBLE);
 
-        String recentMessageTime = sharedPreferences.getString(notificationsListInfo.getGroupName() + "_RECENT_MESSAGE_TIME", "");
-        holder.TV_timeStamp.setText(recentMessageTime);
+        String recentMessageTime = sharedPreferences.getString(notificationsListInfo.getGroupName() + "_RECENT_MESSAGE_TIME", null);
+        if (recentMessageTime != null) {
+            String[] timeStamp = recentMessageTime.split("/");
+            try {
+                DateFormat df = new SimpleDateFormat("d MMM yyyy", Locale.getDefault());
+                String currentDateString = df.format(Calendar.getInstance().getTime());
+                Date currentDate = df.parse(currentDateString);
+                Date messageDate = df.parse(timeStamp[0]);
+                if (messageDate.equals(currentDate)) {
+                    holder.TV_timeStamp.setText(timeStamp[1]);
+                } else holder.TV_timeStamp.setText(timeStamp[0] +" At "+ timeStamp[1]);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+        } else holder.TV_timeStamp.setVisibility(View.INVISIBLE);
     }
 
     void addItem(NotificationsListInfo notificationsListInfo, int position) {
