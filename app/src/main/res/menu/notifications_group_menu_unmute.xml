@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/action_mute_chat"
+    <item android:id="@+id/action_unmute_chat"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_mute_chat"
-        android:title="@string/logout" />
+        android:icon="@drawable/ic_unmute_chat"
+        android:title="@string/unmute_group_chat" />
 
 </menu>

@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -163,8 +164,10 @@ class NotificationsModal {
             if (result != null) {
                 switch (result) {
                     case "OK": {
+                        MediaPlayer mPlayer = MediaPlayer.create(context, R.raw.message_sent);
+                        if (mPlayer != null)
+                            mPlayer.start();
 
-                        Toast.makeText(context, "Message sent!", Toast.LENGTH_LONG).show();
                         NotificationsController.setNotification(message);
                         NotificationsController.setDateTime(currentDateTimeString);
                         NotificationsController.setMine(1);
@@ -180,10 +183,11 @@ class NotificationsModal {
                         NotificationsView.notificationsAdapter.notifyDataSetChanged();
                         NotificationsView.listView.setSelection(NotificationsView.notificationsAdapter.getCount() - 1);
 
-                        editor.putString(notificationType + "_RECENT_MESSAGE", "You: " + message);
+                        editor.putString(notificationType + "_RECENT_MESSAGE", "Me: " + message);
                         editor.putString(notificationType + "_RECENT_MESSAGE_TIME", currentDateTimeString);
                         editor.apply();
                         break;
+
                     }
                     case "ERROR": {
                         NotificationsView.ET_message.setText(message);

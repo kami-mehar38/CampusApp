@@ -143,4 +143,6 @@
     <string name="choose_picture">Choose picture</string>
     <string name="group_name">Group name</string>
     <string name="no_recent_message">No recent message</string>
+    <string name="mute_group_chat">Mute group chat</string>
+    <string name="unmute_group_chat">Unmute group chat</string>
 </resources>

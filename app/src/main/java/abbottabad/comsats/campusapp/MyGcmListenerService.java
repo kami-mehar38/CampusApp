@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Location;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,7 +20,6 @@ import com.google.android.gms.gcm.GcmListenerService;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 /**
@@ -295,7 +295,16 @@ public class MyGcmListenerService extends GcmListenerService {
             }
         });
 
-        createEventNotification(message);
+        boolean isMuted = sharedPreferences.getBoolean(notificationType + "_MUTED" , false);
+        if (NotificationsView.notificationsAdapter == null){
+            if (!isMuted){
+                createEventNotification(message);
+            }
+        } else if (!isMuted){
+            MediaPlayer mPlayer = MediaPlayer.create(this, R.raw.message_received);
+            if (mPlayer != null)
+                mPlayer.start();
+        }
     }
 
     private void createEventNotification(String message) {
@@ -397,12 +406,5 @@ public class MyGcmListenerService extends GcmListenerService {
         mBuilder.setContentIntent(resultPendingIntent);
         notificationManager.notify(GCM_NOTIFICATION_ID, mBuilder.build());
 
-    }
-
-    private String getCurrentTime(){
-        Date dt = new Date();
-        int hours = dt.getHours();
-        int minutes = dt.getMinutes();
-        return hours + ":" + minutes;
     }
 }

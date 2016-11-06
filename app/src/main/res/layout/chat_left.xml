@@ -10,8 +10,9 @@
         android:orientation="vertical"
         android:paddingEnd="25dp"
         android:paddingRight="25dp"
-        android:paddingStart="0dp"
-        android:paddingLeft="0dp">
+        android:paddingStart="10dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp">
 
 
         <LinearLayout
@@ -42,7 +43,6 @@
                     android:id="@+id/txt_msg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hi there its my message"
                     android:textColor="#5b5b5b"
                     android:textSize="16sp" />
 
@@ -52,7 +52,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_marginTop="8dp"
-                    android:text="Kamran Ramzan"
                     android:textColor="#000"
                     android:textSize="12sp" />
 

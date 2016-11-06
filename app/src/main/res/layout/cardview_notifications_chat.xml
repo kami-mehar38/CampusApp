@@ -34,11 +34,13 @@
                 android:layout_toRightOf="@id/IV_profilePicture"
                 android:layout_toLeftOf="@+id/TV_counterBadge"
                 android:layout_toStartOf="@+id/TV_counterBadge"
+                android:gravity="center_vertical"
                 android:textColor="#000"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:ellipsize="end"
-                android:maxLines="1"/>
+                android:maxLines="1"
+                android:text="Kamran Ramzan"/>
 
             <TextView
                 android:id="@+id/TV_recentMessage"
@@ -46,13 +48,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
                 android:layout_toEndOf="@+id/IV_profilePicture"
                 android:layout_toRightOf="@id/IV_profilePicture"
                 android:layout_below="@+id/TV_groupName"
                 android:textSize="14sp"
                 android:textStyle="normal"
                 android:ellipsize="end"
-                android:maxLines="1"/>
+                android:maxLines="1"
+                android:text="Recent Message"/>
 
             <TextView
                 android:id="@+id/TV_counterBadge"

@@ -3,6 +3,7 @@ package abbottabad.comsats.campusapp;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -32,9 +33,11 @@ class NotificationsListAdapter extends RecyclerView.Adapter<NotificationsListAda
     private List<NotificationsListInfo> notificationsListInfoList = new ArrayList<>();
     private Context context;
     private SharedPreferences sharedPreferences;
+    private NotificationsHomePage notificationsHomePage;
 
     NotificationsListAdapter(Context context) {
         this.context = context;
+        this.notificationsHomePage = (NotificationsHomePage) context;
     }
 
     @Override
@@ -54,6 +57,12 @@ class NotificationsListAdapter extends RecyclerView.Adapter<NotificationsListAda
         // Then later, when you want to display image
         ImageLoader.getInstance().displayImage(notificationsListInfo.getGroupImageUri(), holder.IV_groupPicture); // Default options will be used
 
+        boolean isMuted = sharedPreferences.getBoolean(notificationsListInfo.getGroupName() + "_MUTED", false);
+        if (isMuted){
+            Drawable drawableLeft = context.getResources().getDrawable(R.drawable.ic_muted_chat);
+            holder.TV_groupName.setCompoundDrawablesWithIntrinsicBounds(drawableLeft, null, null, null);
+            holder.TV_groupName.setCompoundDrawablePadding(15);
+        } else holder.TV_groupName.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
         holder.TV_groupName.setText(notificationsListInfo.getGroupName());
         String recentMessage = sharedPreferences.getString(notificationsListInfo.getGroupName() + "_RECENT_MESSAGE", "No recent message");
         holder.TV_recentMessage.setText(recentMessage);
@@ -112,6 +121,13 @@ class NotificationsListAdapter extends RecyclerView.Adapter<NotificationsListAda
             TV_timeStamp = (TextView) itemView.findViewById(R.id.TV_timeStamp);
             CV_group = (CardView) itemView.findViewById(R.id.CV_group);
             CV_group.setOnClickListener(this);
+            CV_group.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    notificationsHomePage.setActionMode(TV_groupName.getText().toString());
+                    return true;
+                }
+            });
             String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
             sharedPreferences = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
             editor = sharedPreferences.edit();

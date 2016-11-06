@@ -51,7 +51,6 @@
             android:textColor="#fff"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:elevation="0dp"
             android:visibility="visible"
             android:textAllCaps="false" />
 
