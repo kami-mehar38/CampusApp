@@ -18,4 +18,24 @@
             </item>
         </layer-list>
     </item>
+
+    <item android:state_pressed="true">
+        <layer-list>
+            <!-- SHADOW -->
+            <item>
+                <shape>
+                    <solid android:color="#c9dbe1" />
+                    <corners android:topRightRadius="12dp" android:bottomLeftRadius="12dp" android:bottomRightRadius="12dp" />
+                </shape>
+            </item>
+
+            <item android:left="1dp" android:right="1dp" android:top="1dp" android:bottom="1dp">
+                <shape>
+                    <solid android:color="#c7d1d5" />
+                    <corners android:topRightRadius="12dp" android:bottomLeftRadius="12dp" android:bottomRightRadius="12dp" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+
 </selector>

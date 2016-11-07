@@ -134,7 +134,7 @@ public class CreateNotificationsGroup extends AppCompatActivity implements View.
                     matrix.postRotate(270);
                 }
                 bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-                bitmap = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth()/10, bitmap.getHeight()/10, true);
+                bitmap = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth(), bitmap.getHeight(), true);
                 return bitmap;
             } catch (IOException e) {
                 e.printStackTrace();

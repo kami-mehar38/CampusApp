@@ -155,7 +155,11 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".NotificationsHomePage" />
+
+        <activity
+            android:name=".NotificationsHomePage"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+
         <activity
             android:name=".TimetableImage"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -164,6 +168,10 @@
         <activity
             android:name=".CreateNotificationsGroup"
             android:configChanges="keyboardHidden|orientation|screenSize" />
+
+        <activity android:name=".NotificationsGroupImage"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
+
     </application>
 
 </manifest>

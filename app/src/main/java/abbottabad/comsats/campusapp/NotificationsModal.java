@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
@@ -32,6 +33,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * This project CampusApp is created by Kamran Ramzan on 8/22/16.
@@ -86,7 +88,7 @@ class NotificationsModal {
                 }
             });
 
-            DateFormat df = new SimpleDateFormat("d MMM yyyy/h:mm a");
+            DateFormat df = new SimpleDateFormat("d MMM yyyy/h:mm a", Locale.getDefault());
             currentDateTimeString = df.format(Calendar.getInstance().getTime());
             NotificationsView.ET_message.setText("");
 
@@ -164,9 +166,13 @@ class NotificationsModal {
             if (result != null) {
                 switch (result) {
                     case "OK": {
+                        AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
                         MediaPlayer mPlayer = MediaPlayer.create(context, R.raw.message_sent);
-                        if (mPlayer != null)
+                        if (mPlayer != null && audioManager.getRingerMode() == AudioManager.RINGER_MODE_NORMAL) {
+                            final int initVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+                            audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, initVolume, 0);
                             mPlayer.start();
+                        }
 
                         NotificationsController.setNotification(message);
                         NotificationsController.setDateTime(currentDateTimeString);
@@ -215,7 +221,7 @@ class NotificationsModal {
             progressDialog = new ProgressDialog(context);
             progressDialog.setIndeterminate(true);
             progressDialog.setCancelable(false);
-            progressDialog.setMessage("Creating group...");
+            progressDialog.setMessage("Creating group... This might take some time");
             progressDialog.show();
         }
 

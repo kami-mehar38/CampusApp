@@ -143,7 +143,7 @@ public class HomePageView extends AppCompatActivity implements
                 @Override
                 public void onClick(View v) {
                     //startActivity(new Intent(HomePageView.this, MapsActivity.class));
-                    startActivity(new Intent(HomePageView.this, TimetableImage.class));
+                    //startActivity(new Intent(HomePageView.this, TimetableImage.class));
                 }
             });
         }

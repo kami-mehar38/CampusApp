@@ -4,9 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,8 +54,7 @@ class NotificationsListAdapter extends RecyclerView.Adapter<NotificationsListAda
     @Override
     public void onBindViewHolder(NotificationsListViewHolder holder, int position) {
         NotificationsListInfo notificationsListInfo = notificationsListInfoList.get(position);
-        // Then later, when you want to display image
-        ImageLoader.getInstance().displayImage(notificationsListInfo.getGroupImageUri(), holder.IV_groupPicture); // Default options will be used
+        ImageLoader.getInstance().displayImage(notificationsListInfo.getGroupImageUri(), holder.IV_groupPicture);
 
         boolean isMuted = sharedPreferences.getBoolean(notificationsListInfo.getGroupName() + "_MUTED", false);
         if (isMuted){
@@ -67,7 +66,6 @@ class NotificationsListAdapter extends RecyclerView.Adapter<NotificationsListAda
         String recentMessage = sharedPreferences.getString(notificationsListInfo.getGroupName() + "_RECENT_MESSAGE", "No recent message");
         holder.TV_recentMessage.setText(recentMessage);
         int notificationCount = sharedPreferences.getInt(notificationsListInfo.getGroupName() + "_COUNT", 0);
-        Log.i("TAG", "onBindViewHolder: " + notificationCount);
         if (notificationCount > 0) {
             holder.TV_counterBadge.setVisibility(View.VISIBLE);
             holder.TV_counterBadge.setText(String.valueOf(notificationCount));
@@ -111,10 +109,12 @@ class NotificationsListAdapter extends RecyclerView.Adapter<NotificationsListAda
         private TextView TV_timeStamp;
         private CardView CV_group;
         private SharedPreferences.Editor editor;
+        private AlertDialog alertDialog;
 
         NotificationsListViewHolder(View itemView) {
             super(itemView);
             IV_groupPicture = (ImageView) itemView.findViewById(R.id.IV_profilePicture);
+            IV_groupPicture.setOnClickListener(this);
             TV_groupName = (TextView) itemView.findViewById(R.id.TV_groupName);
             TV_recentMessage = (TextView) itemView.findViewById(R.id.TV_recentMessage);
             TV_counterBadge = (TextView) itemView.findViewById(R.id.TV_counterBadge);
@@ -140,6 +140,23 @@ class NotificationsListAdapter extends RecyclerView.Adapter<NotificationsListAda
                     editor.putString("NOTIFICATION_TYPE", TV_groupName.getText().toString());
                     editor.apply();
                     context.startActivity(new Intent(context, NotificationsView.class));
+                    break;
+                }
+                case R.id.IV_profilePicture: {
+                    View view = LayoutInflater.from(context).inflate(R.layout.notifications_group_picture_view, null);
+                    ImageView imageView = (ImageView) view.findViewById(R.id.IV_groupPicture);
+                    imageView.setOnClickListener(this);
+                    ImageLoader.getInstance().displayImage("http://hostellocator.com/images/" + TV_groupName.getText().toString() + ".JPG", imageView);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setView(view);
+                    builder.setCancelable(true);
+                    alertDialog = builder.create();
+                    alertDialog.show();
+                    break;
+                }
+                case R.id.IV_groupPicture: {
+                    NotificationsUtills.setImageUri("http://hostellocator.com/images/" + TV_groupName.getText().toString() + ".JPG");
+                    context.startActivity(new Intent(context, NotificationsGroupImage.class));
                     break;
                 }
             }

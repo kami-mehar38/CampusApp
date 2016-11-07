@@ -6,14 +6,33 @@
             <item>
                 <shape>
                     <solid android:color="#e1cfc9" />
-                    <corners android:topLeftRadius="12dp" android:bottomLeftRadius="12dp" android:bottomRightRadius="12dp" />
+                    <corners android:bottomLeftRadius="12dp" android:bottomRightRadius="12dp" android:topLeftRadius="12dp" />
                 </shape>
             </item>
 
-            <item android:left="1dp" android:right="1dp" android:top="1dp" android:bottom="1dp">
+            <item android:bottom="1dp" android:left="1dp" android:right="1dp" android:top="1dp">
                 <shape>
                     <solid android:color="#ede2de" />
-                    <corners android:topLeftRadius="12dp" android:bottomLeftRadius="12dp" android:bottomRightRadius="12dp" />
+                    <corners android:bottomLeftRadius="12dp" android:bottomRightRadius="12dp" android:topLeftRadius="12dp" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+
+    <item android:state_pressed="true">
+        <layer-list>
+            <!-- SHADOW -->
+            <item>
+                <shape>
+                    <solid android:color="#e1cfc9" />
+                    <corners android:bottomLeftRadius="12dp" android:bottomRightRadius="12dp" android:topLeftRadius="12dp" />
+                </shape>
+            </item>
+
+            <item android:bottom="1dp" android:left="1dp" android:right="1dp" android:top="1dp">
+                <shape>
+                    <solid android:color="#d5cbc7" />
+                    <corners android:bottomLeftRadius="12dp" android:bottomRightRadius="12dp" android:topLeftRadius="12dp" />
                 </shape>
             </item>
         </layer-list>

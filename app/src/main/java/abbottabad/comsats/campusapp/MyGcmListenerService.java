@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Location;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -268,7 +269,7 @@ public class MyGcmListenerService extends GcmListenerService {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                if (NotificationsHomePage.notificationsListAdapter != null){
+                if (NotificationsHomePage.notificationsListAdapter != null) {
                     NotificationsHomePage.notificationsListAdapter.notifyDataSetChanged();
                 }
             }
@@ -295,12 +296,15 @@ public class MyGcmListenerService extends GcmListenerService {
             }
         });
 
-        boolean isMuted = sharedPreferences.getBoolean(notificationType + "_MUTED" , false);
-        if (NotificationsView.notificationsAdapter == null){
-            if (!isMuted){
+        AudioManager audioManager = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
+        boolean isMuted = sharedPreferences.getBoolean(notificationType + "_MUTED", false);
+        if (NotificationsView.notificationsAdapter == null) {
+            if (!isMuted) {
                 createEventNotification(message);
             }
-        } else if (!isMuted){
+        } else if (!isMuted && audioManager.getRingerMode() == AudioManager.RINGER_MODE_NORMAL) {
+            final int initVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+            audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, initVolume, 0);
             MediaPlayer mPlayer = MediaPlayer.create(this, R.raw.message_received);
             if (mPlayer != null)
                 mPlayer.start();
