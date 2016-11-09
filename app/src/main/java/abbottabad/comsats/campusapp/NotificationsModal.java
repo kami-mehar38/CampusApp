@@ -1,8 +1,10 @@
 package abbottabad.comsats.campusapp;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -284,6 +286,8 @@ class NotificationsModal {
                 switch (result) {
                     case "CREATED": {
                         Toast.makeText(context, "Succesfully created", Toast.LENGTH_LONG).show();
+                        ((Activity) context).finish();
+                        context.startActivity(new Intent(context, NotificationsHomePage.class));
                         break;
                     }
                     case "EXISTED": {

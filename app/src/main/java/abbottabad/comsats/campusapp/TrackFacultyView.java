@@ -69,13 +69,11 @@ public class TrackFacultyView extends Activity {
 
         int selectedStatus = sharedPreferences.getInt("SELECTED_STATUS", 0);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Select your status!");
+        builder.setTitle("Select your status");
         builder.setSingleChoiceItems(STATUS_LIST, selectedStatus, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                editor = sharedPreferences.edit();
-                editor.putInt("SELECTED_STATUS", which);
-                editor.apply();
+
                 TEACHER_ID = sharedPreferences.getString("REG_ID", null);
                 status = alertDialog.getListView().getItemAtPosition(which).toString();
 
@@ -84,6 +82,9 @@ public class TrackFacultyView extends Activity {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                editor = sharedPreferences.edit();
+                editor.putInt("SELECTED_STATUS", which);
+                editor.apply();
                 new TrackFacultyModal(TrackFacultyView.this).updateStatus(
                         status,
                         TEACHER_ID, TV_myStatus
@@ -91,12 +92,7 @@ public class TrackFacultyView extends Activity {
                 alertDialog.cancel();
             }
         });
-        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                alertDialog.cancel();
-            }
-        });
+
         alertDialog = builder.create();
         FloatingActionButton FAB_edit = (FloatingActionButton) findViewById(R.id.FAB_edit);
         FAB_edit.setOnClickListener(new View.OnClickListener() {

@@ -113,6 +113,7 @@ class NotificationsListAdapter extends RecyclerView.Adapter<NotificationsListAda
 
         NotificationsListViewHolder(View itemView) {
             super(itemView);
+            this.setIsRecyclable(false);
             IV_groupPicture = (ImageView) itemView.findViewById(R.id.IV_profilePicture);
             IV_groupPicture.setOnClickListener(this);
             TV_groupName = (TextView) itemView.findViewById(R.id.TV_groupName);
@@ -146,6 +147,9 @@ class NotificationsListAdapter extends RecyclerView.Adapter<NotificationsListAda
                     View view = LayoutInflater.from(context).inflate(R.layout.notifications_group_picture_view, null);
                     ImageView imageView = (ImageView) view.findViewById(R.id.IV_groupPicture);
                     imageView.setOnClickListener(this);
+                    TextView TV_sendMessage = (TextView) view.findViewById(R.id.TV_sendMessage);
+                    TV_sendMessage.append(" " + TV_groupName.getText().toString());
+                    TV_sendMessage.setOnClickListener(this);
                     ImageLoader.getInstance().displayImage("http://hostellocator.com/images/" + TV_groupName.getText().toString() + ".JPG", imageView);
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setView(view);
@@ -155,8 +159,17 @@ class NotificationsListAdapter extends RecyclerView.Adapter<NotificationsListAda
                     break;
                 }
                 case R.id.IV_groupPicture: {
+                    alertDialog.cancel();
+                    NotificationsUtills.setGroupName(TV_groupName.getText().toString());
                     NotificationsUtills.setImageUri("http://hostellocator.com/images/" + TV_groupName.getText().toString() + ".JPG");
                     context.startActivity(new Intent(context, NotificationsGroupImage.class));
+                    break;
+                }
+                case R.id.TV_sendMessage: {
+                    alertDialog.cancel();
+                    editor.putString("NOTIFICATION_TYPE", TV_groupName.getText().toString());
+                    editor.apply();
+                    context.startActivity(new Intent(context, NotificationsView.class));
                     break;
                 }
             }

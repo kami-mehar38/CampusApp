@@ -5,7 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000"
-    tools:context="abbottabad.comsats.campusapp.TimetableImage">
+    tools:context="abbottabad.comsats.campusapp.NotificationsGroupImage">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/notifications_group_image_toolbar" />
 
     <abbottabad.comsats.campusapp.TouchImageView
         android:id="@+id/IV_groupPicture"
@@ -13,6 +20,8 @@
         android:layout_height="match_parent"
         android:contentDescription="@string/timetable"
         />
+
+    </LinearLayout>
 
     <ProgressBar
         android:id="@+id/isWaiting"

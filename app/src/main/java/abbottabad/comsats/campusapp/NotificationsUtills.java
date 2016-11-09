@@ -7,12 +7,21 @@ package abbottabad.comsats.campusapp;
 class NotificationsUtills {
 
     private static String imageUri;
+    private static String groupName;
 
-    public static String getImageUri() {
+    static String getGroupName() {
+        return groupName;
+    }
+
+    static void setGroupName(String groupName) {
+        NotificationsUtills.groupName = groupName;
+    }
+
+    static String getImageUri() {
         return imageUri;
     }
 
-    public static void setImageUri(String imageUri) {
+    static void setImageUri(String imageUri) {
         NotificationsUtills.imageUri = imageUri;
     }
 }

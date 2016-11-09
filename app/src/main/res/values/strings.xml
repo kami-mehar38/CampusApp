@@ -40,7 +40,7 @@
     <string name="change_email">Change Email</string>
     <string name="change_uname">Change Uname</string>
     <string name="enter_username">Enter username</string>
-    <string name="enter_description">Enter description (optional)</string>
+    <string name="enter_description">Enter description</string>
     <string name="add_image_optional">Add Image (optional)</string>
     <string name="visual_proof">Visual proof</string>
     <string name="description">Description:</string>
@@ -130,13 +130,6 @@
     <string name="reject">Reject</string>
     <string name="event_notifiations">Event notifiations</string>
     <string name="class_notifications">Class notifications</string>
-    <string name="soft_society">Soft Society</string>
-    <string name="funkada">Funkada</string>
-    <string name="hertz_society">Hertz Society</string>
-    <string name="aadrish">Aadrish</string>
-    <string name="comsats_literary_society">Comsats Literary Society</string>
-    <string name="ieee_society">IEEE Society</string>
-    <string name="others">Others</string>
     <string name="ok">OK</string>
     <string name="profile_picture">Profile Picture</string>
     <string name="create_group">Create Group</string>
@@ -145,4 +138,6 @@
     <string name="no_recent_message">No recent message</string>
     <string name="mute_group_chat">Mute group chat</string>
     <string name="unmute_group_chat">Unmute group chat</string>
+    <string name="send_message_to">Send message to</string>
+    <string name="_320">320</string>
 </resources>

@@ -21,8 +21,6 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
-import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
-
 public class NotificationsHomePage extends AppCompatActivity {
 
     private SharedPreferences sharedPreferences;
@@ -55,9 +53,7 @@ public class NotificationsHomePage extends AppCompatActivity {
         if (recyclerView != null) {
             recyclerView.setLayoutManager(layoutManager);
             notificationsListAdapter = new NotificationsListAdapter(this);
-            ScaleInAnimationAdapter scaleInAnimationAdapter = new ScaleInAnimationAdapter(notificationsListAdapter);
-            scaleInAnimationAdapter.setFirstOnly(false);
-            recyclerView.setAdapter(scaleInAnimationAdapter);
+            recyclerView.setAdapter(notificationsListAdapter);
         }
 
         FloatingActionButton FAB_createGroup = (FloatingActionButton) findViewById(R.id.FAB_createGroup);
@@ -69,6 +65,7 @@ public class NotificationsHomePage extends AppCompatActivity {
                 }
             });
         }
+
         NotificationsModal notificationsModal = new NotificationsModal(this);
         notificationsModal.getNotificationGroups();
 

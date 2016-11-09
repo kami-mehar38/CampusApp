@@ -15,7 +15,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -72,9 +71,6 @@ public class CreateNotificationsGroup extends AppCompatActivity implements View.
                 String imageString = getStringImage(bitmap);
                 String groupName = ET_groupName.getText().toString().trim();
                 String reg_id = sharedPreferences.getString("REG_ID", null);
-                Log.i("TAG", "onClick: " + imageString);
-                Log.i("TAG", "onClick: " + groupName);
-                Log.i("TAG", "onClick: " + reg_id);
                 notificationsModal.createGroup(imageString, groupName, reg_id);
                 break;
             }

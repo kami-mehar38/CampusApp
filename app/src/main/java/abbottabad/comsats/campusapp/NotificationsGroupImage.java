@@ -1,14 +1,18 @@
 package abbottabad.comsats.campusapp;
 
-import android.app.Activity;
+
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.support.v7.widget.Toolbar;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -16,16 +20,22 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
-public class NotificationsGroupImage extends Activity implements View.OnClickListener {
+public class NotificationsGroupImage extends AppCompatActivity {
 
-    private ImageView imageView;
     private ProgressBar isWaiting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.notifications_group_image_activity);
-
+        Toolbar toolbar = (Toolbar) findViewById(R.id.notifications_group_image_toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null)
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        TextView notificationsGroupTitle = (TextView) findViewById(R.id.notificationGroupTitle);
+        if (notificationsGroupTitle != null) {
+            notificationsGroupTitle.setText(NotificationsUtills.getGroupName());
+        }
         // Create default options which will be used for every
         // displayImage(...) call if no options will be passed to this method
         DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
@@ -45,34 +55,42 @@ public class NotificationsGroupImage extends Activity implements View.OnClickLis
         }
 
         isWaiting = (ProgressBar) findViewById(R.id.isWaiting);
-        imageView = (ImageView) findViewById(R.id.IV_groupPicture);
+        ImageView imageView = (ImageView) findViewById(R.id.IV_groupPicture);
 
         String stringUrl = NotificationsUtills.getImageUri();
-        ImageLoader.getInstance().displayImage(stringUrl, imageView, new ImageLoadingListener() {
-            @Override
-            public void onLoadingStarted(String imageUri, View view) {
+        if (imageView != null) {
+            ImageLoader.getInstance().displayImage(stringUrl, imageView, new ImageLoadingListener() {
+                @Override
+                public void onLoadingStarted(String imageUri, View view) {
 
-            }
+                }
 
-            @Override
-            public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
-                Toast.makeText(NotificationsGroupImage.this, "Error loading timetable", Toast.LENGTH_SHORT).show();
-            }
+                @Override
+                public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+                    Toast.makeText(NotificationsGroupImage.this, "Error loading timetable", Toast.LENGTH_SHORT).show();
+                }
 
-            @Override
-            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                isWaiting.setVisibility(View.GONE);
-            }
+                @Override
+                public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                    isWaiting.setVisibility(View.GONE);
+                }
 
-            @Override
-            public void onLoadingCancelled(String imageUri, View view) {
+                @Override
+                public void onLoadingCancelled(String imageUri, View view) {
 
-            }
-        });
+                }
+            });
+        }
     }
 
     @Override
-    public void onClick(View v) {
-
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home: {
+                onBackPressed();
+                break;
+            }
+        }
+        return true;
     }
 }

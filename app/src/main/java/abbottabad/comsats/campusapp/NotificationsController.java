@@ -10,11 +10,11 @@ class NotificationsController {
     private static int mine;
     private static String notificationType;
 
-    public static String getNotificationSender() {
+    static String getNotificationSender() {
         return notificationSender;
     }
 
-    public static void setNotificationSender(String notificationSender) {
+    static void setNotificationSender(String notificationSender) {
         NotificationsController.notificationSender = notificationSender;
     }
 
