@@ -73,7 +73,9 @@ public class TrackFacultyView extends Activity {
         builder.setSingleChoiceItems(STATUS_LIST, selectedStatus, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                editor = sharedPreferences.edit();
+                editor.putInt("SELECTED_STATUS", which);
+                editor.apply();
                 TEACHER_ID = sharedPreferences.getString("REG_ID", null);
                 status = alertDialog.getListView().getItemAtPosition(which).toString();
 
@@ -82,9 +84,7 @@ public class TrackFacultyView extends Activity {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                editor = sharedPreferences.edit();
-                editor.putInt("SELECTED_STATUS", which);
-                editor.apply();
+
                 new TrackFacultyModal(TrackFacultyView.this).updateStatus(
                         status,
                         TEACHER_ID, TV_myStatus

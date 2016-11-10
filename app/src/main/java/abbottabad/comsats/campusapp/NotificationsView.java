@@ -15,10 +15,15 @@ import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -63,6 +68,17 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(notificationType + "_COUNT", 0);
         editor.apply();
+
+        ImageView imageView = (ImageView) findViewById(R.id.IV_groupPicture);
+        // Create default options which will be used for every
+        //  displayImage(...) call if no options will be passed to this method
+        DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
+                .cacheInMemory(true).cacheOnDisk(true).build();
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
+                .defaultDisplayImageOptions(defaultOptions).build();
+        ImageLoader.getInstance().init(config); // Do it on Application start
+
+        ImageLoader.getInstance().displayImage("http://hostellocator.com/images/" + notificationType + ".JPG", imageView);
 
         listView = (ListView) findViewById(R.id.LV_notifications);
         btnSend = (ImageButton) findViewById(R.id.sendNotification);

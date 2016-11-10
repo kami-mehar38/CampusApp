@@ -34,6 +34,7 @@
         android:layout_margin="14dp"
         android:src="@drawable/ic_action_add_group"
         android:tint="#dee9ed"
-        app:backgroundTint="#76939c"/>
+        app:backgroundTint="#76939c"
+        />
 
 </FrameLayout>

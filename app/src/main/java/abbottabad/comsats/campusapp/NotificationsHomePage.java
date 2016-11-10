@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -15,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -28,6 +30,7 @@ public class NotificationsHomePage extends AppCompatActivity {
     private Toolbar toolbar;
     private boolean IS_IN_ACTION_MODE = false;
     private String groupName;
+    private RelativeLayout relativeLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +91,11 @@ public class NotificationsHomePage extends AppCompatActivity {
         }
     }
 
-    void setActionMode(String groupName){
+    void setActionMode(String groupName, View v){
+        relativeLayout = (RelativeLayout) ((CardView) v).getChildAt(0);
+        ((CardView) v).getChildAt(0).setBackground(ContextCompat
+                .getDrawable(NotificationsHomePage.this,
+                        R.drawable.cardview_status_background_checked));
         this.groupName = groupName;
         toolbar.getMenu().clear();
         boolean isMuted = sharedPreferences.getBoolean(groupName + "_MUTED" , false);
@@ -124,6 +131,9 @@ public class NotificationsHomePage extends AppCompatActivity {
         IS_IN_ACTION_MODE = false;
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         toolbar.getMenu().clear();
+        relativeLayout.setBackground(ContextCompat
+                .getDrawable(NotificationsHomePage.this,
+                        R.drawable.cardview_status_background));
     }
 
     void muteGroupChat(String groupName){

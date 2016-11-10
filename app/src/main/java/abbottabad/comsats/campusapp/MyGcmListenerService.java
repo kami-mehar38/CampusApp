@@ -253,61 +253,65 @@ public class MyGcmListenerService extends GcmListenerService {
         NotificationsController.setNotificationType(notificationType);
         new NotificationsLocalModal(this).addEventNotification();
 
-        /**
-         * Below is the code to set the message counter of a specific group
-         * It show the number of unread messages
-         */
-        int badgeCount = sharedPreferences.getInt(notificationType + "_COUNT", 0);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        badgeCount++;
-        editor.putInt(notificationType + "_COUNT", badgeCount);
-        editor.putString(notificationType + "_RECENT_MESSAGE", message);
-        editor.putString(notificationType + "_RECENT_MESSAGE_TIME", currentDateTimeString);
-        editor.apply();
+        if (sharedPreferences.getBoolean(notificationType + "_EXISTS", false)) {
 
-        Handler handler = new Handler(Looper.getMainLooper());
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                if (NotificationsHomePage.notificationsListAdapter != null) {
-                    NotificationsHomePage.notificationsListAdapter.notifyDataSetChanged();
-                }
-            }
-        });
+            /**
+             * Below is the code to set the message counter of a specific group
+             * It show the number of unread messages
+             */
 
-        final NotificationInfo notificationInfo = new NotificationInfo();
-        notificationInfo.setNotification(message);
-        notificationInfo.setNotificationSender(notificationSender);
-        notificationInfo.setDateTime(currentDateTimeString);
-        notificationInfo.setMine(0);
-        notificationInfo.setNotificationType(notificationType);
-        final String NOTIFICATION_TYPE = sharedPreferences.getString("NOTIFICATION_TYPE", null);
+            int badgeCount = sharedPreferences.getInt(notificationType + "_COUNT", 0);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            badgeCount++;
+            editor.putInt(notificationType + "_COUNT", badgeCount);
+            editor.putString(notificationType + "_RECENT_MESSAGE", message);
+            editor.putString(notificationType + "_RECENT_MESSAGE_TIME", currentDateTimeString);
+            editor.apply();
 
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                if (NotificationsView.notificationsAdapter != null && NotificationsView.listView != null) {
-                    if (notificationType != null && NOTIFICATION_TYPE != null && notificationType.equals(NOTIFICATION_TYPE)) {
-                        NotificationsView.notificationsAdapter.add(notificationInfo);
-                        NotificationsView.notificationsAdapter.notifyDataSetChanged();
-                        NotificationsView.listView.setSelection(NotificationsView.notificationsAdapter.getCount());
+            Handler handler = new Handler(Looper.getMainLooper());
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    if (NotificationsHomePage.notificationsListAdapter != null) {
+                        NotificationsHomePage.notificationsListAdapter.notifyDataSetChanged();
                     }
                 }
-            }
-        });
+            });
 
-        AudioManager audioManager = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
-        boolean isMuted = sharedPreferences.getBoolean(notificationType + "_MUTED", false);
-        if (NotificationsView.notificationsAdapter == null) {
-            if (!isMuted) {
-                createEventNotification(message);
+            final NotificationInfo notificationInfo = new NotificationInfo();
+            notificationInfo.setNotification(message);
+            notificationInfo.setNotificationSender(notificationSender);
+            notificationInfo.setDateTime(currentDateTimeString);
+            notificationInfo.setMine(0);
+            notificationInfo.setNotificationType(notificationType);
+            final String NOTIFICATION_TYPE = sharedPreferences.getString("NOTIFICATION_TYPE", null);
+
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    if (NotificationsView.notificationsAdapter != null && NotificationsView.listView != null) {
+                        if (notificationType != null && NOTIFICATION_TYPE != null && notificationType.equals(NOTIFICATION_TYPE)) {
+                            NotificationsView.notificationsAdapter.add(notificationInfo);
+                            NotificationsView.notificationsAdapter.notifyDataSetChanged();
+                            NotificationsView.listView.setSelection(NotificationsView.notificationsAdapter.getCount());
+                        }
+                    }
+                }
+            });
+
+            AudioManager audioManager = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
+            boolean isMuted = sharedPreferences.getBoolean(notificationType + "_MUTED", false);
+            if (NotificationsView.notificationsAdapter == null) {
+                if (!isMuted) {
+                    createEventNotification(message);
+                }
+            } else if (!isMuted && audioManager.getRingerMode() == AudioManager.RINGER_MODE_NORMAL) {
+                final int initVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+                audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, initVolume, 0);
+                MediaPlayer mPlayer = MediaPlayer.create(this, R.raw.message_received);
+                if (mPlayer != null)
+                    mPlayer.start();
             }
-        } else if (!isMuted && audioManager.getRingerMode() == AudioManager.RINGER_MODE_NORMAL) {
-            final int initVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
-            audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, initVolume, 0);
-            MediaPlayer mPlayer = MediaPlayer.create(this, R.raw.message_received);
-            if (mPlayer != null)
-                mPlayer.start();
         }
     }
 

@@ -56,6 +56,10 @@ class NotificationsListAdapter extends RecyclerView.Adapter<NotificationsListAda
         NotificationsListInfo notificationsListInfo = notificationsListInfoList.get(position);
         ImageLoader.getInstance().displayImage(notificationsListInfo.getGroupImageUri(), holder.IV_groupPicture);
 
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(notificationsListInfo.getGroupName() + "_EXISTS", true);
+        editor.apply();
+
         boolean isMuted = sharedPreferences.getBoolean(notificationsListInfo.getGroupName() + "_MUTED", false);
         if (isMuted){
             Drawable drawableLeft = context.getResources().getDrawable(R.drawable.ic_muted_chat);
@@ -125,7 +129,7 @@ class NotificationsListAdapter extends RecyclerView.Adapter<NotificationsListAda
             CV_group.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    notificationsHomePage.setActionMode(TV_groupName.getText().toString());
+                    notificationsHomePage.setActionMode(TV_groupName.getText().toString(), v);
                     return true;
                 }
             });
