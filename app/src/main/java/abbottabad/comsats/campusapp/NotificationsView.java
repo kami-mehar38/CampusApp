@@ -26,7 +26,6 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * This project CampusApp is created by Kamran Ramzan on 8/20/16.
@@ -153,7 +152,6 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
                         notificationsLocalModal.deleteNotifications(notifications, sharedPreferences.getString("NOTIFICATION_TYPE", null));
                         notificationInfos.clear();
                         Toast.makeText(this, "Deleted", Toast.LENGTH_SHORT).show();
-                        Log.i("TAG", "onOptionsItemSelected: " + Arrays.toString(notifications));
                     } else {
                         Toast.makeText(this, "No item is selected", Toast.LENGTH_SHORT).show();
                     }

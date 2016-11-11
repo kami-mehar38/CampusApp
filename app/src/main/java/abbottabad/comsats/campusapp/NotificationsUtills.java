@@ -8,6 +8,15 @@ class NotificationsUtills {
 
     private static String imageUri;
     private static String groupName;
+    private static int position;
+
+    static int getPosition() {
+        return position;
+    }
+
+    static void setPosition(int position) {
+        NotificationsUtills.position = position;
+    }
 
     static String getGroupName() {
         return groupName;

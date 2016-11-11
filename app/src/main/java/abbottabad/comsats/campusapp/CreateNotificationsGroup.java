@@ -23,6 +23,10 @@ import android.widget.Toast;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * This project CampusApp is created by Kamran Ramzan on 26-Oct-16.
@@ -71,7 +75,11 @@ public class CreateNotificationsGroup extends AppCompatActivity implements View.
                 String imageString = getStringImage(bitmap);
                 String groupName = ET_groupName.getText().toString().trim();
                 String reg_id = sharedPreferences.getString("REG_ID", null);
-                notificationsModal.createGroup(imageString, groupName, reg_id);
+                DateFormat df = new SimpleDateFormat("d MMM yyyy 'AT' h:mm a", Locale.getDefault());
+                String currentDateTimeString = df.format(Calendar.getInstance().getTime());
+                String name = sharedPreferences.getString("NAME", null);
+                if (name != null)
+                notificationsModal.createGroup(imageString, groupName, name, reg_id, currentDateTimeString);
                 break;
             }
         }

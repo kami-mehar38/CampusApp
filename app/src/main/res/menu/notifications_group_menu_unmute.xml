@@ -7,4 +7,9 @@
         android:icon="@drawable/ic_unmute_chat"
         android:title="@string/unmute_group_chat" />
 
+    <item android:id="@+id/action_info_chat"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_action_about"
+        android:title="@string/information" />
+
 </menu>

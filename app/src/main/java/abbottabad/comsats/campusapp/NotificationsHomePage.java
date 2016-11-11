@@ -31,6 +31,7 @@ public class NotificationsHomePage extends AppCompatActivity {
     private boolean IS_IN_ACTION_MODE = false;
     private String groupName;
     private RelativeLayout relativeLayout;
+    private NotificationsModal notificationsModal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,7 @@ public class NotificationsHomePage extends AppCompatActivity {
 
         // Create default options which will be used for every
         //  displayImage(...) call if no options will be passed to this method
-        DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
+        DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder().displayer(new CircleBitmapDisplayer())
                 .cacheInMemory(true).cacheOnDisk(true).build();
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
                 .defaultDisplayImageOptions(defaultOptions).build();
@@ -69,7 +70,7 @@ public class NotificationsHomePage extends AppCompatActivity {
             });
         }
 
-        NotificationsModal notificationsModal = new NotificationsModal(this);
+        notificationsModal = new NotificationsModal(this);
         notificationsModal.getNotificationGroups();
 
         NotificationsLocalModal notificationsLocalModal = new NotificationsLocalModal(this);
@@ -123,8 +124,20 @@ public class NotificationsHomePage extends AppCompatActivity {
                 clearActionMode();
                 break;
             }
+            case R.id.action_info_chat: {
+
+                break;
+            }
+            case R.id.action_delete_chat: {
+                deleteNotificationGroup();
+                break;
+            }
         }
         return true;
+    }
+
+    void deleteNotificationGroup(){
+        notificationsModal.deleteGroup(groupName);
     }
 
     void clearActionMode(){

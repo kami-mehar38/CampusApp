@@ -16,6 +16,10 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.utils.DiskCacheUtils;
+import com.nostra13.universalimageloader.utils.MemoryCacheUtils;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -54,12 +58,16 @@ class NotificationsModal {
         new SendEventNotification().execute(reg_id, message, notificationSender, notification_type);
     }
 
-    void createGroup(String imageString, String groupName, String reg_id){
-        new CreateGroup().execute(imageString, groupName, reg_id);
+    void createGroup(String imageString, String groupName, String userName, String reg_id, String currentDateTimeString){
+        new CreateGroup().execute(imageString, groupName, reg_id, currentDateTimeString, userName);
     }
 
     void getNotificationGroups(){
         new GetNotificationGroups().execute();
+    }
+
+    void deleteGroup(String groupName){
+        new DeleteGroup().execute(groupName);
     }
 
     private class SendEventNotification extends AsyncTask<String, Void, String> {
@@ -215,6 +223,8 @@ class NotificationsModal {
         private String imageString;
         private String groupName;
         private String reg_id;
+        private String timeStamp;
+        private String userName;
         private ProgressDialog progressDialog;
         private AlertDialog alertDialog;
 
@@ -233,6 +243,8 @@ class NotificationsModal {
             imageString = params[0];
             groupName = params[1];
             reg_id = params[2];
+            timeStamp = params[3];
+            userName = params[4];
 
             try {
                 URL url = new URL(stringUrl);
@@ -244,7 +256,9 @@ class NotificationsModal {
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
                 String data = URLEncoder.encode("imageString", "UTF-8") + "=" + URLEncoder.encode(imageString, "UTF-8") + "&" +
                         URLEncoder.encode("groupName", "UTF-8") + "=" + URLEncoder.encode(groupName, "UTF-8") + "&" +
-                        URLEncoder.encode("reg_id", "UTF-8") + "=" + URLEncoder.encode(reg_id, "UTF-8");
+                        URLEncoder.encode("reg_id", "UTF-8") + "=" + URLEncoder.encode(reg_id, "UTF-8") + "&" +
+                        URLEncoder.encode("timeStamp", "UTF-8") + "=" + URLEncoder.encode(timeStamp, "UTF-8") + "&" +
+                        URLEncoder.encode("userName", "UTF-8") + "=" + URLEncoder.encode(userName, "UTF-8");
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -372,6 +386,93 @@ class NotificationsModal {
                     }
                 } else Toast.makeText(context, "No group is created yet", Toast.LENGTH_LONG).show();
             } else Toast.makeText(context, "Some error occurred! Please try again.", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private class DeleteGroup extends AsyncTask<String, Void, String> {
+        private String groupName;
+        private String selectedItem;
+        private ProgressDialog progressDialog;
+        private AlertDialog alertDialog;
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog = new ProgressDialog(context);
+            progressDialog.setIndeterminate(true);
+            progressDialog.setCancelable(false);
+            progressDialog.setMessage("Deleting group... This might take some time");
+            progressDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            String stringUrl = "http://hostellocator.com/deleteNotificationGroup.php";
+            groupName = params[0];
+            try {
+                URL url = new URL(stringUrl);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String data = URLEncoder.encode("groupName", "UTF-8") + "=" + URLEncoder.encode(groupName, "UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+                StringBuilder stringBuilder = new StringBuilder();
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(line);
+                }
+
+                JSONArray parentJSON = new JSONArray(stringBuilder.toString());
+                JSONObject finalObject = parentJSON.getJSONObject(0);
+                String RESPONSE = finalObject.getString("RESPONSE");
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return RESPONSE;
+            } catch (IOException | JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            progressDialog.cancel();
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+            if (result != null) {
+                switch (result) {
+                    case "DELETED": {
+                        Toast.makeText(context, "Succesfully deleted", Toast.LENGTH_LONG).show();
+                        MemoryCacheUtils.removeFromCache("http://hostellocator.com/images/" + groupName + ".JPG",
+                                ImageLoader.getInstance().getMemoryCache());
+                        DiskCacheUtils.removeFromCache("http://hostellocator.com/images/" + groupName + ".JPG",
+                                ImageLoader.getInstance().getDiskCache());
+                        new NotificationsLocalModal(context).deleteAll(groupName);
+                        if (NotificationsHomePage.notificationsListAdapter != null) {
+                            NotificationsHomePage.notificationsListAdapter.removeItem(NotificationsUtills.getPosition());
+                            Log.i("TAG", "onPostExecute: " + NotificationsUtills.getPosition());
+                        }
+                        break;
+                    }
+                    case "ERROR": {
+                        builder.setMessage("Error occurred");
+                        alertDialog = builder.create();
+                        alertDialog.show();
+                        break;
+                    }
+                }
+            } else {
+                Toast.makeText(context, "Some error occurred! Please try again.", Toast.LENGTH_LONG).show();
+            }
+
         }
     }
 }

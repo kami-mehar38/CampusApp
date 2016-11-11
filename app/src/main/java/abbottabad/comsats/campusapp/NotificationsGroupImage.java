@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -12,11 +13,9 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.support.v7.widget.Toolbar;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
@@ -40,9 +39,6 @@ public class NotificationsGroupImage extends AppCompatActivity {
         // displayImage(...) call if no options will be passed to this method
         DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
                 .cacheInMemory(true).cacheOnDisk(true).build();
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
-                .defaultDisplayImageOptions(defaultOptions).build();
-        ImageLoader.getInstance().init(config); // Do it on Application start
 
         if (Build.VERSION.SDK_INT < 16) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -59,7 +55,7 @@ public class NotificationsGroupImage extends AppCompatActivity {
 
         String stringUrl = NotificationsUtills.getImageUri();
         if (imageView != null) {
-            ImageLoader.getInstance().displayImage(stringUrl, imageView, new ImageLoadingListener() {
+            ImageLoader.getInstance().displayImage(stringUrl, imageView, defaultOptions, new ImageLoadingListener() {
                 @Override
                 public void onLoadingStarted(String imageUri, View view) {
 

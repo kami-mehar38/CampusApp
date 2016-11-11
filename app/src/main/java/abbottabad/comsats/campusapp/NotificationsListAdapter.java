@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.text.DateFormat;
@@ -96,12 +97,12 @@ class NotificationsListAdapter extends RecyclerView.Adapter<NotificationsListAda
 
     void addItem(NotificationsListInfo notificationsListInfo, int position) {
         notificationsListInfoList.add(position, notificationsListInfo);
-        notifyItemInserted(position);
+        super.notifyItemInserted(position);
     }
 
-    public void removeItem(int position) {
+    void removeItem(int position) {
         notificationsListInfoList.remove(position);
-        notifyItemRemoved(position);
+        super.notifyItemRemoved(position);
     }
 
     class NotificationsListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -130,6 +131,7 @@ class NotificationsListAdapter extends RecyclerView.Adapter<NotificationsListAda
                 @Override
                 public boolean onLongClick(View v) {
                     notificationsHomePage.setActionMode(TV_groupName.getText().toString(), v);
+                    NotificationsUtills.setPosition(getAdapterPosition());
                     return true;
                 }
             });
@@ -154,7 +156,10 @@ class NotificationsListAdapter extends RecyclerView.Adapter<NotificationsListAda
                     TextView TV_sendMessage = (TextView) view.findViewById(R.id.TV_sendMessage);
                     TV_sendMessage.append(" " + TV_groupName.getText().toString());
                     TV_sendMessage.setOnClickListener(this);
-                    ImageLoader.getInstance().displayImage("http://hostellocator.com/images/" + TV_groupName.getText().toString() + ".JPG", imageView);
+                    DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
+                            .cacheInMemory(true).cacheOnDisk(true).build();
+
+                    ImageLoader.getInstance().displayImage("http://hostellocator.com/images/" + TV_groupName.getText().toString() + ".JPG", imageView, defaultOptions);
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setView(view);
                     builder.setCancelable(true);
