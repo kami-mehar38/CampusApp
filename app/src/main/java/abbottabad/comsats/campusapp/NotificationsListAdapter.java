@@ -87,12 +87,11 @@ class NotificationsListAdapter extends RecyclerView.Adapter<NotificationsListAda
                 Date messageDate = df.parse(timeStamp[0]);
                 if (messageDate.equals(currentDate)) {
                     holder.TV_timeStamp.setText(timeStamp[1]);
-                } else holder.TV_timeStamp.setText(timeStamp[0] +" At "+ timeStamp[1]);
+                } else holder.TV_timeStamp.setText(timeStamp[0]);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-
-        } else holder.TV_timeStamp.setVisibility(View.INVISIBLE);
+        }
     }
 
     void addItem(NotificationsListInfo notificationsListInfo, int position) {

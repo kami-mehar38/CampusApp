@@ -251,9 +251,9 @@ public class MyGcmListenerService extends GcmListenerService {
         NotificationsController.setDateTime(currentDateTimeString);
         NotificationsController.setMine(0);
         NotificationsController.setNotificationType(notificationType);
-        new NotificationsLocalModal(this).addEventNotification();
 
         if (sharedPreferences.getBoolean(notificationType + "_EXISTS", false)) {
+            new NotificationsLocalModal(this).addEventNotification();
 
             /**
              * Below is the code to set the message counter of a specific group
@@ -301,16 +301,15 @@ public class MyGcmListenerService extends GcmListenerService {
 
             AudioManager audioManager = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
             boolean isMuted = sharedPreferences.getBoolean(notificationType + "_MUTED", false);
-            if (NotificationsView.notificationsAdapter == null) {
-                if (!isMuted) {
-                    createEventNotification(message);
-                }
-            } else if (!isMuted && audioManager.getRingerMode() == AudioManager.RINGER_MODE_NORMAL) {
+            boolean isChatOpen = sharedPreferences.getBoolean("IS_CHAT_OPEN", false);
+            if (!isMuted && audioManager.getRingerMode() == AudioManager.RINGER_MODE_NORMAL && isChatOpen) {
                 final int initVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
                 audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, initVolume, 0);
                 MediaPlayer mPlayer = MediaPlayer.create(this, R.raw.message_received);
                 if (mPlayer != null)
                     mPlayer.start();
+            } else if (NotificationsView.notificationsAdapter != null && !isMuted) {
+                createEventNotification(message);
             }
         }
     }

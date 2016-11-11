@@ -12,7 +12,10 @@
             android:id="@+id/RL_cardView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="0dp"
+            android:paddingBottom="3dp"
             android:background="@drawable/cardview_status_background">
 
             <ImageView
@@ -25,6 +28,7 @@
                 android:layout_centerVertical="true"/>
 
             <LinearLayout
+                android:id="@+id/messageContent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/IV_profilePicture"
@@ -53,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="2dp"
                 android:textSize="14sp"
                 android:textStyle="normal"
                 android:ellipsize="end"
@@ -78,12 +82,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
+                android:textColor="#00cd00"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_below="@+id/TV_counterBadge"
-                android:layout_marginTop="8dp"
-                android:drawableStart="@drawable/timing"
-                android:drawableLeft="@drawable/timing"
+                android:layout_below="@+id/messageContent"
+                android:paddingTop="20dp"
                 android:drawablePadding="3dp"
                 android:gravity="center"
                 />

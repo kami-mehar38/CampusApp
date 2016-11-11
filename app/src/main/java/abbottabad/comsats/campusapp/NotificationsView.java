@@ -66,6 +66,7 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
         String notificationType = sharedPreferences.getString("NOTIFICATION_TYPE", null);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(notificationType + "_COUNT", 0);
+        editor.putBoolean("IS_CHAT_OPEN", true);
         editor.apply();
 
         ImageView imageView = (ImageView) findViewById(R.id.IV_groupPicture);
@@ -252,6 +253,7 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
         String notificationType = sharedPreferences.getString("NOTIFICATION_TYPE", null);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(notificationType + "_COUNT", 0);
+        editor.putBoolean("IS_CHAT_OPEN", false);
         editor.apply();
     }
 }
