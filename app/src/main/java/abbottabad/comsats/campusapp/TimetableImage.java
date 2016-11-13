@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
@@ -30,9 +29,6 @@ public class TimetableImage extends Activity implements View.OnClickListener {
         // displayImage(...) call if no options will be passed to this method
         DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
                 .cacheInMemory(true).cacheOnDisk(true).build();
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
-                .defaultDisplayImageOptions(defaultOptions).build();
-        ImageLoader.getInstance().init(config); // Do it on Application start
 
         if (Build.VERSION.SDK_INT < 16) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -49,7 +45,7 @@ public class TimetableImage extends Activity implements View.OnClickListener {
         imageView = (ImageView) findViewById(R.id.IV_picture);
 
         String stringUrl = "http://hostellocator.com/images/" + TrackFacultyUtills.getRegistration() + ".JPG";
-        ImageLoader.getInstance().displayImage(stringUrl, imageView, new ImageLoadingListener() {
+        ImageLoader.getInstance().displayImage(stringUrl, imageView, defaultOptions, new ImageLoadingListener() {
             @Override
             public void onLoadingStarted(String imageUri, View view) {
 

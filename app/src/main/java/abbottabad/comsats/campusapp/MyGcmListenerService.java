@@ -308,7 +308,7 @@ public class MyGcmListenerService extends GcmListenerService {
                 MediaPlayer mPlayer = MediaPlayer.create(this, R.raw.message_received);
                 if (mPlayer != null)
                     mPlayer.start();
-            } else if (NotificationsView.notificationsAdapter != null && !isMuted) {
+            } else if (!isMuted) {
                 createEventNotification(message);
             }
         }

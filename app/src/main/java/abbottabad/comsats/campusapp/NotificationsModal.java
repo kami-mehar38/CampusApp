@@ -394,6 +394,7 @@ class NotificationsModal {
         private String selectedItem;
         private ProgressDialog progressDialog;
         private AlertDialog alertDialog;
+        private SharedPreferences.Editor editor;
 
         @Override
         protected void onPreExecute() {
@@ -402,6 +403,9 @@ class NotificationsModal {
             progressDialog.setCancelable(false);
             progressDialog.setMessage("Deleting group... This might take some time");
             progressDialog.show();
+
+            SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+            editor = sharedPreferences.edit();
         }
 
         @Override
@@ -451,6 +455,11 @@ class NotificationsModal {
                 switch (result) {
                     case "DELETED": {
                         Toast.makeText(context, "Succesfully deleted", Toast.LENGTH_LONG).show();
+                        editor.putInt(groupName + "_COUNT", 0);
+                        editor.putString(groupName + "_RECENT_MESSAGE", "");
+                        editor.putString(groupName + "_RECENT_MESSAGE_TIME", "");
+                        editor.putBoolean(groupName + "_MUTED", false);
+                        editor.apply();
                         MemoryCacheUtils.removeFromCache("http://hostellocator.com/images/" + groupName + ".JPG",
                                 ImageLoader.getInstance().getMemoryCache());
                         DiskCacheUtils.removeFromCache("http://hostellocator.com/images/" + groupName + ".JPG",
