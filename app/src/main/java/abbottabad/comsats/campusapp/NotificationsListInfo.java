@@ -7,6 +7,33 @@ class NotificationsListInfo {
 
     private String groupImageUri;
     private String groupName;
+    private String userName;
+    private String regId;
+    private String timeStamp;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getRegId() {
+        return regId;
+    }
+
+    public void setRegId(String regId) {
+        this.regId = regId;
+    }
+
+    public String getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp;
+    }
 
     String getGroupImageUri() {
         return groupImageUri;

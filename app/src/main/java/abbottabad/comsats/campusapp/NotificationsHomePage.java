@@ -7,16 +7,20 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -32,6 +36,15 @@ public class NotificationsHomePage extends AppCompatActivity {
     private String groupName;
     private RelativeLayout relativeLayout;
     private NotificationsModal notificationsModal;
+    private ActionBar actionBar;
+    private String userName;
+    private String regId;
+    private String groupTimeStamp;
+    private AlertDialog alertDialog;
+    private TextView TV_userName;
+    private TextView TV_regId;
+    private TextView TV_timeStamp;
+    private TextView TV_groupName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +55,7 @@ public class NotificationsHomePage extends AppCompatActivity {
         setStatusBarColor();
         String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
         sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+        actionBar = getSupportActionBar();
 
         // Create default options which will be used for every
         //  displayImage(...) call if no options will be passed to this method
@@ -75,6 +89,15 @@ public class NotificationsHomePage extends AppCompatActivity {
 
         NotificationsLocalModal notificationsLocalModal = new NotificationsLocalModal(this);
 
+        View view = LayoutInflater.from(NotificationsHomePage.this).inflate(R.layout.notification_group_info_view, null);
+        TV_groupName = (TextView) view.findViewById(R.id.TV_groupName);
+        TV_userName = (TextView) view.findViewById(R.id.TV_userName);
+        TV_regId = (TextView) view.findViewById(R.id.TV_regId);
+        TV_timeStamp = (TextView) view.findViewById(R.id.TV_timeStamp);
+        AlertDialog.Builder builder = new AlertDialog.Builder(NotificationsHomePage.this);
+        builder.setView(view);
+        builder.setCancelable(true);
+        alertDialog = builder.create();
     }
 
     @Override
@@ -92,7 +115,7 @@ public class NotificationsHomePage extends AppCompatActivity {
         }
     }
 
-    void setActionMode(String groupName, View v){
+    void setActionMode(String groupName, View v, String userName, String regId, String timeStamp){
         relativeLayout = (RelativeLayout) ((CardView) v).getChildAt(0);
         ((CardView) v).getChildAt(0).setBackground(ContextCompat
                 .getDrawable(NotificationsHomePage.this,
@@ -103,8 +126,11 @@ public class NotificationsHomePage extends AppCompatActivity {
         if (isMuted){
             toolbar.inflateMenu(R.menu.notifications_group_menu_unmute);
         } else toolbar.inflateMenu(R.menu.notifications_group_menu_mute);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
         IS_IN_ACTION_MODE = true;
+        this.userName = userName;
+        this.regId = regId;
+        this.groupTimeStamp = timeStamp;
     }
 
     @Override
@@ -125,7 +151,12 @@ public class NotificationsHomePage extends AppCompatActivity {
                 break;
             }
             case R.id.action_info_chat: {
-
+                TV_groupName.setText(groupName);
+                TV_userName.setText("Created by: " + userName);
+                TV_regId.setText("Registration id: " + regId);
+                TV_timeStamp.setText("Created on: " + groupTimeStamp);
+                alertDialog.show();
+                clearActionMode();
                 break;
             }
             case R.id.action_delete_chat: {
@@ -138,11 +169,12 @@ public class NotificationsHomePage extends AppCompatActivity {
 
     void deleteNotificationGroup(){
         notificationsModal.deleteGroup(groupName);
+        clearActionMode();
     }
 
     void clearActionMode(){
         IS_IN_ACTION_MODE = false;
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        actionBar.setDisplayHomeAsUpEnabled(false);
         toolbar.getMenu().clear();
         relativeLayout.setBackground(ContextCompat
                 .getDrawable(NotificationsHomePage.this,

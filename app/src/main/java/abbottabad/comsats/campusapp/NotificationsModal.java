@@ -58,15 +58,15 @@ class NotificationsModal {
         new SendEventNotification().execute(reg_id, message, notificationSender, notification_type);
     }
 
-    void createGroup(String imageString, String groupName, String userName, String reg_id, String currentDateTimeString){
+    void createGroup(String imageString, String groupName, String userName, String reg_id, String currentDateTimeString) {
         new CreateGroup().execute(imageString, groupName, reg_id, currentDateTimeString, userName);
     }
 
-    void getNotificationGroups(){
+    void getNotificationGroups() {
         new GetNotificationGroups().execute();
     }
 
-    void deleteGroup(String groupName){
+    void deleteGroup(String groupName) {
         new DeleteGroup().execute(groupName);
     }
 
@@ -364,6 +364,9 @@ class NotificationsModal {
                     notificationsListInfo[index] = new NotificationsListInfo();
                     notificationsListInfo[index].setGroupImageUri(finalObject.getString("group_image"));
                     notificationsListInfo[index].setGroupName(finalObject.getString("group_name"));
+                    notificationsListInfo[index].setUserName(finalObject.getString("user_name"));
+                    notificationsListInfo[index].setRegId(finalObject.getString("reg_id"));
+                    notificationsListInfo[index].setTimeStamp(finalObject.getString("time_stamp"));
                     notificationsListInfoList.add(notificationsListInfo[index]);
                 }
                 bufferedReader.close();
@@ -381,11 +384,12 @@ class NotificationsModal {
             progressDialog.cancel();
             if (notificationsListInfoList != null) {
                 if (notificationsListInfoList.size() > 0) {
-                    for (int i = 0; i < notificationsListInfoList.size(); i++){
+                    for (int i = 0; i < notificationsListInfoList.size(); i++) {
                         NotificationsHomePage.notificationsListAdapter.addItem(notificationsListInfoList.get(i), 0);
                     }
                 } else Toast.makeText(context, "No group is created yet", Toast.LENGTH_LONG).show();
-            } else Toast.makeText(context, "Some error occurred! Please try again.", Toast.LENGTH_LONG).show();
+            } else
+                Toast.makeText(context, "Some error occurred! Please try again.", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -454,11 +458,12 @@ class NotificationsModal {
             if (result != null) {
                 switch (result) {
                     case "DELETED": {
-                        Toast.makeText(context, "Succesfully deleted", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, groupName + " deleted", Toast.LENGTH_SHORT).show();
                         editor.putInt(groupName + "_COUNT", 0);
                         editor.putString(groupName + "_RECENT_MESSAGE", "");
                         editor.putString(groupName + "_RECENT_MESSAGE_TIME", "");
                         editor.putBoolean(groupName + "_MUTED", false);
+                        editor.putBoolean(groupName + "_EXISTS", false);
                         editor.apply();
                         MemoryCacheUtils.removeFromCache("http://hostellocator.com/images/" + groupName + ".JPG",
                                 ImageLoader.getInstance().getMemoryCache());
@@ -467,7 +472,6 @@ class NotificationsModal {
                         new NotificationsLocalModal(context).deleteAll(groupName);
                         if (NotificationsHomePage.notificationsListAdapter != null) {
                             NotificationsHomePage.notificationsListAdapter.removeItem(NotificationsUtills.getPosition());
-                            Log.i("TAG", "onPostExecute: " + NotificationsUtills.getPosition());
                         }
                         break;
                     }

@@ -92,16 +92,23 @@ class NotificationsListAdapter extends RecyclerView.Adapter<NotificationsListAda
                 e.printStackTrace();
             }
         }
+
+        holder.TV_userName.setText(notificationsListInfo.getUserName());
+        holder.TV_userName.setVisibility(View.GONE);
+        holder.TV_regId.setText(notificationsListInfo.getRegId());
+        holder.TV_regId.setVisibility(View.GONE);
+        holder.TV_groupTimeStamp.setText(notificationsListInfo.getTimeStamp());
+        holder.TV_groupTimeStamp.setVisibility(View.GONE);
     }
 
     void addItem(NotificationsListInfo notificationsListInfo, int position) {
         notificationsListInfoList.add(position, notificationsListInfo);
-        super.notifyItemInserted(position);
+        notifyItemInserted(position);
     }
 
     void removeItem(int position) {
         notificationsListInfoList.remove(position);
-        super.notifyItemRemoved(position);
+        notifyDataSetChanged();
     }
 
     class NotificationsListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -111,6 +118,9 @@ class NotificationsListAdapter extends RecyclerView.Adapter<NotificationsListAda
         private TextView TV_recentMessage;
         private TextView TV_counterBadge;
         private TextView TV_timeStamp;
+        private TextView TV_userName;
+        private TextView TV_regId;
+        private TextView TV_groupTimeStamp;
         private CardView CV_group;
         private SharedPreferences.Editor editor;
         private AlertDialog alertDialog;
@@ -124,12 +134,18 @@ class NotificationsListAdapter extends RecyclerView.Adapter<NotificationsListAda
             TV_recentMessage = (TextView) itemView.findViewById(R.id.TV_recentMessage);
             TV_counterBadge = (TextView) itemView.findViewById(R.id.TV_counterBadge);
             TV_timeStamp = (TextView) itemView.findViewById(R.id.TV_timeStamp);
+            TV_userName = (TextView) itemView.findViewById(R.id.TV_userName);
+            TV_regId = (TextView) itemView.findViewById(R.id.TV_regId);
+            TV_groupTimeStamp = (TextView) itemView.findViewById(R.id.TV_groupTimeStamp);
             CV_group = (CardView) itemView.findViewById(R.id.CV_group);
             CV_group.setOnClickListener(this);
             CV_group.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    notificationsHomePage.setActionMode(TV_groupName.getText().toString(), v);
+                    String userName = TV_userName.getText().toString().trim();
+                    String regId = TV_regId.getText().toString().trim();
+                    String timeStamp = TV_groupTimeStamp.getText().toString().trim();
+                    notificationsHomePage.setActionMode(TV_groupName.getText().toString(), v, userName, regId, timeStamp);
                     NotificationsUtills.setPosition(getAdapterPosition());
                     return true;
                 }
