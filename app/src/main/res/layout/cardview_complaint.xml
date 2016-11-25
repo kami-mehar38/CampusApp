@@ -125,6 +125,19 @@
             android:textAllCaps="false"
             android:text="@string/delete"/>
 
+        <ImageView
+            android:id="@+id/IV_evidencePicture"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:contentDescription="@string/choose_picture"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_action_picture"
+            android:background="@drawable/group_picture_background"
+            android:layout_below="@id/btn_deleteComplaint"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            />
+
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>

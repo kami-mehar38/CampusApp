@@ -10,11 +10,11 @@ class RequestsInfo {
     private String contact;
     private int isDonated;
 
-    public int getIsDonated() {
+    int getIsDonated() {
         return isDonated;
     }
 
-    public void setIsDonated(int isDonated) {
+    void setIsDonated(int isDonated) {
         this.isDonated = isDonated;
     }
     public String getName() {

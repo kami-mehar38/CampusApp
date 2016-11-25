@@ -19,6 +19,7 @@ class ComplaintPollLocalModal extends SQLiteOpenHelper {
     private static String COL_REG = "REG_NO";
     private static String COL_CONTACT = "CONTACT";
     private static String COL_DESCRIPTION = "DESCRIPTION";
+    private static String COL_IMAGE_URL = "IMAGE_URL";
 
     ComplaintPollLocalModal(Context context) {
         super(context, DATABASE_NAME, null, VERSION);
@@ -31,7 +32,8 @@ class ComplaintPollLocalModal extends SQLiteOpenHelper {
                 +COL_NAME+ " TEXT,"
                 +COL_REG+ " TEXT,"
                 +COL_CONTACT+ " TEXT,"
-                +COL_DESCRIPTION+ " TEXT"
+                +COL_DESCRIPTION+ " TEXT,"
+                +COL_IMAGE_URL+ " TEXT"
                 + " )";
         db.execSQL(createTableQuery);
     }
@@ -43,18 +45,19 @@ class ComplaintPollLocalModal extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void addComplaint(){
+    void addComplaint(){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_NAME, ComplaintPollController.getName());
         contentValues.put(COL_REG, ComplaintPollController.getRegistration());
         contentValues.put(COL_CONTACT, ComplaintPollController.getContact());
         contentValues.put(COL_DESCRIPTION, ComplaintPollController.getDescription());
+        contentValues.put(COL_IMAGE_URL, ComplaintPollController.getImageUrl());
         db.insert(TABLE_NAME, null, contentValues);
         db.close();
     }
 
-    public void retrieveComplaints(){
+    void retrieveComplaints(){
         SQLiteDatabase db = this.getReadableDatabase();
         String selectQuery= "SELECT * FROM " +TABLE_NAME+ " ORDER BY " +SERIAL+ " DESC";
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -66,6 +69,7 @@ class ComplaintPollLocalModal extends SQLiteOpenHelper {
             complaintsInfos[cursor.getPosition()].setRegistration(cursor.getString(2));
             complaintsInfos[cursor.getPosition()].setContact(cursor.getString(3));
             complaintsInfos[cursor.getPosition()].setDescription(cursor.getString(4));
+            complaintsInfos[cursor.getPosition()].setImageUrl(cursor.getString(5));
             ComplaintPollView.complaintPollVIewAdapter.add(complaintsInfos[cursor.getPosition()], cursor.getPosition());
             cursor.moveToNext();
         }
@@ -73,7 +77,7 @@ class ComplaintPollLocalModal extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void deleteComplaint(String reg){
+    void deleteComplaint(String reg){
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_NAME, COL_REG + " = ?", new String[]{reg});
         db.close();

@@ -26,10 +26,13 @@ public class TimetableImage extends Activity implements View.OnClickListener {
         setContentView(R.layout.timetable_image_page);
 
         // Create default options which will be used for every
-        // displayImage(...) call if no options will be passed to this method
+        //  displayImage(...) call if no options will be passed to this method
         DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
-                .cacheInMemory(true).cacheOnDisk(true).build();
-
+                .cacheInMemory(false).cacheOnDisk(false).build();
+        /*ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
+                .defaultDisplayImageOptions(defaultOptions).build();
+        ImageLoader.getInstance().init(config); // Do it on Application start
+*/
         if (Build.VERSION.SDK_INT < 16) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);

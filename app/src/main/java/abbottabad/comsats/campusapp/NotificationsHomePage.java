@@ -10,7 +10,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -19,13 +18,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.andexert.library.RippleView;
 
 public class NotificationsHomePage extends AppCompatActivity {
 
@@ -34,7 +30,7 @@ public class NotificationsHomePage extends AppCompatActivity {
     private Toolbar toolbar;
     private boolean IS_IN_ACTION_MODE = false;
     private String groupName;
-    private RelativeLayout relativeLayout;
+    private RippleView rippleView;
     private NotificationsModal notificationsModal;
     private ActionBar actionBar;
     private String userName;
@@ -45,6 +41,7 @@ public class NotificationsHomePage extends AppCompatActivity {
     private TextView TV_regId;
     private TextView TV_timeStamp;
     private TextView TV_groupName;
+    public static boolean isLongClick;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,14 +53,6 @@ public class NotificationsHomePage extends AppCompatActivity {
         String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
         sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         actionBar = getSupportActionBar();
-
-        // Create default options which will be used for every
-        //  displayImage(...) call if no options will be passed to this method
-        DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder().displayer(new CircleBitmapDisplayer())
-                .cacheInMemory(true).cacheOnDisk(true).build();
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
-                .defaultDisplayImageOptions(defaultOptions).build();
-        ImageLoader.getInstance().init(config); // Do it on Application start
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -116,8 +105,8 @@ public class NotificationsHomePage extends AppCompatActivity {
     }
 
     void setActionMode(String groupName, View v, String userName, String regId, String timeStamp){
-        relativeLayout = (RelativeLayout) ((CardView) v).getChildAt(0);
-        ((CardView) v).getChildAt(0).setBackground(ContextCompat
+        rippleView = (RippleView) v;
+        v.setBackground(ContextCompat
                 .getDrawable(NotificationsHomePage.this,
                         R.drawable.cardview_status_background_checked));
         this.groupName = groupName;
@@ -174,9 +163,10 @@ public class NotificationsHomePage extends AppCompatActivity {
 
     void clearActionMode(){
         IS_IN_ACTION_MODE = false;
+        isLongClick = false;
         actionBar.setDisplayHomeAsUpEnabled(false);
         toolbar.getMenu().clear();
-        relativeLayout.setBackground(ContextCompat
+        rippleView.setBackground(ContextCompat
                 .getDrawable(NotificationsHomePage.this,
                         R.drawable.cardview_status_background));
     }

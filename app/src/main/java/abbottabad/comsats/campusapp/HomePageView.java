@@ -39,6 +39,9 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 /**
  * This project CampusApp is created by Kamran Ramzan on 6/2/16.
@@ -227,6 +230,12 @@ public class HomePageView extends AppCompatActivity implements
                 linearLayout.setVisibility(View.GONE);
             }
         }
+
+        DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder().displayer(new CircleBitmapDisplayer())
+                .cacheInMemory(true).cacheOnDisk(true).build();
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
+                .defaultDisplayImageOptions(defaultOptions).build();
+        ImageLoader.getInstance().init(config); // Do it on Application start
     }
 
     private void checkIfGpsIsEnabled() {

@@ -9,6 +9,15 @@ class ComplaintPollController {
     private static String registration;
     private static String contact;
     private static String description;
+    private static String imageUrl;
+
+    static String getImageUrl() {
+        return imageUrl;
+    }
+
+    static void setImageUrl(String imageUrl) {
+        ComplaintPollController.imageUrl = imageUrl;
+    }
 
     public static String getName() {
         return name;

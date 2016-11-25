@@ -147,7 +147,6 @@ public class ComplaintPollView extends AppCompatActivity implements View.OnClick
                                 switch (adminOption){
                                     case 1:{
                                         new ComplaintPollModal(ComplaintPollView.this).sendComplaint(name, regID, contact, description);
-                                        break;
                                     }
                                 }
                             } else {
@@ -171,6 +170,7 @@ public class ComplaintPollView extends AppCompatActivity implements View.OnClick
                         Toast.makeText(ComplaintPollView.this, "Invalid registration id", Toast.LENGTH_SHORT).show();
                 } else
                     Toast.makeText(ComplaintPollView.this, "Invalid name", Toast.LENGTH_SHORT).show();
+                break;
             }
             case R.id.IV_openAdminSpinner: {
                 SPadminOptions.performClick();

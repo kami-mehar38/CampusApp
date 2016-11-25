@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +12,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.andexert.library.RippleView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -55,6 +56,15 @@ class NotificationsListAdapter extends RecyclerView.Adapter<NotificationsListAda
     @Override
     public void onBindViewHolder(NotificationsListViewHolder holder, int position) {
         NotificationsListInfo notificationsListInfo = notificationsListInfoList.get(position);
+
+        // Create default options which will be used for every
+        //  displayImage(...) call if no options will be passed to this method
+        DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder().displayer(new CircleBitmapDisplayer())
+                .cacheInMemory(true).cacheOnDisk(true).build();
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
+                .defaultDisplayImageOptions(defaultOptions).build();
+        ImageLoader.getInstance().init(config); // Do it on Application start
+
         ImageLoader.getInstance().displayImage(notificationsListInfo.getGroupImageUri(), holder.IV_groupPicture);
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -121,9 +131,10 @@ class NotificationsListAdapter extends RecyclerView.Adapter<NotificationsListAda
         private TextView TV_userName;
         private TextView TV_regId;
         private TextView TV_groupTimeStamp;
-        private CardView CV_group;
+        private RippleView CV_group;
         private SharedPreferences.Editor editor;
         private AlertDialog alertDialog;
+
 
         NotificationsListViewHolder(View itemView) {
             super(itemView);
@@ -137,11 +148,23 @@ class NotificationsListAdapter extends RecyclerView.Adapter<NotificationsListAda
             TV_userName = (TextView) itemView.findViewById(R.id.TV_userName);
             TV_regId = (TextView) itemView.findViewById(R.id.TV_regId);
             TV_groupTimeStamp = (TextView) itemView.findViewById(R.id.TV_groupTimeStamp);
-            CV_group = (CardView) itemView.findViewById(R.id.CV_group);
-            CV_group.setOnClickListener(this);
+            CV_group = (RippleView) itemView.findViewById(R.id.CV_group);
+            CV_group.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+                @Override
+                public void onComplete(RippleView rippleView) {
+                    if (!NotificationsHomePage.isLongClick) {
+                        editor.putString("NOTIFICATION_TYPE", TV_groupName.getText().toString());
+                        editor.apply();
+                        context.startActivity(new Intent(context, NotificationsView.class));
+                    }
+
+                }
+            });
+            //CV_group.setOnClickListener(this);
             CV_group.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
+                    NotificationsHomePage.isLongClick = true;
                     String userName = TV_userName.getText().toString().trim();
                     String regId = TV_regId.getText().toString().trim();
                     String timeStamp = TV_groupTimeStamp.getText().toString().trim();
@@ -150,6 +173,7 @@ class NotificationsListAdapter extends RecyclerView.Adapter<NotificationsListAda
                     return true;
                 }
             });
+
             String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
             sharedPreferences = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
             editor = sharedPreferences.edit();

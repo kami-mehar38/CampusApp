@@ -38,7 +38,7 @@ public class CreateNotificationsGroup extends AppCompatActivity implements View.
     private ImageView IV_groupPicture;
     private SharedPreferences sharedPreferences;
     private NotificationsModal notificationsModal;
-    private Bitmap bitmap;
+    private Bitmap bitmap = null;
     private EditText ET_groupName;
 
     @Override
@@ -72,14 +72,19 @@ public class CreateNotificationsGroup extends AppCompatActivity implements View.
                 break;
             }
             case R.id.FAB_groupCreation: {
-                String imageString = getStringImage(bitmap);
                 String groupName = ET_groupName.getText().toString().trim();
                 String reg_id = sharedPreferences.getString("REG_ID", null);
                 DateFormat df = new SimpleDateFormat("d MMM yyyy 'AT' h:mm a", Locale.getDefault());
                 String currentDateTimeString = df.format(Calendar.getInstance().getTime());
                 String name = sharedPreferences.getString("NAME", null);
-                if (name != null)
-                notificationsModal.createGroup(imageString, groupName, name, reg_id, currentDateTimeString);
+                if (!groupName.isEmpty()) {
+                    if (bitmap != null) {
+                        String imageString = getStringImage(bitmap);
+                        notificationsModal.createGroup(imageString, groupName, name, reg_id, currentDateTimeString);
+                    } else
+                        Toast.makeText(CreateNotificationsGroup.this, "Select group image", Toast.LENGTH_LONG).show();
+                } else
+                    Toast.makeText(CreateNotificationsGroup.this, "Enter group name", Toast.LENGTH_LONG).show();
                 break;
             }
         }
@@ -99,14 +104,16 @@ public class CreateNotificationsGroup extends AppCompatActivity implements View.
             Uri imageUri = data.getData();
             String imaePath = getPathFromURI(imageUri);
             try {
-                bitmap = decodeBitmap(imaePath);
+                bitmap = resizeImageForImageView(decodeBitmap(imaePath));
                 if (bitmap != null) {
                     IV_groupPicture.setImageBitmap(bitmap);
-                } else Toast.makeText(CreateNotificationsGroup.this, "Image not selected", Toast.LENGTH_LONG).show();
+                } else
+                    Toast.makeText(CreateNotificationsGroup.this, "Image not selected", Toast.LENGTH_LONG).show();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-        } else Toast.makeText(CreateNotificationsGroup.this, "Image not selected", Toast.LENGTH_LONG).show();
+        } else
+            Toast.makeText(CreateNotificationsGroup.this, "Image not selected", Toast.LENGTH_LONG).show();
     }
 
     public String getPathFromURI(Uri contentUri) {
@@ -145,5 +152,30 @@ public class CreateNotificationsGroup extends AppCompatActivity implements View.
             }
         }
         return null;
+    }
+
+
+    private Bitmap resizeImageForImageView(Bitmap bitmap) {
+        int scaleSize = 480;
+        Bitmap resizedBitmap;
+        int originalWidth = bitmap.getWidth();
+        int originalHeight = bitmap.getHeight();
+        int newWidth = -1;
+        int newHeight = -1;
+        float multFactor;
+        if (originalHeight > originalWidth) {
+            newHeight = scaleSize;
+            multFactor = (float) originalWidth / (float) originalHeight;
+            newWidth = (int) (newHeight * multFactor);
+        } else if (originalWidth > originalHeight) {
+            newWidth = scaleSize;
+            multFactor = (float) originalHeight / (float) originalWidth;
+            newHeight = (int) (newWidth * multFactor);
+        } else if (originalHeight == originalWidth) {
+            newHeight = scaleSize;
+            newWidth = scaleSize;
+        }
+        resizedBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, false);
+        return resizedBitmap;
     }
 }

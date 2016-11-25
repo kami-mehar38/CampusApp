@@ -9,6 +9,15 @@ class ComplaintsInfo {
     private String registration;
     private String contact;
     private String description;
+    private String imageUrl;
+
+    String getImageUrl() {
+        return imageUrl;
+    }
+
+    void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
     public String getName() {
         return name;

@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -104,9 +105,13 @@ class ComplaintPollModal {
         @Override
         protected void onPostExecute(String s) {
             progressDialog.cancel();
+            Log.i("TAG", "onPostExecute: " + s);
             if (s != null && s.equals("OK")) {
                 Toast.makeText(context, "Complaint sent.", Toast.LENGTH_LONG).show();
-            } else {
+            } else if (s != null && s.equals("ERROR")){
+                Toast.makeText(context, "Failed", Toast.LENGTH_LONG).show();
+            }
+            else {
                 Toast.makeText(context, "Some error occurred, please try again.", Toast.LENGTH_LONG).show();
             }
 

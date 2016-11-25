@@ -122,6 +122,7 @@ class LoginModal {
                 editor.putString("APPLICATION_STATUS", designation);
                 editor.putBoolean("LOGGED_IN", true);
                 editor.putString("REG_ID", designation);
+                editor.putString("NAME", designation + " Admin");
                 editor.apply();
 
                 SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);

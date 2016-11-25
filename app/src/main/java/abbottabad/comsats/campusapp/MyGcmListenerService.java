@@ -181,11 +181,13 @@ public class MyGcmListenerService extends GcmListenerService {
         final String reg = data.getString("reg");
         final String contact = data.getString("contact");
         final String description = data.getString("description");
+        final String imageUrl = data.getString("imageUrl");
 
         ComplaintPollController.setName(name);
         ComplaintPollController.setRegistration(reg);
         ComplaintPollController.setContact(contact);
         ComplaintPollController.setDescription(description);
+        ComplaintPollController.setImageUrl(imageUrl);
 
         new ComplaintPollLocalModal(this).addComplaint();
 
@@ -199,6 +201,7 @@ public class MyGcmListenerService extends GcmListenerService {
                     complaintsInfo.setRegistration(reg);
                     complaintsInfo.setContact(contact);
                     complaintsInfo.setDescription(description);
+                    complaintsInfo.setImageUrl(imageUrl);
                     ComplaintPollView.complaintPollVIewAdapter.add(complaintsInfo, 0);
                     ComplaintPollView.RV_complaints.smoothScrollToPosition(0);
                 }
@@ -308,7 +311,7 @@ public class MyGcmListenerService extends GcmListenerService {
                 MediaPlayer mPlayer = MediaPlayer.create(this, R.raw.message_received);
                 if (mPlayer != null)
                     mPlayer.start();
-            } else if (!isMuted) {
+            } else if (!isMuted && !isChatOpen) {
                 createEventNotification(message);
             }
         }
