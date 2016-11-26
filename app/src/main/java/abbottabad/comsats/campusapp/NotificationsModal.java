@@ -58,8 +58,8 @@ class NotificationsModal {
         new SendEventNotification().execute(reg_id, message, notificationSender, notification_type);
     }
 
-    void createGroup(String imageString, String groupName, String userName, String reg_id, String currentDateTimeString) {
-        new CreateGroup().execute(imageString, groupName, reg_id, currentDateTimeString, userName);
+    void createGroup(String imageString, String groupName, String groupPrivacy, String userName, String reg_id, String currentDateTimeString) {
+        new CreateGroup().execute(imageString, groupName, groupPrivacy, reg_id, currentDateTimeString, userName);
     }
 
     void getNotificationGroups() {
@@ -222,11 +222,13 @@ class NotificationsModal {
     private class CreateGroup extends AsyncTask<String, Void, String> {
         private String imageString;
         private String groupName;
+        private String groupPrivacy;
         private String reg_id;
         private String timeStamp;
         private String userName;
         private ProgressDialog progressDialog;
         private AlertDialog alertDialog;
+        private SharedPreferences.Editor editor;
 
         @Override
         protected void onPreExecute() {
@@ -235,6 +237,8 @@ class NotificationsModal {
             progressDialog.setCancelable(false);
             progressDialog.setMessage("Creating group... This might take some time");
             progressDialog.show();
+            SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+            editor = sharedPreferences.edit();
         }
 
         @Override
@@ -242,9 +246,10 @@ class NotificationsModal {
             String stringUrl = "http://hostellocator.com/createNotificationsGroup.php";
             imageString = params[0];
             groupName = params[1];
-            reg_id = params[2];
-            timeStamp = params[3];
-            userName = params[4];
+            groupPrivacy = params[2];
+            reg_id = params[3];
+            timeStamp = params[4];
+            userName = params[5];
 
             try {
                 URL url = new URL(stringUrl);
@@ -255,7 +260,8 @@ class NotificationsModal {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
                 String data = URLEncoder.encode("imageString", "UTF-8") + "=" + URLEncoder.encode(imageString, "UTF-8") + "&" +
-                        URLEncoder.encode("groupName", "UTF-8") + "=" + URLEncoder.encode(groupName, "UTF-8") + "&" +
+                        URLEncoder.encode("groupName", "UTF-8") + "=" + URLEncoder.encode(groupName, "UTF-8")+ "&" +
+                        URLEncoder.encode("groupPrivacy", "UTF-8") + "=" + URLEncoder.encode(groupPrivacy, "UTF-8") + "&" +
                         URLEncoder.encode("reg_id", "UTF-8") + "=" + URLEncoder.encode(reg_id, "UTF-8") + "&" +
                         URLEncoder.encode("timeStamp", "UTF-8") + "=" + URLEncoder.encode(timeStamp, "UTF-8") + "&" +
                         URLEncoder.encode("userName", "UTF-8") + "=" + URLEncoder.encode(userName, "UTF-8");
@@ -302,6 +308,8 @@ class NotificationsModal {
                         Toast.makeText(context, "Succesfully created", Toast.LENGTH_LONG).show();
                         ((Activity) context).finish();
                         context.startActivity(new Intent(context, NotificationsHomePage.class));
+                        editor.putBoolean(groupName + "_CREATED_BY_ME", true);
+                        editor.apply();
                         break;
                     }
                     case "EXISTED": {

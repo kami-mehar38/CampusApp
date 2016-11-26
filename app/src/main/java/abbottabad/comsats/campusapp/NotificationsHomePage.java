@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +43,8 @@ public class NotificationsHomePage extends AppCompatActivity {
     private TextView TV_timeStamp;
     private TextView TV_groupName;
     public static boolean isLongClick;
+    public static boolean isImageClick;
+    private Spinner SP_groupPrivacy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,8 +79,6 @@ public class NotificationsHomePage extends AppCompatActivity {
         notificationsModal = new NotificationsModal(this);
         notificationsModal.getNotificationGroups();
 
-        NotificationsLocalModal notificationsLocalModal = new NotificationsLocalModal(this);
-
         View view = LayoutInflater.from(NotificationsHomePage.this).inflate(R.layout.notification_group_info_view, null);
         TV_groupName = (TextView) view.findViewById(R.id.TV_groupName);
         TV_userName = (TextView) view.findViewById(R.id.TV_userName);
@@ -87,6 +88,7 @@ public class NotificationsHomePage extends AppCompatActivity {
         builder.setView(view);
         builder.setCancelable(true);
         alertDialog = builder.create();
+
     }
 
     @Override
@@ -120,6 +122,9 @@ public class NotificationsHomePage extends AppCompatActivity {
         this.userName = userName;
         this.regId = regId;
         this.groupTimeStamp = timeStamp;
+        boolean isCreatedByMe = sharedPreferences.getBoolean(groupName + "_CREATED_BY_ME" , false);
+        if (!isCreatedByMe)
+        toolbar.getMenu().getItem(1).setVisible(false);
     }
 
     @Override

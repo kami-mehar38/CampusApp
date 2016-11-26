@@ -16,6 +16,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -57,6 +58,10 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
         toolbar = (Toolbar) findViewById(R.id.notifications_toolbar);
         setSupportActionBar(toolbar);
         setStatusBarColor();
+        LinearLayout privacyLayout = (LinearLayout) findViewById(R.id.privacyLayout);
+        if (privacyLayout != null) {
+            privacyLayout.setVisibility(View.GONE);
+        }
         sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         REG_ID = sharedPreferences.getString("REG_ID", null);
         notificationsLocalModal = new NotificationsLocalModal(this);

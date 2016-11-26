@@ -49,6 +49,41 @@
 
     </LinearLayout>
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/spinner_background_style"
+        android:orientation="horizontal"
+        android:paddingBottom="12dp"
+        android:paddingLeft="6dp"
+        android:paddingRight="6dp"
+        android:paddingTop="12dp">
+
+        <Spinner
+            android:id="@+id/SP_groupPrivacy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:spinnerMode="dropdown" />
+
+        <ImageView
+            android:id="@+id/IV_openPrivacySpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_toEndOf="@+id/SP_groupPrivacy"
+            android:layout_toRightOf="@+id/SP_groupPrivacy"
+            android:contentDescription="@string/login_account"
+            android:src="@drawable/ic_action_expand" />
+
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -61,8 +96,8 @@
             android:src="@drawable/ic_action_accept"
             android:tint="#fff"
             app:backgroundTint="#00cd00"
-            android:layout_gravity="end"
-            android:layout_margin="10dp"/>
+            android:layout_gravity="center"
+            android:layout_margin="20dp"/>
 
     </LinearLayout>
 

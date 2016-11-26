@@ -30,9 +30,9 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.andexert.library.RippleView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -90,74 +90,73 @@ public class HomePageView extends AppCompatActivity implements
 
         Animation bounceAnimation = AnimationUtils.loadAnimation(this, R.anim.accelerate_decelerate_aimation);
 
-        RelativeLayout RL_notifications = (RelativeLayout) findViewById(R.id.RL_notifications);
+        RippleView RL_notifications = (RippleView) findViewById(R.id.RL_notifications);
 
         if (RL_notifications != null) {
             RL_notifications.startAnimation(bounceAnimation);
-            RL_notifications.setOnClickListener(new View.OnClickListener() {
+            RL_notifications.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
                 @Override
-                public void onClick(View v) {
+                public void onComplete(RippleView rippleView) {
                     startActivity(new Intent(HomePageView.this, NotificationsHomePage.class));
                 }
             });
         }
 
-        RelativeLayout RL_timetable = (RelativeLayout) findViewById(R.id.RL_timetable);
+        RippleView RL_timetable = (RippleView) findViewById(R.id.RL_timetable);
 
         if (RL_timetable != null) {
             RL_timetable.startAnimation(bounceAnimation);
-            RL_timetable.setOnClickListener(new View.OnClickListener() {
+            RL_timetable.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
                 @Override
-                public void onClick(View v) {
+                public void onComplete(RippleView rippleView) {
                     startActivity(new Intent(HomePageView.this, TimeTableView.class));
                 }
             });
         }
 
-        RelativeLayout RL_complaintPoll = (RelativeLayout) findViewById(R.id.RL_complaintPoll);
+        RippleView RL_complaintPoll = (RippleView) findViewById(R.id.RL_complaintPoll);
 
         if (RL_complaintPoll != null) {
             RL_complaintPoll.startAnimation(bounceAnimation);
-            RL_complaintPoll.setOnClickListener(new View.OnClickListener() {
+            RL_complaintPoll.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
                 @Override
-                public void onClick(View v) {
+                public void onComplete(RippleView rippleView) {
                     startActivity(new Intent(HomePageView.this, ComplaintPollView.class));
                 }
             });
         }
 
-        RelativeLayout RL_tracking = (RelativeLayout) findViewById(R.id.RL_trackFaculty);
+        RippleView RL_tracking = (RippleView) findViewById(R.id.RL_trackFaculty);
 
         if (RL_tracking != null) {
             RL_tracking.startAnimation(bounceAnimation);
-            RL_tracking.setOnClickListener(new View.OnClickListener() {
+            RL_tracking.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
                 @Override
-                public void onClick(View v) {
+                public void onComplete(RippleView rippleView) {
                     startActivity(new Intent(HomePageView.this, TrackFacultyView.class));
                 }
             });
         }
 
-        RelativeLayout RL_parking = (RelativeLayout) findViewById(R.id.RL_parking);
+        RippleView RL_parking = (RippleView) findViewById(R.id.RL_parking);
 
         if (RL_parking != null) {
             RL_parking.startAnimation(bounceAnimation);
-            RL_parking.setOnClickListener(new View.OnClickListener() {
+            RL_parking.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
                 @Override
-                public void onClick(View v) {
-                    //startActivity(new Intent(HomePageView.this, MapsActivity.class));
-                    //startActivity(new Intent(HomePageView.this, TimetableImage.class));
+                public void onComplete(RippleView rippleView) {
+
                 }
             });
         }
 
-        RelativeLayout RL_bloodBank = (RelativeLayout) findViewById(R.id.RL_bloodBank);
+        RippleView RL_bloodBank = (RippleView) findViewById(R.id.RL_bloodBank);
 
         if (RL_bloodBank != null) {
             RL_bloodBank.startAnimation(bounceAnimation);
-            RL_bloodBank.setOnClickListener(new View.OnClickListener() {
+            RL_bloodBank.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
                 @Override
-                public void onClick(View v) {
+                public void onComplete(RippleView rippleView) {
                     startActivity(new Intent(HomePageView.this, BloodBankView.class));
                 }
             });

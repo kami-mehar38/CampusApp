@@ -16,8 +16,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
@@ -40,6 +43,8 @@ public class CreateNotificationsGroup extends AppCompatActivity implements View.
     private NotificationsModal notificationsModal;
     private Bitmap bitmap = null;
     private EditText ET_groupName;
+    private Spinner SP_groupPrivacy;
+    private int spinnerOption;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,6 +64,36 @@ public class CreateNotificationsGroup extends AppCompatActivity implements View.
         }
 
         ET_groupName = (EditText) findViewById(R.id.ET_groupName);
+
+        SP_groupPrivacy = (Spinner) findViewById(R.id.SP_groupPrivacy);
+        populateSpinner(SP_groupPrivacy);
+        SP_groupPrivacy.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                spinnerOption = position;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        ImageView imageView = (ImageView) findViewById(R.id.IV_openPrivacySpinner);
+        if (imageView != null) {
+            imageView.setOnClickListener(this);
+        }
+    }
+
+    void populateSpinner(Spinner SPloginOptions) {
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this,
+                R.array.privacy_options,
+                android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Set the adapter to Spinner
+        SPloginOptions.setAdapter(spinnerAdapter);
     }
 
     @Override
@@ -79,12 +114,29 @@ public class CreateNotificationsGroup extends AppCompatActivity implements View.
                 String name = sharedPreferences.getString("NAME", null);
                 if (!groupName.isEmpty()) {
                     if (bitmap != null) {
-                        String imageString = getStringImage(bitmap);
-                        notificationsModal.createGroup(imageString, groupName, name, reg_id, currentDateTimeString);
+                        if (spinnerOption != 0) {
+                            switch (spinnerOption){
+                                case 1: {
+                                    String imageString = getStringImage(bitmap);
+                                    notificationsModal.createGroup(imageString, groupName, "Public", name, reg_id, currentDateTimeString);
+                                    break;
+                                }
+                                case 2: {
+                                    String imageString = getStringImage(bitmap);
+                                    notificationsModal.createGroup(imageString, groupName, "Private", name, reg_id, currentDateTimeString);
+                                    break;
+                                }
+                            }
+                        } else
+                            Toast.makeText(CreateNotificationsGroup.this, "Select group privacy", Toast.LENGTH_LONG).show();
                     } else
                         Toast.makeText(CreateNotificationsGroup.this, "Select group image", Toast.LENGTH_LONG).show();
                 } else
                     Toast.makeText(CreateNotificationsGroup.this, "Enter group name", Toast.LENGTH_LONG).show();
+                break;
+            }
+            case R.id.IV_openPrivacySpinner: {
+                SP_groupPrivacy.performClick();
                 break;
             }
         }

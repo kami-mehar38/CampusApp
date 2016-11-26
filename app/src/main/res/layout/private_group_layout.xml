@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#f8fafb"
+    android:id="@+id/privacyLayout">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:contentDescription="@string/group_is_private"
+        android:src="@drawable/ic_action_add_group"
+        android:layout_gravity="center"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/group_is_private_to_join_send"
+        android:textSize="20sp"
+        android:textColor="#94b8c4"/>
+
+        <com.andexert.library.RippleView
+            android:id="@+id/CV_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            rv_centered="true"
+            app:rv_color="#e1ebee"
+            app:rv_rippleDuration="250">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/request"
+            android:textAllCaps="false"
+            android:background="@drawable/request_button_background"
+            android:textColor="#678089"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            />
+
+        </com.andexert.library.RippleView>
+
+    </LinearLayout>
+
+</LinearLayout>

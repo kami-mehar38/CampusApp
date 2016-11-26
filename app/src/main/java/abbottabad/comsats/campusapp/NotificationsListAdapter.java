@@ -1,6 +1,7 @@
 package abbottabad.comsats.campusapp;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
@@ -152,7 +153,7 @@ class NotificationsListAdapter extends RecyclerView.Adapter<NotificationsListAda
             CV_group.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
                 @Override
                 public void onComplete(RippleView rippleView) {
-                    if (!NotificationsHomePage.isLongClick) {
+                    if (!NotificationsHomePage.isLongClick && !NotificationsHomePage.isImageClick) {
                         editor.putString("NOTIFICATION_TYPE", TV_groupName.getText().toString());
                         editor.apply();
                         context.startActivity(new Intent(context, NotificationsView.class));
@@ -189,6 +190,7 @@ class NotificationsListAdapter extends RecyclerView.Adapter<NotificationsListAda
                     break;
                 }
                 case R.id.IV_profilePicture: {
+                    NotificationsHomePage.isImageClick = true;
                     View view = LayoutInflater.from(context).inflate(R.layout.notifications_group_picture_view, null);
                     ImageView imageView = (ImageView) view.findViewById(R.id.IV_groupPicture);
                     imageView.setOnClickListener(this);
@@ -202,6 +204,12 @@ class NotificationsListAdapter extends RecyclerView.Adapter<NotificationsListAda
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setView(view);
                     builder.setCancelable(true);
+                    builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                        @Override
+                        public void onCancel(DialogInterface dialog) {
+                            NotificationsHomePage.isImageClick = false;
+                        }
+                    });
                     alertDialog = builder.create();
                     alertDialog.show();
                     break;

@@ -13,7 +13,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             rv_centered="true"
-            app:rv_color="#dee9ed">
+            app:rv_color="#94b8c4"
+            app:rv_rippleDuration="250">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -87,7 +88,7 @@
                     android:id="@+id/TV_counterBadge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_gravity="end"
                     android:textColor="#8989e5"
                     android:textSize="16sp"
                     android:textStyle="bold"/>
@@ -100,7 +101,6 @@
                     android:gravity="center"
                     android:textColor="#00cd00"
                     android:textSize="14sp"
-                    android:layout_marginTop="2dp"
                     android:layout_gravity="end"/>
 
             </LinearLayout>

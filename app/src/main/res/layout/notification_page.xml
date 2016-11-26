@@ -6,71 +6,80 @@
 
     <include layout="@layout/notifications_toolbar" />
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/form"
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:background="@color/colorLightGrey"
-            android:orientation="horizontal"
-            android:padding="10dp">
+            android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/ET_notification"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:id="@+id/form"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.9"
-                android:background="@drawable/chatbox_notifications_style"
-                android:ems="10"
-                android:hint="@string/input_message"
-                android:maxHeight="80dp"
-                android:maxLength="320"
-                android:padding="10dp"
-                android:textColor="#000"
-                android:textColorHint="#5b5b5b"
-                android:textCursorDrawable="@drawable/edittext_notifications_cursor_color"
-                android:textSize="16sp"
-                android:textStyle="normal">
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:background="@color/colorLightGrey"
+                android:orientation="horizontal"
+                android:padding="10dp">
 
-                <requestFocus />
-            </EditText>
+                <EditText
+                    android:id="@+id/ET_notification"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.9"
+                    android:background="@drawable/chatbox_notifications_style"
+                    android:ems="10"
+                    android:hint="@string/input_message"
+                    android:maxHeight="80dp"
+                    android:maxLength="320"
+                    android:padding="10dp"
+                    android:textColor="#000"
+                    android:textColorHint="#5b5b5b"
+                    android:textCursorDrawable="@drawable/edittext_notifications_cursor_color"
+                    android:textSize="16sp"
+                    android:textStyle="normal">
 
-            <ImageButton
-                android:id="@+id/sendNotification"
-                android:layout_width="wrap_content"
+                    <requestFocus />
+                </EditText>
+
+                <ImageButton
+                    android:id="@+id/sendNotification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:contentDescription="@string/send"
+                    android:maxHeight="10dp"
+                    android:src="@drawable/ic_action_send_now"
+                    android:tint="#81a1ab" />
+
+                <ProgressBar
+                    android:id="@+id/waiting"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
+                    android:indeterminate="true" />
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/LV_notifications"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@null"
-                android:contentDescription="@string/send"
-                android:maxHeight="10dp"
-                android:src="@drawable/ic_action_send_now"
-                android:tint="#81a1ab" />
+                android:layout_above="@+id/form"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:background="#f8fafb"
+                android:divider="@null"
+                android:dividerHeight="10dp" />
+        </RelativeLayout>
 
-            <ProgressBar
-                android:id="@+id/waiting"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="5dp"
-                android:layout_marginStart="5dp"
-                android:indeterminate="true" />
-        </LinearLayout>
+        <include layout="@layout/private_group_layout" />
 
-        <ListView
-            android:id="@+id/LV_notifications"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/form"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:divider="@null"
-            android:dividerHeight="10dp"
-            android:background="#f8fafb"/>
-    </RelativeLayout>
+    </FrameLayout>
 
 </LinearLayout>

@@ -28,50 +28,69 @@
                 android:orientation="horizontal"
                 android:padding="@dimen/activity_vertical_margin">
 
-                <RelativeLayout
+                <com.andexert.library.RippleView
                     android:id="@+id/RL_notifications"
+                    rv_centered="true"
                     android:layout_width="110dp"
                     android:layout_height="120dp"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="@dimen/activity_vertical_margin"
-                    android:layout_marginRight="@dimen/activity_vertical_margin"
                     android:layout_weight="1"
-                    android:background="@drawable/homebutton_background">
+                    app:rv_color="@color/colorAccent"
+                    app:rv_rippleDuration="250"
+                    app:rv_zoom="true">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:drawablePadding="@dimen/activity_vertical_margin"
-                        android:drawableTop="@drawable/notification"
-                        android:text="@string/notifications"
-                        android:textColor="#786351"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:ellipsize="end"
-                        android:maxLines="1"/>
-                </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/activity_vertical_margin"
+                        android:layout_marginRight="@dimen/activity_vertical_margin"
+                        android:background="@drawable/homebutton_background">
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:drawablePadding="@dimen/activity_vertical_margin"
+                            android:drawableTop="@drawable/notification"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="@string/notifications"
+                            android:textColor="#786351"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
 
-                <RelativeLayout
+                </com.andexert.library.RippleView>
+
+                <com.andexert.library.RippleView
                     android:id="@+id/RL_timetable"
+                    rv_centered="true"
                     android:layout_width="110dp"
                     android:layout_height="120dp"
-                    android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:background="@drawable/homebutton_background">
+                    app:rv_color="@color/colorAccent"
+                    app:rv_rippleDuration="250"
+                    app:rv_zoom="true">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:drawablePadding="@dimen/activity_vertical_margin"
-                        android:drawableTop="@drawable/calendar"
-                        android:text="@string/timetable"
-                        android:textColor="#786351"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-                </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:background="@drawable/homebutton_background">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:drawablePadding="@dimen/activity_vertical_margin"
+                            android:drawableTop="@drawable/calendar"
+                            android:text="@string/timetable"
+                            android:textColor="#786351"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                </com.andexert.library.RippleView>
 
             </LinearLayout>
 
@@ -82,49 +101,69 @@
                 android:orientation="horizontal"
                 android:padding="@dimen/activity_vertical_margin">
 
-                <RelativeLayout
+                <com.andexert.library.RippleView
                     android:id="@+id/RL_complaintPoll"
+                    rv_centered="true"
                     android:layout_width="110dp"
                     android:layout_height="120dp"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="@dimen/activity_vertical_margin"
-                    android:layout_marginRight="@dimen/activity_vertical_margin"
                     android:layout_weight="1"
-                    android:background="@drawable/homebutton_background">
+                    app:rv_color="@color/colorAccent"
+                    app:rv_rippleDuration="250"
+                    app:rv_zoom="true">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:drawablePadding="@dimen/activity_vertical_margin"
-                        android:drawableTop="@drawable/complaint"
-                        android:text="@string/complaint_poll"
-                        android:textColor="#786351"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-                </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/activity_vertical_margin"
+                        android:layout_marginRight="@dimen/activity_vertical_margin"
+                        android:background="@drawable/homebutton_background">
 
-                <RelativeLayout
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:drawablePadding="@dimen/activity_vertical_margin"
+                            android:drawableTop="@drawable/complaint"
+                            android:text="@string/complaint_poll"
+                            android:textColor="#786351"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                </com.andexert.library.RippleView>
+
+                <com.andexert.library.RippleView
                     android:id="@+id/RL_trackFaculty"
+                    rv_centered="true"
                     android:layout_width="110dp"
                     android:layout_height="120dp"
-                    android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:background="@drawable/homebutton_background">
+                    app:rv_color="@color/colorAccent"
+                    app:rv_rippleDuration="250"
+                    app:rv_zoom="true">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:drawablePadding="@dimen/activity_vertical_margin"
-                        android:drawableTop="@drawable/tracking"
-                        android:text="@string/track_faculty"
-                        android:textColor="#786351"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:ellipsize="end"
-                        android:maxLines="1"/>
-                </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:background="@drawable/homebutton_background">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:drawablePadding="@dimen/activity_vertical_margin"
+                            android:drawableTop="@drawable/tracking"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="@string/track_faculty"
+                            android:textColor="#786351"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                </com.andexert.library.RippleView>
             </LinearLayout>
 
             <LinearLayout
@@ -134,49 +173,72 @@
                 android:orientation="horizontal"
                 android:padding="@dimen/activity_vertical_margin">
 
-                <RelativeLayout
+                <com.andexert.library.RippleView
                     android:id="@+id/RL_parking"
+                    rv_centered="true"
                     android:layout_width="110dp"
                     android:layout_height="120dp"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="@dimen/activity_vertical_margin"
-                    android:layout_marginRight="@dimen/activity_vertical_margin"
                     android:layout_weight="1"
-                    android:background="@drawable/homebutton_background">
+                    app:rv_color="@color/colorAccent"
+                    app:rv_rippleDuration="250"
+                    app:rv_zoom="true">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:drawablePadding="@dimen/activity_vertical_margin"
-                        android:drawableTop="@drawable/parking"
-                        android:text="@string/parking"
-                        android:textColor="#786351"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-                </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/activity_vertical_margin"
+                        android:layout_marginRight="@dimen/activity_vertical_margin"
+                        android:background="@drawable/homebutton_background">
 
-                <RelativeLayout
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:drawablePadding="@dimen/activity_vertical_margin"
+                            android:drawableTop="@drawable/parking"
+                            android:text="@string/parking"
+                            android:textColor="#786351"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                </com.andexert.library.RippleView>
+
+                <com.andexert.library.RippleView
                     android:id="@+id/RL_bloodBank"
+                    rv_centered="true"
                     android:layout_width="110dp"
                     android:layout_height="120dp"
-                    android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:background="@drawable/homebutton_background">
+                    app:rv_color="@color/colorAccent"
+                    app:rv_rippleDuration="250"
+                    app:rv_zoom="true">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:drawablePadding="@dimen/activity_vertical_margin"
-                        android:drawableTop="@drawable/blood"
-                        android:text="@string/blood_bank"
-                        android:textColor="#786351"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-                </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:background="@drawable/homebutton_background">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:drawablePadding="@dimen/activity_vertical_margin"
+                            android:drawableTop="@drawable/blood"
+                            android:text="@string/blood_bank"
+                            android:textColor="#786351"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                </com.andexert.library.RippleView>
+
             </LinearLayout>
+
         </LinearLayout>
+
     </ScrollView>
 
 </LinearLayout>
