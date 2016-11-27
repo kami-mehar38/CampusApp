@@ -70,6 +70,7 @@ class NotificationsListAdapter extends RecyclerView.Adapter<NotificationsListAda
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(notificationsListInfo.getGroupName() + "_EXISTS", true);
+        editor.putString(notificationsListInfo.getGroupName() + "_IS", notificationsListInfo.getGroupPrivacy());
         editor.apply();
 
         boolean isMuted = sharedPreferences.getBoolean(notificationsListInfo.getGroupName() + "_MUTED", false);
@@ -161,7 +162,7 @@ class NotificationsListAdapter extends RecyclerView.Adapter<NotificationsListAda
 
                 }
             });
-            //CV_group.setOnClickListener(this);
+
             CV_group.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
@@ -183,12 +184,6 @@ class NotificationsListAdapter extends RecyclerView.Adapter<NotificationsListAda
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.CV_group: {
-                    editor.putString("NOTIFICATION_TYPE", TV_groupName.getText().toString());
-                    editor.apply();
-                    context.startActivity(new Intent(context, NotificationsView.class));
-                    break;
-                }
                 case R.id.IV_profilePicture: {
                     NotificationsHomePage.isImageClick = true;
                     View view = LayoutInflater.from(context).inflate(R.layout.notifications_group_picture_view, null);

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.Toolbar
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/notifications_toolbar"
     android:background="#94b8c4"
     android:minHeight="?attr/actionBarSize"
@@ -41,12 +41,52 @@
             android:id="@+id/CB_selectAll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
+            android:layout_toLeftOf="@+id/pendingRequests"
+            android:layout_toStartOf="@+id/pendingRequests"
             android:theme="@style/checkBoxStyle"
             android:layout_centerVertical="true"
             android:checked="false"
             />
+
+        <com.andexert.library.RippleView
+            android:id="@+id/pendingRequests"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            rv_centered="true"
+            app:rv_color="#fff"
+            app:rv_rippleDuration="250"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="5dp"
+            >
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_group_requests"
+            android:contentDescription="@string/group_requests"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:layout_marginLeft="21dp"
+                android:layout_marginStart="21dp"
+                />
+
+        </FrameLayout>
+
+        </com.andexert.library.RippleView>
 
     </RelativeLayout>
 

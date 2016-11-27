@@ -70,6 +70,10 @@ class NotificationsModal {
         new DeleteGroup().execute(groupName);
     }
 
+    void sendGroupRequest(String groupName, String name) {
+        new SendGroupRequest().execute(groupName, name);
+    }
+
     private class SendEventNotification extends AsyncTask<String, Void, String> {
 
         private String message;
@@ -372,6 +376,7 @@ class NotificationsModal {
                     notificationsListInfo[index] = new NotificationsListInfo();
                     notificationsListInfo[index].setGroupImageUri(finalObject.getString("group_image"));
                     notificationsListInfo[index].setGroupName(finalObject.getString("group_name"));
+                    notificationsListInfo[index].setGroupPrivacy(finalObject.getString("group_privacy"));
                     notificationsListInfo[index].setUserName(finalObject.getString("user_name"));
                     notificationsListInfo[index].setRegId(finalObject.getString("reg_id"));
                     notificationsListInfo[index].setTimeStamp(finalObject.getString("time_stamp"));
@@ -494,6 +499,85 @@ class NotificationsModal {
                 Toast.makeText(context, "Some error occurred! Please try again.", Toast.LENGTH_LONG).show();
             }
 
+        }
+    }
+
+    private class SendGroupRequest extends AsyncTask<String, Void, String> {
+        private String groupName;
+        private String name;
+        private ProgressDialog progressDialog;
+        private SharedPreferences.Editor editor;
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog = new ProgressDialog(context);
+            progressDialog.setIndeterminate(true);
+            progressDialog.setCancelable(false);
+            progressDialog.setMessage("Sending request...");
+            progressDialog.show();
+
+            SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+            editor = sharedPreferences.edit();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            String stringUrl = "http://hostellocator.com/sendGroupRequest.php";
+            groupName = params[0];
+            name = params[1];
+            try {
+                URL url = new URL(stringUrl);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String data = URLEncoder.encode("groupName", "UTF-8") + "=" + URLEncoder.encode(groupName, "UTF-8") + "&" +
+                        URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+                StringBuilder stringBuilder = new StringBuilder();
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(line);
+                }
+
+                JSONArray parentJSON = new JSONArray(stringBuilder.toString());
+                JSONObject finalObject = parentJSON.getJSONObject(0);
+                String RESPONSE = finalObject.getString("RESPONSE");
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return RESPONSE;
+            } catch (IOException | JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            progressDialog.cancel();
+
+            if (result != null) {
+                switch (result) {
+                    case "OK": {
+                        Toast.makeText(context, "Successfully sent", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                    case "ERROR": {
+                        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                    }
+                    default: {
+                        Toast.makeText(context, "Error occurred, please try again", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
         }
     }
 }

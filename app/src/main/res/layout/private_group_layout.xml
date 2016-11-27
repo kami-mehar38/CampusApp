@@ -4,48 +4,51 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#f8fafb"
-    android:id="@+id/privacyLayout">
+    android:background="#fff"
+    android:id="@+id/privacyLayout"
+    android:layout_gravity="center">
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:contentDescription="@string/group_is_private"
-        android:src="@drawable/ic_action_add_group"
+        android:src="@drawable/ic_action_group"
         android:layout_gravity="center"
         />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="5dp"
+        android:orientation="vertical"
+        android:layout_marginTop="15dp"
         android:layout_gravity="center">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/group_is_private_to_join_send"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textColor="#94b8c4"/>
 
         <com.andexert.library.RippleView
-            android:id="@+id/CV_group"
+            android:id="@+id/btn_sendRequest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             rv_centered="true"
             app:rv_color="#e1ebee"
-            app:rv_rippleDuration="250">
+            app:rv_rippleDuration="250"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="center">
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="70dp"
+            android:layout_height="35dp"
             android:text="@string/request"
             android:textAllCaps="false"
             android:background="@drawable/request_button_background"
             android:textColor="#678089"
-            android:layout_marginLeft="5dp"
-            android:layout_marginStart="5dp"
+
             />
 
         </com.andexert.library.RippleView>

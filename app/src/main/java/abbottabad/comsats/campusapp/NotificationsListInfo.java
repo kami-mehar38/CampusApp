@@ -7,31 +7,40 @@ class NotificationsListInfo {
 
     private String groupImageUri;
     private String groupName;
+    private String groupPrivacy;
     private String userName;
     private String regId;
     private String timeStamp;
 
-    public String getUserName() {
+    public String getGroupPrivacy() {
+        return groupPrivacy;
+    }
+
+    public void setGroupPrivacy(String groupPrivacy) {
+        this.groupPrivacy = groupPrivacy;
+    }
+
+    String getUserName() {
         return userName;
     }
 
-    public void setUserName(String userName) {
+    void setUserName(String userName) {
         this.userName = userName;
     }
 
-    public String getRegId() {
+    String getRegId() {
         return regId;
     }
 
-    public void setRegId(String regId) {
+    void setRegId(String regId) {
         this.regId = regId;
     }
 
-    public String getTimeStamp() {
+    String getTimeStamp() {
         return timeStamp;
     }
 
-    public void setTimeStamp(String timeStamp) {
+    void setTimeStamp(String timeStamp) {
         this.timeStamp = timeStamp;
     }
 

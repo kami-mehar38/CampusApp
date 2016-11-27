@@ -6,12 +6,16 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -19,9 +23,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.andexert.library.RippleView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -50,6 +56,10 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
     private CheckBox CB_selectAll;
     public static boolean IS_IN_SELECT_ALL_MODE = false;
     private SharedPreferences sharedPreferences;
+    private boolean areRequestsOpen;
+    private String notificationType;
+    public static RecyclerView recyclerView;
+    public static PendingGroupRequestsAdapter pendingGroupRequestsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,21 +68,20 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
         toolbar = (Toolbar) findViewById(R.id.notifications_toolbar);
         setSupportActionBar(toolbar);
         setStatusBarColor();
-        LinearLayout privacyLayout = (LinearLayout) findViewById(R.id.privacyLayout);
-        if (privacyLayout != null) {
-            privacyLayout.setVisibility(View.GONE);
-        }
         sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         REG_ID = sharedPreferences.getString("REG_ID", null);
         notificationsLocalModal = new NotificationsLocalModal(this);
         IS_IN_ACTION_MODE = false;
         IS_IN_SELECT_ALL_MODE = false;
 
-        String notificationType = sharedPreferences.getString("NOTIFICATION_TYPE", null);
+        notificationType = sharedPreferences.getString("NOTIFICATION_TYPE", null);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(notificationType + "_COUNT", 0);
         editor.putBoolean("IS_CHAT_OPEN", true);
         editor.apply();
+
+        String groupPrivacy = sharedPreferences.getString(notificationType + "_IS", null);
+        boolean isCreatedByMe = sharedPreferences.getBoolean(notificationType + "_CREATED_BY_ME", false);
 
         ImageView imageView = (ImageView) findViewById(R.id.IV_groupPicture);
         // Create default options which will be used for every
@@ -83,7 +92,9 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
                 .defaultDisplayImageOptions(defaultOptions).build();
         ImageLoader.getInstance().init(config); // Do it on Application start
 
-        ImageLoader.getInstance().displayImage("http://hostellocator.com/images/" + notificationType + ".JPG", imageView);
+        if (imageView != null) {
+            ImageLoader.getInstance().displayImage("http://hostellocator.com/images/" + notificationType + ".JPG", imageView);
+        }
 
         listView = (ListView) findViewById(R.id.LV_notifications);
         btnSend = (ImageButton) findViewById(R.id.sendNotification);
@@ -133,6 +144,111 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
                 }
             }
         });
+
+        managePrivacyLayout(groupPrivacy, isCreatedByMe);
+
+        final LinearLayout pendingRequestsLayout = (LinearLayout) findViewById(R.id.pendingRequestsLayout);
+        if (pendingRequestsLayout != null) {
+            pendingRequestsLayout.setVisibility(View.GONE);
+        }
+        final Animation bottomToTop = AnimationUtils.loadAnimation(this,
+                R.anim.bottom_to_top);
+        final Animation topToBottom = AnimationUtils.loadAnimation(this,
+                R.anim.top_to_bottom);
+        topToBottom.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                if (pendingRequestsLayout != null) {
+                    pendingRequestsLayout.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        recyclerView = (RecyclerView) findViewById(R.id.RV_pendingRequests);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        pendingGroupRequestsAdapter = new PendingGroupRequestsAdapter(this);
+        if (recyclerView != null) {
+            recyclerView.setLayoutManager(layoutManager);
+            recyclerView.setAdapter(pendingGroupRequestsAdapter);
+        }
+
+        new NotificationsRequestsLocalModal(this).retrieveGroupRequest(notificationType);
+
+        TextView TV_collapse = (TextView) findViewById(R.id.TV_collapse);
+        if (TV_collapse != null) {
+            TV_collapse.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (pendingRequestsLayout != null) {
+                        pendingRequestsLayout.startAnimation(topToBottom);
+                        areRequestsOpen = false;
+                    }
+                }
+            });
+        }
+
+        RippleView pendingRequests = (RippleView) findViewById(R.id.pendingRequests);
+        if (groupPrivacy != null && groupPrivacy.equals("Private") && isCreatedByMe) {
+            if (pendingRequests != null) {
+                pendingRequests.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+                    @Override
+                    public void onComplete(RippleView rippleView) {
+                        if (!areRequestsOpen) {
+                            areRequestsOpen = true;
+                            if (pendingRequestsLayout != null) {
+                                pendingRequestsLayout.startAnimation(bottomToTop);
+                            }
+                            if (pendingRequestsLayout != null) {
+                                pendingRequestsLayout.setVisibility(View.VISIBLE);
+                            }
+                        }
+                    }
+                });
+            }
+        } else if (pendingRequests != null) {
+            pendingRequests.setVisibility(View.GONE);
+        }
+    }
+
+    private void managePrivacyLayout(String groupPrivacy, boolean isCreatedByMe) {
+        LinearLayout privacyLayout = (LinearLayout) findViewById(R.id.privacyLayout);
+        RelativeLayout chatLayout = (RelativeLayout) findViewById(R.id.RL_chatLayout);
+        if (privacyLayout != null) {
+            privacyLayout.setVisibility(View.GONE);
+        }
+        if (chatLayout != null) {
+            chatLayout.setVisibility(View.GONE);
+        }
+        if (groupPrivacy != null && groupPrivacy.equals("Public")){
+            if (privacyLayout != null && chatLayout != null) {
+                chatLayout.setVisibility(View.VISIBLE);
+            }
+        } else if (groupPrivacy != null && groupPrivacy.equals("Private")){
+            if (chatLayout != null && privacyLayout != null && !isCreatedByMe){
+                privacyLayout.setVisibility(View.VISIBLE);
+            } else if (chatLayout != null) {
+                chatLayout.setVisibility(View.VISIBLE);
+            }
+        }
+        RippleView btn_sendRequest = (RippleView) findViewById(R.id.btn_sendRequest);
+        if (btn_sendRequest != null) {
+            btn_sendRequest.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+                @Override
+                public void onComplete(RippleView rippleView) {
+                    new NotificationsModal(NotificationsView.this).sendGroupRequest(notificationType, sharedPreferences.getString("NAME", null));
+                }
+            });
+        }
     }
 
     @Override
@@ -180,6 +296,7 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
     }
 
     private void clearActionMode() {
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         notificationTitle.setText(sharedPreferences.getString("NOTIFICATION_TYPE", ""));
         toolbar.getMenu().clear();

@@ -73,6 +73,11 @@ public class MyGcmListenerService extends GcmListenerService {
                 receiveEventNotification(data);
             }
         }
+
+        if (PURPOSE != null && PURPOSE.equals("GROUP_REQUEST")) {
+                receiveGroupRequest(data);
+
+        }
     }
 
     private void receiveBloodRequestResponseStatus(Bundle data) {
@@ -416,5 +421,38 @@ public class MyGcmListenerService extends GcmListenerService {
         mBuilder.setContentIntent(resultPendingIntent);
         notificationManager.notify(GCM_NOTIFICATION_ID, mBuilder.build());
 
+    }
+
+    private void receiveGroupRequest(Bundle data) {
+        DateFormat df = new SimpleDateFormat("d MMM yyyy/h:mm a", Locale.getDefault());
+        final String currentDateTimeString = df.format(Calendar.getInstance().getTime());
+        final String name = data.getString("name");
+        final String notificationType = data.getString("groupName");
+
+
+        if (sharedPreferences.getBoolean(notificationType + "_EXISTS", false)) {
+
+            NotificationsRequestController.setName(name);
+            NotificationsRequestController.setGroupName(notificationType);
+            NotificationsRequestController.setTimeStamp(currentDateTimeString);
+            new NotificationsRequestsLocalModal(this).addGroupRequest();
+
+            Handler handler = new Handler(Looper.getMainLooper());
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    if (NotificationsView.pendingGroupRequestsAdapter != null) {
+                        PendingGroupRequestsInfo pendingGroupRequestsInfo = new PendingGroupRequestsInfo();
+                        pendingGroupRequestsInfo.setName(name);
+                        pendingGroupRequestsInfo.setGroupName(notificationType);
+                        pendingGroupRequestsInfo.setTimeStamp(currentDateTimeString);
+                        NotificationsView.pendingGroupRequestsAdapter.addItem(pendingGroupRequestsInfo, 0);
+                        NotificationsView.recyclerView.smoothScrollToPosition(0);
+                    }
+                }
+            });
+
+            createEventNotification(name + " wants to join " + notificationType);
+        }
     }
 }

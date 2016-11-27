@@ -149,4 +149,6 @@
     <string name="group_is_private">Group is private</string>
     <string name="group_is_private_to_join_send">Group is private, to join send</string>
     <string name="request">Request</string>
+    <string name="group_requests">Group requests</string>
+    <string name="pending_requests">Pending requests</string>
 </resources>

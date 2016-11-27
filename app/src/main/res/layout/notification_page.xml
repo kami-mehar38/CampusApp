@@ -12,6 +12,7 @@
 
 
         <RelativeLayout
+            android:id="@+id/RL_chatLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -79,6 +80,7 @@
         </RelativeLayout>
 
         <include layout="@layout/private_group_layout" />
+        <include layout="@layout/group_pending_requests_layout" />
 
     </FrameLayout>
 
