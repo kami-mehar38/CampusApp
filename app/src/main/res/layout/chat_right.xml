@@ -1,39 +1,38 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingLeft="25dp"
-    android:paddingStart="25dp"
+    android:paddingBottom="5dp"
     android:paddingEnd="10dp"
+    android:paddingLeft="90dp"
     android:paddingRight="10dp"
-    android:paddingTop="5dp"
-    android:paddingBottom="5dp">
+    android:paddingStart="90dp"
+    android:paddingTop="5dp">
 
     <LinearLayout
         android:id="@+id/LL_notification"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_toLeftOf="@+id/LL_checkBox"
-        android:layout_toStartOf="@+id/LL_checkBox">
+        android:layout_toStartOf="@+id/LL_checkBox"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/txt_msg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#000"
-            android:textSize="16sp"
+            android:layout_gravity="end"
             android:background="@drawable/chat_right"
             android:padding="8dp"
-            android:layout_gravity="end" />
+            android:textColor="#000"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/TV_notificationDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="end"
             android:textColor="#5b5b5b"
-            android:textSize="12sp"
-            android:layout_marginTop="5dp"
-            android:layout_gravity="end"/>
+            android:textSize="12sp" />
 
     </LinearLayout>
 
@@ -42,7 +41,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true">
+        android:layout_alignParentRight="true"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/IV_messageSenderName"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginStart="3dp"
+            android:contentDescription="@string/name" />
 
         <CheckBox
             android:id="@+id/CB_delete"

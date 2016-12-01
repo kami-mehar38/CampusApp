@@ -60,6 +60,9 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
     private String notificationType;
     public static RecyclerView recyclerView;
     public static PendingGroupRequestsAdapter pendingGroupRequestsAdapter;
+    public static RippleView btn_sendRequest;
+    public static TextView TV_requestStatus;
+    public static TextView TV_requestsCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +85,8 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
 
         String groupPrivacy = sharedPreferences.getString(notificationType + "_IS", null);
         boolean isCreatedByMe = sharedPreferences.getBoolean(notificationType + "_CREATED_BY_ME", false);
+        boolean isJoinded = sharedPreferences.getBoolean(notificationType + "_IS_JOINED", false);
+        Log.i("TAG", "onCreate: " + isJoinded);
 
         ImageView imageView = (ImageView) findViewById(R.id.IV_groupPicture);
         // Create default options which will be used for every
@@ -100,7 +105,9 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
         btnSend = (ImageButton) findViewById(R.id.sendNotification);
         ET_message = (EditText) findViewById(R.id.ET_notification);
         notificationTitle = (TextView) findViewById(R.id.notificationTitle);
-        notificationTitle.setText(sharedPreferences.getString("NOTIFICATION_TYPE", ""));
+        if (notificationTitle != null) {
+            notificationTitle.setText(notificationType);
+        }
         CB_selectAll = (CheckBox) findViewById(R.id.CB_selectAll);
         if (CB_selectAll != null) {
             CB_selectAll.setVisibility(View.GONE);
@@ -145,7 +152,7 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
             }
         });
 
-        managePrivacyLayout(groupPrivacy, isCreatedByMe);
+        managePrivacyLayout(groupPrivacy, isCreatedByMe, isJoinded);
 
         final LinearLayout pendingRequestsLayout = (LinearLayout) findViewById(R.id.pendingRequestsLayout);
         if (pendingRequestsLayout != null) {
@@ -180,6 +187,7 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
         if (recyclerView != null) {
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.setAdapter(pendingGroupRequestsAdapter);
+            recyclerView.addItemDecoration(new RecyclerViewDivider(this));
         }
 
         new NotificationsRequestsLocalModal(this).retrieveGroupRequest(notificationType);
@@ -218,9 +226,20 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
         } else if (pendingRequests != null) {
             pendingRequests.setVisibility(View.GONE);
         }
+
+        TV_requestsCount = (TextView) findViewById(R.id.TV_requestsCount);
+        int count = sharedPreferences.getInt(notificationType + "_REQUESTS_COUNT", 0);
+        TV_requestsCount.setText(String.valueOf(count));
+        Log.i("TAG", "onCreate: " + count);
+
+        TV_requestStatus = (TextView) findViewById(R.id.TV_requestStatus);
+        if (sharedPreferences.getBoolean("REQUESTED_FOR_" + notificationType, false)){
+            TV_requestStatus.setText("Your request has been sent, waiting for reaponse.");
+            btn_sendRequest.setVisibility(View.GONE);
+        }
     }
 
-    private void managePrivacyLayout(String groupPrivacy, boolean isCreatedByMe) {
+    private void managePrivacyLayout(String groupPrivacy, boolean isCreatedByMe, boolean isJoinded) {
         LinearLayout privacyLayout = (LinearLayout) findViewById(R.id.privacyLayout);
         RelativeLayout chatLayout = (RelativeLayout) findViewById(R.id.RL_chatLayout);
         if (privacyLayout != null) {
@@ -229,7 +248,7 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
         if (chatLayout != null) {
             chatLayout.setVisibility(View.GONE);
         }
-        if (groupPrivacy != null && groupPrivacy.equals("Public")){
+        if (groupPrivacy != null && groupPrivacy.equals("Public") || isJoinded){
             if (privacyLayout != null && chatLayout != null) {
                 chatLayout.setVisibility(View.VISIBLE);
             }
@@ -240,12 +259,15 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
                 chatLayout.setVisibility(View.VISIBLE);
             }
         }
-        RippleView btn_sendRequest = (RippleView) findViewById(R.id.btn_sendRequest);
+        btn_sendRequest = (RippleView) findViewById(R.id.btn_sendRequest);
         if (btn_sendRequest != null) {
             btn_sendRequest.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
                 @Override
                 public void onComplete(RippleView rippleView) {
-                    new NotificationsModal(NotificationsView.this).sendGroupRequest(notificationType, sharedPreferences.getString("NAME", null));
+                    new NotificationsModal(NotificationsView.this).sendGroupRequest(notificationType,
+                            sharedPreferences.getString("NAME", null),
+                            sharedPreferences.getString("REG_ID", null));
+                    Log.i("TAG", "onComplete: " + sharedPreferences.getString("REG_ID", null));
                 }
             });
         }

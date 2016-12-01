@@ -2,9 +2,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingBottom="5dp"
-    android:paddingEnd="25dp"
+    android:paddingEnd="90dp"
     android:paddingLeft="10dp"
-    android:paddingRight="25dp"
+    android:paddingRight="90dp"
     android:paddingStart="10dp"
     android:paddingTop="5dp">
 
@@ -13,12 +13,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:orientation="horizontal">
 
         <CheckBox
             android:id="@+id/CB_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/IV_messageSenderName"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="3dp"
+            android:layout_marginRight="3dp"
+            android:contentDescription="@string/name" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -60,7 +70,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:layout_marginTop="5dp"
             android:textColor="#5b5b5b"
             android:textSize="12sp" />
 

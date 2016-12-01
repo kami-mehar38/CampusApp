@@ -7,18 +7,27 @@ package abbottabad.comsats.campusapp;
 class NotificationsRequestController {
 
     private static String name;
+    private static String regId;
     private static String groupName;
     private static String timeStamp;
 
-    public static String getName() {
+    static String getRegId() {
+        return regId;
+    }
+
+    static void setRegId(String regId) {
+        NotificationsRequestController.regId = regId;
+    }
+
+    static String getName() {
         return name;
     }
 
-    public static String getGroupName() {
+    static String getGroupName() {
         return groupName;
     }
 
-    public static void setGroupName(String groupName) {
+    static void setGroupName(String groupName) {
         NotificationsRequestController.groupName = groupName;
     }
 
@@ -26,11 +35,11 @@ class NotificationsRequestController {
         NotificationsRequestController.name = name;
     }
 
-    public static String getTimeStamp() {
+    static String getTimeStamp() {
         return timeStamp;
     }
 
-    public static void setTimeStamp(String timeStamp) {
+    static void setTimeStamp(String timeStamp) {
         NotificationsRequestController.timeStamp = timeStamp;
     }
 }

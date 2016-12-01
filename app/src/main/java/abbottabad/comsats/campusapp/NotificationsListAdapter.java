@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.amulyakhare.textdrawable.TextDrawable;
 import com.andexert.library.RippleView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -84,10 +86,12 @@ class NotificationsListAdapter extends RecyclerView.Adapter<NotificationsListAda
         holder.TV_recentMessage.setText(recentMessage);
         int notificationCount = sharedPreferences.getInt(notificationsListInfo.getGroupName() + "_COUNT", 0);
         if (notificationCount > 0) {
-            holder.TV_counterBadge.setVisibility(View.VISIBLE);
-            holder.TV_counterBadge.setText(String.valueOf(notificationCount));
+            holder.IV_counterBadge.setVisibility(View.VISIBLE);
+            TextDrawable drawable = TextDrawable.builder()
+                    .buildRound(String.valueOf(notificationCount), Color.parseColor("#76939c"));
+            holder.IV_counterBadge.setImageDrawable(drawable);
 
-        } else holder.TV_counterBadge.setVisibility(View.INVISIBLE);
+        } else holder.IV_counterBadge.setVisibility(View.INVISIBLE);
 
         String recentMessageTime = sharedPreferences.getString(notificationsListInfo.getGroupName() + "_RECENT_MESSAGE_TIME", null);
         if (recentMessageTime != null) {
@@ -128,7 +132,7 @@ class NotificationsListAdapter extends RecyclerView.Adapter<NotificationsListAda
         private ImageView IV_groupPicture;
         private TextView TV_groupName;
         private TextView TV_recentMessage;
-        private TextView TV_counterBadge;
+        private ImageView IV_counterBadge;
         private TextView TV_timeStamp;
         private TextView TV_userName;
         private TextView TV_regId;
@@ -145,7 +149,7 @@ class NotificationsListAdapter extends RecyclerView.Adapter<NotificationsListAda
             IV_groupPicture.setOnClickListener(this);
             TV_groupName = (TextView) itemView.findViewById(R.id.TV_groupName);
             TV_recentMessage = (TextView) itemView.findViewById(R.id.TV_recentMessage);
-            TV_counterBadge = (TextView) itemView.findViewById(R.id.TV_counterBadge);
+            IV_counterBadge = (ImageView) itemView.findViewById(R.id.IV_counterBadge);
             TV_timeStamp = (TextView) itemView.findViewById(R.id.TV_timeStamp);
             TV_userName = (TextView) itemView.findViewById(R.id.TV_userName);
             TV_regId = (TextView) itemView.findViewById(R.id.TV_regId);

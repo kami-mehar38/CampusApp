@@ -31,62 +31,73 @@
             android:textColor="#fff"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_toStartOf="@+id/CB_selectAll"
-            android:layout_toLeftOf="@+id/CB_selectAll"
+            android:layout_toStartOf="@+id/menu"
+            android:layout_toLeftOf="@+id/menu"
             android:layout_toRightOf="@+id/IV_groupPicture"
             android:layout_toEndOf="@+id/IV_groupPicture"
             android:layout_centerVertical="true" />
 
-        <CheckBox
-            android:id="@+id/CB_selectAll"
+        <LinearLayout
+            android:id="@+id/menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/pendingRequests"
-            android:layout_toStartOf="@+id/pendingRequests"
-            android:theme="@style/checkBoxStyle"
-            android:layout_centerVertical="true"
-            android:checked="false"
-            />
-
-        <com.andexert.library.RippleView
-            android:id="@+id/pendingRequests"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            rv_centered="true"
-            app:rv_color="#fff"
-            app:rv_rippleDuration="250"
+            android:orientation="horizontal"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:padding="5dp"
-            >
+            android:layout_centerVertical="true">
 
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            >
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_group_requests"
-            android:contentDescription="@string/group_requests"
-            android:layout_marginRight="10dp"
-            android:layout_marginEnd="10dp"/>
-
-            <TextView
+            <com.andexert.library.RippleView
+                android:id="@+id/pendingRequests"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:textColor="#fff"
-                android:textStyle="bold"
-                android:layout_marginLeft="21dp"
-                android:layout_marginStart="21dp"
+                rv_centered="true"
+                app:rv_color="#fff"
+                app:rv_rippleDuration="250"
+                android:layout_gravity="center"
+                android:layout_marginRight="5dp"
+                android:layout_marginEnd="5dp"
+                android:padding="5dp"
+                >
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_group_requests"
+                        android:contentDescription="@string/group_requests"
+                        />
+
+                    <TextView
+                        android:id="@+id/TV_requestsCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textColor="#fff"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="21dp"
+                        android:layout_marginStart="21dp"
+                        />
+
+                </FrameLayout>
+
+            </com.andexert.library.RippleView>
+
+            <CheckBox
+                android:id="@+id/CB_selectAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:theme="@style/checkBoxStyle"
+                android:checked="false"
+                android:layout_gravity="center"
                 />
 
-        </FrameLayout>
+        </LinearLayout>
 
-        </com.andexert.library.RippleView>
+
 
     </RelativeLayout>
 

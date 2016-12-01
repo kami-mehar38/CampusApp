@@ -70,8 +70,12 @@ class NotificationsModal {
         new DeleteGroup().execute(groupName);
     }
 
-    void sendGroupRequest(String groupName, String name) {
-        new SendGroupRequest().execute(groupName, name);
+    void sendGroupRequest(String groupName, String name, String regId) {
+        new SendGroupRequest().execute(groupName, name, regId);
+    }
+
+    void sendGroupRequestResponse(String response, String regId, String groupName, String status){
+        new SendGroupRequestResponse().execute(response, regId, groupName, status);
     }
 
     private class SendEventNotification extends AsyncTask<String, Void, String> {
@@ -505,6 +509,7 @@ class NotificationsModal {
     private class SendGroupRequest extends AsyncTask<String, Void, String> {
         private String groupName;
         private String name;
+        private String regId;
         private ProgressDialog progressDialog;
         private SharedPreferences.Editor editor;
 
@@ -525,6 +530,7 @@ class NotificationsModal {
             String stringUrl = "http://hostellocator.com/sendGroupRequest.php";
             groupName = params[0];
             name = params[1];
+            regId = params[2];
             try {
                 URL url = new URL(stringUrl);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -534,7 +540,8 @@ class NotificationsModal {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
                 String data = URLEncoder.encode("groupName", "UTF-8") + "=" + URLEncoder.encode(groupName, "UTF-8") + "&" +
-                        URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8");
+                        URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8") + "&" +
+                        URLEncoder.encode("regId", "UTF-8") + "=" + URLEncoder.encode(regId, "UTF-8");
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -568,6 +575,105 @@ class NotificationsModal {
                 switch (result) {
                     case "OK": {
                         Toast.makeText(context, "Successfully sent", Toast.LENGTH_SHORT).show();
+                        editor.putBoolean("REQUESTED_FOR_" + groupName, true);
+                        editor.apply();
+                        NotificationsView.TV_requestStatus.setText("Your request has been sent, waiting for reaponse.");
+                        NotificationsView.btn_sendRequest.setVisibility(View.GONE);
+                        break;
+                    }
+                    case "ERROR": {
+                        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                    }
+                    default: {
+                        Toast.makeText(context, "Error occurred, please try again", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        }
+    }
+
+    private class SendGroupRequestResponse extends AsyncTask<String, Void, String> {
+        private String response;
+        private String regId;
+        private String groupName;
+        private String status;
+        private ProgressDialog progressDialog;
+        private SharedPreferences.Editor editor;
+        private SharedPreferences sharedPreferences;
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog = new ProgressDialog(context);
+            progressDialog.setIndeterminate(true);
+            progressDialog.setCancelable(false);
+            progressDialog.setMessage("Sending response...");
+            progressDialog.show();
+
+            sharedPreferences = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+            editor = sharedPreferences.edit();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            String stringUrl = "http://hostellocator.com/sendGroupRequestResponse.php";
+            response = params[0];
+            regId = params[1];
+            groupName = params[2];
+            status = params[3];
+
+            try {
+                URL url = new URL(stringUrl);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String data = URLEncoder.encode("response", "UTF-8") + "=" + URLEncoder.encode(response, "UTF-8") + "&" +
+                        URLEncoder.encode("regId", "UTF-8") + "=" + URLEncoder.encode(regId, "UTF-8") + "&" +
+                        URLEncoder.encode("groupName", "UTF-8") + "=" + URLEncoder.encode(groupName, "UTF-8") + "&" +
+                        URLEncoder.encode("status", "UTF-8") + "=" + URLEncoder.encode(status, "UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+                StringBuilder stringBuilder = new StringBuilder();
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(line);
+                }
+
+                JSONArray parentJSON = new JSONArray(stringBuilder.toString());
+                JSONObject finalObject = parentJSON.getJSONObject(0);
+                String RESPONSE = finalObject.getString("RESPONSE");
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return RESPONSE;
+            } catch (IOException | JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            progressDialog.cancel();
+
+            if (result != null) {
+                switch (result) {
+                    case "OK": {
+                        Toast.makeText(context, "Successfully sent", Toast.LENGTH_SHORT).show();
+                        NotificationsView.pendingGroupRequestsAdapter.removeItem(NotificationsUtills.getPosition());
+                        int badgeCount = sharedPreferences.getInt(groupName + "_REQUESTS_COUNT", 0);
+                        badgeCount--;
+                        editor.putInt(groupName + "_REQUESTS_COUNT", badgeCount);
+                        editor.apply();
+                        if (NotificationsView.TV_requestsCount != null) {
+                            NotificationsView.TV_requestsCount.setText(String.valueOf(badgeCount));
+                        }
                         break;
                     }
                     case "ERROR": {

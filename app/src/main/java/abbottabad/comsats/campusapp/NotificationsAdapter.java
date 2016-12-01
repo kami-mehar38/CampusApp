@@ -1,14 +1,19 @@
 package abbottabad.comsats.campusapp;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.amulyakhare.textdrawable.TextDrawable;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -24,8 +29,10 @@ import java.util.Locale;
  */
 class NotificationsAdapter extends ArrayAdapter<NotificationInfo> {
 
+    private static final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
     private List<NotificationInfo> chatMessageList = new ArrayList<>();
     private NotificationsView notificationsView;
+    private Context context;
 
     @Override
     public boolean isEnabled(int position) {
@@ -47,6 +54,7 @@ class NotificationsAdapter extends ArrayAdapter<NotificationInfo> {
     NotificationsAdapter(Context context, int textViewResourceId) {
         super(context, textViewResourceId);
         this.notificationsView = (NotificationsView) context;
+        this.context = context;
     }
 
     @Override
@@ -66,14 +74,26 @@ class NotificationsAdapter extends ArrayAdapter<NotificationInfo> {
     @NonNull
     public View getView(final int position, View convertView, @NonNull ViewGroup parent) {
         final NotificationInfo notificationInfo = getItem(position);
+        SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+        String me = sharedPreferences.getString("NAME", null);
         View row;
         LayoutInflater inflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if ((notificationInfo != null ? notificationInfo.getMine() : 0) == 1) {
             row = inflater.inflate(R.layout.chat_right, parent, false);
+            Character firstLetter = me != null ? me.charAt(0) : 0;
+            TextDrawable drawable = TextDrawable.builder()
+                    .buildRound(String.valueOf(firstLetter), Color.parseColor("#a59e9b"));
+            ImageView image = (ImageView) row.findViewById(R.id.IV_messageSenderName);
+            image.setImageDrawable(drawable);
         }else{
             row = inflater.inflate(R.layout.chat_left, parent, false);
             TextView TV_notificationsSender = (TextView) row.findViewById(R.id.TV_notificationSender);
-            TV_notificationsSender.setText(notificationInfo != null ? notificationInfo.getNotificationSender() : null);
+            TV_notificationsSender.setText(notificationInfo != null ? "From: " + notificationInfo.getNotificationSender() : null);
+            Character firstLetter = notificationInfo != null ? notificationInfo.getNotificationSender().charAt(0) : 0;
+            TextDrawable drawable = TextDrawable.builder()
+                    .buildRound(String.valueOf(firstLetter), Color.parseColor("#9ba3a5"));
+            ImageView image = (ImageView) row.findViewById(R.id.IV_messageSenderName);
+            image.setImageDrawable(drawable);
         }
 
         TextView TV_notification = (TextView) row.findViewById(R.id.txt_msg);
@@ -113,6 +133,7 @@ class NotificationsAdapter extends ArrayAdapter<NotificationInfo> {
                 notificationsView.updateSelection(v, position);
             }
         });
+
         return row;
     }
 

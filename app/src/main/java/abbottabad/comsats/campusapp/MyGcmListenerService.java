@@ -75,8 +75,12 @@ public class MyGcmListenerService extends GcmListenerService {
         }
 
         if (PURPOSE != null && PURPOSE.equals("GROUP_REQUEST")) {
-                receiveGroupRequest(data);
+            receiveGroupRequest(data);
 
+        }
+
+        if (PURPOSE != null && PURPOSE.equals("GROUP_REQUEST_RESPONSE")) {
+            receiveGroupRequestResponse(data);
         }
     }
 
@@ -252,7 +256,7 @@ public class MyGcmListenerService extends GcmListenerService {
         DateFormat df = new SimpleDateFormat("d MMM yyyy/h:mm a", Locale.getDefault());
         String currentDateTimeString = df.format(Calendar.getInstance().getTime());
         String message = data.getString("message");
-        String notificationSender = "From: " + data.getString("notificationSender");
+        String notificationSender = data.getString("notificationSender");
         final String notificationType = data.getString("notificationType");
         NotificationsController.setNotification(message);
         NotificationsController.setNotificationSender(notificationSender);
@@ -260,7 +264,9 @@ public class MyGcmListenerService extends GcmListenerService {
         NotificationsController.setMine(0);
         NotificationsController.setNotificationType(notificationType);
 
-        if (sharedPreferences.getBoolean(notificationType + "_EXISTS", false)) {
+        if (sharedPreferences.getBoolean(notificationType + "_EXISTS", false) &&
+                sharedPreferences.getBoolean(notificationType + "_IS_JOINED", false) ||
+                sharedPreferences.getBoolean(notificationType + "_CREATED_BY_ME", false)) {
             new NotificationsLocalModal(this).addEventNotification();
 
             /**
@@ -428,11 +434,13 @@ public class MyGcmListenerService extends GcmListenerService {
         final String currentDateTimeString = df.format(Calendar.getInstance().getTime());
         final String name = data.getString("name");
         final String notificationType = data.getString("groupName");
+        final String regId = data.getString("regId");
 
 
         if (sharedPreferences.getBoolean(notificationType + "_EXISTS", false)) {
 
             NotificationsRequestController.setName(name);
+            NotificationsRequestController.setRegId(regId);
             NotificationsRequestController.setGroupName(notificationType);
             NotificationsRequestController.setTimeStamp(currentDateTimeString);
             new NotificationsRequestsLocalModal(this).addGroupRequest();
@@ -444,6 +452,7 @@ public class MyGcmListenerService extends GcmListenerService {
                     if (NotificationsView.pendingGroupRequestsAdapter != null) {
                         PendingGroupRequestsInfo pendingGroupRequestsInfo = new PendingGroupRequestsInfo();
                         pendingGroupRequestsInfo.setName(name);
+                        pendingGroupRequestsInfo.setRegId(regId);
                         pendingGroupRequestsInfo.setGroupName(notificationType);
                         pendingGroupRequestsInfo.setTimeStamp(currentDateTimeString);
                         NotificationsView.pendingGroupRequestsAdapter.addItem(pendingGroupRequestsInfo, 0);
@@ -452,7 +461,38 @@ public class MyGcmListenerService extends GcmListenerService {
                 }
             });
 
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            int badgeCount = sharedPreferences.getInt(notificationType + "_REQUESTS_COUNT", 0);
+            badgeCount++;
+            editor.putInt(notificationType + "_REQUESTS_COUNT", badgeCount);
+            editor.apply();
+
+            final int finalBadgeCount = badgeCount;
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    if (NotificationsView.TV_requestsCount != null) {
+                        NotificationsView.TV_requestsCount.setText(String.valueOf(finalBadgeCount));
+                    }
+                }
+            });
+
             createEventNotification(name + " wants to join " + notificationType);
         }
     }
+
+    private void receiveGroupRequestResponse(Bundle data) {
+        String response = data.getString("response");
+        String groupName = data.getString("groupName");
+        Log.i("TAG", "receiveGroupRequestResponse: " + groupName);
+        String status = data.getString("status");
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        if (status != null && status.equals("Accepted")) {
+            editor.putBoolean(groupName + "_IS_JOINED", true);
+        } else if (status != null && status.equals("Rejected"))
+            editor.putBoolean(groupName + "_IS_JOINED", false);
+        editor.apply();
+        createEventNotification(response);
+    }
+
 }

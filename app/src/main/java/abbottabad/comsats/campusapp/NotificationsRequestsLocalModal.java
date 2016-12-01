@@ -20,6 +20,7 @@ class NotificationsRequestsLocalModal extends SQLiteOpenHelper {
     private static String DATABASE_NAME = "NOTIFICATIONS_REQUESTS.db";
     private static String TABLE_NAME = "NOTIFICATIONS_REQUESTS";
     private static String COL_NAME = "NAME";
+    private static String COL_REG_ID = "REG_ID";
     private static String COL_GROUP_NAME = "GROUP_NAME";
     private static String COL_DATE_TIME = "DATE_NAME";
     private SharedPreferences sharedPreferences;
@@ -38,6 +39,7 @@ class NotificationsRequestsLocalModal extends SQLiteOpenHelper {
         String createTableQuery = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " ( "
                 + SERIAL + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + COL_NAME + " TEXT,"
+                + COL_REG_ID + " TEXT,"
                 + COL_GROUP_NAME + " TEXT,"
                 + COL_DATE_TIME + " TEXT"
                 + " )";
@@ -55,18 +57,18 @@ class NotificationsRequestsLocalModal extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COL_NAME, NotificationsRequestController.getName());
+        values.put(COL_REG_ID, NotificationsRequestController.getRegId());
         values.put(COL_GROUP_NAME, NotificationsRequestController.getGroupName());
         values.put(COL_DATE_TIME, NotificationsRequestController.getTimeStamp());
         db.insert(TABLE_NAME, null, values);
         db.close();
     }
 
-    void deleteGroupRequest(String name) {
+    void deleteGroupRequest(String regId, String groupName) {
         SQLiteDatabase db = NotificationsRequestsLocalModal.this.getWritableDatabase();
-        db.delete(TABLE_NAME, COL_NAME + " = ?", new String[]{name});
+        db.delete(TABLE_NAME, COL_REG_ID + " = ? AND " + COL_GROUP_NAME + " = ?", new String[]{regId, groupName});
         db.close();
     }
-
 
     void retrieveGroupRequest(String notification_type) {
 
@@ -79,7 +81,8 @@ class NotificationsRequestsLocalModal extends SQLiteOpenHelper {
         while (!cursor.isAfterLast()) {
             pendingGroupRequests[cursor.getPosition()] = new PendingGroupRequestsInfo();
             pendingGroupRequests[cursor.getPosition()].setName(cursor.getString(1));
-            pendingGroupRequests[cursor.getPosition()].setTimeStamp(cursor.getString(2));
+            pendingGroupRequests[cursor.getPosition()].setRegId(cursor.getString(2));
+            pendingGroupRequests[cursor.getPosition()].setTimeStamp(cursor.getString(3));
             pendingGroupRequestsInfos.add(pendingGroupRequests[cursor.getPosition()]);
             cursor.moveToNext();
         }

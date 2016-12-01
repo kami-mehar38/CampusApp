@@ -7,6 +7,7 @@ package abbottabad.comsats.campusapp;
 class PendingGroupRequestsInfo {
 
     private String name;
+    private String regId;
     private String timeStamp;
     private String groupName;
 
@@ -14,7 +15,15 @@ class PendingGroupRequestsInfo {
         return groupName;
     }
 
-    public void setGroupName(String groupName) {
+    String getRegId() {
+        return regId;
+    }
+
+    void setRegId(String regId) {
+        this.regId = regId;
+    }
+
+    void setGroupName(String groupName) {
         this.groupName = groupName;
     }
 
@@ -22,7 +31,7 @@ class PendingGroupRequestsInfo {
         return timeStamp;
     }
 
-    public void setTimeStamp(String timeStamp) {
+    void setTimeStamp(String timeStamp) {
         this.timeStamp = timeStamp;
     }
 
