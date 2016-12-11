@@ -5,9 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,8 +40,8 @@ class TrackFacultyModal {
         this.context = context;
     }
 
-    void retrieveStatus(RecyclerView recyclerView, SwipeRefreshLayout SRL_facultyStatus, TextView TV_myStatus, String TEACHER_ID){
-        new RetrieveStatus(recyclerView, SRL_facultyStatus, TV_myStatus).execute(TEACHER_ID);
+    void retrieveStatus(String TEACHER_ID){
+        new RetrieveStatus().execute(TEACHER_ID);
     }
 
     void updateStatus(String status, String teacher_id, TextView TV_myStatus){
@@ -53,16 +51,7 @@ class TrackFacultyModal {
     private class RetrieveStatus extends AsyncTask<String, Void, List<StatusInfo>> {
 
         private ProgressDialog progressDialog;
-        private RecyclerView recyclerView;
-        private SwipeRefreshLayout swipeRefreshLayout;
-        private TextView textView;
         private String APPLICATION_STATUS;
-
-        RetrieveStatus(RecyclerView recyclerView, SwipeRefreshLayout SRL_facultyStatus, TextView TV_myStatus) {
-            this.recyclerView = recyclerView;
-            this.swipeRefreshLayout = SRL_facultyStatus;
-            this.textView = TV_myStatus;
-        }
 
         @Override
         protected void onPreExecute() {
@@ -75,7 +64,7 @@ class TrackFacultyModal {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             cancel(true);
-                            swipeRefreshLayout.setRefreshing(false);
+                            TrackFacultyView.SRL_facultyStatus.setRefreshing(false);
                         }
                     });
             progressDialog.show();
@@ -147,18 +136,18 @@ class TrackFacultyModal {
         @Override
         protected void onPostExecute(List<StatusInfo> s) {
             progressDialog.cancel();
+            TrackFacultyView.SRL_facultyStatus.setRefreshing(false);
             if (s != null) {
                 if (APPLICATION_STATUS.equals("TEACHER")) {
                     StatusInfo statusInfo = s.get(0);
                     s.remove(0);
-                    textView.setText(statusInfo.getStatus());
+                    TrackFacultyView.TV_myStatus.setText(statusInfo.getStatus());
                 }
                 TrackFacultyView.statusInfoList = s;
                 StatusViewAdapter statusViewAdapter = new StatusViewAdapter(s);
                 ScaleInAnimationAdapter scaleInAnimationAdapter = new ScaleInAnimationAdapter(statusViewAdapter);
                 scaleInAnimationAdapter.setFirstOnly(false);
-                recyclerView.setAdapter(scaleInAnimationAdapter);
-                swipeRefreshLayout.setRefreshing(false);
+                TrackFacultyView.recyclerView.setAdapter(scaleInAnimationAdapter);
 
             } else {
                 Toast.makeText(context, "Couldn't retrieve information.", Toast.LENGTH_LONG).show();

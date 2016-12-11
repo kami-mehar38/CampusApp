@@ -271,7 +271,7 @@ public class MyGcmListenerService extends GcmListenerService {
 
             /**
              * Below is the code to set the message counter of a specific group
-             * It show the number of unread messages
+             * It shows the number of unread messages
              */
 
             int badgeCount = sharedPreferences.getInt(notificationType + "_COUNT", 0);

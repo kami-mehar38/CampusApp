@@ -18,4 +18,37 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <!-- Year Precise -->
+    <style name="Theme.SwitchDateTime.DateLabelYear">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Month and day Precise -->
+    <style name="Theme.SwitchDateTime.DateLabelMonthAndDay">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">#fff</item>
+    </style>
+
+    <!-- am and pm Precise -->
+    <style name="Theme.SwitchDateTime.TimeLabelAmPm">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Time Precise -->
+    <style name="Theme.SwitchDateTime.TimeLabelText">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">#fff</item>
+    </style>
+
+    <!-- Title Precise -->
+    <style name="Theme.SwitchDateTime.TitleDateTimeLabelText">
+        <item name="android:textSize">26sp</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>
