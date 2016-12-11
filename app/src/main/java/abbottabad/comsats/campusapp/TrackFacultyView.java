@@ -46,6 +46,7 @@ import java.util.Locale;
 /**
  * This project CampusApp is created by Kamran Ramzan on 8/15/16.
  */
+
 public class TrackFacultyView extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     private static final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
@@ -376,8 +377,10 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
         switch (buttonView.getId()) {
             case R.id.SW_autoReset: {
                 if (!isChecked) {
+                    buttonView.setTextColor(Color.parseColor("#7f7f7f"));
                     LL_autoReset.setVisibility(View.GONE);
                 } else {
+                    buttonView.setTextColor(Color.parseColor("#000000"));
                     LL_autoReset.setVisibility(View.VISIBLE);
                 }
                 break;
