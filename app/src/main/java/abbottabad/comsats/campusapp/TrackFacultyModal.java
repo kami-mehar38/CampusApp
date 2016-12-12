@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -44,8 +43,12 @@ class TrackFacultyModal {
         new RetrieveStatus().execute(TEACHER_ID);
     }
 
-    void updateStatus(String status, String teacher_id, TextView TV_myStatus){
-        new UpdateStatus(TV_myStatus).execute(status, teacher_id);
+    void updateStatus(String status, String teacher_id){
+        new UpdateStatus().execute(status, teacher_id);
+    }
+
+    void sendStatusNotification(String status, String teacher_id){
+        new sendStatusNotification().execute(teacher_id, status);
     }
 
     private class RetrieveStatus extends AsyncTask<String, Void, List<StatusInfo>> {
@@ -159,13 +162,8 @@ class TrackFacultyModal {
 
         private ProgressDialog progressDialog;
         private AlertDialog alertDialog;
-        private TextView textView;
         private String status;
         private String teacher_id;
-
-        UpdateStatus(TextView TV_myStatus) {
-            this.textView = TV_myStatus;
-        }
 
         @Override
         protected void onPreExecute() {
@@ -236,7 +234,7 @@ class TrackFacultyModal {
             switch (result) {
                 case "UPDATED": {
                     Toast.makeText(context, "Status is successfully updated!", Toast.LENGTH_LONG).show();
-                    textView.setText(status);
+                    TrackFacultyView.TV_myStatus.setText(status);
                     new sendStatusNotification().execute(teacher_id, status);
                     break;
                 }

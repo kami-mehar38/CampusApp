@@ -1,6 +1,9 @@
 package abbottabad.comsats.campusapp;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -33,6 +36,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.andexert.library.RippleView;
 import com.kunzisoft.switchdatetime.SwitchDateTimeDialogFragment;
 
 import java.text.ParseException;
@@ -47,7 +51,7 @@ import java.util.Locale;
  * This project CampusApp is created by Kamran Ramzan on 8/15/16.
  */
 
-public class TrackFacultyView extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+public class TrackFacultyView extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener, RippleView.OnRippleCompleteListener {
 
     private static final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
     public static SwipeRefreshLayout SRL_facultyStatus;
@@ -57,6 +61,7 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
     private SharedPreferences sharedPreferences;
     private AlertDialog alertDialog;
     private String status;
+    private String teacherStatus;
     public static List<StatusInfo> statusInfoList;
     private LinearLayoutManager layoutManager;
     public static ImageView imageView;
@@ -83,16 +88,12 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
         recyclerView.addItemDecoration(new RecyclerViewDivider(this));
 
         imageView = (ImageView) findViewById(R.id.timetable);
-
         TV_myStatus = (TextView) findViewById(R.id.TV_myStatus);
         sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         final String APPLICATION_STATUS = sharedPreferences.getString("APPLICATION_STATUS", "NULL");
-        String[] STATUS_LIST = new String[]{
-                "Available",
-                "Busy",
-                "On Leave"};
 
         int selectedStatus = sharedPreferences.getInt("SELECTED_STATUS", 0);
+        TEACHER_ID = sharedPreferences.getString("REG_ID", null);
         editor = sharedPreferences.edit();
 
         /*AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -103,7 +104,7 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
                 editor = sharedPreferences.edit();
                 editor.putInt("SELECTED_STATUS", which);
                 editor.apply();
-                TEACHER_ID = sharedPreferences.getString("REG_ID", null);
+
                 status = alertDialog.getListView().getItemAtPosition(which).toString();
 
             }
@@ -145,11 +146,14 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
         }
 
         SPstatus = (Spinner) view.findViewById(R.id.SPstatus);
+        populateSpinner(SPstatus);
+        SPstatus.setSelection(sharedPreferences.getInt("RESET_OPTION", 0));
         SPstatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 editor.putInt("RESET_OPTION", position);
                 editor.apply();
+                status = SPstatus.getSelectedItem().toString().trim();
             }
 
             @Override
@@ -157,8 +161,9 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
 
             }
         });
-        populateSpinner(SPstatus);
-        SPstatus.setSelection(sharedPreferences.getInt("RESET_OPTION", 0));
+
+        RippleView BTN_ok = (RippleView) view.findViewById(R.id.BTN_ok);
+        BTN_ok.setOnRippleCompleteListener(this);
 
         TextView TV_dateTime = (TextView) view.findViewById(R.id.TV_dateTime);
         TV_dateTime.setOnClickListener(this);
@@ -180,7 +185,6 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
             }
         });
 
-
         if (APPLICATION_STATUS.equals("TEACHER")) {
             TEACHER_ID = sharedPreferences.getString("REG_ID", null);
             Toast.makeText(this, TEACHER_ID, Toast.LENGTH_LONG).show();
@@ -192,6 +196,7 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
             TV_myStatus.setVisibility(View.GONE);
             new TrackFacultyModal(this).retrieveStatus("ALL");
         }
+
         SRL_facultyStatus = (SwipeRefreshLayout) findViewById(R.id.SRL_facultyStatus);
         SRL_facultyStatus.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -269,7 +274,7 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
         // Assign values
         dateTimeDialogFragment.startAtTimeView();
         dateTimeDialogFragment.set24HoursMode(false);
-        dateTimeDialogFragment.setDefaultHourOfDay(calendar.get(Calendar.HOUR));
+        dateTimeDialogFragment.setDefaultHourOfDay(calendar.get(Calendar.HOUR_OF_DAY));
         dateTimeDialogFragment.setDefaultMinute(calendar.get(Calendar.MINUTE));
         dateTimeDialogFragment.setDefaultDay(calendar.get(Calendar.DATE));
         dateTimeDialogFragment.setDefaultMonth(calendar.get(Calendar.MONTH));
@@ -284,9 +289,14 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
 
         // Set listener
         dateTimeDialogFragment.setOnButtonClickListener(new SwitchDateTimeDialogFragment.OnButtonClickListener() {
+
             @Override
             public void onPositiveButtonClick(Date date) {
-                Toast.makeText(TrackFacultyView.this, String.valueOf(date.getMonth()), Toast.LENGTH_SHORT).show();
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(date);
+                setAutoReset(86, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+                        calendar.get(Calendar.DATE), calendar.get(Calendar.HOUR_OF_DAY),
+                        calendar.get(Calendar.MINUTE), calendar.get(Calendar.SECOND));
             }
 
             @Override
@@ -296,8 +306,27 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
         });
 
         // Show
-
         dateTimeDialogFragment.show(this.getSupportFragmentManager(), "dialog_time");
+    }
+
+    private void setAutoReset(int id, int year, int month, int date, int hours, int minutes, int seconds) {
+        Toast.makeText(TrackFacultyView.this, "Auto reset on", Toast.LENGTH_SHORT).show();
+        Intent alarmIntent = new Intent(this, StatusResetReceiver.class);
+        alarmIntent.putExtra("STATUS", status);
+        alarmIntent.putExtra("TEACHER_ID", TEACHER_ID);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, id, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, date, hours, minutes, seconds);
+
+        //check whether the time is earlier than current time. If so, set it to next day.
+        Calendar now = Calendar.getInstance();
+        if (calendar.before(now)) {
+            calendar.add(Calendar.DATE, 1);
+            Toast.makeText(TrackFacultyView.this, "Before", Toast.LENGTH_SHORT).show();
+        }
+        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
     }
 
     void populateSpinner(Spinner SPloginOptions) {
@@ -345,6 +374,7 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
                     CB_onLeave.setChecked(false);
                 editor.putInt("SELECTED_STATUS", 0);
                 editor.apply();
+                teacherStatus = "Available";
                 break;
             }
             case R.id.CB_busy: {
@@ -354,6 +384,7 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
                     CB_onLeave.setChecked(false);
                 editor.putInt("SELECTED_STATUS", 1);
                 editor.apply();
+                teacherStatus = "Busy";
                 break;
             }
             case R.id.CB_onLeave: {
@@ -363,6 +394,7 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
                     CB_available.setChecked(false);
                 editor.putInt("SELECTED_STATUS", 2);
                 editor.apply();
+                teacherStatus = "On Leave";
                 break;
             }
             case R.id.TV_dateTime: {
@@ -383,6 +415,18 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
                     buttonView.setTextColor(Color.parseColor("#000000"));
                     LL_autoReset.setVisibility(View.VISIBLE);
                 }
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void onComplete(RippleView rippleView) {
+        switch (rippleView.getId()){
+            case R.id.BTN_ok: {
+                alertDialog.cancel();
+                Toast.makeText(TrackFacultyView.this, status, Toast.LENGTH_SHORT).show();
+                new TrackFacultyModal(TrackFacultyView.this).updateStatus(teacherStatus, TEACHER_ID);
                 break;
             }
         }

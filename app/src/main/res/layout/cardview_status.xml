@@ -9,7 +9,8 @@
         rv_centered="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:rv_color="#a6cd96">
+        app:rv_color="#a6cd96"
+        app:rv_rippleDuration="150">
 
         <RelativeLayout
             android:id="@+id/cardView"
