@@ -2407,7 +2407,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                     String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
                     String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
                     if (!subject.isEmpty()) {
-                        handleNotification(26, subject, room, 2, 16, 30, 0);
+                        handleNotification(26, subject, room, 2, 20, 13, 0);
                         editor.putBoolean("SLOT26_CHECKED", true);
                         editor.apply();
                     }
@@ -2754,6 +2754,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, id, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
         switch (day) {
             case 1: {
                 calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
@@ -2786,6 +2787,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
         Calendar now = Calendar.getInstance();
         if (calendar.before(now)) {
             calendar.add(Calendar.DATE, 7);
+            Toast.makeText(TimeTableView.this, "In Past", Toast.LENGTH_SHORT).show();
         }
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 7, pendingIntent);
     }

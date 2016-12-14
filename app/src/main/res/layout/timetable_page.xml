@@ -126,8 +126,6 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="-2dp"
-                        android:layout_marginTop="2dp"
                         android:background="@drawable/timetable_header_background"
                         android:padding="12dp">
 
@@ -143,7 +141,7 @@
                     <RelativeLayout
                         android:id="@+id/slot11"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -156,7 +154,8 @@
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="normal"
-
+                            android:maxLines="1"
+                            android:ellipsize="end"
                             />
 
                         <TextView
@@ -200,7 +199,7 @@
                     <RelativeLayout
                         android:id="@+id/slot12"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -212,7 +211,9 @@
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal" />
+                            android:textStyle="normal"
+                            android:maxLines="1"
+                            android:ellipsize="end"/>
 
                         <TextView
                             android:id="@+id/slot2Teacher"
@@ -253,7 +254,7 @@
                     <RelativeLayout
                         android:id="@+id/slot13"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -265,7 +266,9 @@
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal" />
+                            android:textStyle="normal"
+                            android:maxLines="1"
+                            android:ellipsize="end"/>
 
                         <TextView
                             android:id="@+id/slot3Teacher"
@@ -306,7 +309,7 @@
                     <RelativeLayout
                         android:id="@+id/slot14"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -318,7 +321,9 @@
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal" />
+                            android:textStyle="normal"
+                            android:maxLines="1"
+                            android:ellipsize="end"/>
 
                         <TextView
                             android:id="@+id/slot4Teacher"
@@ -360,7 +365,7 @@
                     <RelativeLayout
                         android:id="@+id/slot15"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -372,7 +377,9 @@
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal" />
+                            android:textStyle="normal"
+                            android:maxLines="1"
+                            android:ellipsize="end"/>
 
                         <TextView
                             android:id="@+id/slot5Teacher"
@@ -413,7 +420,7 @@
                     <RelativeLayout
                         android:id="@+id/slot16"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -425,7 +432,9 @@
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal" />
+                            android:textStyle="normal"
+                            android:maxLines="1"
+                            android:ellipsize="end"/>
 
                         <TextView
                             android:id="@+id/slot6Teacher"
@@ -466,7 +475,7 @@
                     <RelativeLayout
                         android:id="@+id/slot17"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -478,7 +487,9 @@
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal" />
+                            android:textStyle="normal"
+                            android:maxLines="1"
+                            android:ellipsize="end"/>
 
                         <TextView
                             android:id="@+id/slot7Teacher"
@@ -519,7 +530,7 @@
                     <RelativeLayout
                         android:id="@+id/slot18"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -531,7 +542,9 @@
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal" />
+                            android:textStyle="normal"
+                            android:maxLines="1"
+                            android:ellipsize="end"/>
 
                         <TextView
                             android:id="@+id/slot8Teacher"
@@ -579,8 +592,6 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="-2dp"
-                        android:layout_marginTop="2dp"
                         android:background="@drawable/timetable_header_background"
                         android:padding="12dp">
 
@@ -596,7 +607,7 @@
                     <RelativeLayout
                         android:id="@+id/slot21"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -608,7 +619,9 @@
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal" />
+                            android:textStyle="normal"
+                            android:maxLines="1"
+                            android:ellipsize="end"/>
 
                         <TextView
                             android:id="@+id/slot9Teacher"
@@ -649,7 +662,7 @@
                     <RelativeLayout
                         android:id="@+id/slot22"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -661,7 +674,9 @@
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal" />
+                            android:textStyle="normal"
+                            android:maxLines="1"
+                            android:ellipsize="end"/>
 
                         <TextView
                             android:id="@+id/slot10Teacher"
@@ -702,7 +717,7 @@
                     <RelativeLayout
                         android:id="@+id/slot23"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -714,7 +729,9 @@
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal" />
+                            android:textStyle="normal"
+                            android:maxLines="1"
+                            android:ellipsize="end"/>
 
                         <TextView
                             android:id="@+id/slot11Teacher"
@@ -755,7 +772,7 @@
                     <RelativeLayout
                         android:id="@+id/slot24"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -767,7 +784,9 @@
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal" />
+                            android:textStyle="normal"
+                            android:maxLines="1"
+                            android:ellipsize="end"/>
 
                         <TextView
                             android:id="@+id/slot12Teacher"
@@ -808,7 +827,7 @@
                     <RelativeLayout
                         android:id="@+id/slot25"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -820,7 +839,9 @@
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal" />
+                            android:textStyle="normal"
+                            android:maxLines="1"
+                            android:ellipsize="end"/>
 
                         <TextView
                             android:id="@+id/slot13Teacher"
@@ -861,7 +882,7 @@
                     <RelativeLayout
                         android:id="@+id/slot26"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -873,7 +894,9 @@
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal" />
+                            android:textStyle="normal"
+                            android:maxLines="1"
+                            android:ellipsize="end"/>
 
                         <TextView
                             android:id="@+id/slot14Teacher"
@@ -914,7 +937,7 @@
                     <RelativeLayout
                         android:id="@+id/slot27"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -926,7 +949,9 @@
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal" />
+                            android:textStyle="normal"
+                            android:maxLines="1"
+                            android:ellipsize="end"/>
 
                         <TextView
                             android:id="@+id/slot15Teacher"
@@ -968,7 +993,7 @@
                     <RelativeLayout
                         android:id="@+id/slot28"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -980,7 +1005,9 @@
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal" />
+                            android:textStyle="normal"
+                            android:maxLines="1"
+                            android:ellipsize="end"/>
 
                         <TextView
                             android:id="@+id/slot16Teacher"
@@ -1027,8 +1054,6 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="-2dp"
-                        android:layout_marginTop="2dp"
                         android:background="@drawable/timetable_header_background"
                         android:padding="12dp">
 
@@ -1044,7 +1069,7 @@
                     <RelativeLayout
                         android:id="@+id/slot31"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -1057,7 +1082,8 @@
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="normal"
-
+                            android:maxLines="1"
+                            android:ellipsize="end"
                             />
 
                         <TextView
@@ -1101,7 +1127,7 @@
                     <RelativeLayout
                         android:id="@+id/slot32"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -1114,7 +1140,8 @@
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="normal"
-
+                            android:maxLines="1"
+                            android:ellipsize="end"
                             />
 
                         <TextView
@@ -1158,7 +1185,7 @@
                     <RelativeLayout
                         android:id="@+id/slot33"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -1171,7 +1198,8 @@
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="normal"
-
+                            android:maxLines="1"
+                            android:ellipsize="end"
                             />
 
                         <TextView
@@ -1215,7 +1243,7 @@
                     <RelativeLayout
                         android:id="@+id/slot34"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -1228,7 +1256,8 @@
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="normal"
-
+                            android:maxLines="1"
+                            android:ellipsize="end"
                             />
 
                         <TextView
@@ -1272,7 +1301,7 @@
                     <RelativeLayout
                         android:id="@+id/slot35"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -1285,7 +1314,8 @@
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="normal"
-
+                            android:maxLines="1"
+                            android:ellipsize="end"
                             />
 
                         <TextView
@@ -1329,7 +1359,7 @@
                     <RelativeLayout
                         android:id="@+id/slot36"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -1342,7 +1372,8 @@
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="normal"
-
+                            android:maxLines="1"
+                            android:ellipsize="end"
                             />
 
                         <TextView
@@ -1386,7 +1417,7 @@
                     <RelativeLayout
                         android:id="@+id/slot37"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -1399,7 +1430,8 @@
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="normal"
-
+                            android:maxLines="1"
+                            android:ellipsize="end"
                             />
 
                         <TextView
@@ -1443,7 +1475,7 @@
                     <RelativeLayout
                         android:id="@+id/slot38"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -1456,7 +1488,8 @@
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="normal"
-
+                            android:maxLines="1"
+                            android:ellipsize="end"
                             />
 
                         <TextView
@@ -1507,8 +1540,6 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="-2dp"
-                        android:layout_marginTop="2dp"
                         android:background="@drawable/timetable_header_background"
                         android:padding="12dp">
 
@@ -1524,7 +1555,7 @@
                     <RelativeLayout
                         android:id="@+id/slot41"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -1537,7 +1568,8 @@
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="normal"
-
+                            android:maxLines="1"
+                            android:ellipsize="end"
                             />
 
                         <TextView
@@ -1581,7 +1613,7 @@
                     <RelativeLayout
                         android:id="@+id/slot42"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -1594,7 +1626,8 @@
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="normal"
-
+                            android:maxLines="1"
+                            android:ellipsize="end"
                             />
 
                         <TextView
@@ -1638,7 +1671,7 @@
                     <RelativeLayout
                         android:id="@+id/slot43"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -1651,7 +1684,8 @@
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="normal"
-
+                            android:maxLines="1"
+                            android:ellipsize="end"
                             />
 
                         <TextView
@@ -1695,7 +1729,7 @@
                     <RelativeLayout
                         android:id="@+id/slot44"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -1708,7 +1742,8 @@
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="normal"
-
+                            android:maxLines="1"
+                            android:ellipsize="end"
                             />
 
                         <TextView
@@ -1751,7 +1786,7 @@
                     <RelativeLayout
                         android:id="@+id/slot45"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -1764,7 +1799,8 @@
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="normal"
-
+                            android:maxLines="1"
+                            android:ellipsize="end"
                             />
 
                         <TextView
@@ -1808,7 +1844,7 @@
                     <RelativeLayout
                         android:id="@+id/slot46"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -1821,7 +1857,8 @@
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="normal"
-
+                            android:maxLines="1"
+                            android:ellipsize="end"
                             />
 
                         <TextView
@@ -1865,7 +1902,7 @@
                     <RelativeLayout
                         android:id="@+id/slot47"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -1878,7 +1915,8 @@
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="normal"
-
+                            android:maxLines="1"
+                            android:ellipsize="end"
                             />
 
                         <TextView
@@ -1922,7 +1960,7 @@
                     <RelativeLayout
                         android:id="@+id/slot48"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -1935,7 +1973,8 @@
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="normal"
-
+                            android:maxLines="1"
+                            android:ellipsize="end"
                             />
 
                         <TextView
@@ -1986,8 +2025,6 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="-2dp"
-                        android:layout_marginTop="2dp"
                         android:background="@drawable/timetable_header_background"
                         android:padding="12dp">
 
@@ -2003,7 +2040,7 @@
                     <RelativeLayout
                         android:id="@+id/slot51"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -2016,7 +2053,8 @@
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="normal"
-
+                            android:maxLines="1"
+                            android:ellipsize="end"
                             />
 
                         <TextView
@@ -2060,7 +2098,7 @@
                     <RelativeLayout
                         android:id="@+id/slot52"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -2073,7 +2111,8 @@
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="normal"
-
+                            android:maxLines="1"
+                            android:ellipsize="end"
                             />
 
                         <TextView
@@ -2117,7 +2156,7 @@
                     <RelativeLayout
                         android:id="@+id/slot53"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -2130,7 +2169,8 @@
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="normal"
-
+                            android:maxLines="1"
+                            android:ellipsize="end"
                             />
 
                         <TextView
@@ -2174,7 +2214,7 @@
                     <RelativeLayout
                         android:id="@+id/slot54"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -2187,7 +2227,8 @@
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="normal"
-
+                            android:maxLines="1"
+                            android:ellipsize="end"
                             />
 
                         <TextView
@@ -2231,7 +2272,7 @@
                     <RelativeLayout
                         android:id="@+id/slot55"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -2244,7 +2285,8 @@
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="normal"
-
+                            android:maxLines="1"
+                            android:ellipsize="end"
                             />
 
                         <TextView
@@ -2288,7 +2330,7 @@
                     <RelativeLayout
                         android:id="@+id/slot56"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -2301,7 +2343,8 @@
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="normal"
-
+                            android:maxLines="1"
+                            android:ellipsize="end"
                             />
 
                         <TextView
@@ -2345,7 +2388,7 @@
                     <RelativeLayout
                         android:id="@+id/slot57"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -2358,7 +2401,8 @@
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="normal"
-
+                            android:maxLines="1"
+                            android:ellipsize="end"
                             />
 
                         <TextView
@@ -2402,7 +2446,7 @@
                     <RelativeLayout
                         android:id="@+id/slot58"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/timetable_slot_unchecked"
                         android:padding="12dp">
 
@@ -2415,7 +2459,8 @@
                             android:textColor="#fff"
                             android:textSize="14sp"
                             android:textStyle="normal"
-
+                            android:maxLines="1"
+                            android:ellipsize="end"
                             />
 
                         <TextView

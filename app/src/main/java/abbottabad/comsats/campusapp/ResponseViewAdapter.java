@@ -64,11 +64,21 @@ class ResponseViewAdapter extends RecyclerView.Adapter <ResponseViewAdapter.View
     public void add(ResponseInfo responseInfo, int position){
         responseInfoList.add(position,responseInfo);
         notifyItemInserted(position);
+        if (BloodRequestResponseFragment.TV_noResponse != null){
+            if (getItemCount() > 0){
+                BloodRequestResponseFragment.TV_noResponse.setVisibility(View.GONE);
+            }
+        }
     }
 
     private void remove(int position) {
         responseInfoList.remove(position);
         notifyItemRemoved(position);
+        if (BloodRequestResponseFragment.TV_noResponse != null){
+            if (getItemCount() == 0){
+                BloodRequestResponseFragment.TV_noResponse.setVisibility(View.VISIBLE);
+            }
+        }
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{

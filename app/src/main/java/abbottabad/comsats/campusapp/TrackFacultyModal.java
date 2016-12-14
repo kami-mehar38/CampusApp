@@ -39,16 +39,12 @@ class TrackFacultyModal {
         this.context = context;
     }
 
-    void retrieveStatus(String TEACHER_ID){
+    void retrieveStatus(String TEACHER_ID) {
         new RetrieveStatus().execute(TEACHER_ID);
     }
 
-    void updateStatus(String status, String teacher_id){
+    void updateStatus(String status, String teacher_id) {
         new UpdateStatus().execute(status, teacher_id);
-    }
-
-    void sendStatusNotification(String status, String teacher_id){
-        new sendStatusNotification().execute(teacher_id, status);
     }
 
     private class RetrieveStatus extends AsyncTask<String, Void, List<StatusInfo>> {
@@ -82,57 +78,57 @@ class TrackFacultyModal {
             List<StatusInfo> statusInfoList = new ArrayList<>();
             String TEACHER_ID = params[0];
 
-                try {
-                    URL url = new URL(stringUrl);
-                    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                    httpURLConnection.setRequestMethod("POST");
-                    httpURLConnection.setDoOutput(true);
+            try {
+                URL url = new URL(stringUrl);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
 
-                    OutputStream outputStream = httpURLConnection.getOutputStream();
-                    BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                    String data = URLEncoder.encode("TEACHER_ID", "UTF-8") + "=" + URLEncoder.encode(TEACHER_ID, "UTF-8");
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String data = URLEncoder.encode("TEACHER_ID", "UTF-8") + "=" + URLEncoder.encode(TEACHER_ID, "UTF-8");
 
-                    bufferedWriter.write(data);
-                    bufferedWriter.flush();
-                    bufferedWriter.close();
-                    outputStream.close();
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
 
-                    InputStream inputStream = httpURLConnection.getInputStream();
-                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
-                    StringBuilder stringBuilder = new StringBuilder();
-                    String line;
-                    while ((line = bufferedReader.readLine()) != null) {
-                        stringBuilder.append(line);
-                    }
-                    JSONObject parentObject = new JSONObject(stringBuilder.toString());
-                    JSONArray othersArray = parentObject.getJSONArray("others");
-
-                    statusInfo = new StatusInfo[othersArray.length()];
-                    for (int index = 0; index < othersArray.length(); index++) {
-                        JSONObject finalObject = othersArray.getJSONObject(index);
-                        statusInfo[index] = new StatusInfo();
-                        statusInfo[index].setTeacherName(finalObject.getString("name"));
-                        statusInfo[index].setTeacherRegistration(finalObject.getString("reg_id"));
-                        statusInfo[index].setStatus(finalObject.getString("status"));
-                        statusInfo[index].setMode(finalObject.getString("timetable"));
-                        statusInfoList.add(statusInfo[index]);
-                    }
-
-
-                    if (APPLICATION_STATUS.equals("TEACHER")) {
-                        JSONArray myArray = parentObject.getJSONArray("my");
-                        JSONObject finalObject = myArray.getJSONObject(0);
-                        StatusInfo statusInfo1 = new StatusInfo();
-                        statusInfo1.setTeacherName(finalObject.getString("name"));
-                        statusInfo1.setStatus(finalObject.getString("status"));
-                        statusInfoList.add(0, statusInfo1);
-                    }
-                    inputStream.close();
-                    httpURLConnection.disconnect();
-                    return statusInfoList;
-                } catch (IOException | JSONException e) {
-                    e.printStackTrace();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+                StringBuilder stringBuilder = new StringBuilder();
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(line);
                 }
+                JSONObject parentObject = new JSONObject(stringBuilder.toString());
+                JSONArray othersArray = parentObject.getJSONArray("others");
+
+                statusInfo = new StatusInfo[othersArray.length()];
+                for (int index = 0; index < othersArray.length(); index++) {
+                    JSONObject finalObject = othersArray.getJSONObject(index);
+                    statusInfo[index] = new StatusInfo();
+                    statusInfo[index].setTeacherName(finalObject.getString("name"));
+                    statusInfo[index].setTeacherRegistration(finalObject.getString("reg_id"));
+                    statusInfo[index].setStatus(finalObject.getString("status"));
+                    statusInfo[index].setMode(finalObject.getString("timetable"));
+                    statusInfoList.add(statusInfo[index]);
+                }
+
+
+                if (APPLICATION_STATUS.equals("TEACHER")) {
+                    JSONArray myArray = parentObject.getJSONArray("my");
+                    JSONObject finalObject = myArray.getJSONObject(0);
+                    StatusInfo statusInfo1 = new StatusInfo();
+                    statusInfo1.setTeacherName(finalObject.getString("name"));
+                    statusInfo1.setStatus(finalObject.getString("status"));
+                    statusInfoList.add(0, statusInfo1);
+                }
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return statusInfoList;
+            } catch (IOException | JSONException e) {
+                e.printStackTrace();
+            }
             return null;
         }
 
@@ -164,22 +160,25 @@ class TrackFacultyModal {
         private AlertDialog alertDialog;
         private String status;
         private String teacher_id;
+        private SharedPreferences sharedPreferences;
 
         @Override
         protected void onPreExecute() {
-            progressDialog = new ProgressDialog(context);
-            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            progressDialog.setMessage("Updating your status...");
-            progressDialog.setCancelable(false);
-            progressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel",
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            cancel(true);
-                        }
-                    });
-            progressDialog.show();
-
+            sharedPreferences = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+            if (sharedPreferences.getBoolean("SHOW_PROGRESS", true)) {
+                progressDialog = new ProgressDialog(context);
+                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progressDialog.setMessage("Updating your status...");
+                progressDialog.setCancelable(false);
+                progressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                cancel(true);
+                            }
+                        });
+                progressDialog.show();
+            }
         }
 
         @Override
@@ -195,8 +194,8 @@ class TrackFacultyModal {
 
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String data = URLEncoder.encode("status", "UTF-8") +"="+ URLEncoder.encode(status, "UTF-8") +"&"+
-                        URLEncoder.encode("reg_id", "UTF-8") +"="+ URLEncoder.encode(teacher_id, "UTF-8");
+                String data = URLEncoder.encode("status", "UTF-8") + "=" + URLEncoder.encode(status, "UTF-8") + "&" +
+                        URLEncoder.encode("reg_id", "UTF-8") + "=" + URLEncoder.encode(teacher_id, "UTF-8");
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -205,7 +204,7 @@ class TrackFacultyModal {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
                 StringBuilder stringBuilder = new StringBuilder();
                 String line;
-                while ((line = bufferedReader.readLine()) != null){
+                while ((line = bufferedReader.readLine()) != null) {
                     stringBuilder.append(line);
                 }
                 JSONArray parentJSON = new JSONArray(stringBuilder.toString());
@@ -223,7 +222,10 @@ class TrackFacultyModal {
 
         @Override
         protected void onPostExecute(String result) {
-            progressDialog.cancel();
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            if (sharedPreferences.getBoolean("SHOW_PROGRESS", false)) {
+                progressDialog.cancel();
+            }
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
@@ -234,7 +236,22 @@ class TrackFacultyModal {
             switch (result) {
                 case "UPDATED": {
                     Toast.makeText(context, "Status is successfully updated!", Toast.LENGTH_LONG).show();
-                    TrackFacultyView.TV_myStatus.setText(status);
+                    switch (status) {
+                        case "Available":
+                            editor.putInt("SELECTED_STATUS", 0);
+                            break;
+                        case "Busy":
+                            editor.putInt("SELECTED_STATUS", 1);
+                            break;
+                        case "On Leave":
+                            editor.putInt("SELECTED_STATUS", 2);
+                            break;
+                    }
+                    editor.putString("CURRENT_STATUS", status);
+                    editor.putBoolean("SHOW_PROGRESS", false);
+                    editor.apply();
+                    if (TrackFacultyView.TV_myStatus != null)
+                        TrackFacultyView.TV_myStatus.setText(status);
                     new sendStatusNotification().execute(teacher_id, status);
                     break;
                 }
@@ -260,7 +277,7 @@ class TrackFacultyModal {
         protected String doInBackground(String... params) {
             String stringUrl = "http://hostellocator.com/sendStatusNotification.php";
             String teacher_id = params[0];
-             String status = params[1];
+            String status = params[1];
             try {
                 URL url = new URL(stringUrl);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -269,8 +286,8 @@ class TrackFacultyModal {
 
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-                String data = URLEncoder.encode("reg_id", "UTF-8") +"="+ URLEncoder.encode(teacher_id, "UTF-8") +"&"+
-                              URLEncoder.encode("status", "UTF-8") +"="+ URLEncoder.encode(status, "UTF-8");
+                String data = URLEncoder.encode("reg_id", "UTF-8") + "=" + URLEncoder.encode(teacher_id, "UTF-8") + "&" +
+                        URLEncoder.encode("status", "UTF-8") + "=" + URLEncoder.encode(status, "UTF-8");
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
@@ -279,7 +296,7 @@ class TrackFacultyModal {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
                 StringBuilder stringBuilder = new StringBuilder();
                 String line;
-                while ((line = bufferedReader.readLine()) != null){
+                while ((line = bufferedReader.readLine()) != null) {
                     stringBuilder.append(line);
                 }
 
@@ -291,11 +308,6 @@ class TrackFacultyModal {
                 e.printStackTrace();
             }
             return null;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            Toast.makeText(context, s, Toast.LENGTH_LONG).show();
         }
     }
 }

@@ -63,6 +63,7 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
     public static RippleView btn_sendRequest;
     public static TextView TV_requestStatus;
     public static TextView TV_requestsCount;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +89,7 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
         boolean isJoinded = sharedPreferences.getBoolean(notificationType + "_IS_JOINED", false);
         Log.i("TAG", "onCreate: " + isJoinded);
 
-        ImageView imageView = (ImageView) findViewById(R.id.IV_groupPicture);
+        imageView = (ImageView) findViewById(R.id.IV_groupPicture);
         // Create default options which will be used for every
         //  displayImage(...) call if no options will be passed to this method
         DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
@@ -329,12 +330,14 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
         notificationsAdapter.notifyDataSetChanged();
         selectedItems.clear();
         counter = 0;
+        imageView.setVisibility(View.VISIBLE);
     }
 
     @Override
     public boolean onLongClick(View v) {
         toolbar.getMenu().clear();
         notificationTitle.setText("0 item selected");
+        imageView.setVisibility(View.GONE);
         toolbar.inflateMenu(R.menu.notifications_menu);
         CB_selectAll.setVisibility(View.VISIBLE);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

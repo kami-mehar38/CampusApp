@@ -35,7 +35,9 @@
             android:layout_toLeftOf="@+id/menu"
             android:layout_toRightOf="@+id/IV_groupPicture"
             android:layout_toEndOf="@+id/IV_groupPicture"
-            android:layout_centerVertical="true" />
+            android:layout_centerVertical="true"
+            android:maxLines="1"
+            android:ellipsize="end"/>
 
         <LinearLayout
             android:id="@+id/menu"

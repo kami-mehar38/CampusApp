@@ -164,4 +164,7 @@
     <string name="auto_reset_to">Auto reset to</string>
     <string name="auto_reset">Auto reset</string>
     <string name="at">At</string>
+    <string name="set_time">Set time</string>
+    <string name="no_blood_requests">No blood requests</string>
+    <string name="no_response">No response</string>
 </resources>

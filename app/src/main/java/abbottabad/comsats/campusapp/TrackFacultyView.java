@@ -39,6 +39,7 @@ import android.widget.Toast;
 import com.andexert.library.RippleView;
 import com.kunzisoft.switchdatetime.SwitchDateTimeDialogFragment;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -62,6 +63,7 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
     private AlertDialog alertDialog;
     private String status;
     private String teacherStatus;
+    private boolean isSelectionChanged = false;
     public static List<StatusInfo> statusInfoList;
     private LinearLayoutManager layoutManager;
     public static ImageView imageView;
@@ -71,8 +73,10 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
     private CheckBox CB_available;
     private CheckBox CB_busy;
     private CheckBox CB_onLeave;
-    private SimpleDateFormat dateFormat;
-    private Date currentDate;
+    private int selectedStatus;
+    private TextView TV_dateTime;
+    private Calendar calendar;
+    private Switch SW_autoReset;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,45 +94,16 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
         imageView = (ImageView) findViewById(R.id.timetable);
         TV_myStatus = (TextView) findViewById(R.id.TV_myStatus);
         sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+        TV_myStatus.setText(sharedPreferences.getString("CURRENT_STATUS", "Available"));
         final String APPLICATION_STATUS = sharedPreferences.getString("APPLICATION_STATUS", "NULL");
 
-        int selectedStatus = sharedPreferences.getInt("SELECTED_STATUS", 0);
         TEACHER_ID = sharedPreferences.getString("REG_ID", null);
-        editor = sharedPreferences.edit();
-
-        /*AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Select your status");
-        builder.setSingleChoiceItems(STATUS_LIST, selectedStatus, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                editor = sharedPreferences.edit();
-                editor.putInt("SELECTED_STATUS", which);
-                editor.apply();
-
-                status = alertDialog.getListView().getItemAtPosition(which).toString();
-
-            }
-        });
-
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                new TrackFacultyModal(TrackFacultyView.this).updateStatus(
-                        status,
-                        TEACHER_ID, TV_myStatus
-                );
-                alertDialog.cancel();
-            }
-        });
-        */
 
         View view = LayoutInflater.from(this).inflate(R.layout.track_faculty_settings, null);
         LL_autoReset = (LinearLayout) view.findViewById(R.id.LL_autoReset);
-        LL_autoReset.setVisibility(View.GONE);
-        Switch SW_autoReset = (Switch) view.findViewById(R.id.SW_autoReset);
-        SW_autoReset.setChecked(false);
+        SW_autoReset = (Switch) view.findViewById(R.id.SW_autoReset);
         SW_autoReset.setOnCheckedChangeListener(this);
+
 
         CB_available = (CheckBox) view.findViewById(R.id.CB_available);
         CB_available.setOnClickListener(this);
@@ -137,20 +112,13 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
         CB_onLeave = (CheckBox) view.findViewById(R.id.CB_onLeave);
         CB_onLeave.setOnClickListener(this);
 
-        if (selectedStatus == 0) {
-            CB_available.setChecked(true);
-        } else if (selectedStatus == 1) {
-            CB_busy.setChecked(true);
-        } else if (selectedStatus == 2) {
-            CB_onLeave.setChecked(true);
-        }
-
         SPstatus = (Spinner) view.findViewById(R.id.SPstatus);
         populateSpinner(SPstatus);
         SPstatus.setSelection(sharedPreferences.getInt("RESET_OPTION", 0));
         SPstatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                editor = sharedPreferences.edit();
                 editor.putInt("RESET_OPTION", position);
                 editor.apply();
                 status = SPstatus.getSelectedItem().toString().trim();
@@ -165,7 +133,7 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
         RippleView BTN_ok = (RippleView) view.findViewById(R.id.BTN_ok);
         BTN_ok.setOnRippleCompleteListener(this);
 
-        TextView TV_dateTime = (TextView) view.findViewById(R.id.TV_dateTime);
+        TV_dateTime = (TextView) view.findViewById(R.id.TV_dateTime);
         TV_dateTime.setOnClickListener(this);
 
         ImageView IV_openStatusSpinner = (ImageView) view.findViewById(R.id.IV_openStatusSpinner);
@@ -182,6 +150,27 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
             @Override
             public void onClick(View v) {
                 alertDialog.show();
+                if (sharedPreferences.getBoolean("IS_AUTO_RESET", false)){
+                    SW_autoReset.setChecked(true);
+                    LL_autoReset.setVisibility(View.VISIBLE);
+                } else {
+                    SW_autoReset.setChecked(false);
+                    LL_autoReset.setVisibility(View.GONE);
+                }
+                selectedStatus = sharedPreferences.getInt("SELECTED_STATUS", 0);
+                if (selectedStatus == 0) {
+                    CB_available.setChecked(true);
+                    CB_busy.setChecked(false);
+                    CB_onLeave.setChecked(false);
+                } else if (selectedStatus == 1) {
+                    CB_busy.setChecked(true);
+                    CB_available.setChecked(false);
+                    CB_onLeave.setChecked(false);
+                } else if (selectedStatus == 2) {
+                    CB_onLeave.setChecked(true);
+                    CB_available.setChecked(false);
+                    CB_busy.setChecked(false);
+                }
             }
         });
 
@@ -260,16 +249,8 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
                 "OK",
                 "Cancel"
         );
+        calendar = Calendar.getInstance();
 
-        dateFormat = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
-        Calendar calendar = Calendar.getInstance();
-        try {
-            currentDate = dateFormat.parse(String.valueOf(calendar.get(Calendar.YEAR))
-                    + "/" + String.valueOf(calendar.get(Calendar.MONTH))
-                    +"/"+ String.valueOf(calendar.get(Calendar.DATE)));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
 
         // Assign values
         dateTimeDialogFragment.startAtTimeView();
@@ -292,11 +273,31 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
 
             @Override
             public void onPositiveButtonClick(Date date) {
-                Calendar calendar = Calendar.getInstance();
+                DateFormat df = new SimpleDateFormat("d MMM yyyy/h:mm a", Locale.getDefault());
+                String currentDateTimeString = df.format(Calendar.getInstance().getTime());
+
                 calendar.setTime(date);
-                setAutoReset(86, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+                String resetDateTimeString = df.format(calendar.getTime());
+                String[] splitted = resetDateTimeString.split("/");
+                String time = null;
+                try {
+                    if (df.parse(resetDateTimeString).after(df.parse(currentDateTimeString))) {
+                        time = "Today at " + splitted[1];
+                    } else {
+                        time = "Tommorrow at " + splitted[1];
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                if (time != null)
+                TV_dateTime.setText(time);
+                setAutoReset(1, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
                         calendar.get(Calendar.DATE), calendar.get(Calendar.HOUR_OF_DAY),
                         calendar.get(Calendar.MINUTE), calendar.get(Calendar.SECOND));
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean("IS_AUTO_RESET", true);
+                editor.putString("RESET_TIME",time);
+                editor.apply();
             }
 
             @Override
@@ -310,11 +311,10 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
     }
 
     private void setAutoReset(int id, int year, int month, int date, int hours, int minutes, int seconds) {
-        Toast.makeText(TrackFacultyView.this, "Auto reset on", Toast.LENGTH_SHORT).show();
-        Intent alarmIntent = new Intent(this, StatusResetReceiver.class);
+        Intent alarmIntent = new Intent(TrackFacultyView.this, StatusResetReceiver.class);
         alarmIntent.putExtra("STATUS", status);
         alarmIntent.putExtra("TEACHER_ID", TEACHER_ID);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, id, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(TrackFacultyView.this, id, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
         Calendar calendar = Calendar.getInstance();
@@ -324,7 +324,6 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
         Calendar now = Calendar.getInstance();
         if (calendar.before(now)) {
             calendar.add(Calendar.DATE, 1);
-            Toast.makeText(TrackFacultyView.this, "Before", Toast.LENGTH_SHORT).show();
         }
         alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
     }
@@ -372,8 +371,6 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
                     CB_busy.setChecked(false);
                 if (CB_onLeave.isChecked())
                     CB_onLeave.setChecked(false);
-                editor.putInt("SELECTED_STATUS", 0);
-                editor.apply();
                 teacherStatus = "Available";
                 break;
             }
@@ -382,8 +379,6 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
                     CB_available.setChecked(false);
                 if (CB_onLeave.isChecked())
                     CB_onLeave.setChecked(false);
-                editor.putInt("SELECTED_STATUS", 1);
-                editor.apply();
                 teacherStatus = "Busy";
                 break;
             }
@@ -392,8 +387,6 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
                     CB_busy.setChecked(false);
                 if (CB_available.isChecked())
                     CB_available.setChecked(false);
-                editor.putInt("SELECTED_STATUS", 2);
-                editor.apply();
                 teacherStatus = "On Leave";
                 break;
             }
@@ -413,6 +406,7 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
                     LL_autoReset.setVisibility(View.GONE);
                 } else {
                     buttonView.setTextColor(Color.parseColor("#000000"));
+                    TV_dateTime.setText(sharedPreferences.getString("RESET_TIME", "Set time"));
                     LL_autoReset.setVisibility(View.VISIBLE);
                 }
                 break;
@@ -425,8 +419,10 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
         switch (rippleView.getId()){
             case R.id.BTN_ok: {
                 alertDialog.cancel();
-                Toast.makeText(TrackFacultyView.this, status, Toast.LENGTH_SHORT).show();
-                new TrackFacultyModal(TrackFacultyView.this).updateStatus(teacherStatus, TEACHER_ID);
+                if (teacherStatus != null) {
+                    if (!sharedPreferences.getString("CURRENT_STATUS", "Available").equals(teacherStatus))
+                        new TrackFacultyModal(TrackFacultyView.this).updateStatus(teacherStatus, TEACHER_ID);
+                }
                 break;
             }
         }

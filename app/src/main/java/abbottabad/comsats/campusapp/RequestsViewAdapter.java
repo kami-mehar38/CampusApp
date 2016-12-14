@@ -58,11 +58,21 @@ class RequestsViewAdapter extends RecyclerView.Adapter<RequestsViewAdapter.ViewH
     public void add(RequestsInfo requestsInfo, int position) {
         requestsInfoList.add(position, requestsInfo);
         notifyItemInserted(position);
+        if (BloodRequestsFragment.TV_noBloodRequests != null){
+            if (getItemCount() > 0){
+                BloodRequestsFragment.TV_noBloodRequests.setVisibility(View.GONE);
+            }
+        }
     }
 
     private void remove(int position) {
         requestsInfoList.remove(position);
         notifyItemRemoved(position);
+        if (BloodRequestsFragment.TV_noBloodRequests != null){
+            if (getItemCount() == 0){
+                BloodRequestsFragment.TV_noBloodRequests.setVisibility(View.VISIBLE);
+            }
+        }
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

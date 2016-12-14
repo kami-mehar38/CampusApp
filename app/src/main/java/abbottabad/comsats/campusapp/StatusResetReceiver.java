@@ -20,11 +20,15 @@ public class StatusResetReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
         SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
-
+        SharedPreferences.Editor editor = sharedPreferences.edit();
         String status = intent.getStringExtra("STATUS");
+        editor.putBoolean("SHOW_PROGRESS", false);
+        editor.putString("RESET_TIME", "Set time");
+        editor.putBoolean("IS_AUTO_RESET", false);
+        editor.apply();
+
         String teacherId = intent.getStringExtra("TEACHER_ID");
         TrackFacultyModal trackFacultyModal = new TrackFacultyModal(context);
-        trackFacultyModal.sendStatusNotification(status, teacherId);
         trackFacultyModal.updateStatus(status, teacherId);
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -36,7 +40,7 @@ public class StatusResetReceiver extends BroadcastReceiver {
         taskStackBuilder.addParentStack(TrackFacultyView.class);
         taskStackBuilder.addNextIntent(resultIntent);
 
-        PendingIntent resultPendingIntent = taskStackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent resultPendingIntent = taskStackBuilder.getPendingIntent(1, PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
                 context).setSmallIcon(R.drawable.ic_notification_tracking)
                 .setContentTitle("Faculty availability").setVibrate(pattern)
@@ -44,6 +48,6 @@ public class StatusResetReceiver extends BroadcastReceiver {
                 .setContentText("Status auto reset to " + status)
                 .setAutoCancel(true).setSound(sound);
         mBuilder.setContentIntent(resultPendingIntent);
-        notificationManager.notify(1994, mBuilder.build());
+        notificationManager.notify(0, mBuilder.build());
     }
 }

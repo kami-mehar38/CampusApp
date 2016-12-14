@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
@@ -22,6 +23,7 @@ public class BloodRequestsFragment extends Fragment {
     private BloodBankLocalModal bloodBankLocalModal;
     public static RecyclerView RV_bloodRequests;
     public static RequestsViewAdapter requestsViewAdapter;
+    public static TextView TV_noBloodRequests;
 
     public BloodRequestsFragment() {
     }
@@ -59,5 +61,6 @@ public class BloodRequestsFragment extends Fragment {
         scaleInAnimationAdapter.setFirstOnly(false);
         RV_bloodRequests.setAdapter(scaleInAnimationAdapter);
         bloodBankLocalModal.viewBloodRequests();
+        TV_noBloodRequests = (TextView) view.findViewById(R.id.TV_noBloodRequests);
     }
 }
