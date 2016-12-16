@@ -39,6 +39,8 @@ public class BloodRequestResponseFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        TV_noResponse = (TextView) view.findViewById(R.id.TV_noResponse);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -50,7 +52,6 @@ public class BloodRequestResponseFragment extends Fragment {
         scaleInAnimationAdapter.setFirstOnly(false);
         recyclerView.setAdapter(scaleInAnimationAdapter);
         bloodBankResponseModal.viewBloodRequestResponses();
-        TV_noResponse = (TextView) view.findViewById(R.id.TV_noResponse);
     }
 
 }

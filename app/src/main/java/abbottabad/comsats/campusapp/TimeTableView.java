@@ -2751,7 +2751,8 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
         Intent alarmIntent = new Intent(this, TimeTableReceiver.class);
         alarmIntent.putExtra("SUBJECT", subject);
         alarmIntent.putExtra("ROOM", room);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, id, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmIntent.putExtra("ID", id);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, id, alarmIntent, 0);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/notifications_toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:background="#94b8c4"
     android:minHeight="?attr/actionBarSize"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -16,73 +16,69 @@
             android:id="@+id/IV_groupPicture"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:contentDescription="@string/profile_picture"
-            android:scaleType="centerCrop"
-            android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
-            android:layout_marginRight="5dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
             android:layout_marginEnd="5dp"
-            android:layout_centerVertical="true"/>
+            android:layout_marginRight="5dp"
+            android:contentDescription="@string/profile_picture"
+            android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/notificationTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#fff"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_toStartOf="@+id/menu"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/IV_groupPicture"
             android:layout_toLeftOf="@+id/menu"
             android:layout_toRightOf="@+id/IV_groupPicture"
-            android:layout_toEndOf="@+id/IV_groupPicture"
-            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/menu"
+            android:ellipsize="end"
             android:maxLines="1"
-            android:ellipsize="end"/>
+            android:textColor="#fff"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:id="@+id/menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true">
+            android:layout_centerVertical="true"
+            android:orientation="horizontal">
 
             <com.andexert.library.RippleView
                 android:id="@+id/pendingRequests"
+                rv_centered="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                rv_centered="true"
-                app:rv_color="#fff"
-                app:rv_rippleDuration="250"
                 android:layout_gravity="center"
-                android:layout_marginRight="5dp"
                 android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
                 android:padding="5dp"
-                >
+                app:rv_color="#fff"
+                app:rv_rippleDuration="250">
 
                 <FrameLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    >
+                    android:layout_height="wrap_content">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_group_requests"
                         android:contentDescription="@string/group_requests"
-                        />
+                        android:src="@drawable/ic_group_requests" />
 
                     <TextView
                         android:id="@+id/TV_requestsCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:textColor="#fff"
-                        android:textStyle="bold"
                         android:layout_marginLeft="21dp"
                         android:layout_marginStart="21dp"
-                        />
+                        android:textColor="#fff"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
                 </FrameLayout>
 
@@ -92,14 +88,11 @@
                 android:id="@+id/CB_selectAll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:theme="@style/checkBoxStyle"
-                android:checked="false"
                 android:layout_gravity="center"
-                />
+                android:checked="false"
+                android:theme="@style/checkBoxStyle" />
 
         </LinearLayout>
-
-
 
     </RelativeLayout>
 

@@ -26,6 +26,7 @@ public class TimeTableReceiver extends BroadcastReceiver{
         if (sharedPreferences.getBoolean("RECEIVE_CLASS_NOTIFICATIONS", false)) {
             String subject = intent.getStringExtra("SUBJECT");
             String room = intent.getStringExtra("ROOM");
+            int id = intent.getIntExtra("ID", 0);
             NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
             Uri sound = Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.notification_sound);
@@ -36,7 +37,7 @@ public class TimeTableReceiver extends BroadcastReceiver{
             taskStackBuilder.addParentStack(TimeTableView.class);
             taskStackBuilder.addNextIntent(resultIntent);
 
-            PendingIntent resultPendingIntent = taskStackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent resultPendingIntent = taskStackBuilder.getPendingIntent(id, 0);
             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
                     context).setSmallIcon(R.drawable.ic_notification_timetable)
                     .setContentTitle("Timetable").setVibrate(pattern)

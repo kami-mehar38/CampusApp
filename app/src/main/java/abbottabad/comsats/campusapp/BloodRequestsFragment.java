@@ -50,6 +50,7 @@ public class BloodRequestsFragment extends Fragment {
         // Setup any handles to view objects here
         super.onViewCreated(view, savedInstanceState);
 
+        TV_noBloodRequests = (TextView) view.findViewById(R.id.TV_noBloodRequests);
         RV_bloodRequests = (RecyclerView) view.findViewById(R.id.RV_bloodRequests);
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -61,6 +62,5 @@ public class BloodRequestsFragment extends Fragment {
         scaleInAnimationAdapter.setFirstOnly(false);
         RV_bloodRequests.setAdapter(scaleInAnimationAdapter);
         bloodBankLocalModal.viewBloodRequests();
-        TV_noBloodRequests = (TextView) view.findViewById(R.id.TV_noBloodRequests);
     }
 }
