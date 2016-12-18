@@ -168,7 +168,8 @@
 
         <activity
             android:name=".CreateNotificationsGroup"
-            android:configChanges="keyboardHidden|orientation|screenSize" />
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="stateHidden"/>
 
         <activity android:name=".NotificationsGroupImage"
             android:configChanges="keyboardHidden|orientation|screenSize"/>

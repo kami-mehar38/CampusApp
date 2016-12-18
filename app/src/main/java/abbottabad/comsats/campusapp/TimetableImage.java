@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
@@ -29,10 +30,10 @@ public class TimetableImage extends Activity implements View.OnClickListener {
         //  displayImage(...) call if no options will be passed to this method
         DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
                 .cacheInMemory(false).cacheOnDisk(false).build();
-        /*ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
                 .defaultDisplayImageOptions(defaultOptions).build();
         ImageLoader.getInstance().init(config); // Do it on Application start
-*/
+
         if (Build.VERSION.SDK_INT < 16) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -42,8 +43,7 @@ public class TimetableImage extends Activity implements View.OnClickListener {
             int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
             decorView.setSystemUiVisibility(uiOptions);
         }
-        ImageView btnCancel = (ImageView) findViewById(R.id.btnCancel);
-        btnCancel.setOnClickListener(this);
+
         isWaiting = (ProgressBar) findViewById(R.id.isWaiting);
         imageView = (ImageView) findViewById(R.id.IV_picture);
 

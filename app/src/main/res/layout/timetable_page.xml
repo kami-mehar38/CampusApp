@@ -12,7 +12,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-
         <HorizontalScrollView
             android:id="@+id/SV_parentView"
             android:layout_width="wrap_content"
@@ -149,14 +148,13 @@
                             android:id="@+id/slot1Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot1Teacher"
@@ -207,13 +205,13 @@
                             android:id="@+id/slot2Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"/>
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot2Teacher"
@@ -262,13 +260,13 @@
                             android:id="@+id/slot3Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"/>
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot3Teacher"
@@ -317,13 +315,13 @@
                             android:id="@+id/slot4Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"/>
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot4Teacher"
@@ -350,14 +348,13 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="#fff"
-                            android:textSize="14sp"
-                            android:textStyle="bold"
                             android:layout_alignBaseline="@+id/slot14Reminder"
                             android:layout_alignBottom="@+id/slot14Reminder"
-                            android:layout_toRightOf="@+id/slot4Teacher"
                             android:layout_toEndOf="@+id/slot4Teacher"
-                             />
+                            android:layout_toRightOf="@+id/slot4Teacher"
+                            android:textColor="#fff"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
 
 
                     </RelativeLayout>
@@ -373,13 +370,13 @@
                             android:id="@+id/slot5Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"/>
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot5Teacher"
@@ -428,13 +425,13 @@
                             android:id="@+id/slot6Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"/>
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot6Teacher"
@@ -483,13 +480,13 @@
                             android:id="@+id/slot7Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"/>
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot7Teacher"
@@ -538,13 +535,13 @@
                             android:id="@+id/slot8Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"/>
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot8Teacher"
@@ -615,13 +612,13 @@
                             android:id="@+id/slot9Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"/>
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot9Teacher"
@@ -670,13 +667,13 @@
                             android:id="@+id/slot10Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"/>
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot10Teacher"
@@ -725,13 +722,13 @@
                             android:id="@+id/slot11Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"/>
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot11Teacher"
@@ -780,13 +777,13 @@
                             android:id="@+id/slot12Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"/>
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot12Teacher"
@@ -835,13 +832,13 @@
                             android:id="@+id/slot13Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"/>
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot13Teacher"
@@ -890,13 +887,13 @@
                             android:id="@+id/slot14Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"/>
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot14Teacher"
@@ -945,13 +942,13 @@
                             android:id="@+id/slot15Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"/>
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot15Teacher"
@@ -1001,13 +998,13 @@
                             android:id="@+id/slot16Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"/>
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot16Teacher"
@@ -1077,14 +1074,13 @@
                             android:id="@+id/slot17Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot17Teacher"
@@ -1135,14 +1131,13 @@
                             android:id="@+id/slot18Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot18Teacher"
@@ -1193,14 +1188,13 @@
                             android:id="@+id/slot19Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot19Teacher"
@@ -1251,14 +1245,13 @@
                             android:id="@+id/slot20Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot20Teacher"
@@ -1309,14 +1302,13 @@
                             android:id="@+id/slot21Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot21Teacher"
@@ -1367,14 +1359,13 @@
                             android:id="@+id/slot22Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot22Teacher"
@@ -1425,14 +1416,13 @@
                             android:id="@+id/slot23Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot23Teacher"
@@ -1483,14 +1473,13 @@
                             android:id="@+id/slot24Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot24Teacher"
@@ -1563,14 +1552,13 @@
                             android:id="@+id/slot25Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot25Teacher"
@@ -1621,14 +1609,13 @@
                             android:id="@+id/slot26Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot26Teacher"
@@ -1679,14 +1666,13 @@
                             android:id="@+id/slot27Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot27Teacher"
@@ -1737,14 +1723,13 @@
                             android:id="@+id/slot28Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot28Teacher"
@@ -1767,8 +1752,7 @@
                             android:layout_marginTop="17dp"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="bold"
-                            />
+                            android:textStyle="bold" />
 
                         <CheckBox
                             android:id="@+id/slot44Reminder"
@@ -1794,14 +1778,13 @@
                             android:id="@+id/slot29Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot29Teacher"
@@ -1852,14 +1835,13 @@
                             android:id="@+id/slot30Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot30Teacher"
@@ -1910,14 +1892,13 @@
                             android:id="@+id/slot31Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot31Teacher"
@@ -1968,14 +1949,13 @@
                             android:id="@+id/slot32Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot32Teacher"
@@ -2048,14 +2028,13 @@
                             android:id="@+id/slot33Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot33Teacher"
@@ -2106,14 +2085,13 @@
                             android:id="@+id/slot34Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot34Teacher"
@@ -2164,14 +2142,13 @@
                             android:id="@+id/slot35Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot35Teacher"
@@ -2222,14 +2199,13 @@
                             android:id="@+id/slot36Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot36Teacher"
@@ -2280,14 +2256,13 @@
                             android:id="@+id/slot37Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot37Teacher"
@@ -2338,14 +2313,13 @@
                             android:id="@+id/slot38Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot38Teacher"
@@ -2396,14 +2370,13 @@
                             android:id="@+id/slot39Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot39Teacher"
@@ -2454,14 +2427,13 @@
                             android:id="@+id/slot40Subject"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
                             android:maxWidth="106dp"
                             android:text="@string/subject"
                             android:textColor="#fff"
                             android:textSize="14sp"
-                            android:textStyle="normal"
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            />
+                            android:textStyle="normal" />
 
                         <TextView
                             android:id="@+id/slot40Teacher"
@@ -2509,5 +2481,6 @@
         </HorizontalScrollView>
 
     </ScrollView>
+
 
 </LinearLayout>

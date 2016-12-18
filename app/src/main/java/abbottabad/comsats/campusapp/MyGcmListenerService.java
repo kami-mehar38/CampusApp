@@ -92,7 +92,7 @@ public class MyGcmListenerService extends GcmListenerService {
     private void createBloodResponseAcceptNotification(String message) {
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         Uri sound = Uri.parse("android.resource://" + this.getPackageName() + "/" + R.raw.notification_sound);
-        long[] pattern = {1000, 1000, 1000, 1000, 1000};
+        long[] pattern = {1000, 1000};
 
         Intent resultIntent = new Intent(this, BloodBankView.class);
         TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(this);
@@ -104,7 +104,6 @@ public class MyGcmListenerService extends GcmListenerService {
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
                 this).setSmallIcon(R.drawable.ic_notification_blood)
                 .setContentTitle("Blood Bank").setVibrate(pattern)
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
                 .setContentText(message)
                 .setAutoCancel(true).setSound(sound);
         mBuilder.setContentIntent(resultPendingIntent);
@@ -165,7 +164,7 @@ public class MyGcmListenerService extends GcmListenerService {
     private void createBloodResponseNotification(String message) {
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         Uri sound = Uri.parse("android.resource://" + this.getPackageName() + "/" + R.raw.notification_sound);
-        long[] pattern = {1000, 1000, 1000, 1000, 1000};
+        long[] pattern = {1000, 1000};
 
         Intent resultIntent = new Intent(this, BloodBankView.class);
         TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(this);
@@ -177,7 +176,6 @@ public class MyGcmListenerService extends GcmListenerService {
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
                 this).setSmallIcon(R.drawable.ic_notification_blood)
                 .setContentTitle("Blood Bank").setVibrate(pattern)
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
                 .setContentText(message)
                 .setAutoCancel(true).setSound(sound);
         mBuilder.setContentIntent(resultPendingIntent);
@@ -226,7 +224,7 @@ public class MyGcmListenerService extends GcmListenerService {
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         Uri sound = Uri.parse("android.resource://" + this.getPackageName() + "/" + R.raw.notification_sound);
-        long[] pattern = {1000, 1000, 1000, 1000, 1000};
+        long[] pattern = {1000, 1000};
 
         Intent resultIntent = new Intent(this, ComplaintPollView.class);
         TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(this);
@@ -239,7 +237,6 @@ public class MyGcmListenerService extends GcmListenerService {
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
                 this).setSmallIcon(R.drawable.ic_notification_complaint)
                 .setContentTitle("Complaint Poll").setVibrate(pattern)
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
                 .setContentText(message)
                 .setAutoCancel(true).setSound(sound);
         mBuilder.setContentIntent(resultPendingIntent);
@@ -332,7 +329,7 @@ public class MyGcmListenerService extends GcmListenerService {
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         Uri sound = Uri.parse("android.resource://" + this.getPackageName() + "/" + R.raw.notification_sound);
-        long[] pattern = {1000, 1000, 1000, 1000, 1000};
+        long[] pattern = {1000, 1000};
 
         Intent resultIntent = new Intent(this, NotificationsHomePage.class);
         TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(this);
@@ -344,7 +341,6 @@ public class MyGcmListenerService extends GcmListenerService {
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
                 this).setSmallIcon(R.drawable.ic_notification_notifications)
                 .setContentTitle("Event Notifications").setVibrate(pattern)
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
                 .setContentText(message)
                 .setAutoCancel(true).setSound(sound);
         mBuilder.setContentIntent(resultPendingIntent);
@@ -355,7 +351,7 @@ public class MyGcmListenerService extends GcmListenerService {
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         Uri sound = Uri.parse("android.resource://" + this.getPackageName() + "/" + R.raw.notification_sound);
-        long[] pattern = {1000, 1000, 1000, 1000, 1000};
+        long[] pattern = {1000, 1000};
 
         Intent resultIntent = new Intent(this, TrackFacultyView.class);
         TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(this);
@@ -367,7 +363,6 @@ public class MyGcmListenerService extends GcmListenerService {
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
                 this).setSmallIcon(R.drawable.ic_notification_tracking)
                 .setContentTitle("Track Faculty").setVibrate(pattern)
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(status))
                 .setContentText(status)
                 .setAutoCancel(true).setSound(sound);
         mBuilder.setContentIntent(resultPendingIntent);
@@ -409,7 +404,7 @@ public class MyGcmListenerService extends GcmListenerService {
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         Uri sound = Uri.parse("android.resource://" + this.getPackageName() + "/" + R.raw.notification_sound);
-        long[] pattern = {1000, 1000, 1000, 1000, 1000};
+        long[] pattern = {1000, 1000};
 
         Intent resultIntent = new Intent(this, BloodBankView.class);
         TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(this);
@@ -421,7 +416,6 @@ public class MyGcmListenerService extends GcmListenerService {
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
                 this).setSmallIcon(R.drawable.ic_notification_blood)
                 .setContentTitle("Blood Bank").setVibrate(pattern)
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
                 .setContentText(message)
                 .setAutoCancel(true).setSound(sound);
         mBuilder.setContentIntent(resultPendingIntent);

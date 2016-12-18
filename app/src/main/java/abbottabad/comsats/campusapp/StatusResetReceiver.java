@@ -33,7 +33,7 @@ public class StatusResetReceiver extends BroadcastReceiver {
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         Uri sound = Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.notification_sound);
-        long[] pattern = {1000, 1000, 1000, 1000, 1000};
+        long[] pattern = {1000, 1000};
 
         Intent resultIntent = new Intent(context, TrackFacultyView.class);
         TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(context);
@@ -44,7 +44,6 @@ public class StatusResetReceiver extends BroadcastReceiver {
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
                 context).setSmallIcon(R.drawable.ic_notification_tracking)
                 .setContentTitle("Faculty availability").setVibrate(pattern)
-                .setStyle(new NotificationCompat.BigTextStyle())
                 .setContentText("Status auto reset to " + status)
                 .setAutoCancel(true).setSound(sound);
         mBuilder.setContentIntent(resultPendingIntent);

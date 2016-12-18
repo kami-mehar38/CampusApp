@@ -6,10 +6,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.andexert.library.RippleView;
 
 import java.util.List;
 
@@ -33,7 +34,7 @@ class StatusViewAdapter extends RecyclerView.Adapter<StatusViewAdapter.ViewHolde
     public void onBindViewHolder(ViewHolder holder, int position) {
         StatusInfo statusInfo = statusInfoList.get(position);
         holder.TV_teacherName.setText(statusInfo.getTeacherName());
-        switch (statusInfo.getStatus()){
+        switch (statusInfo.getStatus()) {
             case "Available": {
                 holder.TV_teacherStatus.setTextColor(Color.parseColor("#4d9c2d"));
                 break;
@@ -54,7 +55,7 @@ class StatusViewAdapter extends RecyclerView.Adapter<StatusViewAdapter.ViewHolde
         holder.TV_teacherStatus.setText(statusInfo.getStatus());
         holder.TV_teacherRegistration.setText(statusInfo.getTeacherRegistration());
         holder.TV_teacherRegistration.setVisibility(View.GONE);
-        if (statusInfo.getMode().equals("Private")){
+        if (statusInfo.getMode().equals("Private")) {
             holder.btnTimetable.setVisibility(View.GONE);
             holder.cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -75,7 +76,7 @@ class StatusViewAdapter extends RecyclerView.Adapter<StatusViewAdapter.ViewHolde
         private TextView TV_teacherName;
         private TextView TV_teacherRegistration;
         private TextView TV_teacherStatus;
-        private ImageView btnTimetable;
+        private RippleView btnTimetable;
         private RelativeLayout cardView;
 
         ViewHolder(final View itemView) {
@@ -83,12 +84,12 @@ class StatusViewAdapter extends RecyclerView.Adapter<StatusViewAdapter.ViewHolde
             TV_teacherName = (TextView) itemView.findViewById(R.id.TV_teacherName);
             TV_teacherRegistration = (TextView) itemView.findViewById(R.id.TV_teacherRegistration);
             TV_teacherStatus = (TextView) itemView.findViewById(R.id.TV_teacherStatus);
-            btnTimetable = (ImageView) itemView.findViewById(R.id.btnTimetable);
+            btnTimetable = (RippleView) itemView.findViewById(R.id.btn_timetable);
             cardView = (RelativeLayout) itemView.findViewById(R.id.cardView);
 
-            btnTimetable.setOnClickListener(new View.OnClickListener() {
+            btnTimetable.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
                 @Override
-                public void onClick(View v) {
+                public void onComplete(RippleView rippleView) {
                     TrackFacultyUtills.setRegistration(TV_teacherRegistration.getText().toString());
                     itemView.getContext().startActivity(new Intent(itemView.getContext(), TimetableImage.class));
                 }

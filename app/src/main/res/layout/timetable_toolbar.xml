@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.Toolbar
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/timetable_toolbar"
     android:background="#00A27C"
     android:minHeight="?attr/actionBarSize"
-    android:theme="@style/Base.Theme.AppCompat.Light.DarkActionBar">
+    android:theme="@style/Base.Theme.AppCompat.Light.DarkActionBar"
+    android:elevation="4dp"
+    tools:targetApi="lollipop">
 
     <RelativeLayout
         android:layout_width="match_parent"

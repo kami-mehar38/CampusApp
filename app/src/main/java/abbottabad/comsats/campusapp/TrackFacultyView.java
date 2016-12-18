@@ -3,6 +3,7 @@ package abbottabad.comsats.campusapp;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -63,7 +64,6 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
     private AlertDialog alertDialog;
     private String status;
     private String teacherStatus;
-    private boolean isSelectionChanged = false;
     public static List<StatusInfo> statusInfoList;
     private LinearLayoutManager layoutManager;
     public static ImageView imageView;
@@ -77,6 +77,7 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
     private TextView TV_dateTime;
     private Calendar calendar;
     private Switch SW_autoReset;
+    private AlertDialog AD_autoReset;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,7 +151,7 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
             @Override
             public void onClick(View v) {
                 alertDialog.show();
-                if (sharedPreferences.getBoolean("IS_AUTO_RESET", false)){
+                if (sharedPreferences.getBoolean("IS_AUTO_RESET", false)) {
                     SW_autoReset.setChecked(true);
                     LL_autoReset.setVisibility(View.VISIBLE);
                 } else {
@@ -176,7 +177,6 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
 
         if (APPLICATION_STATUS.equals("TEACHER")) {
             TEACHER_ID = sharedPreferences.getString("REG_ID", null);
-            Toast.makeText(this, TEACHER_ID, Toast.LENGTH_LONG).show();
             new TrackFacultyModal(this).retrieveStatus(TEACHER_ID);
         } else if (APPLICATION_STATUS.equals("BLOOD_BANK") ||
                 APPLICATION_STATUS.equals("STUDENT") ||
@@ -239,7 +239,6 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
 
             }
         });
-
     }
 
     void showdateTimePicker() {
@@ -290,13 +289,13 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
                     e.printStackTrace();
                 }
                 if (time != null)
-                TV_dateTime.setText(time);
+                    TV_dateTime.setText(time);
                 setAutoReset(1, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
                         calendar.get(Calendar.DATE), calendar.get(Calendar.HOUR_OF_DAY),
                         calendar.get(Calendar.MINUTE), calendar.get(Calendar.SECOND));
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putBoolean("IS_AUTO_RESET", true);
-                editor.putString("RESET_TIME",time);
+                editor.putString("RESET_TIME", time);
                 editor.apply();
             }
 
@@ -326,6 +325,17 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
             calendar.add(Calendar.DATE, 1);
         }
         alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+    }
+
+    private void cancelAutoReset() {
+        Intent alarmIntent = new Intent(this, StatusResetReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        if (pendingIntent != null) {
+            alarmManager.cancel(pendingIntent);
+            pendingIntent.cancel();
+            Toast.makeText(TrackFacultyView.this, "Auto reset off", Toast.LENGTH_SHORT).show();
+        }
     }
 
     void populateSpinner(Spinner SPloginOptions) {
@@ -404,6 +414,30 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
                 if (!isChecked) {
                     buttonView.setTextColor(Color.parseColor("#7f7f7f"));
                     LL_autoReset.setVisibility(View.GONE);
+                    if (sharedPreferences.getBoolean("IS_AUTO_RESET", false)) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(TrackFacultyView.this);
+                        builder.setMessage("Turn auto reset off?");
+                        builder.setCancelable(false);
+                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putBoolean("IS_AUTO_RESET", false);
+                                editor.putString("RESET_TIME", "Set time");
+                                editor.apply();
+                                cancelAutoReset();
+                            }
+                        });
+                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                AD_autoReset.cancel();
+                                SW_autoReset.setChecked(true);
+                            }
+                        });
+                        AD_autoReset = builder.create();
+                        AD_autoReset.show();
+                    }
                 } else {
                     buttonView.setTextColor(Color.parseColor("#000000"));
                     TV_dateTime.setText(sharedPreferences.getString("RESET_TIME", "Set time"));
@@ -416,7 +450,7 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onComplete(RippleView rippleView) {
-        switch (rippleView.getId()){
+        switch (rippleView.getId()) {
             case R.id.BTN_ok: {
                 alertDialog.cancel();
                 if (teacherStatus != null) {

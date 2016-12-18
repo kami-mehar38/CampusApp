@@ -9,13 +9,17 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -50,18 +54,20 @@ public class CreateNotificationsGroup extends AppCompatActivity implements View.
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_notifications_group_page);
+        setStatusBarColor();
         String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
         sharedPreferences = getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         notificationsModal = new NotificationsModal(this);
+
         IV_groupPicture = (ImageView) findViewById(R.id.IV_groupPicture);
-        if (IV_groupPicture != null) {
-            IV_groupPicture.setOnClickListener(this);
-        }
 
         FloatingActionButton FAB_groupCreation = (FloatingActionButton) findViewById(R.id.FAB_groupCreation);
         if (FAB_groupCreation != null) {
             FAB_groupCreation.setOnClickListener(this);
         }
+
+        FloatingActionButton FAB_selectImage = (FloatingActionButton) findViewById(R.id.FAB_selectImage);
+        FAB_selectImage.setOnClickListener(this);
 
         ET_groupName = (EditText) findViewById(R.id.ET_groupName);
 
@@ -99,7 +105,7 @@ public class CreateNotificationsGroup extends AppCompatActivity implements View.
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.IV_groupPicture: {
+            case R.id.FAB_selectImage: {
                 Intent galleryIntent = new Intent(Intent.ACTION_PICK,
                         android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 // Start the Intent
@@ -229,5 +235,15 @@ public class CreateNotificationsGroup extends AppCompatActivity implements View.
         }
         resizedBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, false);
         return resizedBitmap;
+    }
+
+    private void setStatusBarColor() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            int color = ContextCompat.getColor(this, R.color.createGroupStatusBar);
+
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(color);
+        }
     }
 }

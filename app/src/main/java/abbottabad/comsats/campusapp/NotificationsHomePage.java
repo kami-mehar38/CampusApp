@@ -1,6 +1,7 @@
 package abbottabad.comsats.campusapp;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -154,7 +155,21 @@ public class NotificationsHomePage extends AppCompatActivity {
                 break;
             }
             case R.id.action_delete_chat: {
-                deleteNotificationGroup();
+                AlertDialog.Builder builder = new AlertDialog.Builder(NotificationsHomePage.this);
+                builder.setCancelable(false);
+                builder.setMessage("Delete " + groupName + " ?");
+                builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        deleteNotificationGroup();
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        clearActionMode();
+                    }
+                });
                 break;
             }
         }

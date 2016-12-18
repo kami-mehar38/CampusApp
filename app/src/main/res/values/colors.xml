@@ -13,4 +13,8 @@
     <color name="bloodBankStatusBar">#cc0000</color>
     <color name="loginStatusBar">#bc6253</color>
     <color name="signupStatusBar">#51517a</color>
+    <color name="blueColorShade">#198cff</color>
+    <color name="createGroupStatusBar">#0059b2</color>
+
+
 </resources>

@@ -14,15 +14,6 @@
         android:contentDescription="@string/timetable"
        />
 
-    <ImageView
-        android:id="@+id/btnCancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_margin="10dp"
-        android:contentDescription="@string/cancel"
-        android:src="@drawable/ic_action_cancel"/>
-
     <ProgressBar
         android:id="@+id/isWaiting"
         android:layout_width="wrap_content"

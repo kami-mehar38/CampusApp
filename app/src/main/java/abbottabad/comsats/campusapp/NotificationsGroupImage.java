@@ -38,7 +38,9 @@ public class NotificationsGroupImage extends AppCompatActivity {
         // Create default options which will be used for every
         // displayImage(...) call if no options will be passed to this method
         DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
-                .cacheInMemory(true).cacheOnDisk(true).build();
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .build();
 
         if (Build.VERSION.SDK_INT < 16) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,

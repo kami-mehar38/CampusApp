@@ -13,6 +13,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,7 +33,7 @@ import java.util.Calendar;
 /**
  * This project CampusApp is created by Kamran Ramzan on 9/1/16.
  */
-public class TimeTableView extends AppCompatActivity implements View.OnLongClickListener, View.OnClickListener {
+public class TimeTableView extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener {
 
     String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
     private RelativeLayout slot11, slot21, slot31, slot41, slot51;
@@ -92,12 +93,15 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
     private CheckBox slot38Reminder;
     private CheckBox slot48Reminder;
     private CheckBox slot58Reminder;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.timetable_page);
         setStatusBarColor();
+        toolbar = (Toolbar) findViewById(R.id.timetable_toolbar);
+        setSupportActionBar(toolbar);
         sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         initializingVariables();
@@ -541,7 +545,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot11.getChildAt(0)).setText(subjectName);
                 ((TextView) slot11.getChildAt(1)).setText(teacherName);
                 ((TextView) slot11.getChildAt(2)).setText(roomNo);
-            }else if (slot11Reminder != null){
+            } else if (slot11Reminder != null) {
                 slot11Reminder.setVisibility(View.INVISIBLE);
             }
             slot11.setOnLongClickListener(this);
@@ -555,7 +559,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot21.getChildAt(0)).setText(subjectName);
                 ((TextView) slot21.getChildAt(1)).setText(teacherName);
                 ((TextView) slot21.getChildAt(2)).setText(roomNo);
-            }else if (slot21Reminder != null){
+            } else if (slot21Reminder != null) {
                 slot21Reminder.setVisibility(View.INVISIBLE);
             }
             slot21.setOnLongClickListener(this);
@@ -569,7 +573,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot31.getChildAt(0)).setText(subjectName);
                 ((TextView) slot31.getChildAt(1)).setText(teacherName);
                 ((TextView) slot31.getChildAt(2)).setText(roomNo);
-            }else if (slot31Reminder != null){
+            } else if (slot31Reminder != null) {
                 slot31Reminder.setVisibility(View.INVISIBLE);
             }
             slot31.setOnLongClickListener(this);
@@ -583,7 +587,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot41.getChildAt(0)).setText(subjectName);
                 ((TextView) slot41.getChildAt(1)).setText(teacherName);
                 ((TextView) slot41.getChildAt(2)).setText(roomNo);
-            }else if (slot41Reminder != null){
+            } else if (slot41Reminder != null) {
                 slot41Reminder.setVisibility(View.INVISIBLE);
             }
             slot41.setOnLongClickListener(this);
@@ -597,7 +601,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot51.getChildAt(0)).setText(subjectName);
                 ((TextView) slot51.getChildAt(1)).setText(teacherName);
                 ((TextView) slot51.getChildAt(2)).setText(roomNo);
-            } else if (slot51Reminder != null){
+            } else if (slot51Reminder != null) {
                 slot51Reminder.setVisibility(View.INVISIBLE);
             }
             slot51.setOnLongClickListener(this);
@@ -611,7 +615,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot12.getChildAt(0)).setText(subjectName);
                 ((TextView) slot12.getChildAt(1)).setText(teacherName);
                 ((TextView) slot12.getChildAt(2)).setText(roomNo);
-            }else if (slot12Reminder != null){
+            } else if (slot12Reminder != null) {
                 slot12Reminder.setVisibility(View.INVISIBLE);
             }
             slot12.setOnLongClickListener(this);
@@ -625,7 +629,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot22.getChildAt(0)).setText(subjectName);
                 ((TextView) slot22.getChildAt(1)).setText(teacherName);
                 ((TextView) slot22.getChildAt(2)).setText(roomNo);
-            }else if (slot22Reminder != null){
+            } else if (slot22Reminder != null) {
                 slot22Reminder.setVisibility(View.INVISIBLE);
             }
             slot22.setOnLongClickListener(this);
@@ -639,7 +643,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot32.getChildAt(0)).setText(subjectName);
                 ((TextView) slot32.getChildAt(1)).setText(teacherName);
                 ((TextView) slot32.getChildAt(2)).setText(roomNo);
-            }else if (slot32Reminder != null){
+            } else if (slot32Reminder != null) {
                 slot32Reminder.setVisibility(View.INVISIBLE);
             }
             slot32.setOnLongClickListener(this);
@@ -653,7 +657,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot42.getChildAt(0)).setText(subjectName);
                 ((TextView) slot42.getChildAt(1)).setText(teacherName);
                 ((TextView) slot42.getChildAt(2)).setText(roomNo);
-            }else if (slot42Reminder != null){
+            } else if (slot42Reminder != null) {
                 slot42Reminder.setVisibility(View.INVISIBLE);
             }
             slot42.setOnLongClickListener(this);
@@ -667,7 +671,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot52.getChildAt(0)).setText(subjectName);
                 ((TextView) slot52.getChildAt(1)).setText(teacherName);
                 ((TextView) slot52.getChildAt(2)).setText(roomNo);
-            }else if (slot52Reminder != null){
+            } else if (slot52Reminder != null) {
                 slot52Reminder.setVisibility(View.INVISIBLE);
             }
             slot52.setOnLongClickListener(this);
@@ -681,7 +685,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot13.getChildAt(0)).setText(subjectName);
                 ((TextView) slot13.getChildAt(1)).setText(teacherName);
                 ((TextView) slot13.getChildAt(2)).setText(roomNo);
-            }else if (slot13Reminder != null){
+            } else if (slot13Reminder != null) {
                 slot13Reminder.setVisibility(View.INVISIBLE);
             }
             slot13.setOnLongClickListener(this);
@@ -695,7 +699,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot23.getChildAt(0)).setText(subjectName);
                 ((TextView) slot23.getChildAt(1)).setText(teacherName);
                 ((TextView) slot23.getChildAt(2)).setText(roomNo);
-            }else if (slot23Reminder != null){
+            } else if (slot23Reminder != null) {
                 slot23Reminder.setVisibility(View.INVISIBLE);
             }
             slot23.setOnLongClickListener(this);
@@ -709,7 +713,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot33.getChildAt(0)).setText(subjectName);
                 ((TextView) slot33.getChildAt(1)).setText(teacherName);
                 ((TextView) slot33.getChildAt(2)).setText(roomNo);
-            }else if (slot33Reminder != null){
+            } else if (slot33Reminder != null) {
                 slot33Reminder.setVisibility(View.INVISIBLE);
             }
             slot33.setOnLongClickListener(this);
@@ -723,7 +727,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot43.getChildAt(0)).setText(subjectName);
                 ((TextView) slot43.getChildAt(1)).setText(teacherName);
                 ((TextView) slot43.getChildAt(2)).setText(roomNo);
-            }else if (slot43Reminder != null){
+            } else if (slot43Reminder != null) {
                 slot43Reminder.setVisibility(View.INVISIBLE);
             }
             slot43.setOnLongClickListener(this);
@@ -737,7 +741,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot53.getChildAt(0)).setText(subjectName);
                 ((TextView) slot53.getChildAt(1)).setText(teacherName);
                 ((TextView) slot53.getChildAt(2)).setText(roomNo);
-            }else if (slot53Reminder != null){
+            } else if (slot53Reminder != null) {
                 slot53Reminder.setVisibility(View.INVISIBLE);
             }
             slot53.setOnLongClickListener(this);
@@ -751,7 +755,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot14.getChildAt(0)).setText(subjectName);
                 ((TextView) slot14.getChildAt(1)).setText(teacherName);
                 ((TextView) slot14.getChildAt(2)).setText(roomNo);
-            }else if (slot14Reminder != null){
+            } else if (slot14Reminder != null) {
                 slot14Reminder.setVisibility(View.INVISIBLE);
             }
             slot14.setOnLongClickListener(this);
@@ -765,7 +769,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot24.getChildAt(0)).setText(subjectName);
                 ((TextView) slot24.getChildAt(1)).setText(teacherName);
                 ((TextView) slot24.getChildAt(2)).setText(roomNo);
-            }else if (slot24Reminder != null){
+            } else if (slot24Reminder != null) {
                 slot24Reminder.setVisibility(View.INVISIBLE);
             }
             slot24.setOnLongClickListener(this);
@@ -779,7 +783,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot34.getChildAt(0)).setText(subjectName);
                 ((TextView) slot34.getChildAt(1)).setText(teacherName);
                 ((TextView) slot34.getChildAt(2)).setText(roomNo);
-            }else if (slot34Reminder != null){
+            } else if (slot34Reminder != null) {
                 slot34Reminder.setVisibility(View.INVISIBLE);
             }
             slot34.setOnLongClickListener(this);
@@ -793,7 +797,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot44.getChildAt(0)).setText(subjectName);
                 ((TextView) slot44.getChildAt(1)).setText(teacherName);
                 ((TextView) slot44.getChildAt(2)).setText(roomNo);
-            }else if (slot44Reminder != null){
+            } else if (slot44Reminder != null) {
                 slot44Reminder.setVisibility(View.INVISIBLE);
             }
             slot44.setOnLongClickListener(this);
@@ -807,7 +811,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot54.getChildAt(0)).setText(subjectName);
                 ((TextView) slot54.getChildAt(1)).setText(teacherName);
                 ((TextView) slot54.getChildAt(2)).setText(roomNo);
-            }else if (slot54Reminder != null){
+            } else if (slot54Reminder != null) {
                 slot54Reminder.setVisibility(View.INVISIBLE);
             }
             slot54.setOnLongClickListener(this);
@@ -821,7 +825,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot15.getChildAt(0)).setText(subjectName);
                 ((TextView) slot15.getChildAt(1)).setText(teacherName);
                 ((TextView) slot15.getChildAt(2)).setText(roomNo);
-            }else if (slot15Reminder != null){
+            } else if (slot15Reminder != null) {
                 slot15Reminder.setVisibility(View.INVISIBLE);
             }
             slot15.setOnLongClickListener(this);
@@ -835,7 +839,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot25.getChildAt(0)).setText(subjectName);
                 ((TextView) slot25.getChildAt(1)).setText(teacherName);
                 ((TextView) slot25.getChildAt(2)).setText(roomNo);
-            }else if (slot25Reminder != null){
+            } else if (slot25Reminder != null) {
                 slot25Reminder.setVisibility(View.INVISIBLE);
             }
             slot25.setOnLongClickListener(this);
@@ -849,7 +853,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot35.getChildAt(0)).setText(subjectName);
                 ((TextView) slot35.getChildAt(1)).setText(teacherName);
                 ((TextView) slot35.getChildAt(2)).setText(roomNo);
-            }else if (slot35Reminder != null){
+            } else if (slot35Reminder != null) {
                 slot35Reminder.setVisibility(View.INVISIBLE);
             }
             slot35.setOnLongClickListener(this);
@@ -863,7 +867,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot45.getChildAt(0)).setText(subjectName);
                 ((TextView) slot45.getChildAt(1)).setText(teacherName);
                 ((TextView) slot45.getChildAt(2)).setText(roomNo);
-            }else if (slot45Reminder != null){
+            } else if (slot45Reminder != null) {
                 slot45Reminder.setVisibility(View.INVISIBLE);
             }
             slot45.setOnLongClickListener(this);
@@ -877,7 +881,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot55.getChildAt(0)).setText(subjectName);
                 ((TextView) slot55.getChildAt(1)).setText(teacherName);
                 ((TextView) slot55.getChildAt(2)).setText(roomNo);
-            }else if (slot55Reminder != null){
+            } else if (slot55Reminder != null) {
                 slot55Reminder.setVisibility(View.INVISIBLE);
             }
             slot55.setOnLongClickListener(this);
@@ -892,7 +896,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot16.getChildAt(0)).setText(subjectName);
                 ((TextView) slot16.getChildAt(1)).setText(teacherName);
                 ((TextView) slot16.getChildAt(2)).setText(roomNo);
-            }else if (slot16Reminder != null){
+            } else if (slot16Reminder != null) {
                 slot16Reminder.setVisibility(View.INVISIBLE);
             }
             slot16.setOnLongClickListener(this);
@@ -907,7 +911,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot26.getChildAt(0)).setText(subjectName);
                 ((TextView) slot26.getChildAt(1)).setText(teacherName);
                 ((TextView) slot26.getChildAt(2)).setText(roomNo);
-            }else if (slot26Reminder != null){
+            } else if (slot26Reminder != null) {
                 slot26Reminder.setVisibility(View.INVISIBLE);
             }
             slot26.setOnLongClickListener(this);
@@ -922,7 +926,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot36.getChildAt(0)).setText(subjectName);
                 ((TextView) slot36.getChildAt(1)).setText(teacherName);
                 ((TextView) slot36.getChildAt(2)).setText(roomNo);
-            }else if (slot36Reminder != null){
+            } else if (slot36Reminder != null) {
                 slot36Reminder.setVisibility(View.INVISIBLE);
             }
             slot36.setOnLongClickListener(this);
@@ -937,7 +941,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot46.getChildAt(0)).setText(subjectName);
                 ((TextView) slot46.getChildAt(1)).setText(teacherName);
                 ((TextView) slot46.getChildAt(2)).setText(roomNo);
-            }else if (slot46Reminder != null){
+            } else if (slot46Reminder != null) {
                 slot46Reminder.setVisibility(View.INVISIBLE);
             }
             slot46.setOnLongClickListener(this);
@@ -952,7 +956,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot56.getChildAt(0)).setText(subjectName);
                 ((TextView) slot56.getChildAt(1)).setText(teacherName);
                 ((TextView) slot56.getChildAt(2)).setText(roomNo);
-            }else if (slot56Reminder != null){
+            } else if (slot56Reminder != null) {
                 slot56Reminder.setVisibility(View.INVISIBLE);
             }
             slot56.setOnLongClickListener(this);
@@ -967,7 +971,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot17.getChildAt(0)).setText(subjectName);
                 ((TextView) slot17.getChildAt(1)).setText(teacherName);
                 ((TextView) slot17.getChildAt(2)).setText(roomNo);
-            }else if (slot17Reminder != null){
+            } else if (slot17Reminder != null) {
                 slot17Reminder.setVisibility(View.INVISIBLE);
             }
             slot17.setOnLongClickListener(this);
@@ -982,7 +986,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot27.getChildAt(0)).setText(subjectName);
                 ((TextView) slot27.getChildAt(1)).setText(teacherName);
                 ((TextView) slot27.getChildAt(2)).setText(roomNo);
-            }else if (slot27Reminder != null){
+            } else if (slot27Reminder != null) {
                 slot27Reminder.setVisibility(View.INVISIBLE);
             }
             slot27.setOnLongClickListener(this);
@@ -997,7 +1001,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot37.getChildAt(0)).setText(subjectName);
                 ((TextView) slot37.getChildAt(1)).setText(teacherName);
                 ((TextView) slot37.getChildAt(2)).setText(roomNo);
-            }else if (slot37Reminder != null){
+            } else if (slot37Reminder != null) {
                 slot37Reminder.setVisibility(View.INVISIBLE);
             }
             slot37.setOnLongClickListener(this);
@@ -1012,7 +1016,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot47.getChildAt(0)).setText(subjectName);
                 ((TextView) slot47.getChildAt(1)).setText(teacherName);
                 ((TextView) slot47.getChildAt(2)).setText(roomNo);
-            }else if (slot47Reminder != null){
+            } else if (slot47Reminder != null) {
                 slot47Reminder.setVisibility(View.INVISIBLE);
             }
             slot47.setOnLongClickListener(this);
@@ -1027,7 +1031,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot57.getChildAt(0)).setText(subjectName);
                 ((TextView) slot57.getChildAt(1)).setText(teacherName);
                 ((TextView) slot57.getChildAt(2)).setText(roomNo);
-            }else if (slot57Reminder != null){
+            } else if (slot57Reminder != null) {
                 slot57Reminder.setVisibility(View.INVISIBLE);
             }
             slot57.setOnLongClickListener(this);
@@ -1042,7 +1046,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot18.getChildAt(0)).setText(subjectName);
                 ((TextView) slot18.getChildAt(1)).setText(teacherName);
                 ((TextView) slot18.getChildAt(2)).setText(roomNo);
-            }else if (slot18Reminder != null){
+            } else if (slot18Reminder != null) {
                 slot18Reminder.setVisibility(View.INVISIBLE);
             }
             slot18.setOnLongClickListener(this);
@@ -1057,7 +1061,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot28.getChildAt(0)).setText(subjectName);
                 ((TextView) slot28.getChildAt(1)).setText(teacherName);
                 ((TextView) slot28.getChildAt(2)).setText(roomNo);
-            }else if (slot28Reminder != null){
+            } else if (slot28Reminder != null) {
                 slot28Reminder.setVisibility(View.INVISIBLE);
             }
             slot28.setOnLongClickListener(this);
@@ -1072,7 +1076,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot38.getChildAt(0)).setText(subjectName);
                 ((TextView) slot38.getChildAt(1)).setText(teacherName);
                 ((TextView) slot38.getChildAt(2)).setText(roomNo);
-            }else if (slot38Reminder != null){
+            } else if (slot38Reminder != null) {
                 slot38Reminder.setVisibility(View.INVISIBLE);
             }
             slot38.setOnLongClickListener(this);
@@ -1087,7 +1091,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot48.getChildAt(0)).setText(subjectName);
                 ((TextView) slot48.getChildAt(1)).setText(teacherName);
                 ((TextView) slot48.getChildAt(2)).setText(roomNo);
-            }else if (slot48Reminder != null){
+            } else if (slot48Reminder != null) {
                 slot48Reminder.setVisibility(View.INVISIBLE);
             }
             slot48.setOnLongClickListener(this);
@@ -1102,7 +1106,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 ((TextView) slot58.getChildAt(0)).setText(subjectName);
                 ((TextView) slot58.getChildAt(1)).setText(teacherName);
                 ((TextView) slot58.getChildAt(2)).setText(roomNo);
-            }else if (slot58Reminder != null){
+            } else if (slot58Reminder != null) {
                 slot58Reminder.setVisibility(View.INVISIBLE);
             }
             slot58.setOnLongClickListener(this);
@@ -1790,7 +1794,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                                 ((TextView) room).setText(roomNo);
                             }
                             ET_editSlotRoom.setText("");
-                            if (reminder != null){
+                            if (reminder != null) {
                                 reminder.setVisibility(View.VISIBLE);
                             }
                             AD_editSlot.cancel();
@@ -2407,11 +2411,10 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                     String subject = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(0)).getText().toString();
                     String room = ((TextView) ((RelativeLayout) v.getParent()).getChildAt(2)).getText().toString();
                     if (!subject.isEmpty()) {
-                        handleNotification(26, subject, room, 2, 20, 13, 0);
+                        handleNotification(26, subject, room, 2, 16, 30, 0);
                         editor.putBoolean("SLOT26_CHECKED", true);
                         editor.apply();
                     }
-
                 } else {
                     ((RelativeLayout) v.getParent()).setBackground(ContextCompat
                             .getDrawable(TimeTableView.this,
@@ -2747,7 +2750,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
     }
 
     private void handleNotification(int id, String subject, String room, int day, int hours, int minutes, int seconds) {
-        Toast.makeText(TimeTableView.this, "Notification on", Toast.LENGTH_SHORT).show();
+        Toast.makeText(TimeTableView.this, "Reminder on", Toast.LENGTH_SHORT).show();
         Intent alarmIntent = new Intent(this, TimeTableReceiver.class);
         alarmIntent.putExtra("SUBJECT", subject);
         alarmIntent.putExtra("ROOM", room);
@@ -2774,7 +2777,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
                 break;
             }
             case 5: {
-                calendar.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
+                calendar.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
                 break;
             }
         }
@@ -2788,19 +2791,18 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
         Calendar now = Calendar.getInstance();
         if (calendar.before(now)) {
             calendar.add(Calendar.DATE, 7);
-            Toast.makeText(TimeTableView.this, "In Past", Toast.LENGTH_SHORT).show();
         }
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 7, pendingIntent);
     }
 
     private void cancelSlotNotification(int id) {
-        Toast.makeText(TimeTableView.this, "Notification off", Toast.LENGTH_SHORT).show();
         Intent alarmIntent = new Intent(this, TimeTableReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, id, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         if (pendingIntent != null) {
             alarmManager.cancel(pendingIntent);
             pendingIntent.cancel();
+            Toast.makeText(TimeTableView.this, "Reminder off", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -2826,7 +2828,7 @@ public class TimeTableView extends AppCompatActivity implements View.OnLongClick
         }
     }
 
-    void hideSlotReminder(){
+    void hideSlotReminder() {
 
         slot11Reminder.setVisibility(View.INVISIBLE);
         slot21Reminder.setVisibility(View.INVISIBLE);

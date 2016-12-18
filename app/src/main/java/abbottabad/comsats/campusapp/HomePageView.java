@@ -184,8 +184,6 @@ public class HomePageView extends AppCompatActivity implements
                 .setInterval(10 * 1000)        // 10 seconds, in milliseconds
                 .setFastestInterval(1000);
 
-        checkIfGpsIsEnabled();
-
         CheckBox CB_enableNoifications = (CheckBox) findViewById(R.id.CB_enableNotifications);
         if (CB_enableNoifications != null) {
             CB_enableNoifications.setOnClickListener(this);
@@ -243,7 +241,7 @@ public class HomePageView extends AppCompatActivity implements
         if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setMessage("GPS is disabled in your device. Enable it to make this application better for you?")
-                    .setCancelable(false)
+                    .setCancelable(true)
                     .setPositiveButton("Enable GPS",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {

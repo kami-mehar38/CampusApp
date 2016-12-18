@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.net.Uri;
+import android.os.Handler;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 
@@ -30,7 +31,7 @@ public class TimeTableReceiver extends BroadcastReceiver{
             NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
             Uri sound = Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.notification_sound);
-            long[] pattern = {1000, 1000, 1000, 1000, 1000};
+            long[] pattern = {1000, 1000};
 
             Intent resultIntent = new Intent(context, TimeTableView.class);
             TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(context);
@@ -41,7 +42,6 @@ public class TimeTableReceiver extends BroadcastReceiver{
             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
                     context).setSmallIcon(R.drawable.ic_notification_timetable)
                     .setContentTitle("Timetable").setVibrate(pattern)
-                    .setStyle(new NotificationCompat.BigTextStyle())
                     .setContentText("Next class of " + subject + " is in room# " + room)
                     .setAutoCancel(true).setSound(sound);
             mBuilder.setContentIntent(resultPendingIntent);
@@ -49,9 +49,16 @@ public class TimeTableReceiver extends BroadcastReceiver{
         }
 
         if (sharedPreferences.getBoolean("SILENT_DURING_CLASS", false)){
-            AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+            final AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
             if (audioManager.getRingerMode() != AudioManager.RINGER_MODE_VIBRATE) {
-                audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
+                Runnable runnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
+                    }
+                };
+                Handler handler = new Handler();
+                handler.postDelayed(runnable, 1000 * 5);
             }
         }
     }
