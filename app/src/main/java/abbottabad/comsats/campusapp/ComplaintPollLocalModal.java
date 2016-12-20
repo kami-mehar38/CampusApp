@@ -77,9 +77,9 @@ class ComplaintPollLocalModal extends SQLiteOpenHelper {
         db.close();
     }
 
-    void deleteComplaint(String reg){
+    void deleteComplaint(String imageName){
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_NAME, COL_REG + " = ?", new String[]{reg});
+        db.delete(TABLE_NAME, COL_IMAGE_URL + " = ?", new String[]{imageName});
         db.close();
         retrieveComplaints();
     }

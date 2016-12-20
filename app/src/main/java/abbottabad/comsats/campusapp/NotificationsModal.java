@@ -412,7 +412,6 @@ class NotificationsModal {
 
     private class DeleteGroup extends AsyncTask<String, Void, String> {
         private String groupName;
-        private String selectedItem;
         private ProgressDialog progressDialog;
         private AlertDialog alertDialog;
         private SharedPreferences.Editor editor;

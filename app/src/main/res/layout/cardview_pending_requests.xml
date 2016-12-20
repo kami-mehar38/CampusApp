@@ -36,7 +36,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             app:rv_color="#e1ebee"
-            app:rv_rippleDuration="250">
+            app:rv_rippleDuration="150">
 
             <Button
                 android:layout_width="60dp"
@@ -59,7 +59,7 @@
             android:layout_toLeftOf="@+id/btn_accept"
             android:layout_toStartOf="@+id/btn_accept"
             app:rv_color="#e1ebee"
-            app:rv_rippleDuration="250">
+            app:rv_rippleDuration="150">
 
             <Button
                 android:layout_width="60dp"

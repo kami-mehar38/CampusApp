@@ -125,13 +125,6 @@ class LoginModal {
                 editor.putString("NAME", designation + " Admin");
                 editor.apply();
 
-                SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
-                final int TOKEN_GOT = sharedPreferences.getInt("TOKEN_GOT", 0);
-
-                if (TOKEN_GOT != 1){
-                    context.startService(new Intent(context, RegistrationIntentService.class));
-                }
-
                 context.startActivity(new Intent(context, HomePageView.class));
                 ((Activity) context).finish();
             }

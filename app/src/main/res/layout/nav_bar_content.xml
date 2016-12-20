@@ -28,15 +28,14 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="5"
                 android:drawableLeft="@drawable/ic_list_notification"
                 android:drawablePadding="@dimen/activity_horizontal_margin"
                 android:drawableStart="@drawable/ic_list_notification"
                 android:gravity="center|start"
-                android:layout_weight="5"
                 android:text="@string/enable_notifications"
                 android:textColor="#000"
-                android:textStyle="normal"
-                />
+                android:textStyle="normal" />
 
             <CheckBox
                 android:id="@+id/CB_enableNotifications"
@@ -69,11 +68,11 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="5"
                 android:drawableLeft="@drawable/ic_list_timetable"
                 android:drawablePadding="@dimen/activity_horizontal_margin"
                 android:drawableStart="@drawable/ic_list_timetable"
                 android:gravity="center|start"
-                android:layout_weight="5"
                 android:text="@string/class_notifications"
                 android:textColor="#000"
                 android:textStyle="normal" />
@@ -86,6 +85,7 @@
 
         </LinearLayout>
 
+
         <LinearLayout
             android:id="@+id/viewShareTimetable"
             android:layout_width="match_parent"
@@ -97,11 +97,11 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="5"
                 android:drawableLeft="@drawable/ic_list_timetable"
                 android:drawablePadding="@dimen/activity_horizontal_margin"
                 android:drawableStart="@drawable/ic_list_timetable"
                 android:gravity="center|start"
-                android:layout_weight="5"
                 android:text="@string/share_timetable"
                 android:textColor="#000"
                 android:textStyle="normal" />
@@ -124,11 +124,11 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="5"
                 android:drawableLeft="@drawable/ic_list_timetable"
                 android:drawablePadding="@dimen/activity_horizontal_margin"
                 android:drawableStart="@drawable/ic_list_timetable"
                 android:gravity="center|start"
-                android:layout_weight="5"
                 android:text="@string/silent_during_class"
                 android:textColor="#000"
                 android:textStyle="normal" />
@@ -137,6 +137,55 @@
                 android:id="@+id/CB_silentDuringClass"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/complaintView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="20dp"
+                android:background="#000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:text="@string/complaint_poll"
+                android:textSize="16sp"
+                android:textStyle="normal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:drawableLeft="@drawable/ic_list_complaint"
+                    android:drawablePadding="@dimen/activity_horizontal_margin"
+                    android:drawableStart="@drawable/ic_list_complaint"
+                    android:gravity="center|start"
+                    android:text="@string/receive_complaints"
+                    android:textColor="#000"
+                    android:textStyle="normal" />
+
+                <CheckBox
+                    android:id="@+id/CB_receiveComplaints"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -162,17 +211,17 @@
             android:padding="5dp">
 
             <TextView
+                android:id="@+id/textView3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="5"
                 android:drawableLeft="@drawable/ic_list_tracking"
                 android:drawablePadding="@dimen/activity_horizontal_margin"
                 android:drawableStart="@drawable/ic_list_tracking"
                 android:gravity="center|start"
-                android:layout_weight="5"
                 android:text="@string/enable_notifications"
                 android:textColor="#000"
-                android:textStyle="normal"
-                android:id="@+id/textView3" />
+                android:textStyle="normal" />
 
             <CheckBox
                 android:id="@+id/CB_enableFacultyNotifications"
@@ -205,11 +254,11 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="5"
                 android:drawableLeft="@drawable/ic_list_blood"
                 android:drawablePadding="@dimen/activity_horizontal_margin"
                 android:drawableStart="@drawable/ic_list_blood"
                 android:gravity="center|start"
-                android:layout_weight="5"
                 android:text="@string/receive_blood_requests"
                 android:textColor="#000"
                 android:textStyle="normal" />

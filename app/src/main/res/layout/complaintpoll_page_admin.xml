@@ -2,17 +2,34 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/colorExtraLightGrey">
+    android:background="@color/colorExtraLightGrey"
+    android:orientation="vertical">
 
-    <include layout="@layout/complaintpoll_toolbar"/>
+    <include layout="@layout/complaintpoll_toolbar" />
 
-    <android.support.v7.widget.RecyclerView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical"
-        android:id="@+id/RV_complaints">
+        android:layout_height="match_parent">
 
-    </android.support.v7.widget.RecyclerView>
+        <TextView
+            android:id="@+id/TV_noComplaints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_complaints"
+            android:textSize="18sp"
+            android:textColor="#000"
+            android:layout_gravity="center"
+            android:drawableTop="@drawable/complaint"
+            android:drawablePadding="10dp"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/RV_complaints"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </FrameLayout>
 
 </LinearLayout>

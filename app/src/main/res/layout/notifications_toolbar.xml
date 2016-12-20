@@ -63,7 +63,7 @@
                 android:layout_marginRight="5dp"
                 android:padding="5dp"
                 app:rv_color="#fff"
-                app:rv_rippleDuration="250">
+                app:rv_rippleDuration="150">
 
                 <FrameLayout
                     android:layout_width="wrap_content"

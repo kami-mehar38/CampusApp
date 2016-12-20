@@ -167,4 +167,9 @@
     <string name="set_time">Set time</string>
     <string name="no_blood_requests">No blood requests</string>
     <string name="no_response">No response</string>
+    <string name="no_pending_requests">No pending requests</string>
+    <string name="choose_image">Choose image</string>
+    <string name="take_picture">Take Picture</string>
+    <string name="no_complaints">No complaints</string>
+    <string name="receive_complaints">Receive complaints</string>
 </resources>

@@ -18,6 +18,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -64,6 +65,9 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
     public static TextView TV_requestStatus;
     public static TextView TV_requestsCount;
     private ImageView imageView;
+    private FrameLayout pendingRequestsLayout;
+    private Animation topToBottom;
+    public static TextView TV_noRequests;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,13 +159,13 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
 
         managePrivacyLayout(groupPrivacy, isCreatedByMe, isJoinded);
 
-        final LinearLayout pendingRequestsLayout = (LinearLayout) findViewById(R.id.pendingRequestsLayout);
+        pendingRequestsLayout = (FrameLayout) findViewById(R.id.pendingRequestsLayout);
         if (pendingRequestsLayout != null) {
             pendingRequestsLayout.setVisibility(View.GONE);
         }
         final Animation bottomToTop = AnimationUtils.loadAnimation(this,
                 R.anim.bottom_to_top);
-        final Animation topToBottom = AnimationUtils.loadAnimation(this,
+        topToBottom = AnimationUtils.loadAnimation(this,
                 R.anim.top_to_bottom);
         topToBottom.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -190,6 +194,8 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
             recyclerView.setAdapter(pendingGroupRequestsAdapter);
             recyclerView.addItemDecoration(new RecyclerViewDivider(this));
         }
+
+        TV_noRequests = (TextView) findViewById(R.id.TV_noRequests);
 
         new NotificationsRequestsLocalModal(this).retrieveGroupRequest(notificationType);
 
@@ -234,7 +240,7 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
         Log.i("TAG", "onCreate: " + count);
 
         TV_requestStatus = (TextView) findViewById(R.id.TV_requestStatus);
-        if (sharedPreferences.getBoolean("REQUESTED_FOR_" + notificationType, false)){
+        if (sharedPreferences.getBoolean("REQUESTED_FOR_" + notificationType, false)) {
             TV_requestStatus.setText("Your request has been sent, waiting for reaponse.");
             btn_sendRequest.setVisibility(View.GONE);
         }
@@ -249,12 +255,12 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
         if (chatLayout != null) {
             chatLayout.setVisibility(View.GONE);
         }
-        if (groupPrivacy != null && groupPrivacy.equals("Public") || isJoinded){
+        if (groupPrivacy != null && groupPrivacy.equals("Public") || isJoinded) {
             if (privacyLayout != null && chatLayout != null) {
                 chatLayout.setVisibility(View.VISIBLE);
             }
-        } else if (groupPrivacy != null && groupPrivacy.equals("Private")){
-            if (chatLayout != null && privacyLayout != null && !isCreatedByMe){
+        } else if (groupPrivacy != null && groupPrivacy.equals("Private")) {
+            if (chatLayout != null && privacyLayout != null && !isCreatedByMe) {
                 privacyLayout.setVisibility(View.VISIBLE);
             } else if (chatLayout != null) {
                 chatLayout.setVisibility(View.VISIBLE);
@@ -379,6 +385,11 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
     public void onBackPressed() {
         if (IS_IN_ACTION_MODE) {
             clearActionMode();
+        } else if (areRequestsOpen) {
+            if (pendingRequestsLayout != null) {
+                pendingRequestsLayout.startAnimation(topToBottom);
+                areRequestsOpen = false;
+            }
         } else {
             super.onBackPressed();
         }

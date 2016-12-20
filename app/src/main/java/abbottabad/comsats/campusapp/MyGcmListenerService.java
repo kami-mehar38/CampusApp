@@ -58,7 +58,9 @@ public class MyGcmListenerService extends GcmListenerService {
 
         if (APPLICATION_STATUS.equals("FOOD")) {
             if (PURPOSE != null && PURPOSE.equals("FOOD_COMPLAINT")) {
-                receiveFoodComplaint(data);
+                if (sharedPreferences.getBoolean("RECEIVE_COMPLAINTS", false)) {
+                    receiveFoodComplaint(data);
+                }
             }
         }
 
@@ -188,7 +190,7 @@ public class MyGcmListenerService extends GcmListenerService {
         final String reg = data.getString("reg");
         final String contact = data.getString("contact");
         final String description = data.getString("description");
-        final String imageUrl = data.getString("imageUrl");
+        final String imageUrl = data.getString("imagePath");
 
         ComplaintPollController.setName(name);
         ComplaintPollController.setRegistration(reg);

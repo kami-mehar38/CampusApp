@@ -49,11 +49,21 @@ class PendingGroupRequestsAdapter extends RecyclerView.Adapter<PendingGroupReque
     void addItem(PendingGroupRequestsInfo pendingGroupRequestsInfo, int position) {
         pendingGroupRequestsInfoList.add(position, pendingGroupRequestsInfo);
         notifyItemInserted(position);
+        if (NotificationsView.TV_noRequests != null){
+            if (getItemCount() > 0){
+                NotificationsView.TV_noRequests.setVisibility(View.GONE);
+            }
+        }
     }
 
     void removeItem(int position) {
         pendingGroupRequestsInfoList.remove(position);
         notifyDataSetChanged();
+        if (NotificationsView.TV_noRequests != null){
+            if (getItemCount() == 0){
+                NotificationsView.TV_noRequests.setVisibility(View.VISIBLE);
+            }
+        }
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements RippleView.OnRippleCompleteListener {

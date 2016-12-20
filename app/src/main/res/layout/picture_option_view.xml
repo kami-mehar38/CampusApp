@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="#fff"
+        android:orientation="horizontal"
+        android:padding="20dp">
+
+        <com.andexert.library.RippleView
+            android:id="@+id/BTN_choosePicture"
+            rv_centered="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:rv_color="@color/colorLightGrey"
+            app:rv_rippleDuration="150"
+            app:rv_zoom="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/ic_action_picture"
+                android:gravity="center"
+                android:text="@string/choose_picture"
+                android:textColor="@color/blueColorShade"
+                android:textSize="16sp" />
+
+        </com.andexert.library.RippleView>
+
+        <com.andexert.library.RippleView
+            android:id="@+id/BTN_takePicture"
+            rv_centered="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:rv_color="@color/colorLightGrey"
+            app:rv_rippleDuration="150"
+            app:rv_zoom="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/ic_action_camera"
+                android:gravity="center"
+                android:text="@string/take_picture"
+                android:textColor="@color/blueColorShade"
+                android:textSize="16sp" />
+
+        </com.andexert.library.RippleView>
+
+    </LinearLayout>
+
+</RelativeLayout>

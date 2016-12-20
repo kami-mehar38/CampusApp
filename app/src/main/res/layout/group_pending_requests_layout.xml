@@ -1,32 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/pendingRequestsLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#fff"
-    android:id="@+id/pendingRequestsLayout">
+    android:background="#fff">
 
     <TextView
-        android:id="@+id/TV_collapse"
+        android:id="@+id/TV_noRequests"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/pending_requests"
-        android:textSize="18sp"
-        android:textColor="#678089"
         android:layout_gravity="center"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="30dp"
-        android:drawableEnd="@drawable/ic_action_expand"
-        android:drawableRight="@drawable/ic_action_expand"
-        android:gravity="center"
-        android:drawablePadding="10dp"/>
+        android:drawableTop="@drawable/ic_action_person_big"
+        android:text="@string/no_pending_requests"
+        android:textColor="#000"
+        android:textSize="18sp" />
 
-    <android.support.v7.widget.RecyclerView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical"
-        android:id="@+id/RV_pendingRequests">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    </android.support.v7.widget.RecyclerView>
+        <TextView
+            android:id="@+id/TV_collapse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"
+            android:background="@color/colorLightGrey"
+            android:drawableEnd="@drawable/ic_action_expand"
+            android:drawableRight="@drawable/ic_action_expand"
+            android:elevation="4dp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/pending_requests"
+            android:textColor="#678089"
+            android:textSize="18sp"
+            tools:targetApi="lollipop" />
 
-</LinearLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/RV_pendingRequests"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+
+</FrameLayout>

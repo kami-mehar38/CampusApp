@@ -220,9 +220,20 @@ public class HomePageView extends AppCompatActivity implements
             CB_silentDuringClass.setChecked(sharedPreferences.getBoolean("SILENT_DURING_CLASS", false));
         }
 
+        CheckBox CB_receiveComplaints = (CheckBox) findViewById(R.id.CB_receiveComplaints);
+        if (CB_receiveComplaints != null) {
+            CB_receiveComplaints.setOnClickListener(this);
+            CB_receiveComplaints.setChecked(sharedPreferences.getBoolean("RECEIVE_COMPLAINTS", false));
+        }
+
         String applicationStatus = sharedPreferences.getString("APPLICATION_STATUS", "");
         if (!applicationStatus.equals("TEACHER")) {
             LinearLayout linearLayout = (LinearLayout) findViewById(R.id.viewShareTimetable);
+            if (linearLayout != null) {
+                linearLayout.setVisibility(View.GONE);
+            }
+        } else if (!applicationStatus.equals("FOOD")){
+            LinearLayout linearLayout = (LinearLayout) findViewById(R.id.complaintView);
             if (linearLayout != null) {
                 linearLayout.setVisibility(View.GONE);
             }
@@ -641,12 +652,12 @@ public class HomePageView extends AppCompatActivity implements
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putBoolean("RECEIVE_EVENT_NOTIFICATIONS", true);
                     editor.apply();
-                    Toast.makeText(HomePageView.this, "Enabled", Toast.LENGTH_LONG).show();
+                    Toast.makeText(HomePageView.this, "Enabled", Toast.LENGTH_SHORT).show();
                 } else {
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putBoolean("RECEIVE_EVENT_NOTIFICATIONS", false);
                     editor.apply();
-                    Toast.makeText(HomePageView.this, "Disabled", Toast.LENGTH_LONG).show();
+                    Toast.makeText(HomePageView.this, "Disabled", Toast.LENGTH_SHORT).show();
                 }
                 break;
             }
@@ -655,12 +666,12 @@ public class HomePageView extends AppCompatActivity implements
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putBoolean("RECEIVE_BLOOD_REQUEST", true);
                     editor.apply();
-                    Toast.makeText(HomePageView.this, "Enabled", Toast.LENGTH_LONG).show();
+                    Toast.makeText(HomePageView.this, "Enabled", Toast.LENGTH_SHORT).show();
                 } else {
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putBoolean("RECEIVE_BLOOD_REQUEST", false);
                     editor.apply();
-                    Toast.makeText(HomePageView.this, "Disabled", Toast.LENGTH_LONG).show();
+                    Toast.makeText(HomePageView.this, "Disabled", Toast.LENGTH_SHORT).show();
                 }
                 break;
             }
@@ -669,12 +680,12 @@ public class HomePageView extends AppCompatActivity implements
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putBoolean("RECEIVE_FACULTY_NOTIFICATIONS", true);
                     editor.apply();
-                    Toast.makeText(HomePageView.this, "Enabled", Toast.LENGTH_LONG).show();
+                    Toast.makeText(HomePageView.this, "Enabled", Toast.LENGTH_SHORT).show();
                 } else {
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putBoolean("RECEIVE_FACULTY_NOTIFICATIONS", false);
                     editor.apply();
-                    Toast.makeText(HomePageView.this, "Disabled", Toast.LENGTH_LONG).show();
+                    Toast.makeText(HomePageView.this, "Disabled", Toast.LENGTH_SHORT).show();
                 }
                 break;
             }
@@ -693,12 +704,12 @@ public class HomePageView extends AppCompatActivity implements
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putBoolean("RECEIVE_CLASS_NOTIFICATIONS", true);
                     editor.apply();
-                    Toast.makeText(HomePageView.this, "Enabled", Toast.LENGTH_LONG).show();
+                    Toast.makeText(HomePageView.this, "Enabled", Toast.LENGTH_SHORT).show();
                 } else {
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putBoolean("RECEIVE_CLASS_NOTIFICATIONS", false);
                     editor.apply();
-                    Toast.makeText(HomePageView.this, "Disabled", Toast.LENGTH_LONG).show();
+                    Toast.makeText(HomePageView.this, "Disabled", Toast.LENGTH_SHORT).show();
                 }
                 break;
             }
@@ -707,12 +718,26 @@ public class HomePageView extends AppCompatActivity implements
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putBoolean("SILENT_DURING_CLASS", true);
                     editor.apply();
-                    Toast.makeText(HomePageView.this, "Enabled", Toast.LENGTH_LONG).show();
+                    Toast.makeText(HomePageView.this, "Enabled", Toast.LENGTH_SHORT).show();
                 } else {
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putBoolean("SILENT_DURING_CLASS", false);
                     editor.apply();
-                    Toast.makeText(HomePageView.this, "Disabled", Toast.LENGTH_LONG).show();
+                    Toast.makeText(HomePageView.this, "Disabled", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            }
+            case R.id.CB_receiveComplaints:{
+                if (((CheckBox) v).isChecked()){
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean("RECEIVE_COMPLAINTS", true);
+                    editor.apply();
+                    Toast.makeText(HomePageView.this, "Enabled", Toast.LENGTH_SHORT).show();
+                } else {
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean("RECEIVE_COMPLAINTS", false);
+                    editor.apply();
+                    Toast.makeText(HomePageView.this, "Disabled", Toast.LENGTH_SHORT).show();
                 }
                 break;
             }

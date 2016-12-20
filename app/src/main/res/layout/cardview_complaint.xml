@@ -1,142 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/CV_facultyStatus"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/CV_facultyStatus">
+    android:background="#fff">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#fff"
         android:padding="10dp">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/TV_Cname"
-            android:textColor="#000"
-            android:textSize="15sp"
-
-            android:layout_marginRight="5dp"
-            android:layout_marginEnd="5dp"
-            android:text="@string/name" />
-
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/TV_Creg"
-            android:layout_below="@+id/TV_ComplaintName"
-            android:textColor="#000"
-            android:textSize="15sp"
-            android:layout_marginRight="5dp"
             android:layout_marginEnd="5dp"
-            android:text="@string/reg_id" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/TV_Ccontact"
-            android:layout_below="@+id/TV_ComplaintRegistration"
-            android:textColor="#000"
-            android:textSize="15sp"
-            android:paddingBottom="10dp"
             android:layout_marginRight="5dp"
-            android:layout_marginEnd="5dp"
-            android:text="@string/contact" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/TV_Cdesc"
-            android:layout_below="@+id/TV_ComplaintContact"
-            android:textColor="#000"
-            android:textSize="15sp"
-            android:layout_marginRight="5dp"
-            android:layout_marginEnd="5dp"
-            android:text="@string/description" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/TV_ComplaintName"
-            android:layout_toEndOf="@+id/TV_Cname"
-            android:layout_toRightOf="@+id/TV_Cname"
-            android:layout_toLeftOf="@+id/btn_callComplaint"
-            android:layout_toStartOf="@+id/btn_callComplaint"
-            android:layout_marginBottom="10dp"
+            android:text="@string/name"
             android:textColor="#000"
             android:textSize="15sp" />
 
         <TextView
+            android:id="@+id/TV_Creg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/TV_ComplaintName"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:text="@string/reg_id"
+            android:textColor="#000"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/TV_Ccontact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TV_ComplaintRegistration"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:paddingBottom="10dp"
+            android:text="@string/contact"
+            android:textColor="#000"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/TV_Cdesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TV_ComplaintContact"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:text="@string/description"
+            android:textColor="#000"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/TV_ComplaintName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_toEndOf="@+id/TV_Cname"
+            android:layout_toLeftOf="@+id/btn_callComplaint"
+            android:layout_toRightOf="@+id/TV_Cname"
+            android:layout_toStartOf="@+id/btn_callComplaint"
+            android:textColor="#000"
+            android:textSize="15sp" />
+
+        <TextView
             android:id="@+id/TV_ComplaintRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TV_ComplaintName"
+            android:layout_marginBottom="10dp"
             android:layout_toEndOf="@+id/TV_Creg"
             android:layout_toRightOf="@+id/TV_Creg"
-            android:layout_below="@+id/TV_ComplaintName"
-            android:layout_marginBottom="10dp"
             android:textColor="#000"
             android:textSize="15sp" />
 
         <TextView
+            android:id="@+id/TV_ComplaintContact"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/TV_ComplaintContact"
-            android:layout_toEndOf="@+id/TV_Ccontact"
-            android:layout_toRightOf="@+id/TV_Ccontact"
             android:layout_below="@+id/TV_ComplaintRegistration"
             android:layout_marginBottom="10dp"
+            android:layout_toEndOf="@+id/TV_Ccontact"
+            android:layout_toRightOf="@+id/TV_Ccontact"
             android:textColor="#000"
             android:textSize="15sp" />
 
         <TextView
+            android:id="@+id/TV_ComplaintDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/TV_ComplaintDescription"
+            android:layout_below="@+id/TV_ComplaintContact"
             android:layout_toEndOf="@+id/TV_Cdesc"
             android:layout_toRightOf="@+id/TV_Cdesc"
-            android:layout_below="@+id/TV_ComplaintContact"
+            android:text="@string/no_decription"
             android:textColor="#000"
-            android:textSize="15sp"
-            android:text="@string/no_decription"/>
+            android:textSize="15sp" />
 
         <Button
+            android:id="@+id/btn_callComplaint"
             android:layout_width="64dp"
             android:layout_height="30dp"
-            android:id="@+id/btn_callComplaint"
-            android:textColor="@color/colorPrimary"
-            android:textSize="12sp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:background="@drawable/button_background"
+            android:text="@string/call"
             android:textAllCaps="false"
-            android:text="@string/call"/>
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp" />
 
         <Button
+            android:id="@+id/btn_deleteComplaint"
             android:layout_width="64dp"
             android:layout_height="30dp"
-            android:id="@+id/btn_deleteComplaint"
-            android:textColor="@color/colorPrimary"
-            android:textSize="12sp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/btn_callComplaint"
             android:layout_marginTop="5dp"
             android:background="@drawable/button_background"
+            android:text="@string/delete"
             android:textAllCaps="false"
-            android:text="@string/delete"/>
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp" />
 
         <ImageView
             android:id="@+id/IV_evidencePicture"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/btn_deleteComplaint"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/group_picture_background"
             android:contentDescription="@string/choose_picture"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_action_picture"
-            android:background="@drawable/group_picture_background"
-            android:layout_below="@id/btn_deleteComplaint"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            />
+            android:src="@drawable/ic_action_picture" />
+
+        <TextView
+            android:id="@+id/TV_imageUri"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
 
     </RelativeLayout>
 
