@@ -54,8 +54,12 @@ class NotificationsModal {
         this.context = context;
     }
 
-    void sendEventNotification(String reg_id, String message, String notificationSender, String notification_type) {
-        new SendEventNotification().execute(reg_id, message, notificationSender, notification_type);
+    void sendGroupNotification(String reg_id, String message, String notificationSender, String notification_type) {
+        new SendGroupNotification().execute(reg_id, message, notificationSender, notification_type);
+    }
+
+    void sendEventNotification(String regId, String name, String message) {
+        new SendEventNotification().execute(regId, name, message);
     }
 
     void createGroup(String imageString, String groupName, String groupPrivacy, String userName, String reg_id, String currentDateTimeString) {
@@ -78,7 +82,7 @@ class NotificationsModal {
         new SendGroupRequestResponse().execute(response, regId, groupName, status);
     }
 
-    private class SendEventNotification extends AsyncTask<String, Void, String> {
+    private class SendGroupNotification extends AsyncTask<String, Void, String> {
 
         private String message;
         private String currentDateTimeString;
@@ -116,7 +120,7 @@ class NotificationsModal {
 
         @Override
         protected String doInBackground(String... params) {
-            String stringUrl = "http://hostellocator.com/sendEventNotification.php";
+            String stringUrl = "http://hostellocator.com/sendGroupNotification.php";
             String reg_id = params[0];
             message = params[1];
             String notificationSender = params[2];
@@ -221,6 +225,141 @@ class NotificationsModal {
                 }
             } else {
                 NotificationsView.ET_message.setText(message);
+                Toast.makeText(context, "Some error occurred! Please try again.", Toast.LENGTH_LONG).show();
+            }
+
+        }
+    }
+
+    private class SendEventNotification extends AsyncTask<String, Void, String> {
+
+        private String message;
+        private String name;
+
+        @Override
+        protected void onPreExecute() {
+            Animation scaleOut = AnimationUtils.loadAnimation(context, R.anim.send_out);
+            NotificationsListFragment.sendNotification.startAnimation(scaleOut);
+            scaleOut.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    NotificationsListFragment.sendNotification.setVisibility(View.GONE);
+                    NotificationsListFragment.isWaiting.setVisibility(View.VISIBLE);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            String stringUrl = "http://hostellocator.com/sendEventNotification.php";
+            String regId = params[0];
+            name = params[1];
+            message = params[2];
+
+            try {
+                URL url = new URL(stringUrl);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String data = URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8") + "&" +
+                        URLEncoder.encode("reg_id", "UTF-8") + "=" + URLEncoder.encode(regId, "UTF-8") + "&" +
+                        URLEncoder.encode("message", "UTF-8") + "=" + URLEncoder.encode(message, "UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+                StringBuilder stringBuilder = new StringBuilder();
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(line);
+                }
+
+                JSONArray parentJSON = new JSONArray(stringBuilder.toString());
+                JSONObject finalObject = parentJSON.getJSONObject(0);
+                String RESPONSE = finalObject.getString("RESPONSE");
+                Log.i("TAG", "doInBackground: " + RESPONSE);
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return RESPONSE;
+            } catch (IOException | JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+
+            Animation scaleIn = AnimationUtils.loadAnimation(context, R.anim.send_in);
+            NotificationsListFragment.sendNotification.startAnimation(scaleIn);
+            scaleIn.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+                    NotificationsListFragment.sendNotification.setVisibility(View.VISIBLE);
+                    NotificationsListFragment.isWaiting.setVisibility(View.GONE);
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+
+            if (result != null) {
+                switch (result) {
+                    case "OK": {
+                        AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+                        MediaPlayer mPlayer = MediaPlayer.create(context, R.raw.message_sent);
+                        if (mPlayer != null && audioManager.getRingerMode() == AudioManager.RINGER_MODE_NORMAL) {
+                            final int initVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+                            audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, initVolume, 0);
+                            mPlayer.start();
+                        }
+
+                        EventNotificationsInfo eventNotificationsInfo = new EventNotificationsInfo();
+                        eventNotificationsInfo.setName("Me");
+                        eventNotificationsInfo.setNotification(message);
+                        DateFormat df = new SimpleDateFormat("d MMM yyyy/h:mm a", Locale.getDefault());
+                        String currentDateTimeString = df.format(Calendar.getInstance().getTime());
+                        eventNotificationsInfo.setTimeStamp(currentDateTimeString);
+
+                        if (NotificationsListFragment.eventNotificationsAdapter != null && NotificationsListFragment.RV_notifications != null) {
+                            NotificationsListFragment.eventNotificationsAdapter.addItem(eventNotificationsInfo, 0);
+                            NotificationsListFragment.RV_notifications.smoothScrollToPosition(0);
+                        }
+
+                        break;
+
+                    }
+                    case "ERROR": {
+                        NotificationsListFragment.ET_notification.setText(message);
+                        Toast.makeText(context, "Failed", Toast.LENGTH_LONG).show();
+                        break;
+                    }
+                }
+            } else {
+                NotificationsListFragment.ET_notification.setText(message);
                 Toast.makeText(context, "Some error occurred! Please try again.", Toast.LENGTH_LONG).show();
             }
 

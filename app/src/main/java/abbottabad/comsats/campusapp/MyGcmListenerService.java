@@ -76,6 +76,12 @@ public class MyGcmListenerService extends GcmListenerService {
             }
         }
 
+        if (PURPOSE != null && PURPOSE.equals("EVENTS_NOTIFICATIONS")) {
+
+            receiveEventsNotifications(data);
+
+        }
+
         if (PURPOSE != null && PURPOSE.equals("GROUP_REQUEST")) {
             receiveGroupRequest(data);
 
@@ -322,12 +328,40 @@ public class MyGcmListenerService extends GcmListenerService {
                 if (mPlayer != null)
                     mPlayer.start();
             } else if (!isMuted && !isChatOpen) {
-                createEventNotification(message);
+                createEventNotification(message, notificationType);
             }
         }
     }
 
-    private void createEventNotification(String message) {
+    private void receiveEventsNotifications(Bundle data) {
+        DateFormat df = new SimpleDateFormat("d MMM yyyy/h:mm a", Locale.getDefault());
+        String currentDateTimeString = df.format(Calendar.getInstance().getTime());
+        String message = data.getString("message");
+        String name = data.getString("name");
+
+        final EventNotificationsInfo eventNotificationsInfo = new EventNotificationsInfo();
+        eventNotificationsInfo.setNotification(message);
+        eventNotificationsInfo.setName(name);
+        eventNotificationsInfo.setTimeStamp(currentDateTimeString);
+
+        final String NOTIFICATION_TYPE = sharedPreferences.getString("NOTIFICATION_TYPE", null);
+
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                if (NotificationsListFragment.eventNotificationsAdapter != null && NotificationsListFragment.RV_notifications != null) {
+                    NotificationsListFragment.eventNotificationsAdapter.addItem(eventNotificationsInfo, 0);
+                    NotificationsListFragment.RV_notifications.smoothScrollToPosition(0);
+                }
+            }
+        });
+
+        createEventsNotifications(message);
+
+    }
+
+    private void createEventsNotifications(String message) {
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         Uri sound = Uri.parse("android.resource://" + this.getPackageName() + "/" + R.raw.notification_sound);
@@ -343,6 +377,28 @@ public class MyGcmListenerService extends GcmListenerService {
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
                 this).setSmallIcon(R.drawable.ic_notification_notifications)
                 .setContentTitle("Event Notifications").setVibrate(pattern)
+                .setContentText(message)
+                .setAutoCancel(true).setSound(sound);
+        mBuilder.setContentIntent(resultPendingIntent);
+        notificationManager.notify(GCM_NOTIFICATION_ID, mBuilder.build());
+    }
+
+    private void createEventNotification(String message, String notificationType) {
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        Uri sound = Uri.parse("android.resource://" + this.getPackageName() + "/" + R.raw.notification_sound);
+        long[] pattern = {1000, 1000};
+
+        Intent resultIntent = new Intent(this, NotificationsHomePage.class);
+        TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(this);
+        taskStackBuilder.addParentStack(NotificationsView.class);
+        taskStackBuilder.addNextIntent(resultIntent);
+
+        PendingIntent resultPendingIntent = taskStackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
+                this).setSmallIcon(R.drawable.ic_notification_notifications)
+                .setContentTitle(notificationType).setVibrate(pattern)
                 .setContentText(message)
                 .setAutoCancel(true).setSound(sound);
         mBuilder.setContentIntent(resultPendingIntent);
@@ -473,7 +529,7 @@ public class MyGcmListenerService extends GcmListenerService {
                 }
             });
 
-            createEventNotification(name + " wants to join " + notificationType);
+            createEventNotification(name + " wants to join " + notificationType, notificationType);
         }
     }
 
@@ -488,7 +544,7 @@ public class MyGcmListenerService extends GcmListenerService {
         } else if (status != null && status.equals("Rejected"))
             editor.putBoolean(groupName + "_IS_JOINED", false);
         editor.apply();
-        createEventNotification(response);
+        createEventNotification(response, groupName);
     }
 
 }

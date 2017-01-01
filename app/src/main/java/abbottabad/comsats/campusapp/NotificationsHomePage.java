@@ -148,6 +148,8 @@ public class NotificationsHomePage extends AppCompatActivity {
                         clearActionMode();
                     }
                 });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
                 break;
             }
         }
@@ -193,8 +195,8 @@ public class NotificationsHomePage extends AppCompatActivity {
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
+    protected void onDestroy() {
+        super.onDestroy();
         NotificationsGroupFragment.isFirstTime = true;
     }
 

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/IV_name"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:contentDescription="@string/name"/>
+
+        <TextView
+            android:id="@+id/TV_notificationSender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="#000"
+            android:layout_toRightOf="@+id/IV_name"
+            android:layout_toEndOf="@+id/IV_name"
+            android:layout_toLeftOf="@+id/TV_timeStamp"
+            android:layout_toStartOf="@+id/TV_timeStamp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="Kamran Ramzan"/>
+
+        <TextView
+            android:id="@+id/TV_notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_toRightOf="@+id/IV_name"
+            android:layout_toEndOf="@+id/IV_name"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_below="@+id/TV_notificationSender"
+            android:layout_marginTop="5dp"
+            android:text="This is a notification"/>
+
+        <TextView
+            android:id="@+id/TV_timeStamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignBaseline="@+id/TV_notificationSender"
+            android:text="Dec 6-2017"/>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

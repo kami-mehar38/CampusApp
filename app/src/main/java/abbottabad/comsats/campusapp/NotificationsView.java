@@ -135,7 +135,7 @@ public class NotificationsView extends AppCompatActivity implements View.OnLongC
                     Toast.makeText(NotificationsView.this, "Please input some text...", Toast.LENGTH_SHORT).show();
                 } else {
                     new NotificationsModal(NotificationsView.this).
-                            sendEventNotification(REG_ID, ET_message.getText().toString().trim(),
+                            sendGroupNotification(REG_ID, ET_message.getText().toString().trim(),
                                     sharedPreferences.getString("NAME", null),
                                     sharedPreferences.getString("NOTIFICATION_TYPE", null));
                 }

@@ -89,7 +89,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="14dp"
-        android:src="@drawable/ic_action_add_group"
+        android:src="@drawable/ic_action_send_now"
         android:tint="#dee9ed"
         app:backgroundTint="#76939c" />
 
