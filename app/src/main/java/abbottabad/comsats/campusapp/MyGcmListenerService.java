@@ -285,8 +285,8 @@ public class MyGcmListenerService extends GcmListenerService {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    if (NotificationsHomePage.notificationsListAdapter != null) {
-                        NotificationsHomePage.notificationsListAdapter.notifyDataSetChanged();
+                    if (NotificationsGroupFragment.notificationsListAdapter != null) {
+                        NotificationsGroupFragment.notificationsListAdapter.notifyDataSetChanged();
                     }
                 }
             });

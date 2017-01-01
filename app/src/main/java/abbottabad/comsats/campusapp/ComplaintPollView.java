@@ -19,6 +19,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
@@ -81,6 +82,8 @@ public class ComplaintPollView extends AppCompatActivity implements View.OnClick
         if (APPLICATION_STATUS != null) {
             if (APPLICATION_STATUS.equals("FOOD")) {
                 setContentView(R.layout.complaintpoll_page_admin);
+                Toolbar toolbar = (Toolbar) findViewById(R.id.complaintpoll_toolbar);
+                setSupportActionBar(toolbar);
                 TV_noComplaints = (TextView) findViewById(R.id.TV_noComplaints);
                 RV_complaints = (RecyclerView) findViewById(R.id.RV_complaints);
                 if (RV_complaints != null) {
@@ -97,6 +100,8 @@ public class ComplaintPollView extends AppCompatActivity implements View.OnClick
                 }
             } else {
                 setContentView(R.layout.complaintpoll_page_others);
+                Toolbar toolbar = (Toolbar) findViewById(R.id.complaintpoll_toolbar);
+                setSupportActionBar(toolbar);
                 ImageView IV_openAdminSpinner = (ImageView) findViewById(R.id.IV_openAdminSpinner);
                 if (IV_openAdminSpinner != null) {
                     IV_openAdminSpinner.setOnClickListener(this);

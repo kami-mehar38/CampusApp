@@ -71,7 +71,7 @@
         <item>Food</item>
     </string-array>
     <string-array name="admin_options">
-        <item>Select admin</item>
+        <item>Complaint type</item>
         <item>Food</item>
         <item>Management</item>
     </string-array>

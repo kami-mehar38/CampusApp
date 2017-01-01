@@ -2,24 +2,22 @@ package abbottabad.comsats.campusapp;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +26,6 @@ import com.andexert.library.RippleView;
 public class NotificationsHomePage extends AppCompatActivity {
 
     private SharedPreferences sharedPreferences;
-    public static NotificationsListAdapter notificationsListAdapter;
     private Toolbar toolbar;
     private boolean IS_IN_ACTION_MODE = false;
     private String groupName;
@@ -45,40 +42,27 @@ public class NotificationsHomePage extends AppCompatActivity {
     private TextView TV_groupName;
     public static boolean isLongClick;
     public static boolean isImageClick;
-    private Spinner SP_groupPrivacy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.notifications_home_page);
+        setContentView(R.layout.event_notifications_page);
         toolbar = (Toolbar) findViewById(R.id.notifications_home_toolbar);
         setSupportActionBar(toolbar);
         setStatusBarColor();
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewPagerBB);
+        EventNotificationsController eventNotificationsController = new EventNotificationsController();
+        eventNotificationsController.setupViewPager(viewPager, getSupportFragmentManager());
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabsBB);
+        if (tabLayout != null) {
+            tabLayout.setupWithViewPager(viewPager);
+            tabLayout.setSelectedTabIndicatorColor(Color.WHITE);
+        }
         String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
         sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         actionBar = getSupportActionBar();
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        if (recyclerView != null) {
-            recyclerView.setLayoutManager(layoutManager);
-            notificationsListAdapter = new NotificationsListAdapter(this);
-            recyclerView.setAdapter(notificationsListAdapter);
-        }
-
-        FloatingActionButton FAB_createGroup = (FloatingActionButton) findViewById(R.id.FAB_createGroup);
-        if (FAB_createGroup != null) {
-            FAB_createGroup.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(NotificationsHomePage.this, CreateNotificationsGroup.class));
-                }
-            });
-        }
-
         notificationsModal = new NotificationsModal(this);
-        notificationsModal.getNotificationGroups();
 
         View view = LayoutInflater.from(NotificationsHomePage.this).inflate(R.layout.notification_group_info_view, null);
         TV_groupName = (TextView) view.findViewById(R.id.TV_groupName);
@@ -90,12 +74,6 @@ public class NotificationsHomePage extends AppCompatActivity {
         builder.setCancelable(true);
         alertDialog = builder.create();
 
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        notificationsListAdapter.notifyDataSetChanged();
     }
 
     private void setStatusBarColor() {
@@ -195,7 +173,7 @@ public class NotificationsHomePage extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(groupName + "_MUTED", true);
         editor.apply();
-        notificationsListAdapter.notifyDataSetChanged();
+        NotificationsGroupFragment.notificationsListAdapter.notifyDataSetChanged();
         Toast.makeText(NotificationsHomePage.this, groupName + " is muted", Toast.LENGTH_SHORT).show();
     }
 
@@ -203,7 +181,7 @@ public class NotificationsHomePage extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(groupName + "_MUTED", false);
         editor.apply();
-        notificationsListAdapter.notifyDataSetChanged();
+        NotificationsGroupFragment.notificationsListAdapter.notifyDataSetChanged();
         Toast.makeText(NotificationsHomePage.this, groupName + " is unmuted", Toast.LENGTH_SHORT).show();
     }
 
@@ -212,5 +190,18 @@ public class NotificationsHomePage extends AppCompatActivity {
         if (IS_IN_ACTION_MODE){
             clearActionMode();
         } else super.onBackPressed();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        NotificationsGroupFragment.isFirstTime = true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (NotificationsGroupFragment.notificationsListAdapter != null)
+        NotificationsGroupFragment.notificationsListAdapter.notifyDataSetChanged();
     }
 }

@@ -402,7 +402,7 @@ class NotificationsModal {
             if (notificationsListInfoList != null) {
                 if (notificationsListInfoList.size() > 0) {
                     for (int i = 0; i < notificationsListInfoList.size(); i++) {
-                        NotificationsHomePage.notificationsListAdapter.addItem(notificationsListInfoList.get(i), 0);
+                        NotificationsGroupFragment.notificationsListAdapter.addItem(notificationsListInfoList.get(i), 0);
                     }
                 } else Toast.makeText(context, "No group is created yet", Toast.LENGTH_LONG).show();
             } else
@@ -486,8 +486,8 @@ class NotificationsModal {
                         DiskCacheUtils.removeFromCache("http://hostellocator.com/images/" + groupName + ".JPG",
                                 ImageLoader.getInstance().getDiskCache());
                         new NotificationsLocalModal(context).deleteAll(groupName);
-                        if (NotificationsHomePage.notificationsListAdapter != null) {
-                            NotificationsHomePage.notificationsListAdapter.removeItem(NotificationsUtills.getPosition());
+                        if (NotificationsGroupFragment.notificationsListAdapter != null) {
+                            NotificationsGroupFragment.notificationsListAdapter.removeItem(NotificationsUtills.getPosition());
                         }
                         break;
                     }

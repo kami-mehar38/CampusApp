@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_notifications_home_page"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical"
+    tools:context="abbottabad.comsats.campusapp.NotificationsHomePage">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorLightGrey"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <EditText
+            android:id="@+id/ET_notification"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.9"
+            android:background="@drawable/chatbox_notifications_style"
+            android:ems="10"
+            android:hint="@string/input_message"
+            android:maxHeight="80dp"
+            android:maxLength="320"
+            android:padding="10dp"
+            android:textColor="#000"
+            android:textColorHint="#5b5b5b"
+            android:textCursorDrawable="@drawable/edittext_notifications_cursor_color"
+            android:textSize="16sp"
+            android:textStyle="normal">
+
+            <requestFocus />
+        </EditText>
+
+        <ImageButton
+            android:id="@+id/sendNotification"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:contentDescription="@string/send"
+            android:maxHeight="10dp"
+            android:src="@drawable/ic_action_send_now"
+            android:tint="#81a1ab" />
+
+        <ProgressBar
+            android:id="@+id/waiting"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:indeterminate="true" />
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/FAB_createGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="14dp"
+        android:src="@drawable/ic_action_add_group"
+        android:tint="#dee9ed"
+        app:backgroundTint="#76939c" />
+
+</FrameLayout>
