@@ -31,6 +31,7 @@
         android:background="@color/colorLightGrey"
         android:layout_gravity="bottom"
         android:orientation="horizontal"
+        android:visibility="gone"
         android:padding="10dp">
 
         <EditText
@@ -70,11 +71,20 @@
             android:layout_gravity="center"
             android:layout_marginLeft="5dp"
             android:layout_marginStart="5dp"
-            android:indeterminate="true" />
+            android:indeterminate="true"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/BTN_hideFrom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:contentDescription="@string/cancel"
+            android:src="@drawable/ic_action_cancel_disabled"/>
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/FAB_createGroup"
+        android:id="@+id/FAB_sendNotification"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"

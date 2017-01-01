@@ -16,7 +16,7 @@ class EventNotificationsController {
 
     void setupViewPager(ViewPager viewPager, FragmentManager supportFragmentManager) {
         EventNotificationsController.ViewPagerAdapter viewPagerAdapter = new EventNotificationsController.ViewPagerAdapter(supportFragmentManager);
-        viewPagerAdapter.addFragment(new NotificationsFragment(), "Notifications");
+        viewPagerAdapter.addFragment(new NotificationsListFragment(), "Notifications");
         viewPagerAdapter.addFragment(new NotificationsGroupFragment(), "Groups");
         viewPager.setAdapter(viewPagerAdapter);
     }
