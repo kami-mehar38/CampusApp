@@ -232,7 +232,8 @@ public class HomePageView extends AppCompatActivity implements
             if (linearLayout != null) {
                 linearLayout.setVisibility(View.GONE);
             }
-        } else if (!applicationStatus.equals("FOOD")){
+        }
+        if (!applicationStatus.equals("FOOD")){
             LinearLayout linearLayout = (LinearLayout) findViewById(R.id.complaintView);
             if (linearLayout != null) {
                 linearLayout.setVisibility(View.GONE);

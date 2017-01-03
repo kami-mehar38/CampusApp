@@ -4,8 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -15,7 +13,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -47,10 +44,6 @@ class TimetableModal {
 
     void uploadImage(String imageString){
         new UploadImage().execute(imageString);
-    }
-
-    void getImage(String reg_id){
-        new GetImage().execute(reg_id);
     }
 
     private class ShareTimetable extends AsyncTask<String, Void, String> {
@@ -201,61 +194,6 @@ class TimetableModal {
                 e.printStackTrace();
             }
             return "ERROR";
-        }
-    }
-
-    private class GetImage extends AsyncTask<String, Void, Bitmap> {
-        private ProgressDialog progressDialog;
-        private AlertDialog alertDialog;
-        private SharedPreferences sharedPreferences;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            sharedPreferences = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
-            progressDialog = new ProgressDialog(context);
-            progressDialog.setMessage("Getting timetable... Please wait");
-            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            progressDialog.setCancelable(false);
-            progressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel",
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            cancel(true);
-                        }
-                    });
-            progressDialog.show();
-        }
-
-        @Override
-        protected Bitmap doInBackground(String... params) {
-            String reg_id = params[0];
-            String stringUrl = "http://hostellocator.com/images/" +reg_id+ ".JPG";
-            URL url;
-            try {
-                url = new URL(stringUrl);
-                InputStream is = new BufferedInputStream(url.openStream());
-                Bitmap bitmap = BitmapFactory.decodeStream(is);
-                is.close();
-                return bitmap;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            super.onPostExecute(bitmap);
-            progressDialog.cancel();
-            TrackFacultyView.imageView.setImageBitmap(bitmap);
-            /*Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
-            Intent i = new Intent(context, TimetableImage.class);
-            ByteArrayOutputStream bs = new ByteArrayOutputStream();
-            result.compress(Bitmap.CompressFormat.JPEG, 100, bs);
-            i.putExtra("byteArray", bs.toByteArray());
-            context.startActivity(i);
-*/
         }
     }
 }

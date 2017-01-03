@@ -87,11 +87,6 @@
             android:background="@color/colorLightGrey"
             android:padding="10dp">
 
-            <ImageView
-                android:id="@+id/timetable"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
             <EditText
                 android:id="@+id/ET_trackFaculty"
                 android:layout_width="match_parent"

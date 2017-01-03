@@ -66,7 +66,6 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
     private String teacherStatus;
     public static List<StatusInfo> statusInfoList;
     private LinearLayoutManager layoutManager;
-    public static ImageView imageView;
     private Spinner SPstatus;
     public static RecyclerView recyclerView;
     private LinearLayout LL_autoReset;
@@ -92,7 +91,6 @@ public class TrackFacultyView extends AppCompatActivity implements View.OnClickL
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(new RecyclerViewDivider(this));
 
-        imageView = (ImageView) findViewById(R.id.timetable);
         TV_myStatus = (TextView) findViewById(R.id.TV_myStatus);
         sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         TV_myStatus.setText(sharedPreferences.getString("CURRENT_STATUS", "Available"));
