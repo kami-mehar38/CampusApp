@@ -85,7 +85,7 @@ public class NotificationsListFragment extends Fragment implements View.OnClickL
         sendNotification.setOnClickListener(this);
         isWaiting = (ProgressBar) view.findViewById(R.id.waiting);
 
-        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
                 return false;
@@ -100,18 +100,18 @@ public class NotificationsListFragment extends Fragment implements View.OnClickL
             public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
                 Bitmap icon;
                 if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
-
                     View itemView = viewHolder.itemView;
                     float height = (float) itemView.getBottom() - (float) itemView.getTop();
                     float width = height / 3;
 
-                    p.setColor(Color.parseColor("#FF0000"));
-                    RectF background = new RectF((float) itemView.getRight() + dX, (float) itemView.getTop(), (float) itemView.getRight(), (float) itemView.getBottom());
-                    c.drawRect(background, p);
-                    c.drawText("DELETE", itemView.getRight(), itemView.getHeight() / 2, p);
-                    icon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_action_discard_notification);
-                    RectF icon_dest = new RectF((float) itemView.getRight() - 2 * width, (float) itemView.getTop() + width, (float) itemView.getRight() - width, (float) itemView.getBottom() - width);
-                    c.drawBitmap(icon, null, icon_dest, p);
+                    if(dX > 0){
+                        p.setColor(Color.parseColor("#FF0000"));
+                        RectF background = new RectF((float) itemView.getLeft(), (float) itemView.getTop(), dX,(float) itemView.getBottom());
+                        c.drawRect(background,p);
+                        icon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_action_discard_notification);
+                        RectF icon_dest = new RectF((float) itemView.getLeft() + width ,(float) itemView.getTop() + width,(float) itemView.getLeft()+ 2*width,(float)itemView.getBottom() - width);
+                        c.drawBitmap(icon,null,icon_dest,p);
+                    }
                 }
                 super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
             }
