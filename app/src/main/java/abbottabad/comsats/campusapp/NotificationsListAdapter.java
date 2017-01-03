@@ -103,7 +103,27 @@ class NotificationsListAdapter extends RecyclerView.Adapter<NotificationsListAda
                 Date messageDate = df.parse(timeStamp[0]);
                 if (messageDate.equals(currentDate)) {
                     holder.TV_timeStamp.setText(timeStamp[1]);
-                } else holder.TV_timeStamp.setText(timeStamp[0]);
+                } else {
+                    Calendar messageCalendar = Calendar.getInstance();
+                    messageCalendar.setTime(messageDate);
+                    Calendar currentCalendar = Calendar.getInstance();
+                    currentCalendar.setTime(currentDate);
+                    if (messageCalendar.get(Calendar.DATE) != currentCalendar.get(Calendar.DATE)
+                            && messageCalendar.get(Calendar.MONTH) == currentCalendar.get(Calendar.MONTH)
+                            && messageCalendar.get(Calendar.YEAR) == currentCalendar.get(Calendar.YEAR)) {
+                        String[] thisDate = timeStamp[0].split(" ");
+                        holder.TV_timeStamp.setText("0" + thisDate[0] + " At " + timeStamp[1]);
+                    } else if (messageCalendar.get(Calendar.DATE) != currentCalendar.get(Calendar.DATE)
+                            && messageCalendar.get(Calendar.MONTH) != currentCalendar.get(Calendar.MONTH)
+                            && messageCalendar.get(Calendar.YEAR) == currentCalendar.get(Calendar.YEAR)) {
+                        String[] thisDate = timeStamp[0].split(" ");
+                        holder.TV_timeStamp.setText(thisDate[0] + "-" + thisDate[1] + " At " + timeStamp[1]);
+                    } else if (messageCalendar.get(Calendar.DATE) != currentCalendar.get(Calendar.DATE)
+                            && messageCalendar.get(Calendar.MONTH) != currentCalendar.get(Calendar.MONTH)
+                            && messageCalendar.get(Calendar.YEAR) != currentCalendar.get(Calendar.YEAR)) {
+                        holder.TV_timeStamp.setText(timeStamp[0] + " At " + timeStamp[1]);
+                    }
+                }
             } catch (ParseException e) {
                 e.printStackTrace();
             }

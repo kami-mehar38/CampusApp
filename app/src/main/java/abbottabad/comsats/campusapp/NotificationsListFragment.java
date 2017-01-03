@@ -105,13 +105,13 @@ public class NotificationsListFragment extends Fragment implements View.OnClickL
                     float height = (float) itemView.getBottom() - (float) itemView.getTop();
                     float width = height / 3;
 
-                    p.setColor(Color.parseColor("#D32F2F"));
+                    p.setColor(Color.parseColor("#FF0000"));
                     RectF background = new RectF((float) itemView.getRight() + dX, (float) itemView.getTop(), (float) itemView.getRight(), (float) itemView.getBottom());
                     c.drawRect(background, p);
+                    c.drawText("DELETE", itemView.getRight(), itemView.getHeight() / 2, p);
                     icon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_action_discard_notification);
                     RectF icon_dest = new RectF((float) itemView.getRight() - 2 * width, (float) itemView.getTop() + width, (float) itemView.getRight() - width, (float) itemView.getBottom() - width);
                     c.drawBitmap(icon, null, icon_dest, p);
-
                 }
                 super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
             }

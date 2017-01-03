@@ -9,9 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.amulyakhare.textdrawable.TextDrawable;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -63,7 +61,27 @@ class EventNotificationsAdapter extends RecyclerView.Adapter<EventNotificationsA
                 Date messageDate = df.parse(timeStamp[0]);
                 if (messageDate.equals(currentDate)) {
                     holder.TV_timeStamp.setText(timeStamp[1]);
-                } else holder.TV_timeStamp.setText(timeStamp[0]);
+                } else {
+                    Calendar messageCalendar = Calendar.getInstance();
+                    messageCalendar.setTime(messageDate);
+                    Calendar currentCalendar = Calendar.getInstance();
+                    currentCalendar.setTime(currentDate);
+                    if (messageCalendar.get(Calendar.DATE) != currentCalendar.get(Calendar.DATE)
+                            && messageCalendar.get(Calendar.MONTH) == currentCalendar.get(Calendar.MONTH)
+                            && messageCalendar.get(Calendar.YEAR) == currentCalendar.get(Calendar.YEAR)) {
+                        String[] thisDate = timeStamp[0].split(" ");
+                        holder.TV_timeStamp.setText("0" + thisDate[0] + " At " + timeStamp[1]);
+                    } else if (messageCalendar.get(Calendar.DATE) != currentCalendar.get(Calendar.DATE)
+                            && messageCalendar.get(Calendar.MONTH) != currentCalendar.get(Calendar.MONTH)
+                            && messageCalendar.get(Calendar.YEAR) == currentCalendar.get(Calendar.YEAR)) {
+                        String[] thisDate = timeStamp[0].split(" ");
+                        holder.TV_timeStamp.setText(thisDate[0] + "-" + thisDate[1] + " At " + timeStamp[1]);
+                    } else if (messageCalendar.get(Calendar.DATE) != currentCalendar.get(Calendar.DATE)
+                            && messageCalendar.get(Calendar.MONTH) != currentCalendar.get(Calendar.MONTH)
+                            && messageCalendar.get(Calendar.YEAR) != currentCalendar.get(Calendar.YEAR)) {
+                        holder.TV_timeStamp.setText(timeStamp[0] + " At " + timeStamp[1]);
+                    }
+                }
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -103,13 +121,14 @@ class EventNotificationsAdapter extends RecyclerView.Adapter<EventNotificationsA
         notifyItemInserted(position);
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView IV_name;
         private TextView TV_notificationSender;
         private TextView TV_notification;
         private TextView TV_timeStamp;
         private TextView TV_fullTimeStamp;
+
         ViewHolder(View itemView) {
             super(itemView);
             IV_name = (ImageView) itemView.findViewById(R.id.IV_name);
