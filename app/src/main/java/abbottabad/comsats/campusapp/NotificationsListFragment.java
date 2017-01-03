@@ -4,12 +4,19 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +46,7 @@ public class NotificationsListFragment extends Fragment implements View.OnClickL
     private SharedPreferences sharedPreferences;
     public static ImageButton sendNotification;
     public static ProgressBar isWaiting;
+    private Paint p = new Paint();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,6 +73,8 @@ public class NotificationsListFragment extends Fragment implements View.OnClickL
         ScaleInAnimationAdapter scaleInAnimationAdapter = new ScaleInAnimationAdapter(eventNotificationsAdapter);
         scaleInAnimationAdapter.setFirstOnly(false);
         RV_notifications.setAdapter(scaleInAnimationAdapter);
+        new EventsLocalModal(getContext()).retrieveNotifications();
+
         FAB_sendNotification = (FloatingActionButton) view.findViewById(R.id.FAB_sendNotification);
         FAB_sendNotification.setOnClickListener(this);
         LL_from = (LinearLayout) view.findViewById(R.id.form);
@@ -75,38 +85,40 @@ public class NotificationsListFragment extends Fragment implements View.OnClickL
         sendNotification.setOnClickListener(this);
         isWaiting = (ProgressBar) view.findViewById(R.id.waiting);
 
-        SwipeableRecyclerViewTouchListener swipeTouchListener =
-                new SwipeableRecyclerViewTouchListener(RV_notifications,
-                        new SwipeableRecyclerViewTouchListener.SwipeListener() {
+        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
 
-                            @Override
-                            public boolean canSwipeLeft(int position) {
-                                return true;
-                            }
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                eventNotificationsAdapter.onItemRemove(viewHolder, RV_notifications);
+            }
 
-                            @Override
-                            public boolean canSwipeRight(int position) {
-                                return true;
-                            }
+            @Override
+            public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+                Bitmap icon;
+                if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
 
-                            @Override
-                            public void onDismissedBySwipeLeft(RecyclerView recyclerView, int[] reverseSortedPositions) {
-                                for (int position : reverseSortedPositions) {
-                                    Toast.makeText(getContext(), "WOW", Toast.LENGTH_SHORT).show();
-                                }
+                    View itemView = viewHolder.itemView;
+                    float height = (float) itemView.getBottom() - (float) itemView.getTop();
+                    float width = height / 3;
 
-                            }
+                    p.setColor(Color.parseColor("#D32F2F"));
+                    RectF background = new RectF((float) itemView.getRight() + dX, (float) itemView.getTop(), (float) itemView.getRight(), (float) itemView.getBottom());
+                    c.drawRect(background, p);
+                    icon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_action_discard_notification);
+                    RectF icon_dest = new RectF((float) itemView.getRight() - 2 * width, (float) itemView.getTop() + width, (float) itemView.getRight() - width, (float) itemView.getBottom() - width);
+                    c.drawBitmap(icon, null, icon_dest, p);
 
-                            @Override
-                            public void onDismissedBySwipeRight(RecyclerView recyclerView, int[] reverseSortedPositions) {
-                                for (int position : reverseSortedPositions) {
-                                    Toast.makeText(getContext(), "WOW", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
+                }
+                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+            }
+        };
 
-        RV_notifications.addOnItemTouchListener(swipeTouchListener);
-
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        itemTouchHelper.attachToRecyclerView(RV_notifications);
     }
 
     void hideForm(final View view) {
@@ -149,7 +161,7 @@ public class NotificationsListFragment extends Fragment implements View.OnClickL
                 showFrom(LL_from);
                 ET_notification.requestFocus();
                 InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,InputMethodManager.HIDE_IMPLICIT_ONLY);
+                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
             }
         });
     }
@@ -194,4 +206,5 @@ public class NotificationsListFragment extends Fragment implements View.OnClickL
             }
         }
     }
+
 }

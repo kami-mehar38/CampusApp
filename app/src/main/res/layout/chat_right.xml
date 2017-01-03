@@ -24,15 +24,17 @@
             android:background="@drawable/chat_right"
             android:padding="8dp"
             android:textColor="#000"
-            android:textSize="16sp" />
+            android:textSize="14sp"
+            android:fontFamily="@string/font_family_light" />
 
         <TextView
             android:id="@+id/TV_notificationDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:textColor="#5b5b5b"
-            android:textSize="12sp" />
+            android:textColor="#000"
+            android:textSize="12sp"
+            android:fontFamily="@string/font_family_thin"/>
 
     </LinearLayout>
 

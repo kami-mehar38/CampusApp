@@ -349,6 +349,11 @@ class NotificationsModal {
                             NotificationsListFragment.RV_notifications.smoothScrollToPosition(0);
                         }
 
+                        EventsInfoController.setName("Me");
+                        EventsInfoController.setNotification(message);
+                        EventsInfoController.setTimeDate(currentDateTimeString);
+                        new EventsLocalModal(context).addEventNotification();
+
                         break;
 
                     }

@@ -2,6 +2,7 @@ package abbottabad.comsats.campusapp;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,6 +46,7 @@ class EventNotificationsAdapter extends RecyclerView.Adapter<EventNotificationsA
 
         holder.TV_notificationSender.setText(eventNotificationsInfo.getName());
         holder.TV_notification.setText(eventNotificationsInfo.getNotification());
+        holder.TV_fullTimeStamp.setText(eventNotificationsInfo.getTimeStamp());
 
         Character firstLetter = eventNotificationsInfo.getName() != null ? eventNotificationsInfo.getName().charAt(0) : 0;
         TextDrawable drawable = TextDrawable.builder()
@@ -73,14 +75,32 @@ class EventNotificationsAdapter extends RecyclerView.Adapter<EventNotificationsA
         return eventNotificationsInfos.size();
     }
 
-    public void addItem(EventNotificationsInfo eventNotificationsInfo, int position) {
-        eventNotificationsInfos.add(position, eventNotificationsInfo);
-        notifyItemInserted(position);
+    void onItemRemove(final RecyclerView.ViewHolder viewHolder, final RecyclerView recyclerView) {
+        final int adapterPosition = viewHolder.getAdapterPosition();
+        final EventNotificationsInfo eventNotificationsInfo = eventNotificationsInfos.get(adapterPosition);
+        Snackbar snackbar = Snackbar
+                .make(recyclerView, "Notification deleted", Snackbar.LENGTH_LONG)
+                .setAction("UNDO", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        EventsInfoController.setName(eventNotificationsInfo.getName());
+                        EventsInfoController.setNotification(eventNotificationsInfo.getNotification());
+                        EventsInfoController.setTimeDate(eventNotificationsInfo.getTimeStamp());
+                        new EventsLocalModal(context).addEventNotification();
+                        eventNotificationsInfos.add(adapterPosition, eventNotificationsInfo);
+                        notifyItemInserted(adapterPosition);
+                        recyclerView.scrollToPosition(adapterPosition);
+                    }
+                });
+        snackbar.show();
+        eventNotificationsInfos.remove(adapterPosition);
+        notifyItemRemoved(adapterPosition);
+        new EventsLocalModal(context).deleteNotifications(eventNotificationsInfo.getTimeStamp());
     }
 
-    public void removeItem(int position) {
-        eventNotificationsInfos.remove(position);
-        notifyItemRemoved(position);
+    void addItem(EventNotificationsInfo eventNotificationsInfo, int position) {
+        eventNotificationsInfos.add(position, eventNotificationsInfo);
+        notifyItemInserted(position);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
@@ -89,12 +109,14 @@ class EventNotificationsAdapter extends RecyclerView.Adapter<EventNotificationsA
         private TextView TV_notificationSender;
         private TextView TV_notification;
         private TextView TV_timeStamp;
+        private TextView TV_fullTimeStamp;
         ViewHolder(View itemView) {
             super(itemView);
             IV_name = (ImageView) itemView.findViewById(R.id.IV_name);
             TV_notificationSender = (TextView) itemView.findViewById(R.id.TV_notificationSender);
             TV_notification = (TextView) itemView.findViewById(R.id.TV_notification);
             TV_timeStamp = (TextView) itemView.findViewById(R.id.TV_timeStamp);
+            TV_fullTimeStamp = (TextView) itemView.findViewById(R.id.TV_fullTimeStamp);
         }
     }
 }

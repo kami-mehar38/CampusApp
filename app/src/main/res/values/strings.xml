@@ -172,4 +172,6 @@
     <string name="take_picture">Take Picture</string>
     <string name="no_complaints">No complaints</string>
     <string name="receive_complaints">Receive complaints</string>
+    <string name="groups">Groups</string>
+    <string name="notification">Notifications</string>
 </resources>

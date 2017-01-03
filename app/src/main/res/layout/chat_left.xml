@@ -52,7 +52,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
                 android:textColor="#000"
-                android:textSize="16sp" />
+                android:textSize="14sp"
+                android:fontFamily="@string/font_family_light"/>
 
             <TextView
                 android:id="@+id/TV_notificationSender"
@@ -60,8 +61,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginTop="8dp"
-                android:textColor="#5b5b5b"
-                android:textSize="12sp" />
+                android:textColor="#000"
+                android:textSize="12sp"
+                android:fontFamily="@string/font_family_thin"/>
 
         </LinearLayout>
 
@@ -70,8 +72,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:textColor="#5b5b5b"
-            android:textSize="12sp" />
+            android:textColor="#000"
+            android:textSize="12sp"
+            android:fontFamily="@string/font_family_thin"/>
 
     </LinearLayout>
 

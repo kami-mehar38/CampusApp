@@ -18,7 +18,7 @@
             android:id="@+id/TV_notificationSender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textColor="#000"
             android:layout_toRightOf="@+id/IV_name"
             android:layout_toEndOf="@+id/IV_name"
@@ -34,14 +34,16 @@
             android:id="@+id/TV_notification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            android:textSize="14sp"
+            android:fontFamily="@string/font_family_light"
             android:layout_toRightOf="@+id/IV_name"
             android:layout_toEndOf="@+id/IV_name"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
             android:layout_below="@+id/TV_notificationSender"
             android:layout_marginTop="5dp"
-            android:text="This is a notification"/>
+            android:text="This is a notification"
+            android:textColor="#000"/>
 
         <TextView
             android:id="@+id/TV_timeStamp"
@@ -50,7 +52,16 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignBaseline="@+id/TV_notificationSender"
-            android:text="Dec 6-2017"/>
+            android:fontFamily="@string/font_family_light"
+            android:text="Dec 6-2017"
+            android:textSize="14sp"
+            android:textColor="#000"/>
+
+        <TextView
+            android:id="@+id/TV_fullTimeStamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
 
     </RelativeLayout>
 

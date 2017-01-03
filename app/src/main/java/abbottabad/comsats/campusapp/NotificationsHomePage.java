@@ -42,6 +42,8 @@ public class NotificationsHomePage extends AppCompatActivity {
     private TextView TV_groupName;
     public static boolean isLongClick;
     public static boolean isImageClick;
+    public static TabLayout tabLayout;
+    private boolean isFirstTime = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,16 +52,41 @@ public class NotificationsHomePage extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.notifications_home_toolbar);
         setSupportActionBar(toolbar);
         setStatusBarColor();
+        String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
+        sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewPagerBB);
         EventNotificationsController eventNotificationsController = new EventNotificationsController();
         eventNotificationsController.setupViewPager(viewPager, getSupportFragmentManager());
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabsBB);
+        tabLayout = (TabLayout) findViewById(R.id.tabsBB);
         if (tabLayout != null) {
             tabLayout.setupWithViewPager(viewPager);
             tabLayout.setSelectedTabIndicatorColor(Color.WHITE);
+            tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                @Override
+                public void onTabSelected(TabLayout.Tab tab) {
+                    if (tab.getPosition() == 0) {
+                        if (sharedPreferences.getInt("NOTIFICATIONS_COUNT", 0) > 0) {
+                            tabLayout.getTabAt(0).setIcon(null);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            NotificationsHomePage.tabLayout.getTabAt(0).setIcon(null);
+                            editor.putInt("NOTIFICATIONS_COUNT", 0);
+                            editor.apply();
+                        }
+                    }
+                }
+
+                @Override
+                public void onTabUnselected(TabLayout.Tab tab) {
+
+                }
+
+                @Override
+                public void onTabReselected(TabLayout.Tab tab) {
+
+                }
+            });
         }
-        String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
-        sharedPreferences = this.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         actionBar = getSupportActionBar();
 
         notificationsModal = new NotificationsModal(this);
@@ -85,15 +112,15 @@ public class NotificationsHomePage extends AppCompatActivity {
         }
     }
 
-    void setActionMode(String groupName, View v, String userName, String regId, String timeStamp){
+    void setActionMode(String groupName, View v, String userName, String regId, String timeStamp) {
         rippleView = (RippleView) v;
         v.setBackground(ContextCompat
                 .getDrawable(NotificationsHomePage.this,
                         R.drawable.cardview_status_background_checked));
         this.groupName = groupName;
         toolbar.getMenu().clear();
-        boolean isMuted = sharedPreferences.getBoolean(groupName + "_MUTED" , false);
-        if (isMuted){
+        boolean isMuted = sharedPreferences.getBoolean(groupName + "_MUTED", false);
+        if (isMuted) {
             toolbar.inflateMenu(R.menu.notifications_group_menu_unmute);
         } else toolbar.inflateMenu(R.menu.notifications_group_menu_mute);
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -101,14 +128,14 @@ public class NotificationsHomePage extends AppCompatActivity {
         this.userName = userName;
         this.regId = regId;
         this.groupTimeStamp = timeStamp;
-        boolean isCreatedByMe = sharedPreferences.getBoolean(groupName + "_CREATED_BY_ME" , false);
+        boolean isCreatedByMe = sharedPreferences.getBoolean(groupName + "_CREATED_BY_ME", false);
         if (!isCreatedByMe)
-        toolbar.getMenu().getItem(1).setVisible(false);
+            toolbar.getMenu().getItem(1).setVisible(false);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home: {
                 clearActionMode();
                 break;
@@ -156,12 +183,12 @@ public class NotificationsHomePage extends AppCompatActivity {
         return true;
     }
 
-    void deleteNotificationGroup(){
+    void deleteNotificationGroup() {
         notificationsModal.deleteGroup(groupName);
         clearActionMode();
     }
 
-    void clearActionMode(){
+    void clearActionMode() {
         IS_IN_ACTION_MODE = false;
         isLongClick = false;
         actionBar.setDisplayHomeAsUpEnabled(false);
@@ -171,7 +198,7 @@ public class NotificationsHomePage extends AppCompatActivity {
                         R.drawable.cardview_status_background));
     }
 
-    void muteGroupChat(String groupName){
+    void muteGroupChat(String groupName) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(groupName + "_MUTED", true);
         editor.apply();
@@ -179,7 +206,7 @@ public class NotificationsHomePage extends AppCompatActivity {
         Toast.makeText(NotificationsHomePage.this, groupName + " is muted", Toast.LENGTH_SHORT).show();
     }
 
-    void unmuteGroupChat(String groupName){
+    void unmuteGroupChat(String groupName) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(groupName + "_MUTED", false);
         editor.apply();
@@ -189,7 +216,7 @@ public class NotificationsHomePage extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (IS_IN_ACTION_MODE){
+        if (IS_IN_ACTION_MODE) {
             clearActionMode();
         } else super.onBackPressed();
     }
@@ -204,6 +231,6 @@ public class NotificationsHomePage extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (NotificationsGroupFragment.notificationsListAdapter != null)
-        NotificationsGroupFragment.notificationsListAdapter.notifyDataSetChanged();
+            NotificationsGroupFragment.notificationsListAdapter.notifyDataSetChanged();
     }
 }

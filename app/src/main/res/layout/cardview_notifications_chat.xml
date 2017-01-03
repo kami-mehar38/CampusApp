@@ -55,8 +55,7 @@
                     android:maxLines="1"
                     android:text="Kamran Ramzan"
                     android:textColor="#000"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textSize="16sp" />
 
                 <ImageView
                     android:id="@+id/IV_counterBadge"
@@ -82,6 +81,8 @@
                     android:maxLines="1"
                     android:text="Recent Message"
                     android:textSize="14sp"
+                    android:textColor="#000"
+                    android:fontFamily="@string/font_family_light"
                     android:textStyle="normal" />
 
                 <TextView
@@ -94,7 +95,8 @@
                     android:drawablePadding="3dp"
                     android:gravity="center"
                     android:textColor="#00cd00"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:fontFamily="@string/font_family_light"/>
 
                 </RelativeLayout>
 

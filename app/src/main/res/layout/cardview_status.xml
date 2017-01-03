@@ -23,8 +23,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#000"
-                android:textSize="18sp"
-                android:textStyle="bold|italic" />
+                android:textSize="16sp"
+                android:textStyle="italic" />
 
             <TextView
                 android:id="@+id/TV_teacherRegistration"
@@ -39,8 +39,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/TV_teacherRegistration"
-                android:textSize="16sp"
-                android:textStyle="normal" />
+                android:textSize="14sp"
+                android:fontFamily="@string/font_family_light" />
 
         </RelativeLayout>
 

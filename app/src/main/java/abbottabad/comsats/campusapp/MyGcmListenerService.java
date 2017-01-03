@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.location.Location;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -16,6 +17,7 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 
+import com.amulyakhare.textdrawable.TextDrawable;
 import com.google.android.gms.gcm.GcmListenerService;
 
 import java.text.DateFormat;
@@ -339,12 +341,16 @@ public class MyGcmListenerService extends GcmListenerService {
         String message = data.getString("message");
         String name = data.getString("name");
 
+        EventsInfoController.setName(name);
+        EventsInfoController.setNotification(message);
+        EventsInfoController.setTimeDate(currentDateTimeString);
+        new EventsLocalModal(this).addEventNotification();
+
         final EventNotificationsInfo eventNotificationsInfo = new EventNotificationsInfo();
         eventNotificationsInfo.setNotification(message);
         eventNotificationsInfo.setName(name);
         eventNotificationsInfo.setTimeStamp(currentDateTimeString);
 
-        final String NOTIFICATION_TYPE = sharedPreferences.getString("NOTIFICATION_TYPE", null);
 
         Handler handler = new Handler(Looper.getMainLooper());
         handler.post(new Runnable() {
@@ -353,6 +359,19 @@ public class MyGcmListenerService extends GcmListenerService {
                 if (NotificationsListFragment.eventNotificationsAdapter != null && NotificationsListFragment.RV_notifications != null) {
                     NotificationsListFragment.eventNotificationsAdapter.addItem(eventNotificationsInfo, 0);
                     NotificationsListFragment.RV_notifications.smoothScrollToPosition(0);
+                }
+                if (NotificationsHomePage.tabLayout != null) {
+                    if (!NotificationsHomePage.tabLayout.getTabAt(0).isSelected()){
+
+                        int badgeCount = sharedPreferences.getInt("NOTIFICATIONS_COUNT", 0);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        badgeCount++;
+                        editor.putInt("NOTIFICATIONS_COUNT", badgeCount);
+                        editor.apply();
+                        TextDrawable drawable = TextDrawable.builder()
+                                .buildRound(String.valueOf(badgeCount), Color.parseColor("#76939c"));
+                        NotificationsHomePage.tabLayout.getTabAt(0).setIcon(drawable);
+                    }
                 }
             }
         });
