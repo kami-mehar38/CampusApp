@@ -194,6 +194,8 @@ public class MyGcmListenerService extends GcmListenerService {
     }
 
     private void receiveFoodComplaint(Bundle data) {
+        DateFormat df = new SimpleDateFormat("d MMM yyyy/h:mm a", Locale.getDefault());
+        final String currentDateTimeString = df.format(Calendar.getInstance().getTime());
         final String name = data.getString("name");
         final String reg = data.getString("reg");
         final String contact = data.getString("contact");
@@ -205,6 +207,7 @@ public class MyGcmListenerService extends GcmListenerService {
         ComplaintPollController.setContact(contact);
         ComplaintPollController.setDescription(description);
         ComplaintPollController.setImageUrl(imageUrl);
+        ComplaintPollController.setTimeStamp(currentDateTimeString);
 
         new ComplaintPollLocalModal(this).addComplaint();
 
@@ -219,6 +222,8 @@ public class MyGcmListenerService extends GcmListenerService {
                     complaintsInfo.setContact(contact);
                     complaintsInfo.setDescription(description);
                     complaintsInfo.setImageUrl(imageUrl);
+                    complaintsInfo.setComplaintType("1");
+                    complaintsInfo.setTimeStamp(currentDateTimeString);
                     ComplaintPollView.complaintPollVIewAdapter.add(complaintsInfo, 0);
                     ComplaintPollView.RV_complaints.smoothScrollToPosition(0);
                 }

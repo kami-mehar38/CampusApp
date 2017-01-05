@@ -6,7 +6,7 @@
     android:id="@+id/home_toolbar"
     android:background="@color/colorPrimary"
     android:minHeight="?attr/actionBarSize"
-    android:theme="@style/Base.Theme.AppCompat.Light.DarkActionBar"
+    android:theme="@style/MyToolbarStyle"
     android:elevation="4dp"
     tools:targetApi="lollipop">
 

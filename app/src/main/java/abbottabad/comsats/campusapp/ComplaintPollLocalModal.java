@@ -20,6 +20,8 @@ class ComplaintPollLocalModal extends SQLiteOpenHelper {
     private static String COL_CONTACT = "CONTACT";
     private static String COL_DESCRIPTION = "DESCRIPTION";
     private static String COL_IMAGE_URL = "IMAGE_URL";
+    private static String COL_COMPLAINT_TYPE = "COMPLAINT_TYPE";
+    private static String COL_TIME_STAMP = "TIME_STAMP";
 
     ComplaintPollLocalModal(Context context) {
         super(context, DATABASE_NAME, null, VERSION);
@@ -33,7 +35,9 @@ class ComplaintPollLocalModal extends SQLiteOpenHelper {
                 +COL_REG+ " TEXT,"
                 +COL_CONTACT+ " TEXT,"
                 +COL_DESCRIPTION+ " TEXT,"
-                +COL_IMAGE_URL+ " TEXT"
+                +COL_IMAGE_URL+ " TEXT,"
+                +COL_COMPLAINT_TYPE+ " TEXT,"
+                +COL_TIME_STAMP+ " TEXT"
                 + " )";
         db.execSQL(createTableQuery);
     }
@@ -53,14 +57,16 @@ class ComplaintPollLocalModal extends SQLiteOpenHelper {
         contentValues.put(COL_CONTACT, ComplaintPollController.getContact());
         contentValues.put(COL_DESCRIPTION, ComplaintPollController.getDescription());
         contentValues.put(COL_IMAGE_URL, ComplaintPollController.getImageUrl());
+        contentValues.put(COL_COMPLAINT_TYPE, 1);
+        contentValues.put(COL_TIME_STAMP, ComplaintPollController.getTimeStamp());
         db.insert(TABLE_NAME, null, contentValues);
         db.close();
     }
 
-    void retrieveComplaints(){
+    void retrieveComplaints(String complaintType){
         SQLiteDatabase db = this.getReadableDatabase();
-        String selectQuery= "SELECT * FROM " +TABLE_NAME+ " ORDER BY " +SERIAL+ " DESC";
-        Cursor cursor = db.rawQuery(selectQuery, null);
+        String selectQuery= "SELECT * FROM " +TABLE_NAME+ " WHERE " +COL_COMPLAINT_TYPE+ " = ?" + " ORDER BY " +SERIAL+ " DESC";
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{complaintType});
         cursor.moveToFirst();
         ComplaintsInfo[] complaintsInfos = new ComplaintsInfo[cursor.getCount()];
         while (!cursor.isAfterLast()){
@@ -70,6 +76,8 @@ class ComplaintPollLocalModal extends SQLiteOpenHelper {
             complaintsInfos[cursor.getPosition()].setContact(cursor.getString(3));
             complaintsInfos[cursor.getPosition()].setDescription(cursor.getString(4));
             complaintsInfos[cursor.getPosition()].setImageUrl(cursor.getString(5));
+            complaintsInfos[cursor.getPosition()].setComplaintType(cursor.getString(6));
+            complaintsInfos[cursor.getPosition()].setTimeStamp(cursor.getString(7));
             ComplaintPollView.complaintPollVIewAdapter.add(complaintsInfos[cursor.getPosition()], cursor.getPosition());
             cursor.moveToNext();
         }
@@ -77,10 +85,17 @@ class ComplaintPollLocalModal extends SQLiteOpenHelper {
         db.close();
     }
 
-    void deleteComplaint(String imageName){
+    void deleteComplaint(String imageName, String complaintType){
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_NAME, COL_IMAGE_URL + " = ?", new String[]{imageName});
+        db.delete(TABLE_NAME, COL_IMAGE_URL + " = ? AND " + COL_COMPLAINT_TYPE + " = ?", new String[]{imageName, complaintType});
         db.close();
-        retrieveComplaints();
+    }
+
+    void processComplaint(String imageName, String complaintType){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COL_COMPLAINT_TYPE, 2);
+        db.update(TABLE_NAME, values, COL_COMPLAINT_TYPE + " = ? AND " + COL_IMAGE_URL + " = ?", new String[]{complaintType, imageName});
+        db.close();
     }
 }

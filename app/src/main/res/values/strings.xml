@@ -174,4 +174,6 @@
     <string name="receive_complaints">Receive complaints</string>
     <string name="groups">Groups</string>
     <string name="notification">Notifications</string>
+    <string name="pending_complaints">Pending Complaints</string>
+    <string name="processed_complaints">Processed Complaints</string>
 </resources>

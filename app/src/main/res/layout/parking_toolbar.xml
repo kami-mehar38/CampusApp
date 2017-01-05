@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/complaintpoll_toolbar"
+    android:id="@+id/parking_toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#7a7574"
+    android:background="#1164FE"
     android:minHeight="?attr/actionBarSize"
     android:theme="@style/Base.Theme.AppCompat.Light.DarkActionBar">
 

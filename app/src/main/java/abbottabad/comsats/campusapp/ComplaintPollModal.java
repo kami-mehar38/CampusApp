@@ -34,6 +34,7 @@ import java.net.URLEncoder;
 class ComplaintPollModal {
 
     private Context context;
+    private static final String PREFERENCE_FILE_KEY = "abbottabad.comsats.campusapp";
 
     ComplaintPollModal(Context context) {
         this.context = context;
@@ -138,7 +139,7 @@ class ComplaintPollModal {
         private String imageName;
         private ProgressDialog progressDialog;
         private AlertDialog alertDialog;
-        private SharedPreferences.Editor editor;
+        private SharedPreferences sharedPreferences;
 
         @Override
         protected void onPreExecute() {
@@ -147,6 +148,7 @@ class ComplaintPollModal {
             progressDialog.setCancelable(false);
             progressDialog.setMessage("Deleting complaint");
             progressDialog.show();
+            sharedPreferences = context.getSharedPreferences(PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         }
 
         @Override
@@ -202,7 +204,7 @@ class ComplaintPollModal {
                         DiskCacheUtils.removeFromCache("http://hostellocator.com/images/" + imageName + ".JPG",
                                 ImageLoader.getInstance().getDiskCache());
                         Log.i("TAG", "onPostExecute: " + NotificationsUtills.getPosition());
-                        new ComplaintPollLocalModal(context).deleteComplaint(imageName);
+                        new ComplaintPollLocalModal(context).deleteComplaint(imageName, String.valueOf(sharedPreferences.getInt("COMPLAINT_TYPE", 0)));
                         if (ComplaintPollView.complaintPollVIewAdapter != null) {
                             ComplaintPollView.complaintPollVIewAdapter.remove(NotificationsUtills.getPosition());
                         }

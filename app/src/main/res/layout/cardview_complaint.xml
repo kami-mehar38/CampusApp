@@ -66,7 +66,8 @@
             android:layout_toRightOf="@+id/TV_Cname"
             android:layout_toStartOf="@+id/btn_callComplaint"
             android:textColor="#000"
-            android:textSize="15sp" />
+            android:textSize="14sp"
+            android:fontFamily="@string/font_family_light"/>
 
         <TextView
             android:id="@+id/TV_ComplaintRegistration"
@@ -77,7 +78,8 @@
             android:layout_toEndOf="@+id/TV_Creg"
             android:layout_toRightOf="@+id/TV_Creg"
             android:textColor="#000"
-            android:textSize="15sp" />
+            android:textSize="14sp"
+            android:fontFamily="@string/font_family_light"/>
 
         <TextView
             android:id="@+id/TV_ComplaintContact"
@@ -88,7 +90,8 @@
             android:layout_toEndOf="@+id/TV_Ccontact"
             android:layout_toRightOf="@+id/TV_Ccontact"
             android:textColor="#000"
-            android:textSize="15sp" />
+            android:textSize="14sp"
+            android:fontFamily="@string/font_family_light"/>
 
         <TextView
             android:id="@+id/TV_ComplaintDescription"
@@ -99,33 +102,39 @@
             android:layout_toRightOf="@+id/TV_Cdesc"
             android:text="@string/no_decription"
             android:textColor="#000"
-            android:textSize="15sp" />
+            android:textSize="14sp"
+            android:fontFamily="@string/font_family_light"/>
 
-        <Button
+        <ImageView
             android:id="@+id/btn_callComplaint"
-            android:layout_width="64dp"
-            android:layout_height="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:background="@drawable/button_background"
-            android:text="@string/call"
-            android:textAllCaps="false"
-            android:textColor="@color/colorPrimary"
-            android:textSize="12sp" />
+            android:contentDescription="@string/call"
+            android:src="@drawable/ic_settings_phone_black_24dp"/>
 
-        <Button
-            android:id="@+id/btn_deleteComplaint"
-            android:layout_width="64dp"
-            android:layout_height="30dp"
+        <ImageView
+            android:id="@+id/btn_processComplaint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/btn_callComplaint"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/button_background"
-            android:text="@string/delete"
-            android:textAllCaps="false"
-            android:textColor="@color/colorPrimary"
-            android:textSize="12sp" />
+            android:layout_marginTop="10dp"
+            android:contentDescription="@string/delete"
+            android:src="@drawable/ic_check_circle_black_24dp"/>
+
+        <ImageView
+            android:id="@+id/btn_deleteComplaint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/btn_processComplaint"
+            android:layout_marginTop="10dp"
+            android:contentDescription="@string/delete"
+            android:src="@drawable/ic_action_discard"/>
 
         <ImageView
             android:id="@+id/IV_evidencePicture"
@@ -139,6 +148,19 @@
             android:contentDescription="@string/choose_picture"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_action_picture" />
+
+        <TextView
+            android:id="@+id/TV_timeStamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/IV_evidencePicture"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:gravity="center"
+            android:textColor="#000"
+            android:textSize="14sp"
+            android:fontFamily="@string/font_family_light"
+            android:text="6/10/2017"/>
 
         <TextView
             android:id="@+id/TV_imageUri"

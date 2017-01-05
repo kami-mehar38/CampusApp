@@ -9,6 +9,12 @@
 
     </style>
 
+    <style name="MyToolbarStyle" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="colorControlNormal">#ffffff</item>
+        <item name="android:textColorPrimary">#ffffff</item>
+        <item name="android:textColor">#000</item>
+    </style>
+
     <style name="checkBoxStyle" parent="Base.Theme.AppCompat">
         <item name="colorAccent">#fff</item>
         <item name="android:textColorSecondary">#fff</item>

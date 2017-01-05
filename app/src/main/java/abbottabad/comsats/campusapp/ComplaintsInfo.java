@@ -10,6 +10,24 @@ class ComplaintsInfo {
     private String contact;
     private String description;
     private String imageUrl;
+    private String timeStamp;
+    private String complaintType;
+
+    public String getComplaintType() {
+        return complaintType;
+    }
+
+    public void setComplaintType(String complaintType) {
+        this.complaintType = complaintType;
+    }
+
+    public String getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp;
+    }
 
     String getImageUrl() {
         return imageUrl;

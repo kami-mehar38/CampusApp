@@ -127,6 +127,20 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomePageView" />
         </activity>
+
+        <activity
+            android:name=".ParkingHomePage"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:parentActivityName=".HomePageView"
+            android:windowSoftInputMode="stateHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomePageView" />
+        </activity>
+
+        <activity android:name=".ComplaintPollHomePage"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
+
         <activity
             android:name=".TimeTableView"
             android:configChanges="keyboardHidden|orientation|screenSize"

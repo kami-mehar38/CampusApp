@@ -10,6 +10,15 @@ class ComplaintPollController {
     private static String contact;
     private static String description;
     private static String imageUrl;
+    private static String timeStamp;
+
+    public static String getTimeStamp() {
+        return timeStamp;
+    }
+
+    public static void setTimeStamp(String timeStamp) {
+        ComplaintPollController.timeStamp = timeStamp;
+    }
 
     static String getImageUrl() {
         return imageUrl;

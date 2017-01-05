@@ -15,6 +15,7 @@
     <color name="signupStatusBar">#51517a</color>
     <color name="blueColorShade">#198cff</color>
     <color name="createGroupStatusBar">#0059b2</color>
+    <color name="parkingStatusBar">#0d50cb</color>
 
 
 </resources>
