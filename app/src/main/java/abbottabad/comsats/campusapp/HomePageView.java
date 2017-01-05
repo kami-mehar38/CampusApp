@@ -11,7 +11,6 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -146,7 +145,7 @@ public class HomePageView extends AppCompatActivity implements
             RL_parking.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
                 @Override
                 public void onComplete(RippleView rippleView) {
-                    Snackbar.make(rippleView, "It's not implemented yet.", Snackbar.LENGTH_SHORT).show();
+                    startActivity(new Intent(HomePageView.this, ParkingHomePage.class));
                 }
             });
         }

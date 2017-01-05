@@ -5,10 +5,13 @@
     android:orientation="vertical"
     android:background="#ffffff">
 
+    <include layout="@layout/parking_toolbar" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="10dp">
 
     </android.support.v7.widget.RecyclerView>
 
