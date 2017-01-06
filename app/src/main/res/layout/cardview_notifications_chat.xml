@@ -21,7 +21,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
-                android:paddingRight="10dp">
+                android:paddingRight="10dp"
+                android:background="#f4f7f9">
 
                 <ImageView
                     android:id="@+id/IV_profilePicture"
@@ -94,7 +95,7 @@
                     android:layout_alignParentEnd="true"
                     android:drawablePadding="3dp"
                     android:gravity="center"
-                    android:textColor="#00cd00"
+                    android:textColor="#000"
                     android:textSize="14sp"
                     android:fontFamily="@string/font_family_light"/>
 

@@ -121,7 +121,7 @@ class NotificationsListAdapter extends RecyclerView.Adapter<NotificationsListAda
                     } else if (messageCalendar.get(Calendar.DATE) != currentCalendar.get(Calendar.DATE)
                             && messageCalendar.get(Calendar.MONTH) != currentCalendar.get(Calendar.MONTH)
                             && messageCalendar.get(Calendar.YEAR) != currentCalendar.get(Calendar.YEAR)) {
-                        holder.TV_timeStamp.setText(timeStamp[0] + " At " + timeStamp[1]);
+                        holder.TV_timeStamp.setText(timeStamp[0]);
                     }
                 }
             } catch (ParseException e) {
